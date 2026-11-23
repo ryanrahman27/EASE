@@ -1,0 +1,11 @@
+{
+  "experiment": "E154",
+  "design": "Fixed E153 three-model average, four excluded-family models, all96 fitting placements. Compare learned relative weights to identical uniform32 kernel and E120 ensemble under both original controller and fixed E151 home-posture objective. The posture condition is primary; standard control is a disclosed factorial comparison. No training or coefficient sweep during rollout.",
+  "isolation": "Same.98recency, zero-centered1e-6ridge,32measured transitions, mass normalization and DLS/task/probe/frozen-bias settings. Only relative history weighting is learned. No calibration-prior solve term, prior features, simulator Jacobian, contact input or physics selector. Explicit weighted analytical solve remains part of architecture.",
+  "screen": "For either fixed controller context: learned success must exceed both matched uniform32 and E120 ensemble, neither joint-count success may decline against either reference, collisions may not exceed either reference, and fitting gain placements1,13,18 must succeed. Report all paired rescues/losses; zero-loss improvement preferred and no automatic baseline replacement. If both pass, choose primary posture; otherwise choose the sole passing context. If neither passes, fresh stays closed. Selection is declared before these outcomes.",
+  "inputs": {
+    "outputs/ease_fixed_uniform_learning_v1/summary.json": "9f6947e0537ad31d606e0c117f1acf2c3f4a67dcaea65b6d478a59fa8589b14a",
+    "outputs/ease_fixed_uniform_learning_v1/verification.json": "c6b7ab238c3b7969dd24e48e7e58415460389bd3894266897c603f94124e80c4",
+    "outputs/ease_fixed_uniform_learning_v1/frozen.json": "364f424a0bcbbdb0fc5d769da738caf95c2da47ffa1f37b1f61ba855d793e461"
+  }
+}
