@@ -1,0 +1,12 @@
+{
+  "experiment": "E155",
+  "hypothesis": "Posture projection should preserve actual hand motion. Uniform zero-centered regularization may be a useful task controller but distort weakly observed map directions; the calibration-prior map has lower full-Jacobian error. Isolate this by using the same analytical calibration-prior map for the secondary projector, while keeping each primary task estimator unchanged.",
+  "rule": "Same fixed E151 home objective.05(home-q),.015damping,maxabs.01rad and final+/-.04 clamp. Only projector J changes: current32 observed transitions,.98recency,1e-6ridge toward initial measured calibration. Primary task map remains uniform32, E153 fixed-uniform learned ensemble, or E120 ensemble. No privileged geometry, simulator Jacobian or physics selector. Fixed probes untouched.",
+  "diagnostic": "Outcome-informed fitting cases13(persistent six-joint loss),1(previous posture regression),6(seven-joint success),10(seven-joint failure), all three methods. These12 episodes are diagnostic, not representative rates. Continue to all96 fitting placements only if learned succeeds on13,1,6; retain case10 regardless. No coefficient or checkpoint tuning. This diagnostic gate is declared before new-projector outcomes.",
+  "full_gate": "If full fitting proceeds, learned must exceed both matched uniform and E120 ensembles overall, neither joint count decline, no higher collision count, and retain1,13,18. Report every regression. Otherwise no fresh test. E120 immutable.",
+  "inputs": {
+    "outputs/ease_fixed_uniform_learning_v1/summary.json": "9f6947e0537ad31d606e0c117f1acf2c3f4a67dcaea65b6d478a59fa8589b14a",
+    "outputs/ease_fixed_uniform_learning_v1/verification.json": "c6b7ab238c3b7969dd24e48e7e58415460389bd3894266897c603f94124e80c4",
+    "outputs/ease_fixed_uniform_learning_v1/frozen.json": "364f424a0bcbbdb0fc5d769da738caf95c2da47ffa1f37b1f61ba855d793e461"
+  }
+}
