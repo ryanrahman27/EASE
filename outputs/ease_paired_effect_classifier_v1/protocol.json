@@ -1,0 +1,14 @@
+{
+  "experiment": "E140",
+  "inputs": {
+    "outputs/ease_expanded_structured_pairs_v1/dataset.npz": "017f16b9a56ebb97a3af4d75ad831fd016b7ee2e03e0c43195cdfdfe74182ddf",
+    "outputs/ease_expanded_structured_pairs_v1/rows.json": "8aff042142eab8b91b133e6971612052dabe50bf8e4d61508290a3021f74a67c",
+    "outputs/ease_expanded_structured_pairs_v1/cases.json": "bb06c1302362e1e0232c548d822a24705ead6f0ca83e0ac6c283894efa0d7a25",
+    "outputs/ease_rich_structured_value_v1/features.npz": "75ad5f16b6ecee11c23ce65fc90f94e0b95c221840c81cf8cc28edff0ff66ef7",
+    "outputs/ease_rich_structured_value_v1/summary.json": "1452721a013520611482dfc937e0929f4e3b4a842cb4fe52c587a6d64b702b1a"
+  },
+  "motivation": "1994/2208 paired task effects are neutral; only121 beneficial and93 harmful. Regression may shrink toward zero while failing to rank changed outcomes. Test classification as a distinct objective, not more held-out tuning.",
+  "design": "Same expanded family folds and fixed local response predictions. Compare compact32 and richer115 measured features. Three-class balanced ExtraTrees128/depth5/min_leaf12/seed138000 learns -1,0,+1 on all fitting rows. Conditional binary balanced ExtraTrees128/depth5/min_leaf6/seed138000 learns benefit versus harm on nonzero fitting effects only. Also a simple phase-by-joint-count conditional frequency reference with Beta(1,1) smoothing. No privileged inputs or IDs.",
+  "rule": "Always require E138 OOF scalar local progress>10um. Conditional classifiers: benefit vote above .65,.75,.85,.95; primary rich conditional .75. Three-class classifier: benefit-minus-harm vote>.1 and harm vote below .1 or .2. Votes from balanced models are NOT calibrated natural-population probabilities. First clean selected phase receives same8-step off pulse.",
+  "selection": "Fixed development grid; require zero E120 losses, most gains, fewer switches, higher confidence, lexical rule tie break. Neutral-state generalization is explicitly evaluated in complete-task reconstruction; conditional models have no neutral training examples. Fresh and original-held tests remain untouched. No success-based episode removal."
+}
