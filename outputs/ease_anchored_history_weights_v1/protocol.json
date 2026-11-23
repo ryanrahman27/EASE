@@ -1,0 +1,15 @@
+{
+  "experiment": "E142",
+  "inputs": {
+    "outputs/ease_learned_history_weights_v1/dataset.npz": "e530b56ff809c84ab2d827e484e5be361acff6f99c5623cea961f60a6fc50328",
+    "outputs/ease_learned_history_weights_v1/oof.npz": "617a1d3cf29d389f97e1b3c22273d78110db7953b20fcfe565ee7659958745e5",
+    "outputs/ease_learned_history_weights_v1/audit_summary.json": "9ecfc6126a0eb0abecfef7f75b08d2d2851567241bb1ab8d225ffc40487abd35",
+    "outputs/ease_learned_history_weights_v1/reference_fit.json": "522826a572242497d628398c0832070af0729ee14fcf4a8144570931a62e0d4e",
+    "outputs/ease_learned_history_weights_v1/verification.json": "8af25f59d2ba09315e48008ac13fbbc49600d846f4adad33c22ebba726562b7b"
+  },
+  "motivation": "E141 neural weights improve uniform history but not the training-tuned constant kernel; all folds chose the low-ridge grid boundary. Check that boundary before attributing gains to attention.",
+  "reference": "Within each fitting fold only, choose normalized next-motion MSE over forgetting .8,.9,.95,.98,1 and ridge1e-10,1e-9,1e-8,3e-8,1e-7,3e-7,1e-6,1e-5. Compute Gram/cross and solve in float64 for numerical stability. Compare float64 and original float32 uniform controls. No held or fresh task evaluation.",
+  "learned": "Initialize same8-feature32-wide2-layer Transformer weight model at that fold-selected kernel. Freeze forgetting and ridge. Normalize positive transition weights to preserve total recency-weighted mass, preventing a global weight scale from merely changing effective ridge. Solve in float64, network float32. Only relative data-dependent transition weighting is learned.",
+  "training": "Same four family folds, same3 seeds141100..141102,1500 steps,AdamW3e-4 weight_decay1e-4,batch128 starts/both queries,clip1. Training-group motion scales copied from E141; loss normalized forward MSE +.001 mean normalized log-weight squared. No task success labels, seed/checkpoint selection or learned global ridge.",
+  "advancement": "For neural control, pooled position MSE at least5% below selected constant kernel; every seed no worse; neither joint-count pooled error worse; rotation MSE<=1.05x constant. Independently assess the fitted constant kernel versus uniform32 as an engineering control candidate; never claim its gain as a Transformer gain. E120 unchanged."
+}
