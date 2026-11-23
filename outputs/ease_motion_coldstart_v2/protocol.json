@@ -1,0 +1,8 @@
+{
+  "experiment": "E32",
+  "manifest_sha256": "e28aa6cf6d4b402bb3847785d7ac125e8f015a16da7b70870d6582dbcea0d958",
+  "model_sha256": "b3be78ef5e97ed3a725e4f01b130565d85a68827a1d167e836de362ea3d2dd3a",
+  "calibration_steps": 0,
+  "test_evaluated": false,
+  "scope": "Post-E31 cold-start controls, unchanged fixed validation cases. Analytical zero initialization, seed0 neural first-step bootstrap followed by analytical updates, fixed seed0 neural zero-history Jacobian with only tracking-bias updates, and a fixed +0.01 rad all-joint first action followed by analytical updates. Fixed probe added after the initial three controls; no gain tuning."
+}
