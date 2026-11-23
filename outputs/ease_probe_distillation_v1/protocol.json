@@ -1,0 +1,25 @@
+{
+  "experiment": "E98",
+  "training_manifest_sha256": "e28aa6cf6d4b402bb3847785d7ac125e8f015a16da7b70870d6582dbcea0d958",
+  "parents": {
+    "outputs/ease_estimator_distillation_v1/analytical/seed_0/policy.pt": "7cc59ce83397a3856939a849f229e0a962bfe0e1df3add7680aac42b8c5d0fec",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_1/policy.pt": "67a01fc8cdbec4d7c5ee5e602e5d1a16d6cfa80a8520c28a89eb2a861437b2d6",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_2/policy.pt": "f87c12bd330baf384432c5d275eda41f189ddb557f6083f487082a76447b2b71"
+  },
+  "training_bodies": [
+    84000,
+    84001,
+    84002,
+    84003,
+    84004,
+    84005,
+    84006,
+    84007
+  ],
+  "test_evaluated": false,
+  "data": "Eight manifest training bodies only,16 scripted physical trajectories each. Initial q=arm.home+Uniform(-.6,.6), RNG980000+body_index*100+trajectory.32 anchor-settling steps,32 fixed E95 joint probe steps (+/-.004rad,2steps/sign),96 rank-one sinusoidal target steps (amplitude.08rad, period24*pi steps). Feedback target-q+measured bias clipped.04, open fingers, unchanged physical simulation. Local32 updates throughout. Save every pre-action context at steps32..159:16384 rows. Retain contacts and all trajectories; no success filtering. No task Jacobians or target-embodiment histories. Trajectories0..11 train,12..15 validation on same bodies.",
+  "training": "Start all three E66 analytical checkpoints; 2000 AdamW updates per seed,lr2e-5,batch128,clip gradient1. Each batch64 measured training contexts and64 synthetic E52 replay contexts. Measured target is float64 ridge solve of the exact input Gram/cross, cast float32. Fit MSE on all rows plus existing six-weight2/seven-weight.5 parent anchor on synthetic rows only. No anchor on new measured rows. Fixed final checkpoint; no seed/step selection or parameter tuning.",
+  "evaluation": "All16 E97 tasks x3 candidate parents x parent/student continuation =96 full tasks, irrespective of training metrics. Frozen original E66 prefix and same physical probe; swap only model weights at first post-probe close prediction on admitted routes. No-route behavior remains original. Compare to exact E97 candidate references and report every gain/loss. Adoption gate: strictly improve pooled success, no increased collisions, retain EVERY parent success for both DOFs and no per-seed success decrease. No reserved-test evaluation.",
+  "videos": "Prespecified candidate_0 cases2 (E95 six-joint failure),4 (difficult retained success),10 (E97 analytical regression), parent/student pairs. Append first new student regression with both modes and first missing success/failure category if needed. Exact serialized replay checks.",
+  "limitations": "New data are scripted local motions rather than full pick/place training rollouts. Validation is trajectory holdout on training bodies. Evaluation is reused development data with privileged planning and frozen parent prefix; not whole-policy retraining or independent generalization."
+}
