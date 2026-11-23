@@ -1,0 +1,199 @@
+{
+  "experiment": "E54",
+  "checkpoints": {
+    "outputs/ease_robust_training_v1/seed_0/policy.pt": "bb2eadf92edc2f698fd137f6d1a7c8ec0a7283cd34e1d5a0fc390645e66392f1",
+    "outputs/ease_robust_training_v1/seed_1/policy.pt": "141e03fdac6d03a8ef035db3b8d3218cbbe73193450e06821e10b310380fc42d",
+    "outputs/ease_robust_training_v1/seed_2/policy.pt": "cf0d4d5d9fb80d5a20f5b117ea897a057e9c81ede715b785dad7523ec77520a0",
+    "outputs/ease_control_training_v1/prediction/seed_0/policy.pt": "64acab9e10b4130149628dc1ad55f6f41e435eab642e29033de295458bf59155",
+    "outputs/ease_control_training_v1/prediction/seed_1/policy.pt": "eb356f4c3d7b5ecb25611a758f312e7620ce27e159ab1ab5577282632a51c561",
+    "outputs/ease_control_training_v1/prediction/seed_2/policy.pt": "929b7c1019f4907ce4527f70afa5ac1446ed0c50fad7abae02d15a67dac0a695",
+    "outputs/ease_control_training_v1/control/seed_0/policy.pt": "dc49f434e7a7637328aeb91308d5ca1ed5158aa45a507a3176f5492dad7ed1e1",
+    "outputs/ease_control_training_v1/control/seed_1/policy.pt": "39cfbc1368162ce9f35215b44476de150263331409c0ca189174b074a6cd36fe",
+    "outputs/ease_control_training_v1/control/seed_2/policy.pt": "4e4996b881df24f15a219a39db4ba23408c73e924c521462f9a8120255998eb2"
+  },
+  "manifest_sha256": "e28aa6cf6d4b402bb3847785d7ac125e8f015a16da7b70870d6582dbcea0d958",
+  "test_evaluated": false,
+  "tasks": [
+    {
+      "body": 84000,
+      "goals": [
+        [
+          0.1315442519038152,
+          0.043152175027292516,
+          1.099509218561609
+        ],
+        [
+          0.1621370055358981,
+          -0.04086510847036187,
+          1.0566708541851881
+        ]
+      ],
+      "goal_ids": [
+        0,
+        31
+      ]
+    },
+    {
+      "body": 84001,
+      "goals": [
+        [
+          0.1315442519038152,
+          0.043152175027292516,
+          1.099509218561609
+        ],
+        [
+          0.1621370055358981,
+          -0.04086510847036187,
+          1.0566708541851881
+        ]
+      ],
+      "goal_ids": [
+        0,
+        31
+      ]
+    },
+    {
+      "body": 84002,
+      "goals": [
+        [
+          0.14419846495803568,
+          0.016539488683114875,
+          1.1110187398786981
+        ],
+        [
+          0.2208663609261749,
+          -0.01900275561545825,
+          1.0576387324911594
+        ]
+      ],
+      "goal_ids": [
+        80,
+        111
+      ]
+    },
+    {
+      "body": 84003,
+      "goals": [
+        [
+          0.14419846495803568,
+          0.016539488683114875,
+          1.1110187398786981
+        ],
+        [
+          0.2208663609261749,
+          -0.01900275561545825,
+          1.0576387324911594
+        ]
+      ],
+      "goal_ids": [
+        80,
+        111
+      ]
+    },
+    {
+      "body": 84004,
+      "goals": [
+        [
+          0.2124018232672336,
+          -0.07942918033722501,
+          0.9922218618927224
+        ],
+        [
+          0.11673404510249975,
+          -0.053566394695469755,
+          0.9844795163779578
+        ]
+      ],
+      "goal_ids": [
+        160,
+        191
+      ]
+    },
+    {
+      "body": 84005,
+      "goals": [
+        [
+          0.2124018232672336,
+          -0.07942918033722501,
+          0.9922218618927224
+        ],
+        [
+          0.11673404510249975,
+          -0.053566394695469755,
+          0.9844795163779578
+        ]
+      ],
+      "goal_ids": [
+        160,
+        191
+      ]
+    },
+    {
+      "body": 84006,
+      "goals": [
+        [
+          0.22032954792712156,
+          0.012087862606659922,
+          0.9625386835552572
+        ],
+        [
+          0.18206552742823076,
+          -0.044302401495118306,
+          0.965542326777789
+        ]
+      ],
+      "goal_ids": [
+        240,
+        271
+      ]
+    },
+    {
+      "body": 84007,
+      "goals": [
+        [
+          0.22032954792712156,
+          0.012087862606659922,
+          0.9625386835552572
+        ],
+        [
+          0.18206552742823076,
+          -0.044302401495118306,
+          0.965542326777789
+        ]
+      ],
+      "goal_ids": [
+        240,
+        271
+      ]
+    }
+  ],
+  "scope": "Training-split procedural arms only. Position-only reaching, not native XYZ/tool-Z manipulation. Frozen models; no training, selection or native data.",
+  "drivers": [
+    "analytical",
+    "original_0",
+    "original_1",
+    "original_2",
+    "prediction_0",
+    "prediction_1",
+    "prediction_2",
+    "control_0",
+    "control_1",
+    "control_2"
+  ],
+  "horizon": 150,
+  "sample_steps": [
+    9,
+    29,
+    49,
+    50,
+    79,
+    99,
+    100,
+    129,
+    149
+  ],
+  "targets": "First/last training goals per paired body; alternate every 50 steps with .002 m reference ramp. Cold start, no probes; each of ten drivers produces its own online history. Stop driver at first collision; retain missing later states and failures. Ignore legacy static-goal success termination because task is scheduled tracking.",
+  "branches": "Ten candidates per fixed state, same driver Gram/cross/bias; five steps of continuing scheduled moving reference, online updates and native procedural clipping/limits. Record contact, one/five-step errors. Copy all simulator data and Python state; exact driver replay without branching required.",
+  "proxies": "E53 operator, local unclipped and local executed-command scores generalized to 3D, gain .5 and limits +/-2.5. Privileged geometric Jacobian diagnostic-only; forbidden in candidate inference.",
+  "statistics": "Case-macro pairwise ranking, stratified by DoF and driver family; eight bodies are clusters. Record collision-free pairs separately. No independent task-success claims."
+}
