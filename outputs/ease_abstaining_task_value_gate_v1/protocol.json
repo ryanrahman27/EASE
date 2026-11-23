@@ -1,0 +1,142 @@
+{
+  "experiment": "E126",
+  "date": "2026-11-15",
+  "inputs": {
+    "outputs/ease_broad_task_value_gate_v1/gate_dataset.npz": "a14fdd52baf4a6e861a09934d785d1c88f37b7990f569c59480febb419a83138",
+    "outputs/ease_broad_task_value_gate_v1/gate_rows.json": "d44908b48191785740bf11d560c66fedd855ea8996f336c4b6c9cab4267163ad",
+    "outputs/ease_broad_task_value_gate_v1/cases.json": "231122397d1c787fafb138fa54197ad7f7064d823b0727cb36a839753d9a70d9",
+    "outputs/ease_broad_task_value_gate_v1/records.json": "b9b29a003928ca2a0679418f07fb9c9eaff91500051ced6f27933f3df8bd6f8b",
+    "outputs/ease_broad_task_value_gate_v1/summary.json": "7f60b6a77fd84d17b932f542a23ae014d3afa54de00723b9a2a2e2d6975641d7",
+    "outputs/ease_broad_task_value_gate_v1/verification.json": "8ef8f21e1d11a91d467e9818fe0d321bd2fb1c3100bd34ece2d0b7f23e86cc7c",
+    "outputs/ease_broad_task_value_gate_v1/collection/records.json": "e5ee0ff13edf6fbb1d8f2f7c890f0b10da4f6ac7397ed2a936ae29e7cc70bdb7",
+    "outputs/ease_bounded_history_v1/records.json": "660cfa30e45f5cea932f82883d7aaaaae0720708070ab34fc311e338024ca12d",
+    "outputs/ease_bounded_history_v1/summary.json": "a6ae93e4289bc31d87776d44ec0b83db1ed180ee0ebaeeb25131c791ecb926ed"
+  },
+  "checkpoints": {
+    "outputs/ease_task_retention_training_v1/retained/seed_0/policy.pt": "3190e96c2d867237db6f5aedbc46f71ef61ca35f36e0dc3df663018141c50627",
+    "outputs/ease_task_retention_training_v1/retained/seed_1/policy.pt": "4a0495a5b7f719a1d3586554545e11ba39c58840ccdcc78e9fecf1aa2a5993ad",
+    "outputs/ease_task_retention_training_v1/retained/seed_2/policy.pt": "d351c6b49b8252a903ed98f2840207e8881f064b1902bc3b71ceb678273345a2",
+    "outputs/ease_estimator_repair_v1/seed_0/policy.pt": "26dd3d2785e3da7f7daeda03b588f19a5d1572e5db961d09d33c124ec8a733b1",
+    "outputs/ease_estimator_repair_v1/seed_1/policy.pt": "7b9727d0a1f583f158f454fcd1f3d1807636973e455d432f4927fcdc83cf7a7b",
+    "outputs/ease_estimator_repair_v1/seed_2/policy.pt": "62506dc0d29746b80fdeaa1fe549e3010dafe33eb6c6a97284beb9848a96ec37",
+    "outputs/ease_broad_history_v1/seed_0/policy.pt": "2d809ac80788ba548c19a2b577e3228eae32af4a59f591010dc6fa8972ec5a80",
+    "outputs/ease_broad_history_v1/seed_1/policy.pt": "69bec791582226b1fff68ac3432476f3d1881e40b7ffc39ea850fed2262027a0",
+    "outputs/ease_broad_history_v1/seed_2/policy.pt": "5d3303a645c6b540e606cd7dcbcbe1ee4b1574148e47d981a00b2184e83674b2",
+    "outputs/ease_candidate_history_v1/seed_0/policy.pt": "b2f775ea86ba60b82ff71b972c8fc36daf29caca051ea4cc8493ac3cbc26a6a9",
+    "outputs/ease_candidate_history_v1/seed_1/policy.pt": "918cccdf8aae26426069fb6f8c567906bcbe9722fafc2ac5813bebb5698e403b",
+    "outputs/ease_candidate_history_v1/seed_2/policy.pt": "4ef24d776eacaea79098f6f8c8134012b8c72c441d9b6228d0baacdca8a7f5b3"
+  },
+  "folds": "Four folds, each holding two complete source families from different bodies. Eight ancestral source families total: original placement, prior shifted placement, and all four added descendants stay together, across every phase and estimator seed. Twelve placements per fold. All four bodies remain represented in each training fold. Held placements excluded.",
+  "model": "Three 139-64-32-2 tanh MLPs, seeds126100..126102; 1500 full-batch AdamW steps, lr.001 weight_decay.001, paired BCE. Fold-local normalization and training only. Final three models fit all clean fitting rows.",
+  "rule": "At phase entry, all three predicted off-minus-on advantages must exceed min_advantage and their range must not exceed max_spread. Otherwise continue E120. At most one up-to8-step off pulse, then E120 resumes. No physics selector. Agreement is not calibrated confidence.",
+  "grid": [
+    {
+      "min_advantage": 0.1,
+      "max_spread": 0.05
+    },
+    {
+      "min_advantage": 0.1,
+      "max_spread": 0.1
+    },
+    {
+      "min_advantage": 0.1,
+      "max_spread": 0.25
+    },
+    {
+      "min_advantage": 0.1,
+      "max_spread": 0.5
+    },
+    {
+      "min_advantage": 0.1,
+      "max_spread": 2.0
+    },
+    {
+      "min_advantage": 0.25,
+      "max_spread": 0.05
+    },
+    {
+      "min_advantage": 0.25,
+      "max_spread": 0.1
+    },
+    {
+      "min_advantage": 0.25,
+      "max_spread": 0.25
+    },
+    {
+      "min_advantage": 0.25,
+      "max_spread": 0.5
+    },
+    {
+      "min_advantage": 0.25,
+      "max_spread": 2.0
+    },
+    {
+      "min_advantage": 0.5,
+      "max_spread": 0.05
+    },
+    {
+      "min_advantage": 0.5,
+      "max_spread": 0.1
+    },
+    {
+      "min_advantage": 0.5,
+      "max_spread": 0.25
+    },
+    {
+      "min_advantage": 0.5,
+      "max_spread": 0.5
+    },
+    {
+      "min_advantage": 0.5,
+      "max_spread": 2.0
+    },
+    {
+      "min_advantage": 0.75,
+      "max_spread": 0.05
+    },
+    {
+      "min_advantage": 0.75,
+      "max_spread": 0.1
+    },
+    {
+      "min_advantage": 0.75,
+      "max_spread": 0.25
+    },
+    {
+      "min_advantage": 0.75,
+      "max_spread": 0.5
+    },
+    {
+      "min_advantage": 0.75,
+      "max_spread": 2.0
+    },
+    {
+      "min_advantage": 0.9,
+      "max_spread": 0.05
+    },
+    {
+      "min_advantage": 0.9,
+      "max_spread": 0.1
+    },
+    {
+      "min_advantage": 0.9,
+      "max_spread": 0.25
+    },
+    {
+      "min_advantage": 0.9,
+      "max_spread": 0.5
+    },
+    {
+      "min_advantage": 0.9,
+      "max_spread": 2.0
+    },
+    {
+      "min_advantage": 2.0,
+      "max_spread": 0.0
+    }
+  ],
+  "selection": "Using out-of-fold complete-episode outcomes from existing matched continuations: require zero regressions versus E120; maximize gains, then minimize switches, then larger min_advantage, then smaller max_spread. All-abstain included. No held optimization. Pooled validation is used for selection, not an unbiased test estimate.",
+  "validation": "144 fitting placement/estimator episodes. Simulate first accepted clean phase using saved exact counterfactual outcomes. Post-collision phase entries omitted: success already irreversibly false, so they cannot change task success. Runtime has no collision flag input. All72 original episodes retested after selection is frozen.",
+  "baseline": "E120 unchanged. Original gains and previous gate successes audited separately. Existing development held placements, not a fresh final benchmark or unseen bodies.",
+  "grouping_note": "Transitive source ancestry grouping verified before any E126 training; direct-parent-only draft replaced before use."
+}
