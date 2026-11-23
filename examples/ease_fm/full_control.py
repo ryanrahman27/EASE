@@ -164,7 +164,7 @@ def summarize(root):
         for kind in ['flow','direct']:
             folder=root/(phase+'_'+kind)
             result=json.loads((folder/'correct32.json').read_text())
-            for family in ['six','seven']:
+            for family in sorted({r['family'] for r in result['records']}):
                 for start in ['nominal','broad_start']:
                     cases=[r for r in result['records'] if r['family']==family and r['start']==start]
                     rows.append({'phase':phase,'model':kind,'family':family,'start':start,
@@ -174,14 +174,14 @@ def summarize(root):
     print(json.dumps(rows,indent=2),flush=True)
 
 
-def run(data,output,steps=10000,device='cuda'):
+def run(data,output,steps=10000,device='cuda',experiment='E12'):
     torch.set_num_threads(4)
     root=Path(output); root.mkdir(parents=True,exist_ok=False)
     dataset=MixedData(data)
     if not dataset.manifest.get('synchronized_observations',False):
         raise ValueError('Full-control recovery requires synchronized Cartesian observations; regenerate with --synchronize')
     manifest_hash=fingerprint(Path(data)/'manifest.json')
-    protocol={'experiment':'E12','scope':'Full training-body control, one training seed, no held-out evaluation',
+    protocol={'experiment':experiment,'scope':'Full training-body control, one training seed, no held-out evaluation',
         'seed':0,'steps_per_model':steps,'batch_size':32,'lr':.0003,'models':['flow','direct'],
         'capacity':'Identical history-conditioned joint architecture and initial weights, no auxiliary loss',
         'training_context':'Original same-body other-episode contexts; recovered rows exclude their source episode',
@@ -219,4 +219,5 @@ def run(data,output,steps=10000,device='cuda'):
 if __name__=='__main__':
     p=argparse.ArgumentParser(); p.add_argument('--data',required=True); p.add_argument('--output',required=True)
     p.add_argument('--steps',type=int,default=10000); p.add_argument('--device',default='cuda')
+    p.add_argument('--experiment',default='E12')
     run(**vars(p.parse_args()))

@@ -1,0 +1,21 @@
+{
+  "experiment": "E15",
+  "scope": "Full training-body control, one training seed, no held-out evaluation",
+  "seed": 0,
+  "steps_per_model": 10000,
+  "batch_size": 32,
+  "lr": 0.0003,
+  "models": [
+    "flow",
+    "direct"
+  ],
+  "capacity": "Identical history-conditioned joint architecture and initial weights, no auxiliary loss",
+  "training_context": "Original same-body other-episode contexts; recovered rows exclude their source episode",
+  "sampling": "Uniform rows; paired batch/context streams within data condition; all phases train from scratch",
+  "recovery": "Shared union of every tenth non-colliding state from BOTH original-data policies on all accepted training episodes; expert 16-step branches",
+  "evaluation": "All accepted training episodes, correct32 separate calibration frozen during task, fixed paired noise",
+  "gate": "At least 95 percent overall success and at least 90 percent for every training body; exploratory single-seed gate",
+  "original_transitions": 41184,
+  "manifest_sha256": "7e5c8439cddb7edabb188e303d2cd1e788d2f55dc23205d4659e36e8cf17b6d1",
+  "test_evaluated": false
+}

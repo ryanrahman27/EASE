@@ -17,6 +17,15 @@ AXES = {
     "six_novel": ["0 0 1", "0 1 0", "1 0 0", "0 1 0", "0 1 0", "1 0 0"],
 }
 
+# E15 families: distinct axis sequences within each joint count. Legacy entries
+# and reset configurations remain unchanged for reproducibility.
+for _name, _sequence in {
+    "six_c": "ZYYYXX", "six_d": "ZYXXYY", "six_e": "ZYYXYZ",
+    "six_f": "ZYXYXX", "seven_b": "ZYYXYXY", "seven_c": "ZYXYYXX",
+    "seven_d": "ZYYYXXY", "seven_e": "ZYXXYYX", "seven_f": "ZYYXXYZ",
+}.items():
+    AXES[_name] = [{"X": "1 0 0", "Y": "0 1 0", "Z": "0 0 1"}[axis] for axis in _sequence]
+
 
 @dataclass(frozen=True)
 class Arm:
@@ -27,6 +36,7 @@ class Arm:
     masses: tuple
     strength: float
     damping: float
+    home: tuple | None = None
 
     @property
     def dof(self):
@@ -84,6 +94,15 @@ class MixedReach:
         home = np.array([0, .5, -.9, 0, .6, 0] if self.arm.family == "six"
                         else [0, .5, 0, -.9, .6, 0] if self.arm.family == "six_novel"
                         else [0, .5, 0, -.9, 0, .6, 0], dtype=float)
+        if self.arm.family not in {"six", "six_novel", "seven"}:
+            home = np.zeros(self.arm.dof)
+            home[1] = .5
+            home[2 if AXES[self.arm.family][2] == "0 1 0" else 3] = -.9
+            home[-2] += .6
+        if self.arm.home is not None:
+            home = np.asarray(self.arm.home, dtype=float)
+            if home.shape != (self.arm.dof,):
+                raise ValueError("Home configuration must match joint count")
         mujoco.mj_resetData(self.model, self.data)
         self.goal = np.asarray(goal, dtype=float).copy()
         self.data.qpos[:] = home + rng.uniform(-spread, spread, self.arm.dof)
