@@ -1,0 +1,10 @@
+{
+  "experiment": "E146",
+  "inputs": {
+    "outputs/ease_history_estimator_control_v1/diagnosis_constant/dataset.npz": "221feaf3c51b5cb9002d5aa57729523c45482899ea1a7262868a5bcc08e915dc"
+  },
+  "data": "6706 measured transitions sampled every4 steps before any prior collision, across all96 constant-kernel fitting episodes. No success filtering. Temporally correlated samples; effective placement count96. Four unchanged ancestry-family folds. Fresh and old held placements excluded. Training sampling balances placements so long failed episodes cannot dominate.",
+  "model": "Same two-layer32-wide4-head history Transformer, now10 scalar features: prior8 measured features plus position/orientation residual norms against initial measured calibration Jacobian. Positive relative transition weights, normalized total recency mass. Fixed forgetting.98 and ridge1e-6 toward actual calibration J0; solve in float64. Model sees past history and measured J0 residuals only. Actual future joint increment is a supervised query, never a network feature. No phase/body/contact/object truth.",
+  "training": "Three fixed seeds141100..141102,1500 AdamW updates each fold,lr3e-4,wd1e-4,batch128,gradientclip1. Loss normalized measured next-motion MSE plus.001 mean log-weight squared; training-only position/orientation RMS scales, placement-balanced. Fixed all-three Jacobian mean is primary; no best seed/checkpoint selection.",
+  "screen": "Primary all-three ensemble position MSE at least5% below same fixed analytical calibration prior, neither joint count worse, rotation MSE no more than1.05x. Individual seed results and all regressions disclosed. Passing justifies complete fitting episodes, not fresh test. E120 remains unchanged."
+}
