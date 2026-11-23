@@ -1,0 +1,157 @@
+{
+  "experiment": "E67",
+  "checkpoints": {
+    "outputs/ease_robust_training_v1/seed_0/policy.pt": "bb2eadf92edc2f698fd137f6d1a7c8ec0a7283cd34e1d5a0fc390645e66392f1",
+    "outputs/ease_robust_training_v1/seed_1/policy.pt": "141e03fdac6d03a8ef035db3b8d3218cbbe73193450e06821e10b310380fc42d",
+    "outputs/ease_robust_training_v1/seed_2/policy.pt": "cf0d4d5d9fb80d5a20f5b117ea897a057e9c81ede715b785dad7523ec77520a0",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_0/policy.pt": "7cc59ce83397a3856939a849f229e0a962bfe0e1df3add7680aac42b8c5d0fec",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_1/policy.pt": "67a01fc8cdbec4d7c5ee5e602e5d1a16d6cfa80a8520c28a89eb2a861437b2d6",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_2/policy.pt": "f87c12bd330baf384432c5d275eda41f189ddb557f6083f487082a76447b2b71"
+  },
+  "generation_seed": 670000,
+  "native_ik_seed": 67000,
+  "native_probe_seed": 67100,
+  "native_candidates": [
+    {
+      "robot": "piper",
+      "xy": [
+        0.215,
+        -0.015
+      ],
+      "target": [
+        0.215,
+        0.025
+      ]
+    },
+    {
+      "robot": "piper",
+      "xy": [
+        0.215,
+        0.045
+      ],
+      "target": [
+        0.215,
+        0.0049999999999999975
+      ]
+    },
+    {
+      "robot": "piper",
+      "xy": [
+        0.245,
+        -0.015
+      ],
+      "target": [
+        0.245,
+        0.025
+      ]
+    },
+    {
+      "robot": "piper",
+      "xy": [
+        0.245,
+        0.045
+      ],
+      "target": [
+        0.245,
+        0.0049999999999999975
+      ]
+    },
+    {
+      "robot": "piper",
+      "xy": [
+        0.275,
+        -0.015
+      ],
+      "target": [
+        0.275,
+        0.025
+      ]
+    },
+    {
+      "robot": "piper",
+      "xy": [
+        0.275,
+        0.045
+      ],
+      "target": [
+        0.275,
+        0.0049999999999999975
+      ]
+    },
+    {
+      "robot": "panda",
+      "xy": [
+        0.33,
+        -0.015
+      ],
+      "target": [
+        0.33,
+        0.025
+      ]
+    },
+    {
+      "robot": "panda",
+      "xy": [
+        0.33,
+        0.045
+      ],
+      "target": [
+        0.33,
+        0.0049999999999999975
+      ]
+    },
+    {
+      "robot": "panda",
+      "xy": [
+        0.38,
+        -0.015
+      ],
+      "target": [
+        0.38,
+        0.025
+      ]
+    },
+    {
+      "robot": "panda",
+      "xy": [
+        0.38,
+        0.045
+      ],
+      "target": [
+        0.38,
+        0.0049999999999999975
+      ]
+    },
+    {
+      "robot": "panda",
+      "xy": [
+        0.43,
+        -0.015
+      ],
+      "target": [
+        0.43,
+        0.025
+      ]
+    },
+    {
+      "robot": "panda",
+      "xy": [
+        0.43,
+        0.045
+      ],
+      "target": [
+        0.43,
+        0.0049999999999999975
+      ]
+    }
+  ],
+  "test_evaluated": false,
+  "design": "Frozen E66 analytical-target and E35 parents, all three seeds, versus fixed-probe analytical reaching / measured-history analytical native control. No training, checkpoint choice or parameter tuning.",
+  "procedural": "Use E33 structural generator with seed670000; exclude all registered prior paired and E33 broad axis sequences. Sixteen fresh axis arrangements, four geometry/dynamics variants, two homes and eight goals per home: 64 bodies, 1024 cases. Same 150-step reaching horizon, no separate calibration; analytical first action +.01 rad, neural cold start. All structural rejections and policy outcomes retained. Body IDs are local to this manifest.",
+  "native": "Twelve placements fixed before IK and policy evaluation. Same PiPER/Panda robot designs, new XY positions, same 4cm Y transfer. Nine nominal endpoint IK checks, bounded seed67000+candidate; no policy-outcome filtering. Retain rejected placements and do not replace them. One 32-step measured probe per accepted case, clone full simulator state/statistics for every method. Both complete 1700-step contact-disabled tracking and contact-enabled original manipulation. Bias retained throughout.",
+  "limits": "Prospective development evaluation after E66, not the reserved final test. Native transfer changes placements, not robot designs. Structural screening limits scope. Seeds share bodies/goals; report per-seed, per-DoF, per-family and paired gains/losses with collision and interaction costs.",
+  "prior_manifests": {
+    "outputs/ease_paired_factorial_v2/manifest.json": "e28aa6cf6d4b402bb3847785d7ac125e8f015a16da7b70870d6582dbcea0d958",
+    "outputs/ease_broad_development_v2/data/manifest.json": "603d7c309fe33bf5879c3b1200c9267d146f5193baa23ccd7be2319a110615f0"
+  }
+}
