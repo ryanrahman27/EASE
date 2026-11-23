@@ -1,0 +1,151 @@
+# E91: frozen learned estimators with privileged route assistance
+
+All16 E87 development cases and all six frozen checkpoints are compared in baseline, route100 and route300 conditions (288 tasks). Baseline is the original geometry-filter learned controller, without E82 response correction. The planner reuses only the single frozen E89 selected endpoint, constructs a101-sample joint-space route from the learned controller's actual descent posture and accepts it only if the sampled clearance is at least2mm. Rejected or unavailable routes retain baseline actions and budgets. Route300 permits300 descent steps only for accepted routes; all other phase budgets and success rules remain unchanged.
+
+The descent tracker uses joint feedback plus measured adaptive bias; it does not use Transformer actions for that phase. Learned Jacobian control handles approach and all later phases. Offline endpoint IK and online exact scene geometry are privileged planning inputs. No task-time simulator Jacobian calls or target-arm weight updates are allowed. These are development interventions, not an independently evaluated history-only policy.
+
+| Group | Mode | Success | Collisions | Routes used | Steps incl. calibration | Filter queries |
+|---|---|---:|---:|---:|---:|---:|
+| all | baseline | 43/96 | 40 | 0 | 35473 | 153357 |
+| all | route100 | 49/96 | 36 | 78 | 39441 | 167991 |
+| all | route300 | 57/96 | 33 | 78 | 39284 | 151792 |
+| 6 | baseline | 15/48 | 27 | 0 | 17971 | 89709 |
+| 6 | route100 | 18/48 | 27 | 30 | 20476 | 106104 |
+| 6 | route300 | 22/48 | 22 | 30 | 19619 | 86755 |
+| 7 | baseline | 28/48 | 13 | 0 | 17502 | 63648 |
+| 7 | route100 | 31/48 | 9 | 48 | 18965 | 61887 |
+| 7 | route300 | 35/48 | 11 | 48 | 19665 | 65037 |
+| candidate_0 | baseline | 6/16 | 8 | 0 | 5548 | 22190 |
+| candidate_0 | route100 | 9/16 | 5 | 13 | 6280 | 24734 |
+| candidate_0 | route300 | 11/16 | 4 | 13 | 6128 | 21768 |
+| candidate_1 | baseline | 9/16 | 6 | 0 | 5998 | 26890 |
+| candidate_1 | route100 | 8/16 | 6 | 13 | 6773 | 29693 |
+| candidate_1 | route300 | 9/16 | 6 | 13 | 6791 | 26903 |
+| candidate_2 | baseline | 7/16 | 7 | 0 | 5974 | 28216 |
+| candidate_2 | route100 | 8/16 | 7 | 13 | 6471 | 27851 |
+| candidate_2 | route300 | 9/16 | 6 | 13 | 6441 | 24871 |
+| parent_0 | baseline | 7/16 | 7 | 0 | 6116 | 26654 |
+| parent_0 | route100 | 10/16 | 5 | 13 | 6732 | 29886 |
+| parent_0 | route300 | 11/16 | 5 | 13 | 6780 | 28216 |
+| parent_1 | baseline | 8/16 | 6 | 0 | 5705 | 21503 |
+| parent_1 | route100 | 6/16 | 7 | 13 | 6986 | 31620 |
+| parent_1 | route300 | 7/16 | 7 | 13 | 7138 | 29266 |
+| parent_2 | baseline | 6/16 | 6 | 0 | 6132 | 27904 |
+| parent_2 | route100 | 8/16 | 6 | 13 | 6199 | 24207 |
+| parent_2 | route300 | 10/16 | 5 | 13 | 6006 | 20768 |
+
+| Mode | Case | Body | DOF | Checkpoint | Change | Baseline collision | Intervention collision |
+|---|---:|---:|---:|---|---|---|---|
+| route100 | 0 | 0 | 6 | parent_2 | loss | False | False |
+| route300 | 0 | 0 | 6 | parent_2 | loss | False | False |
+| route100 | 0 | 0 | 6 | candidate_0 | loss | False | False |
+| route300 | 0 | 0 | 6 | candidate_0 | loss | False | False |
+| route100 | 0 | 0 | 6 | candidate_2 | loss | False | True |
+| route300 | 0 | 0 | 6 | candidate_2 | loss | False | True |
+| route100 | 1 | 0 | 6 | parent_0 | gain | False | False |
+| route300 | 1 | 0 | 6 | parent_0 | gain | False | False |
+| route100 | 1 | 0 | 6 | parent_1 | gain | False | False |
+| route300 | 1 | 0 | 6 | parent_1 | gain | False | False |
+| route100 | 1 | 0 | 6 | parent_2 | gain | False | False |
+| route300 | 1 | 0 | 6 | parent_2 | gain | False | False |
+| route100 | 1 | 0 | 6 | candidate_0 | gain | False | False |
+| route300 | 1 | 0 | 6 | candidate_0 | gain | False | False |
+| route100 | 1 | 0 | 6 | candidate_1 | gain | False | False |
+| route300 | 1 | 0 | 6 | candidate_1 | gain | False | False |
+| route100 | 1 | 0 | 6 | candidate_2 | gain | False | False |
+| route100 | 2 | 1 | 6 | parent_0 | gain | True | False |
+| route300 | 2 | 1 | 6 | parent_0 | gain | True | False |
+| route100 | 2 | 1 | 6 | parent_1 | gain | True | False |
+| route300 | 2 | 1 | 6 | parent_1 | gain | True | False |
+| route100 | 2 | 1 | 6 | candidate_0 | loss | False | True |
+| route300 | 2 | 1 | 6 | candidate_0 | loss | False | True |
+| route100 | 2 | 1 | 6 | candidate_1 | loss | False | True |
+| route300 | 2 | 1 | 6 | candidate_1 | loss | False | True |
+| route300 | 4 | 2 | 6 | parent_0 | gain | True | False |
+| route300 | 4 | 2 | 6 | parent_1 | gain | True | False |
+| route300 | 4 | 2 | 6 | parent_2 | gain | True | False |
+| route300 | 4 | 2 | 6 | candidate_0 | gain | True | False |
+| route300 | 4 | 2 | 6 | candidate_2 | gain | True | False |
+| route300 | 8 | 4 | 7 | parent_2 | gain | False | False |
+| route300 | 8 | 4 | 7 | candidate_0 | gain | False | False |
+| route100 | 8 | 4 | 7 | candidate_1 | loss | False | False |
+| route300 | 8 | 4 | 7 | candidate_2 | gain | False | False |
+| route100 | 9 | 4 | 7 | parent_1 | loss | False | True |
+| route300 | 9 | 4 | 7 | parent_1 | loss | False | True |
+| route100 | 9 | 4 | 7 | parent_2 | gain | False | False |
+| route300 | 9 | 4 | 7 | parent_2 | gain | False | False |
+| route100 | 10 | 5 | 7 | parent_0 | gain | True | False |
+| route300 | 10 | 5 | 7 | parent_0 | gain | True | False |
+| route100 | 10 | 5 | 7 | candidate_0 | gain | True | False |
+| route300 | 10 | 5 | 7 | candidate_0 | gain | True | False |
+| route100 | 10 | 5 | 7 | candidate_2 | gain | True | False |
+| route300 | 10 | 5 | 7 | candidate_2 | gain | True | False |
+| route100 | 12 | 6 | 7 | parent_1 | loss | False | True |
+| route300 | 12 | 6 | 7 | parent_1 | loss | False | True |
+| route100 | 12 | 6 | 7 | candidate_0 | gain | True | False |
+| route300 | 12 | 6 | 7 | candidate_0 | gain | True | False |
+| route100 | 12 | 6 | 7 | candidate_1 | gain | True | False |
+| route300 | 12 | 6 | 7 | candidate_1 | gain | True | False |
+| route100 | 13 | 6 | 7 | parent_1 | loss | False | True |
+| route300 | 13 | 6 | 7 | parent_1 | loss | False | True |
+| route100 | 13 | 6 | 7 | candidate_0 | gain | True | False |
+| route300 | 13 | 6 | 7 | candidate_0 | gain | True | False |
+| route100 | 14 | 7 | 7 | parent_2 | gain | True | False |
+| route300 | 14 | 7 | 7 | parent_2 | gain | True | False |
+| route100 | 15 | 7 | 7 | parent_1 | loss | False | False |
+| route300 | 15 | 7 | 7 | parent_1 | loss | False | False |
+| route100 | 15 | 7 | 7 | candidate_0 | gain | True | False |
+| route300 | 15 | 7 | 7 | candidate_0 | gain | True | False |
+| route100 | 15 | 7 | 7 | candidate_1 | loss | False | True |
+| route300 | 15 | 7 | 7 | candidate_1 | loss | False | True |
+
+Six-joint casewise retention checks:
+
+- route100: FAIL, 5 previously successful six-joint cases lost.
+- route300: FAIL, 5 previously successful six-joint cases lost.
+- route100: 17 gains and 11 losses versus baseline.
+- route300: 24 gains and 10 losses versus baseline.
+
+Lost baseline successes: descriptive phase diagnostics (not causal attribution):
+
+| Case | Checkpoint | Mode | Descent reached | First collision phase | Unreached phases |
+|---|---|---|---|---|---|
+| 0 | parent_2 | route100 | True | None | lower, release |
+| 0 | parent_2 | route300 | True | None | lower, release |
+| 0 | candidate_0 | route100 | True | None | transport |
+| 0 | candidate_0 | route300 | True | None | transport |
+| 0 | candidate_2 | route100 | True | settle | retreat, settle |
+| 0 | candidate_2 | route300 | True | settle | retreat, settle |
+| 2 | candidate_0 | route100 | True | lower | lower, release |
+| 2 | candidate_0 | route300 | True | lower | lower, release |
+| 2 | candidate_1 | route100 | True | transport | lift, transport, lower, release, retreat, settle |
+| 2 | candidate_1 | route300 | True | transport | lift, transport, lower, release, retreat, settle |
+| 8 | candidate_1 | route100 | False | None | descend, close |
+| 9 | parent_1 | route100 | True | transport | lift, transport, lower, release, retreat, settle |
+| 9 | parent_1 | route300 | True | transport | lift, transport, lower, release, retreat, settle |
+| 12 | parent_1 | route100 | True | lift | lift, transport, lower, release, retreat, settle |
+| 12 | parent_1 | route300 | True | lift | lift, transport, lower, release, retreat, settle |
+| 13 | parent_1 | route100 | True | retreat | retreat, settle |
+| 13 | parent_1 | route300 | True | retreat | retreat, settle |
+| 15 | parent_1 | route100 | True | None | release, retreat |
+| 15 | parent_1 | route300 | True | None | release, retreat |
+| 15 | candidate_1 | route100 | True | lower | transport |
+| 15 | candidate_1 | route300 | True | lower | transport |
+
+Route eligibility: 78/96 checkpoint/case pairs have an E89 eligible endpoint; 78/96 pass the actual-start check; 0 eligible routes are rejected by that check. Each route condition makes 7878 additional geometry queries for admission, separate from per-step filter queries. Both route modes make identical admission decisions.
+
+These counts pool dependent checkpoints and placements. Report every paired loss, not only net improvement. Different descent endpoints/postures can change all subsequent learned histories and behavior. Any gain is attributable to the combined planning intervention, not solely to the motion Transformer. E87 response-corrected scores remain unchanged, and comparisons against E90 exact-Jacobian outcomes are descriptive because the actual learned start states and admission decisions differ.
+
+Verification: all96 baseline rollouts reproduce E87 exactly; 36 fallback rollouts also match. Descent-start qpos/qvel agree across modes for each checkpoint/case. Route checks preserve physical state. Task Jacobian calls are blocked, the neural inverse guard remains enabled, input/checkpoint/source hashes remain unchanged, and114 tests pass. Every completed trial and its trace is saved immediately. No retraining or reserved-test evaluation occurred.
+
+## Decision
+
+Both variants fail the six-joint retention gate and are not promoted. Route100 reaches49/96 success versus43/96 baseline, with17 gains and11 losses. Route300 reaches57/96, with24 gains and10 losses. Six-joint counts are15/48 baseline,18/48 route100 and22/48 route300; each intervention loses five baseline-successful six-joint cases. The longer route recovers five of six checkpoint runs on difficult case4, but blanket route assistance regresses easier cases. All78 eligible routes pass actual-start rechecking; the18 pairs without an eligible E89 route remain exact baseline fallbacks in both modes.
+
+Of21 loss records across the two modes,20 reach the descent target before failing later. This motivates a controlled post-descent handoff diagnostic, but does not prove estimator history is the cause. Checkpoint/placement repetitions and the two modes are dependent.
+
+Do not promote route assistance as a drop-in improvement if the casewise retention gate fails, regardless of pooled gains. Inspect handoff from the planned descent to learned Cartesian control on lost baseline successes. A useful next diagnostic compares learned and exact local Jacobians at the same recorded post-descent states, then uses a separately labeled exact-kinematics continuation to distinguish estimation/handoff errors from remaining trajectory or contact problems. Keep privileged diagnostic gains distinct from learned results and preserve every failure.
+
+## Video evidence
+
+Gallery: `outputs/ease_learned_path_transfer_v1/videos/index.html`. Candidate_0 cases0 and4 in baseline and route300 are the prespecified illustrative examples; if necessary the first missing success/failure category is appended. Videos show executed full tasks, disclose hybrid privileged-planner use, and must match saved traces exactly. Example selection is not a representative success-rate sample.
