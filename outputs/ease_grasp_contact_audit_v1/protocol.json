@@ -1,0 +1,118 @@
+{
+  "experiment": "E102",
+  "failures": [
+    [
+      0,
+      "candidate_2",
+      "onpolicy"
+    ],
+    [
+      1,
+      "candidate_0",
+      "replay"
+    ],
+    [
+      10,
+      "candidate_0",
+      "onpolicy"
+    ],
+    [
+      15,
+      "candidate_0",
+      "replay"
+    ],
+    [
+      15,
+      "candidate_2",
+      "onpolicy"
+    ]
+  ],
+  "selections": [
+    [
+      0,
+      "candidate_2",
+      "parent"
+    ],
+    [
+      0,
+      "candidate_2",
+      "onpolicy"
+    ],
+    [
+      1,
+      "candidate_0",
+      "parent"
+    ],
+    [
+      1,
+      "candidate_0",
+      "replay"
+    ],
+    [
+      10,
+      "candidate_0",
+      "parent"
+    ],
+    [
+      10,
+      "candidate_0",
+      "onpolicy"
+    ],
+    [
+      15,
+      "candidate_0",
+      "parent"
+    ],
+    [
+      15,
+      "candidate_0",
+      "replay"
+    ],
+    [
+      15,
+      "candidate_2",
+      "parent"
+    ],
+    [
+      15,
+      "candidate_2",
+      "onpolicy"
+    ]
+  ],
+  "checkpoints": {
+    "outputs/ease_robust_training_v1/seed_0/policy.pt": "bb2eadf92edc2f698fd137f6d1a7c8ec0a7283cd34e1d5a0fc390645e66392f1",
+    "outputs/ease_robust_training_v1/seed_1/policy.pt": "141e03fdac6d03a8ef035db3b8d3218cbbe73193450e06821e10b310380fc42d",
+    "outputs/ease_robust_training_v1/seed_2/policy.pt": "cf0d4d5d9fb80d5a20f5b117ea897a057e9c81ede715b785dad7523ec77520a0",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_0/policy.pt": "7cc59ce83397a3856939a849f229e0a962bfe0e1df3add7680aac42b8c5d0fec",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_1/policy.pt": "67a01fc8cdbec4d7c5ee5e602e5d1a16d6cfa80a8520c28a89eb2a861437b2d6",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_2/policy.pt": "f87c12bd330baf384432c5d275eda41f189ddb557f6083f487082a76447b2b71",
+    "outputs/ease_onpolicy_history_v1/replay/seed_0/policy.pt": "9012a38419c8202ae710a47cc88936c4ec8155fc1dec523d1e9056cf0dbb25b9",
+    "outputs/ease_onpolicy_history_v1/replay/seed_1/policy.pt": "a7bdd8373bfbfd016f7203a2c3f6abfc81bf7b93e033818281aa1522df94a1f0",
+    "outputs/ease_onpolicy_history_v1/replay/seed_2/policy.pt": "e6bbf8b3ba73d652c570dd99636fbf25fee6d03064e9326afa1293ba4033b861",
+    "outputs/ease_onpolicy_history_v1/onpolicy/seed_0/policy.pt": "241ba264f1aec972841d89883fe054657690fbecf0ac7f62b2052fb1df3d707d",
+    "outputs/ease_onpolicy_history_v1/onpolicy/seed_1/policy.pt": "f42df5cf672d189f59c9519e802b70caf149b1a34020e7a0d6efbca8b39338c5",
+    "outputs/ease_onpolicy_history_v1/onpolicy/seed_2/policy.pt": "4b606ae7213e1b4d8a45553f91dbab1ee0b6fbc815d9dbaefaf7a2faf4f67942",
+    "outputs/ease_task_retention_training_v1/data_only/seed_0/policy.pt": "3b752f0136a32812e1abb4c2d59910d4846c87c3d439d492f241fa2763620037",
+    "outputs/ease_task_retention_training_v1/data_only/seed_1/policy.pt": "852d03bcadbaa650ffaaab71e9ac71bf0b03c5f2128b2f994348cd8f45c30bd7",
+    "outputs/ease_task_retention_training_v1/data_only/seed_2/policy.pt": "58b2bec0d87998d117e29d172b50a42adfd16b2ba64515677f6f656a86b02040",
+    "outputs/ease_task_retention_training_v1/retained/seed_0/policy.pt": "3190e96c2d867237db6f5aedbc46f71ef61ca35f36e0dc3df663018141c50627",
+    "outputs/ease_task_retention_training_v1/retained/seed_1/policy.pt": "4a0495a5b7f719a1d3586554545e11ba39c58840ccdcc78e9fecf1aa2a5993ad",
+    "outputs/ease_task_retention_training_v1/retained/seed_2/policy.pt": "d351c6b49b8252a903ed98f2840207e8881f064b1902bc3b71ceb678273345a2"
+  },
+  "inputs": {
+    "outputs/ease_onpolicy_history_v1/summary.json": "0c3c0d67ccd92ba9580847560ac88940a6da1fbfafa588fe779b86f6b21596f8",
+    "outputs/ease_onpolicy_history_v1/trials/0_candidate_2_parent.json": "dcd0ab09c5ba9571dbe8083cc4c05f1b237b730f913648c35c22a2033962f611",
+    "outputs/ease_onpolicy_history_v1/trials/0_candidate_2_onpolicy.json": "0c32114c60a17c6e69f5a548a7524a74ef4a07a2ce2f07a80f12406ea04d79c2",
+    "outputs/ease_onpolicy_history_v1/trials/1_candidate_0_parent.json": "d434149c02834601841360a67ffa8047347ad33c5c44b5bbe6855f1363de8808",
+    "outputs/ease_onpolicy_history_v1/trials/1_candidate_0_replay.json": "e01e0a2a39879296efa7f9cf0f65dafb4989fd79e032a3d0c91ded4aaca8a5e5",
+    "outputs/ease_onpolicy_history_v1/trials/10_candidate_0_parent.json": "11116158e430a28484f13241ce6091750c3707135246b19e259f85c9d5ba768a",
+    "outputs/ease_onpolicy_history_v1/trials/10_candidate_0_onpolicy.json": "be6becb1049eb6044580c374b7bcece83824c50155a2b67cc0a9aaee30451c78",
+    "outputs/ease_onpolicy_history_v1/trials/15_candidate_0_parent.json": "0e516620606f78668032b435eb281d1d16afc8d6e0256a2da50a074ae9271ff7",
+    "outputs/ease_onpolicy_history_v1/trials/15_candidate_0_replay.json": "c32c10f5f13674b0914aae58b7d9b94d78f196b6e5a7143afc5b7a66f8b8c486",
+    "outputs/ease_onpolicy_history_v1/trials/15_candidate_2_parent.json": "4ced49b2beed6186b1920425d99139f8aaa8b1a2b5c2ea33b5125584b06211db",
+    "outputs/ease_onpolicy_history_v1/trials/15_candidate_2_onpolicy.json": "45ff5949c8e9311c9de75324863985402ed2faf34b45ff71cd5749573834be42"
+  },
+  "test_evaluated": false,
+  "design": "All five E101 non-collision regressions against either original parent or starting student. Pair each with successful original parent, otherwise starting student, same case/seed. Outcome-selected diagnostic only. Instrument existing contacts calls after every2ms physics substep; record object position in gripper frame, tool/object positions, bilateral pad contacts and normal forces, cube-table contact and finger positions. Do not alter control or physics. Full serialized results must exactly replay E101.",
+  "limits": "Contact sampling at2ms; contacts indicate instantaneous geometry/constraint state, not guaranteed grasp stability. Relative displacement can include object rotation/rolling. No causal intervention or new benchmark success estimate. Privileged simulator diagnostics and unchanged privileged planning. No training or final-test evaluation."
+}

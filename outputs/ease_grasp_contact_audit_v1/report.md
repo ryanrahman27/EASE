@@ -1,0 +1,51 @@
+# E102: contact and object motion during lowering/release
+
+All five E101 non-collision regressions are paired with successful original-parent runs on the same task and seed. These ten outcome-selected diagnostic replays exactly match their full saved E101 results. No controller, physics, task criterion or policy weights change. This is not a new success-rate evaluation.
+
+At each existing contact query after a2ms physics substep, record tool/object positions, object position in the gripper frame, finger positions, cube-pad/table contact presence and summed positive normal contact forces. Active contact below uses summed normal force greater than1e-6 N. Geometric contact presence is separately saved. Contact data and poses follow MuJoCo's existing stepping schedule; no extra forward/step call is inserted.
+
+## Contact timing
+
+Times are measured from the beginning of lowering. Relative shift is the Euclidean displacement of the object center in the gripper frame from the final transport sample; it can include rotation/rolling and is not a direct slip measurement. Pre-table statistics end before the first active cube-table contact.
+
+| Case | Seed | Mode | First table ms | Pre-table bilateral fraction | Max pre-table relative shift mm | XY at first table mm |
+|---:|---|---|---:|---:|---:|---:|
+| 0 | candidate_2 | parent | 594.000 | 1.000 | 3.085 | 19.985 |
+| 0 | candidate_2 | onpolicy | 1138.000 | 0.986 | 6.824 | 41.419 |
+| 1 | candidate_0 | parent | 730.000 | 1.000 | 2.947 | 25.997 |
+| 1 | candidate_0 | replay | 2.000 | none | none | 11.191 |
+| 10 | candidate_0 | parent | 402.000 | 1.000 | 2.116 | 20.247 |
+| 10 | candidate_0 | onpolicy | 712.000 | 1.000 | 2.677 | 6.263 |
+| 15 | candidate_0 | parent | 642.000 | 1.000 | 2.289 | 8.189 |
+| 15 | candidate_0 | replay | 114.000 | 0.196 | 70.213 | 9.069 |
+| 15 | candidate_2 | parent | 562.000 | 1.000 | 2.307 | 2.911 |
+| 15 | candidate_2 | onpolicy | 106.000 | 0.115 | 66.755 | 39.009 |
+
+## Placement trajectory
+
+| Case | Seed | Mode | Transport XY mm | Lower XY mm | Release XY mm | Final XY mm | Max lower relative shift mm |
+|---:|---|---|---:|---:|---:|---:|---:|---:|
+| 0 | candidate_2 | parent | 8.25 | 1.71 | 4.63 | 4.63 | 5.31 |
+| 0 | candidate_2 | onpolicy | 5.67 | 34.31 | 40.99 | 40.44 | 35.71 |
+| 1 | candidate_0 | parent | 7.39 | 10.71 | 10.22 | 10.22 | 3.53 |
+| 1 | candidate_0 | replay | 11.19 | 30.52 | 44.60 | 44.60 | 112.51 |
+| 10 | candidate_0 | parent | 7.76 | 2.32 | 2.72 | 2.72 | 15.40 |
+| 10 | candidate_0 | onpolicy | 12.91 | 9.52 | 9.63 | 26.21 | 3.56 |
+| 15 | candidate_0 | parent | 1.43 | 4.68 | 4.27 | 4.27 | 5.80 |
+| 15 | candidate_0 | replay | 4.83 | 41.52 | 73.48 | 73.48 | 77.72 |
+| 15 | candidate_2 | parent | 4.74 | 2.78 | 2.78 | 2.78 | 2.31 |
+| 15 | candidate_2 | onpolicy | 3.83 | 46.25 | 46.25 | 46.25 | 79.04 |
+
+## Interpretation and next decision
+
+The five regressions do not share one failure mechanism. Case1 seed0 replay already has active table contact at the first lowering sample; during transport it has bilateral contact for77% of samples and ends with the object on the table (z approximately0.215m), despite its sticky grasped/lifted flags. Case15 seed0 replay and seed2 onpolicy lose bilateral contact early in lowering: pre-table bilateral fractions19.6% and11.5%, with maximum gripper-relative displacement70.2mm and66.8mm. All five successful references retain bilateral contact throughout their pre-table lowering intervals.
+
+Case0 seed2 onpolicy maintains bilateral contact for98.6% of pre-table lowering samples, but first table contact occurs41.4mm from the target (parent20.0mm); its error and contact path differ before setdown, and a pure grip-loss explanation is insufficient. Case10 seed0 onpolicy remains within tolerance at the end of release (9.63mm). During retreat its right pad recontacts the object for19 sampled substeps (38ms at2ms sampling); XY error rises from9.63mm to17.19mm across these contact samples and finishes26.21mm. This temporal association motivates a controlled retreat-path intervention, not a proven causal attribution.
+
+Correction to the E101 interpretation: all five had acceptable XY error at the end of transport, but that did not establish a maintained grasp; one had already dropped to the table. Not all five fail during lowering/release: case10 becomes out of tolerance during retreat. The saved phase-error tables were correct; the earlier prose localization was too broad.
+
+Next test a shared, fixed gentle phase-transition controller on the original training bodies, with explicit monitoring of object/gripper contact through transport, lowering and retreat. Compare unchanged control against the intervention with identical checkpoints, success criteria and full trajectories; choose settings on training bodies only before repeating the entire development retention evaluation. Keep contact observations explicitly labeled as additional privileged diagnostic/controller inputs if used. Do not train on these selected evaluation traces or adopt an outcome-selected seed. No policy is changed by E102.
+
+## Verification and artifacts
+
+Ten exact full-result replays; 55020 recorded contact samples; unchanged reference/checkpoint hashes.129 existing tests pass. All ten success/failure videos are replay-verified, decoded-frame-count checked and SHA-256 recorded. See videos/index.html. Figure contact_motion.png / .pdf: circles mark first active table contact, dotted lines mark release start, dashed horizontal line is25mm success threshold. Different modes follow different trajectories. Raw per-substep contact traces, vectors and normal forces remain saved. Privileged diagnostics/planning; no inference weight updates, training, or final test.
