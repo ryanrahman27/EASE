@@ -1,0 +1,38 @@
+{
+  "experiment": "E48",
+  "reference": "outputs/ease_local_refresh_v1",
+  "reference_records_sha256": "ddad0a9c128babdf1206ace3c5cc2c92ede05c24b3cd7a786f30ed2c6e0a3f92",
+  "cases_sha256": "6983880bf356462ef01a28fafdd296673d11fb22e29049de2cc75057cabcbb87",
+  "checkpoints": {
+    "outputs/ease_robust_training_v1/seed_0/policy.pt": "bb2eadf92edc2f698fd137f6d1a7c8ec0a7283cd34e1d5a0fc390645e66392f1",
+    "outputs/ease_robust_training_v1/seed_1/policy.pt": "141e03fdac6d03a8ef035db3b8d3218cbbe73193450e06821e10b310380fc42d",
+    "outputs/ease_robust_training_v1/seed_2/policy.pt": "cf0d4d5d9fb80d5a20f5b117ea897a057e9c81ede715b785dad7523ec77520a0"
+  },
+  "asset_commit": "cda5236f98383f6fbaa4820c6b18dba892cd087f",
+  "conditions": {
+    "both": [
+      true,
+      true
+    ],
+    "motion_only": [
+      true,
+      false
+    ],
+    "bias_only": [
+      false,
+      true
+    ],
+    "neither": [
+      false,
+      false
+    ]
+  },
+  "initial_probe_seed": 41000,
+  "refresh_seed": 47000,
+  "refresh_steps": 32,
+  "test_evaluated": false,
+  "design": "Four update combinations during the identical E47 pre-grasp probe only. Normal updates resume immediately afterward. All twelve observed E46 placements; original E35 models; no training or tuning. Re-run analytical plus three neural seeds for all conditions (192 trials). Privileged E47 references are reused, since they do not consume either estimator state.",
+  "mechanics": "Exact E47 hover, +/- .006 rad eight targets, four steps each; open gripper; no reset after initial calibration. All physical steps and failures counted. Freeze motion means freeze Gram and cross including decay/ridge; freeze bias means retain pre-refresh bias.",
+  "diagnostics": "One-step probe motion residual J(previous statistics) @ measured dq - measured dx, separately XYZ and .15-scaled tool-Z. Bias residual command - previous bias - measured dq. Computed before updating with the transition, diagnostic only. All four conditions share actual probe motions; normal task trajectories may diverge after refresh.",
+  "decision": "Diagnostic factorial decomposition, not a checkpoint or controller promotion. Retain every outcome and compare paired gains/losses. No final test."
+}
