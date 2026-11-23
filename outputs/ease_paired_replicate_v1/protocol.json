@@ -1,0 +1,24 @@
+{
+  "experiment": "E24",
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "pilot": "outputs/ease_paired_pilot_v1",
+  "manifest_sha256": "234c8e0e90a31b22fbd065cbe6f55b5959fff65df1114d06ca18120a710a9ddf",
+  "teacher_steps": 10000,
+  "encoder_steps": 5000,
+  "reactive_steps": 15000,
+  "probe_seeds": [
+    930000,
+    940000,
+    950000
+  ],
+  "final_test_evaluated": false,
+  "gate_policy": "Retain every failed gate. Do not fit students after failed teacher gate. Reactive validation is diagnostic when its training gate fails.",
+  "reactive_design": "Same direct Transformer action trunk, learned constant empty latent, no history/body/initial-pose context. All action-producing weights trained on supervised action chunks.",
+  "budget": "Reactive 15k updates equals teacher 10k plus one encoder 5k in update count, not FLOPs; same batch32 AdamW lr0.0003.",
+  "capacity": "Same allocated 244289 parameters; history modules have no influence at length zero. Effective trainable capacity differs.",
+  "replication": "Seed0 reuses immutable pilot. Seeds1/2 fresh teacher and encoder initialization/sampling. Fixed dataset; no tuning."
+}

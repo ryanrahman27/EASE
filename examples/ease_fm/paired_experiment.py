@@ -14,7 +14,7 @@ from .history_distill import make_student, frozen_equal
 
 
 @torch.no_grad()
-def evaluate(data, manifest, model, split, mode, device):
+def evaluate(data, manifest, model, split, mode, device, calibration_seed=930000):
     arms = {a['seed']: Arm(**a) for a in manifest['arms']}
     pairs = {p['id']: p for p in manifest['pairs']}
     cases = [(arms[body], goal, pairs[goal['pair']]) for goal in manifest['goals'][split]
@@ -27,13 +27,13 @@ def evaluate(data, manifest, model, split, mode, device):
         histories = np.zeros((len(batch), 32, 7, 11), np.float32)
         for i, (arm, _, pair) in enumerate(batch):
             if mode == 'oracle': histories[i] = oracle_tokens(arm, padded=True)
-            else:
+            elif mode != 'reactive':
                 donor = arms[next(b for b in pair['bodies'] if b != arm.seed)] if mode == 'twin' else arm
                 # Training evaluation uses a fresh calibration seed, outside the 16 training probes.
-                history, _ = calibration(donor, 930000 + pair['id'])
+                history, _ = calibration(donor, calibration_seed + pair['id'])
                 histories[i, :, :arm.dof] = history
         latent = model.encode(torch.tensor(histories, device=device),
-                              torch.full((len(batch),), 0 if mode == 'empty' else 32, device=device), mask)
+                              torch.full((len(batch),), 0 if mode in ('empty', 'reactive') else 32, device=device), mask)
         obs = [env.reset(0, goal['xyz'], spread=0) for env, (_, goal, _) in zip(envs, batch)]
         active = np.ones(len(batch), bool); early = [None]*len(batch)
         for step in range(150):
@@ -64,11 +64,11 @@ def gate(records):
             'passed': overall[0]/overall[1] >= .95 and all(n/d >= .9 for n, d in by_body.values())}
 
 
-def run(data, output, device='cuda', teacher_steps=10000, student_steps=5000):
+def run(data, output, device='cuda', teacher_steps=10000, student_steps=5000, seed=0):
     torch.set_num_threads(4)
     root = Path(output); root.mkdir(parents=True, exist_ok=False)
     manifest = register(data)
-    protocol = {'experiment': 'E23', 'seed': 0, 'scope': 'Single-seed feasibility pilot, not replication',
+    protocol = {'experiment': 'E23' if seed == 0 else 'E24', 'seed': seed, 'scope': 'One recorded seed; aggregate all seeds externally',
         'teacher_steps': teacher_steps, 'student_steps': student_steps, 'batch': 32, 'lr': .0003,
         'manifest_sha256': fingerprint(Path(data)/'manifest.json'), 'test_evaluated': False,
         'gate': 'Teacher >=95% overall and >=90% every training body before student fitting',
@@ -80,7 +80,7 @@ def run(data, output, device='cuda', teacher_steps=10000, student_steps=5000):
     src = root/'source'; src.mkdir()
     for p in Path(__file__).parent.glob('*.py'): shutil.copyfile(p, src/p.name)
     dataset = OracleData(data)
-    teacher = fit(dataset, root/'teacher', 'direct', teacher_steps, device, protocol['manifest_sha256'])
+    teacher = fit(dataset, root/'teacher', 'direct', teacher_steps, device, protocol['manifest_sha256'], seed=seed)
     records = evaluate(data, manifest, teacher, 'train', 'oracle', device)
     result = gate(records)
     (root/'teacher'/'train.json').write_text(json.dumps(records, indent=2))
@@ -99,9 +99,9 @@ def run(data, output, device='cuda', teacher_steps=10000, student_steps=5000):
     summary = []
     for name in ('history', 'pose'):
         folder = root/name; folder.mkdir()
-        model = make_student(teacher, [c for pool in contexts.values() for c in pool], device, 0, name == 'pose')
+        model = make_student(teacher, [c for pool in contexts.values() for c in pool], device, seed, name == 'pose')
         optimizer = torch.optim.AdamW([p for p in model.parameters() if p.requires_grad], lr=.0003)
-        rng = np.random.default_rng(3000)
+        rng = np.random.default_rng(3000+seed)
         losses = []
         for step in range(student_steps):
             ids = rng.integers(len(arms), size=32); lengths = rng.integers(0, 33, size=32)
@@ -135,4 +135,5 @@ if __name__ == '__main__':
     parser.add_argument('--device', default='cuda')
     parser.add_argument('--teacher-steps', type=int, default=10000)
     parser.add_argument('--student-steps', type=int, default=5000)
+    parser.add_argument('--seed', type=int, default=0)
     run(**vars(parser.parse_args()))
