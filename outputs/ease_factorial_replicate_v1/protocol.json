@@ -1,0 +1,23 @@
+{
+  "experiment": "E27",
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "steps_per_model": 15000,
+  "manifest_sha256": "e28aa6cf6d4b402bb3847785d7ac125e8f015a16da7b70870d6582dbcea0d958",
+  "recovery_sha256": "205d63ea9f9071d55d7344ac69bf552e92d5edf1caeefdf8fe8d716594cd1c62",
+  "pilot": "outputs/ease_factorial_recovery_v2",
+  "test_evaluated": false,
+  "calibration_seed": 930000,
+  "scope": "Seed 0 reused from E26; two new seeds for all four policies. Fixed recovery union; no tuning or filtering failed gates.",
+  "efficiency": "Task steps capped at 150. Correct/twin history costs 32 extra steps per task, or one 32-step calibration reused over 12 goals per body/posture. Reactive/empty require zero calibration, regardless of ignored evaluator probes.",
+  "success_budgets": [
+    25,
+    50,
+    100,
+    150,
+    182
+  ]
+}
