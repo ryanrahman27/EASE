@@ -1,0 +1,10 @@
+{
+  "experiment": "E149",
+  "scope": "PRIVILEGED DIAGNOSTIC ONLY. Exact current MuJoCo tool-position/tool-up Jacobian replaces estimated motion map. Same measured32-step initial calibration, frozen measured bias, close probe, DLS, action limits, waypoints, phase budgets and success/collision criteria. No physics selector, geometry-based route or oracle task decisions. This is a reference for the fixed controller, not a mathematical upper bound on every possible task policy.",
+  "motivation": "E144 offline exact-geometry audit shows learned maps improve full Jacobian and exact-Jacobian DLS action error as well as measured-next-motion error, yet complete tasks regress. Establish whether accurate kinematics alone improves this controller before spending further training on accuracy.",
+  "data": "All96 fitting placements only; preserve calibration seeds38000+case. No held/fresh states. All outcomes retained. Exact-Jacobian access is confined to this explicitly privileged evaluator; no learned training data or deployed estimator uses it. E120 unchanged.",
+  "inputs": {
+    "outputs/ease_history_estimator_control_v1/cases.json": "bb06c1302362e1e0232c548d822a24705ead6f0ca83e0ac6c283894efa0d7a25",
+    "outputs/ease_history_estimator_control_v1/jacobian_diagnosis/summary.json": "f4382fcb0b8f4c068ac40d1caba0cf9415c4f73f87005e42e7b55e74ae1fd5e2"
+  }
+}
