@@ -96,6 +96,21 @@ def run(data, parents, training, reference, output):
 
 def report(root):
     root=Path(root);rows=json.loads((root/'records.json').read_text());summary=[]
+    protocol=json.loads((root/'protocol.json').read_text());audit=json.loads((root/'audit.json').read_text())
+    assert fingerprint(root/'records.json')==audit['records_sha256']
+    assert len(rows)==audit['states']==audit['exact_first_steps']==288
+    assert len(audit['exact_replays'])==32 and all(r['exact'] for r in audit['exact_replays'])
+    assert fingerprint(Path(protocol['reference'])/'drivers.json')==protocol['source_sha256']
+    for path,sha in protocol['checkpoints'].items():assert fingerprint(path)==sha
+    for r in rows:
+        assert len(r['candidates'])==10
+        for c in r['candidates']:
+            terms=c['decomposition']
+            np.testing.assert_allclose(np.sum([terms[k] for k in ['estimator','actuator','nonlinear']],axis=0),terms['total'],atol=1e-12,rtol=1e-10)
+    archived=[]
+    for path in sorted((root/'trials').glob('*.json')):archived.extend(json.loads(path.read_text()))
+    key=lambda r:(r['case'],r['driver'],r['index'])
+    assert sorted(archived,key=key)==sorted(rows,key=key)
     lines=['# E58: predicted versus actual procedural motion','',
         '32 analytical/E35 trajectories exactly replay E55; 288 fixed states, 2,880 five-step branches and 288 exact matching-driver first steps. Eight training bodies; no independent validation, native data or new training. All candidate checkpoints remain frozen.',
         '', '## Pairwise ranking (body-macro agreement)', '',
@@ -132,8 +147,14 @@ def report(root):
             lines.append(f'| {robot} | {seed} | '+' | '.join(f'{n}/{len(rr)}' for n in counts)+' |')
     contacts=sum(c['branch']['5']['collision'] for r in rows for c in r['candidates'])
     lines+=['',f'Five-step branches with contact: {contacts}/2880. All outcomes retained. This audit cannot explain native grasp/contact failures directly; it tests local mechanisms on fixed histories overlapping E57 training data. Keep E35; no promotion or final-test evaluation.']
+    lines+=['','## Interpretation','',
+        'Replacing predicted joint displacement with realized joint displacement raises one-step geometric-score agreement from 78.2% to 99.4% for six joints and 76.4% to 99.5% for seven. This is a diagnostic oracle, not an implementable improvement. Actuator/bias mismatch is much larger than geometric nonlinearity in the vector decomposition; estimated-J error is also substantial and can cancel actuator error.',
+        '', 'Control wins over prediction-only in more than half the sampled states for every seed at both measured horizons, despite worse E57 native manipulation. Better short-horizon performance on these overlapping procedural histories therefore does not establish native retention. No contact occurred here, so contact and grasp mechanisms remain untested. The five-step ordering gap persists even with the first-step realized-motion oracle.',
+        '', 'Next bounded test: fit a joint-response predictor using procedural measured commands, velocities and histories, evaluate it on whole held-out bodies/trajectories before integrating it into a training objective, and compare against the existing command-minus-bias approximation. Keep native data diagnostic-only and E35 as the retained controller. No model training was performed by this audit.',
+        '', 'Validation: 81 regression tests pass. Initial v1 stopped on a float64-versus-float32 command-log assertion (maximum observed difference 7.4e-10); its source and failure status are preserved. v2 compares commands exactly at logged float32 precision while retaining full precision in the physical-motion decomposition.']
     (root/'summary.json').write_text(json.dumps(dict(rankings=summary,decomposition=decomposed,matched=matched,contacts=contacts),indent=2))
     (root/'report.md').write_text('\n'.join(lines)+'\n');print('\n'.join(lines),flush=True)
+    (root/'report_audit.json').write_text(json.dumps(dict(records_sha256=fingerprint(root/'records.json'),source_drivers_verified=True,trial_records_match=True,decomposition_identity_checks=2880,unchanged_weights=True,test_evaluated=False),indent=2))
 
 
 if __name__=='__main__':
