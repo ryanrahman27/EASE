@@ -1,0 +1,38 @@
+# E89: static descent-path feasibility on unseen arrangements
+
+All 16 E88 exact-Jacobian rollouts replay exactly. Search starts from each recorded state immediately before descent. Twenty deterministic endpoint IK attempts per case retain the recorded object and finger poses. Every accepted endpoint receives 101 equally spaced joint-space path samples. The original contact rules apply; the separate 2 mm geometry check is also reported. This is a bounded privileged kinematic search, not an executed policy or continuous-path certificate.
+
+| Case | DOF | Collision-free endpoints / 20 | Contact-free sampled routes | Routes with 2 mm margin | Selected minimum clearance (mm) |
+|---|---:|---:|---:|---:|---:|
+| 0 | 6 | 13 | 13 | 13 | 2.000 |
+| 1 | 6 | 9 | 9 | 9 | 2.000 |
+| 2 | 6 | 16 | 4 | 4 | 2.000 |
+| 3 | 6 | 13 | 13 | 13 | 2.000 |
+| 4 | 6 | 5 | 1 | 1 | 2.000 |
+| 5 | 6 | 7 | 0 | 0 | -59.807 |
+| 6 | 6 | 4 | 0 | 0 | -12.003 |
+| 7 | 6 | 9 | 0 | 0 | -2.661 |
+| 8 | 7 | 14 | 11 | 11 | 2.000 |
+| 9 | 7 | 13 | 12 | 12 | 2.000 |
+| 10 | 7 | 14 | 12 | 12 | 2.000 |
+| 11 | 7 | 11 | 6 | 6 | 2.000 |
+| 12 | 7 | 15 | 6 | 6 | 2.000 |
+| 13 | 7 | 14 | 11 | 11 | 2.000 |
+| 14 | 7 | 13 | 11 | 11 | 2.000 |
+| 15 | 7 | 12 | 12 | 12 | 2.000 |
+
+## Findings and next decision
+
+The search finds 182 collision-free endpoints from 320 attempts and 121 sampled contact-free joint-interpolation routes. Thirteen of 16 cases have at least one route; all such routes also satisfy the sampled 2 mm margin. Endpoints may duplicate a branch and are not independent samples.
+
+Within the difficult six-joint ZYXYZY family, case 4 has one clear route among five endpoints. Its local-start IK attempt fails; attempt 17 finds a different endpoint posture. Cases 5, 6 and 7 have seven, four and nine endpoints respectively, but no clear sampled straight joint-space route. This is evidence of posture/path sensitivity, not proof that these cases are infeasible.
+
+Case 4 requires a maximum single-joint displacement of 4.172 radians, or 105 nominal increments of 0.04 radians, exceeding the existing 100-step descent budget under ideal incremental tracking. This is an illustrative planning-cost estimate, not a physical lower bound: actual actuator displacements can differ from commands. The 5.462-radian joint-vector distance and finite geometry samples mean the clear animation cannot be counted as recovered manipulation.
+
+Next evaluate physical tracking of the discovered route as a separately labeled privileged diagnostic, first under the original descent budget and then a disclosed longer budget. Preserve the recorded start state and compare with the original local controller. This will distinguish static path availability from dynamic executability and budget limitations before changing the learned policy. Whole pick-and-place success must still be evaluated separately.
+
+Verification: 16 exact full-rollout replays, identical calibration probes, saved per-attempt endpoints and per-sample contacts/clearances, unchanged input hashes, and 110 passing tests including an interior-collision regression test. Two path animations reproduce all 101 saved contact and clearance samples each. No training, final-test evaluation or new policy-success result.
+
+## Video evidence
+
+Gallery: `outputs/ease_novelaxis_paths_v1/videos/index.html`. Case 4 shows a sampled-clear route; case 5 shows a blocked route. Both prominently state KINEMATIC ANIMATION, NOT EXECUTED MOTION. Playback timing is arbitrary and does not represent actuator speed. Original executed successes/failures remain available in the E88 gallery.

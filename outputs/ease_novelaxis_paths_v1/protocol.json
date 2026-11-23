@@ -1,0 +1,12 @@
+{
+  "experiment": "E89",
+  "inputs": {
+    "outputs/ease_direction_novelaxis_v1/cases.json": "b92e989e1db069b5d195bfb07151f3cd0a03e59bb314cf94568cff6b3ee5d0a1",
+    "outputs/ease_direction_novelaxis_v1/axis_catalog.json": "bc812c707bbca7129148013b4d567e811a0b52fc5a0f693a2ee1b03612bfc07c",
+    "outputs/ease_novelaxis_oracle_v1/records.json": "ab3dfefbe74d550a4cf7259fc69885d26c05d63d8401d80eeaf2e121e18edf16"
+  },
+  "test_evaluated": false,
+  "design": "All16 E87 cases. Replay E88 exact-Jacobian controller to completion and save full state immediately before descent. Verify full replay against saved E88 trace. On a separate model preserve object/finger pose and solve descent endpoint from20 starts: recorded arm posture then19 fixed uniform[-1.8,1.8] random starts, seed89000+case. Each solve uses220 iterations, unchanged IK damping .005, stepclip .15, jointlimits +/-2.4, XYZ1mm/tool-axis scaled.003 tolerances. Accept contact-free endpoints only; no early stopping across starts.",
+  "paths": "For every accepted endpoint evaluate101 equally spaced joint-interpolation samples from recorded descent start. Report physical forbidden-contact freedom and separate2mm expanded-geometry clearance. No physics integration, object motion, velocity limits, grasping or whole-task execution. Choose highest minimum clearance endpoint; ties shortest joint displacement then earliest attempt. Failure to find a route is not proof of infeasibility; finite samples do not certify continuous safety.",
+  "videos": "Illustrative static-kinematic path animations selected deterministically: first contact-free route and first blocked route among difficult-family cases, with all-case fallback if absent. Explicit labels distinguish kinematic samples from executed motion. Save source states, endpoint vectors, checks and video hashes."
+}
