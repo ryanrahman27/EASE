@@ -1,0 +1,21 @@
+{
+  "experiment": "E63",
+  "checkpoints": {
+    "outputs/ease_robust_training_v1/seed_0/policy.pt": "bb2eadf92edc2f698fd137f6d1a7c8ec0a7283cd34e1d5a0fc390645e66392f1",
+    "outputs/ease_robust_training_v1/seed_1/policy.pt": "141e03fdac6d03a8ef035db3b8d3218cbbe73193450e06821e10b310380fc42d",
+    "outputs/ease_robust_training_v1/seed_2/policy.pt": "cf0d4d5d9fb80d5a20f5b117ea897a057e9c81ede715b785dad7523ec77520a0",
+    "outputs/ease_response_corrected_training_v1/prediction/seed_0/policy.pt": "c365cdfcd6a361b8dbe89dc34c7fe4ea8aea0c891cff5729194b21d7c0fd991d",
+    "outputs/ease_response_corrected_training_v1/prediction/seed_1/policy.pt": "d71a62cc955f320926cd5d92e88796cb9e92cee9cf7a73b0152d074dc8e41139",
+    "outputs/ease_response_corrected_training_v1/prediction/seed_2/policy.pt": "d8cc22d89c7c04646a467e9146f522dbccd4d0cf7738472aeeadb562926c6270",
+    "outputs/ease_response_corrected_training_v1/control/seed_0/policy.pt": "9302844857f92e3cd721a5c1680d53456f572a59db3dc722d69b178368f93767",
+    "outputs/ease_response_corrected_training_v1/control/seed_1/policy.pt": "8a207205a4029feff38a6ceae4fe4656ca711fbc44b563e39b2fc8e6ddc2425d",
+    "outputs/ease_response_corrected_training_v1/control/seed_2/policy.pt": "62dff63af9873a0d68c8974888bfcdb2d27b1858cd0473056a78a0ee33b13617"
+  },
+  "asset_commit": "cda5236f98383f6fbaa4820c6b18dba892cd087f",
+  "cases_sha256": "6983880bf356462ef01a28fafdd296673d11fb22e29049de2cc75057cabcbb87",
+  "reference_sha256": "011b49455167e1ea0f93b7a2fd70a1ad2011f6a99e483b9c71b7f6bc56039872",
+  "design": "All twelve observed E46 cases, ten frozen methods. Same 32 original probes, then all geometry contype/conaffinity disabled. Fixed complete 1700-step schedule, no early stopping or object feedback. Native nominal nine pose waypoints and original phase budgets (220,260,60,260,260,260,60,260,60). One schedule per case starts at calibrated analytical tool position; ramp .002 m/step continuously across phases, independent of model observations. Native aperture sequence retained. Tool-Z target +Z. Same gains/damping/clips/limits/online updates.",
+  "metrics": "Phase passes only if all final eight samples have goal XYZ error <.006 m and tool-Z direction norm <.08. Complete schedule passes all nine phases. Also retain tracking RMS, joint speeds and action clipping. No velocity threshold, task-success termination or outcome filtering.",
+  "limits": "Artificial unconstrained tracking, not manipulation, safety or deployable success. Fixed nominal tool poses omit object-offset correction and object-height early release. Observed development cases and two native robot designs, not independent novel-embodiment validation. No training or parameter tuning.",
+  "test_evaluated": false
+}
