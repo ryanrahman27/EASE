@@ -1,0 +1,12 @@
+{
+  "experiment": "E38",
+  "cases_sha256": "9913082036080a0260394a0e9c8bfc9993ffb64bbf6e3019699bb88827d3f1cb",
+  "checkpoints": {
+    "outputs/ease_robust_training_v1/seed_0/policy.pt": "bb2eadf92edc2f698fd137f6d1a7c8ec0a7283cd34e1d5a0fc390645e66392f1",
+    "outputs/ease_robust_training_v1/seed_1/policy.pt": "141e03fdac6d03a8ef035db3b8d3218cbbe73193450e06821e10b310380fc42d",
+    "outputs/ease_robust_training_v1/seed_2/policy.pt": "cf0d4d5d9fb80d5a20f5b117ea897a057e9c81ede715b785dad7523ec77520a0"
+  },
+  "scope": "Training-family manipulation pilot; same scripted phase sequencer, same 32 measured probe steps, no inference weight updates. Same frozen estimator applied separately to position and tool-Z-direction statistics. Direction scale .15; yaw unconstrained. No learned grasp/phase decisions.",
+  "calibration": "32 steps uniform +/-.006 rad, held for four steps, aperture open, continue without reset; counted in total task steps. Contact during calibration retained.",
+  "test_evaluated": false
+}
