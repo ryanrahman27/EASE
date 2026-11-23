@@ -1,0 +1,12 @@
+{
+  "experiment": "E175",
+  "scope": "48 six-joint fitting episodes and5 exact E174 guarded-handoff replays. Preserve47 successes. No training or held execution.",
+  "change": "Add causal early object/tilt guard described in planning_protocol.json. Retain original late gate, strict planner, E120, frozen bias, probe protection, guarded handoff, release fix and all budgets/scoring. Replay disables only the new early guard.",
+  "screen": "48 successes, zero collision episodes, no lost E174 successes. Report all outcomes even if rejected. No automatic promotion.",
+  "privileged": true,
+  "inputs": {
+    "outputs/ease_object_preserving_v1/guarded_handoff/records.json": "85c33476ccc1401a2d0656d2da5ec78faa1277b3725239c90b2aca966844bbfa",
+    "outputs/ease_early_object_recovery_v1/planning_protocol.json": "59f37134e58dc4b81338e883aa8c24f02c3fd21bab3329158cbfa3810c37ca13",
+    "outputs/ease_early_object_recovery_v1/planning_summary.json": "cf94c927b70f1773eb7d7a6aa7ee2039e8e7f64dfba1a0065dc8aee3ef6ce406"
+  }
+}
