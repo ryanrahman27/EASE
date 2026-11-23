@@ -31,7 +31,7 @@ def bounded_error(goal,position,limit=.004):
     return error*min(1.,limit/max(float(np.linalg.norm(error)),1e-12))
 
 
-def rollout(env,controller=None,render=None,target_x=None,contact_hold=False,precise_grasp=False,object_release=False):
+def rollout(env,controller=None,render=None,target_x=None,contact_hold=False,precise_grasp=False,object_release=False,pregrasp_hook=None):
     obs=env.observe();trace=[];phases=[];failure=None
     renderer=None
     if render:
@@ -40,7 +40,10 @@ def rollout(env,controller=None,render=None,target_x=None,contact_hold=False,pre
         renderer=mujoco.Renderer(env.model,height=480,width=640)
         camera=mujoco.MjvCamera();camera.lookat[:]=[.25,0,.35]
         camera.distance=1.3;camera.azimuth=130;camera.elevation=-25
-    for phase,goal,aperture,budget in sequence(env):
+    plan=sequence(env)
+    if pregrasp_hook is not None:
+        plan.insert(1,('hover',np.r_[env.xy,(.24 if env.name=='piper' else .222)+.04],0.,260))
+    for phase,goal,aperture,budget in plan:
         # The cube can settle below the nominal tool site inside native fingers.
         # Use allowed object-position feedback to avoid driving it into the table.
         if phase in ('transport','lower'):
@@ -81,6 +84,11 @@ def rollout(env,controller=None,render=None,target_x=None,contact_hold=False,pre
             Image.fromarray(renderer.render()).save(Path(render)/f'{phase}.png')
         if failure:break
         if not reached:failure='phase_timeout:'+phase;break
+        if phase=='hover' and pregrasp_hook is not None:
+            extra=pregrasp_hook(env,controller)
+            trace.extend(extra);obs=env.observe()
+            phases.append(dict(phase='refresh',reached=not env.bad,steps=len(extra),goal=goal.tolist()))
+            if env.bad:failure='forbidden_contact';break
         if phase=='close' and len(env.contacts()[0])!=2:failure='no_bilateral_grasp';break
         if phase in ('lift','transport') and len(env.contacts()[0])!=2:failure='lost_grasp:'+phase;break
     if renderer:renderer.close()

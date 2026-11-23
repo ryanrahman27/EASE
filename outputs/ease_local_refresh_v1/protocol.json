@@ -1,0 +1,25 @@
+{
+  "experiment": "E47",
+  "checkpoints": {
+    "outputs/ease_robust_training_v1/seed_0/policy.pt": "bb2eadf92edc2f698fd137f6d1a7c8ec0a7283cd34e1d5a0fc390645e66392f1",
+    "outputs/ease_robust_training_v1/seed_1/policy.pt": "141e03fdac6d03a8ef035db3b8d3218cbbe73193450e06821e10b310380fc42d",
+    "outputs/ease_robust_training_v1/seed_2/policy.pt": "cf0d4d5d9fb80d5a20f5b117ea897a057e9c81ede715b785dad7523ec77520a0"
+  },
+  "cases_sha256": "6983880bf356462ef01a28fafdd296673d11fb22e29049de2cc75057cabcbb87",
+  "asset_commit": "cda5236f98383f6fbaa4820c6b18dba892cd087f",
+  "conditions": [
+    "baseline",
+    "wait",
+    "probe",
+    "frozen_probe"
+  ],
+  "initial_probe_steps": 32,
+  "refresh_steps": 32,
+  "refresh_seed": 47000,
+  "initial_probe_seed": 41000,
+  "test_evaluated": false,
+  "design": "Original E35 weights. Reuse all twelve E46 placements, now observed development. Baseline exactly replays E46 old models. All intervention arms add the same gated hover 4 cm above grasp, followed by 32 steps. Thus baseline comparison also includes hover; causal refresh comparisons use wait/probe/frozen_probe.",
+  "excitation": "Eight random joint targets uniform +/- .006 rad about measured hover joint pose, four steps each, open gripper. No reset; retain history with normal .98 decay and bias update. Wait holds measured hover joint pose and updates history. Frozen_probe executes identical physical probing without any statistics or bias updates. Stop early on forbidden contact; retain failures before intervention.",
+  "accounting": "All actual simulator steps counted, including initial calibration, hover, refresh, failures and remaining task. Equal maximum refresh budget, not artificially equal total episode durations. No gradient updates or native training data.",
+  "decision": "Diagnostic only. Do not promote if any neural seed/robot regresses versus baseline. Compare probe to both matched controls; retain every outcome."
+}
