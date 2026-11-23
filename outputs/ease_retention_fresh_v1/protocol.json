@@ -1,0 +1,67 @@
+{
+  "experiment": "E46",
+  "old": "outputs/ease_robust_training_v1",
+  "new": "outputs/ease_motion_retention_v1",
+  "candidates": {
+    "piper": [
+      [
+        0.21,
+        -0.02
+      ],
+      [
+        0.21,
+        0.05
+      ],
+      [
+        0.24,
+        -0.02
+      ],
+      [
+        0.24,
+        0.05
+      ],
+      [
+        0.27,
+        -0.02
+      ],
+      [
+        0.27,
+        0.05
+      ]
+    ],
+    "panda": [
+      [
+        0.32,
+        -0.02
+      ],
+      [
+        0.32,
+        0.05
+      ],
+      [
+        0.37,
+        -0.02
+      ],
+      [
+        0.37,
+        0.05
+      ],
+      [
+        0.42,
+        -0.02
+      ],
+      [
+        0.42,
+        0.05
+      ]
+    ]
+  },
+  "asset_commit": "cda5236f98383f6fbaa4820c6b18dba892cd087f",
+  "ik_seed": 45000,
+  "probe_seed": 41000,
+  "transfer": "Y +.04 for initial Y=-.02; -.04 for Y=.05",
+  "test_evaluated": false,
+  "selection": "Prespecified before candidate evaluation. All 12 candidates receive nine nominal endpoint IK checks; retain all accepted cases and record rejections. No success filtering.",
+  "control": "Same E41 PiPER object-offset placement and E42 Panda object-height release. Native mechanics unchanged. All old/new seeds and shared privileged/analytical references. Same home and 32 probe steps; no reset after probe.",
+  "scope": "Fresh native development placements; not the reserved final test. Evaluate fixed E45 checkpoints regardless of retention outcome, and report failed gates rather than promoting them."
+}
