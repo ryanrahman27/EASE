@@ -1,0 +1,35 @@
+{
+  "experiment": "E178",
+  "scope": "Retrospective diagnostic of three E177 E120 losses0,8,37; three E120 wins9,42,45 as controls.12 exact full-episode replays capture complete MuJoCo integration state. No training, tuning, deployment or new task-success evaluation.",
+  "cases": [
+    0,
+    8,
+    37,
+    9,
+    42,
+    45
+  ],
+  "source": "outputs/ease_unseen_estimator_v1",
+  "controller": "E177 controller/estimators frozen; only passive mj_getState instrumentation added. Both original success/failure trajectories must reproduce exactly.",
+  "matched_histories": "On every saved pre-action history from both source policies, recompute reference/correction neural ensembles and analytical solve. Score all against the same measured next dq/dx, separating kinematic J*dq error from command-to-motion error. Compare against exact local kinematic Jacobian only as a privileged offline diagnostic, never as policy input.",
+  "actions": "From identical state/history/goal/context, reconstruct E120, analytical, E120 without its bounded correction, and a privileged local-Jacobian reference. Keep bias, action bounds, aperture, route/guard state, clearance gradient and allowance fixed; use the unchanged safety projection with each candidate metric. Privileged local action is a diagnostic reference, not an optimal-action label.",
+  "branches": "One40ms step per candidate from the complete saved integration state, including velocities, controls, warm start and other integration fields. Source-policy branch must reproduce saved post-state and contact union. Measure task error reduction, axis error, object displacement, collision and prediction errors. This is a local intervention with source controller context, not a full alternative rollout or proof of eventual task success.",
+  "analysis": "Primary summaries on states clean before the action, split by source trajectory, phase and loss/win group. All states retained. Report base versus correction and action-projection differences, first divergences, failure chronology and same-state one-step comparisons. No outcome-based controller adjustment.",
+  "videos": "Full source trajectories for all six cases and both estimators, outcome-labeled and trace/frame/hash verified. Diagnostic branches are not presented as successful full tasks.",
+  "checkpoints": {
+    "outputs/ease_task_retention_training_v1/retained/seed_0/policy.pt": "3190e96c2d867237db6f5aedbc46f71ef61ca35f36e0dc3df663018141c50627",
+    "outputs/ease_task_retention_training_v1/retained/seed_1/policy.pt": "4a0495a5b7f719a1d3586554545e11ba39c58840ccdcc78e9fecf1aa2a5993ad",
+    "outputs/ease_task_retention_training_v1/retained/seed_2/policy.pt": "d351c6b49b8252a903ed98f2840207e8881f064b1902bc3b71ceb678273345a2",
+    "outputs/ease_estimator_repair_v1/seed_0/policy.pt": "26dd3d2785e3da7f7daeda03b588f19a5d1572e5db961d09d33c124ec8a733b1",
+    "outputs/ease_estimator_repair_v1/seed_1/policy.pt": "7b9727d0a1f583f158f454fcd1f3d1807636973e455d432f4927fcdc83cf7a7b",
+    "outputs/ease_estimator_repair_v1/seed_2/policy.pt": "62506dc0d29746b80fdeaa1fe549e3010dafe33eb6c6a97284beb9848a96ec37",
+    "outputs/ease_broad_history_v1/seed_0/policy.pt": "2d809ac80788ba548c19a2b577e3228eae32af4a59f591010dc6fa8972ec5a80",
+    "outputs/ease_broad_history_v1/seed_1/policy.pt": "69bec791582226b1fff68ac3432476f3d1881e40b7ffc39ea850fed2262027a0",
+    "outputs/ease_broad_history_v1/seed_2/policy.pt": "5d3303a645c6b540e606cd7dcbcbe1ee4b1574148e47d981a00b2184e83674b2",
+    "outputs/ease_candidate_history_v1/seed_0/policy.pt": "b2f775ea86ba60b82ff71b972c8fc36daf29caca051ea4cc8493ac3cbc26a6a9",
+    "outputs/ease_candidate_history_v1/seed_1/policy.pt": "918cccdf8aae26426069fb6f8c567906bcbe9722fafc2ac5813bebb5698e403b",
+    "outputs/ease_candidate_history_v1/seed_2/policy.pt": "4ef24d776eacaea79098f6f8c8134012b8c72c441d9b6228d0baacdca8a7f5b3"
+  },
+  "source_summary_sha256": "e52b30857a013bbc8876a940a41c4b1322449a0945dd7f528b9c24304414188c",
+  "prospective_claim": false
+}
