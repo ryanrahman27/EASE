@@ -1,0 +1,32 @@
+{
+  "experiment": "E73",
+  "inputs": {
+    "outputs/ease_arm_pick_place_v2/cases.json": "9913082036080a0260394a0e9c8bfc9993ffb64bbf6e3019699bb88827d3f1cb",
+    "outputs/ease_arm_pick_place_v2/axis_catalog.json": "89fe5fcd4ded136798585ae58ad9339ad53b15a874c705f014bfc1646f86e406",
+    "outputs/ease_arm_pick_place_unseen_v1/cases.json": "944fbb927dac19a433547a0bd7f54790a6ba7e6dcb0aa7341c35488833de7753",
+    "outputs/ease_arm_pick_place_unseen_v1/axis_catalog.json": "56bd6c4afecb761916a879b2627cc7146793eda3731cc542b9560b422f9597bc",
+    "outputs/ease_phase_fresh_v1/cases.json": "e6f855d9e942af5259ae8554e916ff25e58e44328ac4251de6d773df4f020df4",
+    "outputs/ease_phase_fresh_v1/screening.json": "bdd324e307738b77eaf72c4602ee0ce05d26f71849f64da35fb928eebad429be"
+  },
+  "checkpoints": {
+    "outputs/ease_robust_training_v1/seed_0/policy.pt": "bb2eadf92edc2f698fd137f6d1a7c8ec0a7283cd34e1d5a0fc390645e66392f1",
+    "outputs/ease_robust_training_v1/seed_1/policy.pt": "141e03fdac6d03a8ef035db3b8d3218cbbe73193450e06821e10b310380fc42d",
+    "outputs/ease_robust_training_v1/seed_2/policy.pt": "cf0d4d5d9fb80d5a20f5b117ea897a057e9c81ede715b785dad7523ec77520a0",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_0/policy.pt": "7cc59ce83397a3856939a849f229e0a962bfe0e1df3add7680aac42b8c5d0fec",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_1/policy.pt": "67a01fc8cdbec4d7c5ee5e602e5d1a16d6cfa80a8520c28a89eb2a861437b2d6",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_2/policy.pt": "f87c12bd330baf384432c5d275eda41f189ddb557f6083f487082a76447b2b71"
+  },
+  "sources": {
+    "/mnt/c/Users/faisa/piperx-openpi/examples/ease_fm/geometry_filter.py": "63f478d5c6ea32623c101a85e65b3bc9fed6e837ed1e5413fca20b75c980e59d",
+    "/mnt/c/Users/faisa/piperx-openpi/examples/ease_fm/arm_pick_place.py": "17847bb4133fe8965e9689bd20e797635351eb7cb7a59a7946a5c3e29e602df5",
+    "/mnt/c/Users/faisa/piperx-openpi/examples/ease_fm/pick_place_control.py": "f65cfd3ce5fea387262a128ca8cee61acc94a64676269ef81e80715d74daaba5",
+    "/mnt/c/Users/faisa/piperx-openpi/examples/ease_fm/retention_fresh.py": "4674b1d66683b42d848c951799b29d87746d553d7586c7e0d13b528f726fa629",
+    "/mnt/c/Users/faisa/piperx-openpi/examples/ease_fm/action_objective_audit.py": "ff4d66d2d731f62d95ba774ddf7dc74697c1c8a41d6f8db2a5428ae013bc681d"
+  },
+  "test_evaluated": false,
+  "design": "All17 accepted E71 placements, seven frozen estimators, baseline/geometry/slow:357 trials. E71 screening (17/18) retained without rerunning or replacing rejected cases. Same bodies, new relative to E72 placements; already observed E71 development data, not an independent reserved test.",
+  "geometry": "Exact frozen E72v2 2mm midpoint/endpoint filter; same known robot/scene geometry and exact current pose. No changes to margins, scales, physics, horizons, weights or task-success criteria.",
+  "slow": "Geometry-free fixed0.5 task-motion scale, preserving clipped measured bias: bias+0.5*(clipped action-bias), clipped+/-0.04. No gripper scaling. Same original phase budgets. Constant0.5 fixed before E73 outcomes; no sweep. Geometry query function blocked in baseline/slow trials.",
+  "matching": "One32-step probe seed71100+candidate per case, exact E71 replay. Clone full simulator state and measured controller statistics across all conditions; retain probe contact. All baseline traces must reproduce E71 exactly.",
+  "decision": "Replication requires geometry pooled learned success greater than baseline, no pooled collision increase and no per-checkpoint aggregate six-joint success loss. To support benefit beyond this slowing control also require greater pooled success than slow. Report casewise regressions and costs regardless. One fixed slowing control cannot exclude all speed schedules or prove geometry is uniquely necessary."
+}
