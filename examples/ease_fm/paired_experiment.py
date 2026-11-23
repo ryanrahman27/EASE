@@ -14,7 +14,7 @@ from .history_distill import make_student, frozen_equal
 
 
 @torch.no_grad()
-def evaluate(data, manifest, model, split, mode, device, calibration_seed=930000):
+def evaluate(data, manifest, model, split, mode, device, calibration_seed=930000, intervention=None):
     arms = {a['seed']: Arm(**a) for a in manifest['arms']}
     pairs = {p['id']: p for p in manifest['pairs']}
     cases = [(arms[body], goal, pairs[goal['pair']]) for goal in manifest['goals'][split]
@@ -32,6 +32,8 @@ def evaluate(data, manifest, model, split, mode, device, calibration_seed=930000
                 # Training evaluation uses a fresh calibration seed, outside the 16 training probes.
                 history, _ = calibration(donor, calibration_seed + pair['id'])
                 histories[i, :, :arm.dof] = history
+        if intervention is not None:
+            histories = intervention(histories, mode, mask.cpu().numpy())
         latent = model.encode(torch.tensor(histories, device=device),
                               torch.full((len(batch),), 0 if mode in ('empty', 'reactive') else 32, device=device), mask)
         obs = [env.reset(0, goal['xyz'], spread=0) for env, (_, goal, _) in zip(envs, batch)]

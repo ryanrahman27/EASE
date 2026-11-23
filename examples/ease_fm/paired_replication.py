@@ -35,7 +35,7 @@ def run(data, pilot, output, device='cuda'):
         'gate_policy': 'Retain every failed gate. Do not fit students after failed teacher gate. Reactive validation is diagnostic when its training gate fails.',
         'reactive_design': 'Same direct Transformer action trunk, learned constant empty latent, no history/body/initial-pose context. All action-producing weights trained on supervised action chunks.',
         'budget': 'Reactive 15k updates equals teacher 10k plus one encoder 5k in update count, not FLOPs; same batch32 AdamW lr0.0003.',
-        'capacity': 'Same allocated 244289 parameters; history modules have no influence at length zero. Effective trainable capacity differs.',
+        'capacity': 'Same allocated 244289 parameters; history input/spatial modules have no influence at length zero. Temporal/output modules process the learned empty token, yielding a trainable constant. Effective trainable capacity differs.',
         'replication': 'Seed0 reuses immutable pilot. Seeds1/2 fresh teacher and encoder initialization/sampling. Fixed dataset; no tuning.'}
     (root/'protocol.json').write_text(json.dumps(protocol, indent=2))
     src = root/'source'; src.mkdir()

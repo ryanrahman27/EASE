@@ -1,0 +1,26 @@
+{
+  "experiment": "E25",
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "modes": [
+    "correct32",
+    "shuffle_actions",
+    "shuffle_transitions",
+    "static_only",
+    "repeat_initial_static"
+  ],
+  "probe_seeds": [
+    930000,
+    940000,
+    950000
+  ],
+  "manifest_sha256": "234c8e0e90a31b22fbd065cbe6f55b5959fff65df1114d06ca18120a710a9ddf",
+  "weights_updated": false,
+  "test_evaluated": false,
+  "interventions": "Existing E20 transforms: fixed action permutation; full transition permutation; q/ee trajectory only; repeated first q/ee",
+  "limitations": "Frozen input interventions may be out of distribution. Pose trajectory contains motion information. Privileged controller is not a formal upper bound.",
+  "fitting": "Original training expert states, first-action errors; identical twin initial inputs imply a deterministic supervised MSE floor, not a control impossibility proof."
+}
