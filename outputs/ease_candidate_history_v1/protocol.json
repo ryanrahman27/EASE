@@ -1,0 +1,25 @@
+{
+  "experiment": "E119",
+  "inputs": {
+    "outputs/ease_broad_history_v1/contexts.npz": "32d21188a0d973163421ffcb2c241d1e86bdf3f676ffa38b7a539758c6300272",
+    "outputs/ease_broad_history_v1/records.json": "18c0c7c4c2543febe1fab9815fb6246730fab3c8b0b4e2e18110b09eadbe4b3b",
+    "outputs/ease_broad_history_v1/summary.json": "0d3d9ce8f1a7425b059c134359bdf8e34286747f0f4bdfd9fd843a6adcd0a085",
+    "outputs/ease_broad_history_v1/cases.json": "d1b687e1d7869859813195bc25da66c99dbf54816abb0e7a41394fd02859969f"
+  },
+  "checkpoints": {
+    "outputs/ease_task_retention_training_v1/retained/seed_0/policy.pt": "3190e96c2d867237db6f5aedbc46f71ef61ca35f36e0dc3df663018141c50627",
+    "outputs/ease_task_retention_training_v1/retained/seed_1/policy.pt": "4a0495a5b7f719a1d3586554545e11ba39c58840ccdcc78e9fecf1aa2a5993ad",
+    "outputs/ease_task_retention_training_v1/retained/seed_2/policy.pt": "d351c6b49b8252a903ed98f2840207e8881f064b1902bc3b71ceb678273345a2",
+    "outputs/ease_estimator_repair_v1/seed_0/policy.pt": "26dd3d2785e3da7f7daeda03b588f19a5d1572e5db961d09d33c124ec8a733b1",
+    "outputs/ease_estimator_repair_v1/seed_1/policy.pt": "7b9727d0a1f583f158f454fcd1f3d1807636973e455d432f4927fcdc83cf7a7b",
+    "outputs/ease_estimator_repair_v1/seed_2/policy.pt": "62506dc0d29746b80fdeaa1fe549e3010dafe33eb6c6a97284beb9848a96ec37",
+    "outputs/ease_broad_history_v1/seed_0/policy.pt": "2d809ac80788ba548c19a2b577e3228eae32af4a59f591010dc6fa8972ec5a80",
+    "outputs/ease_broad_history_v1/seed_1/policy.pt": "69bec791582226b1fff68ac3432476f3d1881e40b7ffc39ea850fed2262027a0",
+    "outputs/ease_broad_history_v1/seed_2/policy.pt": "5d3303a645c6b540e606cd7dcbcbe1ee4b1574148e47d981a00b2184e83674b2"
+  },
+  "collection": "Exactly replay all48 fitting-case E118 candidate trajectories (16 fitting placements x3 checkpoints), including successes and failures, collecting every pre-update context. Do not collect held candidate histories for fitting. Check every baseline trace and state against E118. Append to E118 contexts; inherit held histories for fixed offline diagnostics only.",
+  "training": "Three fixed1500-update runs from E118 final checkpoints; AdamW1e-5, gradient clip1,128 rows:32 own failed-task clean contexts,32 own successful-task clean contexts,32 earlier fitting contexts,32 synthetic. On cases already successful for this seed, preserve current E118 same-history response/action. Failed cases: use successful E117 if available, then successful E99 on original cases, otherwise analytical same-history ridge. Matrix/action objectives use these coherent targets; measured-response loss only on unprotected failed cases. No conflicting analytical-matrix objective on protected successful cases. Loss matrix MSE +0.1 normalized action MSE (descent/lower3x; probe excluded)+0.02 measured-response loss. No held or unseen optimization, no checkpoint selection.",
+  "evaluation": "Reuse204 earlier results;72 new candidate full episodes. Require net improvement, no lost E118 success, no additional collisions, and retention of older successful baselines. Report targeted fitting failures and both held groups separately. No physics selector, geometry filter or privileged Jacobian; same frozen calibrated bias and response updates. No unseen evaluation.",
+  "videos": "First success/failure per reference/candidate seed; paired first gain/loss overall and fresh-held per seed. All trials, contexts, state sequences, checkpoints and failures retained.",
+  "test_evaluated": false
+}
