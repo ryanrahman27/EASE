@@ -1,0 +1,12 @@
+{
+  "experiment": "E137",
+  "inputs": {
+    "outputs/ease_structured_response_v1/dataset.npz": "4dbc239b887a0ce504fe3f5133b8ca9be0e0b00ca5c4645810d239094b577724",
+    "outputs/ease_compact_response_value_v1/dataset.npz": "41f14707da4e179460a40d1e5f35e1c6447dccf56a58782cfc35550b3f2fae6e",
+    "outputs/ease_combined_response_value_v1/rollout_summary.json": "b92c1af61da3c3380d8e4b914f3eab46afe8763bbd5596bc589eb35f69acb3e4"
+  },
+  "motivation": "E136 held15/24 equals baseline with1 gain/1 loss, so not promoted. Do not tune on those examples. Quantify training-data uncertainty by family deletion, not neural initialization.",
+  "design": "For each of four outer fitting-family folds, fit six scalar-response/ridge-value pairs, each excluding one additional ancestral training family. Require every inner model to predict positive local progress above10um and task advantage above margin. Same features, ridge1, target and8-step pulse as E136. Primary value margin.05; fixed grid0,.025,.05,.1 plus abstain. Select zero outer-fitting losses, most gains, fewer switches, higher margin. Final ensemble comprises eight leave-one-family-out models fitted on the original fitting pool only.",
+  "fresh_test": "Predeclare48 new randomized placements, six per ancestral fitting source, same four known bodies/homes. RNG137000; XY uniform[.275,.425]x[-.10,.10], destination source displacement plus independent20mm jitter. No reachability/success filtering. All3 E120 estimator seeds, paired baseline/candidate=288 fresh episodes. Geometry saved before model outcomes. Only execute a qualifying nontrivial no-loss fitting candidate. Do not reuse original held results for model selection; fresh outcomes will not tune this candidate.",
+  "scope": "Development-family validation remains adaptive. Fresh placements are a new placement test on known bodies, not unseen morphology. E120 immutable."
+}
