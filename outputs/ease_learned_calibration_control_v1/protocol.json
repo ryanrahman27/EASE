@@ -1,0 +1,11 @@
+{
+  "experiment": "E147",
+  "inputs": {
+    "outputs/ease_calibration_prior_learning_v1/summary.json": "6447061b2c46c011799f21991a959cfd10c7417c7e8482214908f469e6a3b374",
+    "outputs/ease_calibration_prior_learning_v1/verification.json": "c1e9c9420bcdd03f36110cebf60a2e7538354c73a8814c42afe1178803b5c902",
+    "outputs/ease_calibration_prior_learning_v1/frozen.json": "8033de10f1e23b197f5ab81d161601031557ecfbdc74e207f5362786e909ed65"
+  },
+  "controller": "Fixed mean of all three E146 Jacobians per excluded-family fold. Measured initial calibration prior, relative learned history weights, .98 recency,1e-6 ridge. Same task, probe, DLS, action bounds and frozen bias as E145. No checkpoint/seed selection or online gradient update. No physics selector or privileged runtime inputs.",
+  "evaluation": "All96 fitting placements, known bodies. Compare E145 analytical prior and E144 constant/analytical/uniform/E120 ensemble; also retain original E120195/288 individual-seed rate separately. Save all outcomes and ordered histories. No new held or fresh placements.",
+  "advancement": "Require more successes than E120 ensemble, at least as many as analytical prior and constant, no lower success in either joint count than E120 ensemble, no more collision episodes, and retain fitting gain placements1,13,18. Report every lost success; zero-loss improvement preferred and no automatic E120 replacement. Only a passing fixed controller warrants reserved fresh evaluation."
+}
