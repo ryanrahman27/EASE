@@ -1,0 +1,15 @@
+{
+  "experiment": "E171",
+  "scope": "Fitting-only privileged control diagnostic; two variants x48 six-joint cases and4 exact E170 history-allowance replays. E170 reference44/48 with0 collisions. Original E120+release37/48 remains baseline. No held execution or training.",
+  "diagnosis": "All four failures saturate joint5 near+2.5rad during descent, with active clearance constraints and little or negative late progress. Nominal damped least-squares action is independently clipped before metric projection, potentially distorting its task direction.",
+  "intervention": "direct_task: on every descent step, minimize the original E120-estimated task residual directly subject to all original bounds/clearance constraints. limit_gated: do this only if any measured absolute arm joint coordinate>=2.4rad. Equivalent QP target is the UNCLIPPED damped least-squares command J.T solve(J J.T+.015^2 I,.35 error)+frozen_bias, with metric J.T J+.015^2 I. Original projection minimizes distance to the CLIPPED command. No new Jacobian or goal source. All thresholds and objectives frozen before outcomes.",
+  "preserved": "History-based descent error allowance from E170, arm/palm/pad constraints, probe protection/schedule/aperture, frozen E120 checkpoints and bias, release265mm, phase budgets and strict scoring. No extra steps or outcome-based fallback. Same solver and logged hold fallback; no safety guarantee.",
+  "screen": "More than44 successes, zero collisions, zero lost E170 successes. Retain and report every outcome; no automatic baseline replacement.",
+  "inputs": {
+    "outputs/ease_descent_execution_v1/history_allowance/records.json": "0b823dca0acf78881670195602ba7fbce29f9ba5f3b18f683461923852f7a244",
+    "outputs/ease_release_clearance_control_v1/records.json": "8e78a35dca667c23a502b59687524b7c402d321497ffef65e8a50c37648835ea",
+    "outputs/ease_descent_progress_v1/diagnosis.json": "b9674eeac3c72695934ccbeae81d20272808e0cfe943b661ef307407bf761323",
+    "/mnt/c/Users/faisa/piperx-openpi/examples/ease_fm/descent_execution.py": "a3d6659e2bbdb281d2efcd0c7a3615372d18d3de6a6f16a46af4d73f3c98a7b5",
+    "/mnt/c/Users/faisa/piperx-openpi/examples/ease_fm/link_clearance_diagnostic.py": "ed179f471c7fca8f6772d333ed846d0588c5d9bfe832284a486f9414a845da82"
+  }
+}
