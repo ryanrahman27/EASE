@@ -1,0 +1,31 @@
+{
+  "experiment": "E179",
+  "scope": "48 existing six-joint fitting cases x4 conditions; five exact preflight replays. No unseen execution or training.",
+  "conditions": [
+    "baseline",
+    "analytical_metric",
+    "universal_readiness",
+    "combined"
+  ],
+  "nominal": "Frozen E120 reference/correction ensembles, bounded residual, calibrated bias and history updates in every condition.",
+  "metric": "baseline/universal_readiness use original reference J.T J + .015^2 I. analytical_metric/combined use solve(gram,cross).T from identical current E120 histories only for projection metric, at every eligible phase including probes. No analytical nominal action.",
+  "readiness": "universal_readiness/combined apply existing routed handoff to all cases. At close entry use existing pick_goal or original xy at z=.24; xy error<=8mm,z error<=12mm,axis error<.08,object xy drift<=8mm. Hold close-entry joint posture, keep open if not ready. At lift entry abort/hold/open unless ready and at least five consecutive final two-pad close steps. No retries or extra interactions. Routed behavior unchanged.",
+  "budget": "Original caps: calibration32,approach80,descend100 or300 only if route accepted,probe32,close40,lift100,transport100,lower100,release40,retreat80,settle40. Original early exit/scoring. Release265mm, probe/gripper/link protection, planning and E120 unchanged.",
+  "analysis": "Paired success/collision losses against 48/48 fitting baseline, actual interactions, readiness/abort and projection counts. Full baseline exact replay required. No selection on unseen data. Thresholds inherited without fitting retuning.",
+  "videos": "Baseline and candidates for every discordant case plus fixed cases0,26,43,62,67; all available success/failure categories. Actual saved state replay.",
+  "checkpoints": {
+    "outputs/ease_task_retention_training_v1/retained/seed_0/policy.pt": "3190e96c2d867237db6f5aedbc46f71ef61ca35f36e0dc3df663018141c50627",
+    "outputs/ease_task_retention_training_v1/retained/seed_1/policy.pt": "4a0495a5b7f719a1d3586554545e11ba39c58840ccdcc78e9fecf1aa2a5993ad",
+    "outputs/ease_task_retention_training_v1/retained/seed_2/policy.pt": "d351c6b49b8252a903ed98f2840207e8881f064b1902bc3b71ceb678273345a2",
+    "outputs/ease_estimator_repair_v1/seed_0/policy.pt": "26dd3d2785e3da7f7daeda03b588f19a5d1572e5db961d09d33c124ec8a733b1",
+    "outputs/ease_estimator_repair_v1/seed_1/policy.pt": "7b9727d0a1f583f158f454fcd1f3d1807636973e455d432f4927fcdc83cf7a7b",
+    "outputs/ease_estimator_repair_v1/seed_2/policy.pt": "62506dc0d29746b80fdeaa1fe549e3010dafe33eb6c6a97284beb9848a96ec37",
+    "outputs/ease_broad_history_v1/seed_0/policy.pt": "2d809ac80788ba548c19a2b577e3228eae32af4a59f591010dc6fa8972ec5a80",
+    "outputs/ease_broad_history_v1/seed_1/policy.pt": "69bec791582226b1fff68ac3432476f3d1881e40b7ffc39ea850fed2262027a0",
+    "outputs/ease_broad_history_v1/seed_2/policy.pt": "5d3303a645c6b540e606cd7dcbcbe1ee4b1574148e47d981a00b2184e83674b2",
+    "outputs/ease_candidate_history_v1/seed_0/policy.pt": "b2f775ea86ba60b82ff71b972c8fc36daf29caca051ea4cc8493ac3cbc26a6a9",
+    "outputs/ease_candidate_history_v1/seed_1/policy.pt": "918cccdf8aae26426069fb6f8c567906bcbe9722fafc2ac5813bebb5698e403b",
+    "outputs/ease_candidate_history_v1/seed_2/policy.pt": "4ef24d776eacaea79098f6f8c8134012b8c72c441d9b6228d0baacdca8a7f5b3"
+  },
+  "privileged": true
+}
