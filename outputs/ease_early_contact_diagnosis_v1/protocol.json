@@ -1,0 +1,5 @@
+{
+  "scope": "Offline simulator geometry at saved fitting states only; no geometry labels enter learned estimator, training or held evaluation. Post-control snapshots can miss transient within-step contacts.",
+  "baseline": "outputs/ease_release_clearance_control_v1",
+  "six_joint_collision_episodes": 11
+}
