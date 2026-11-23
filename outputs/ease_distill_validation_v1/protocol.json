@@ -1,0 +1,23 @@
+{
+  "experiment": "E18",
+  "scope": "Frozen distilled policy on unseen validation arms",
+  "checkpoint_sha256": "31122c9c15b5e39d9113b5c70b57d06d7c3b73569274ddf9ba4bcccf79361058",
+  "manifest_sha256": "7e5c8439cddb7edabb188e303d2cd1e788d2f55dc23205d4659e36e8cf17b6d1",
+  "modes": [
+    "empty",
+    "correct8",
+    "wrong8",
+    "correct16",
+    "wrong16",
+    "correct32",
+    "wrong32"
+  ],
+  "training_gate_passed": true,
+  "weights_updated": false,
+  "target_arm_training": false,
+  "physical_parameters_at_inference": false,
+  "test_evaluated": false,
+  "calibration": "Separate excitation episode followed by task reset; frozen history and weights during reaching",
+  "comparison": "Correct versus both empty and same-DoF different-axis training-arm history; familiar-family and novel-family validation reported separately",
+  "limitations": "One model seed; 6 familiar-family bodies and 8 novel-family bodies; development validation, no target-arm specialist comparison"
+}
