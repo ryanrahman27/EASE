@@ -1,0 +1,134 @@
+{
+  "experiment": "E127",
+  "date": "2026-11-15",
+  "inputs": {
+    "outputs/ease_broad_task_value_gate_v1/gate_dataset.npz": "a14fdd52baf4a6e861a09934d785d1c88f37b7990f569c59480febb419a83138",
+    "outputs/ease_broad_task_value_gate_v1/gate_rows.json": "d44908b48191785740bf11d560c66fedd855ea8996f336c4b6c9cab4267163ad",
+    "outputs/ease_broad_task_value_gate_v1/records.json": "b9b29a003928ca2a0679418f07fb9c9eaff91500051ced6f27933f3df8bd6f8b",
+    "outputs/ease_broad_task_value_gate_v1/summary.json": "7f60b6a77fd84d17b932f542a23ae014d3afa54de00723b9a2a2e2d6975641d7",
+    "outputs/ease_broad_task_value_gate_v1/verification.json": "8ef8f21e1d11a91d467e9818fe0d321bd2fb1c3100bd34ece2d0b7f23e86cc7c",
+    "outputs/ease_broad_task_value_gate_v1/collection/records.json": "e5ee0ff13edf6fbb1d8f2f7c890f0b10da4f6ac7397ed2a936ae29e7cc70bdb7",
+    "outputs/ease_bounded_history_v1/records.json": "660cfa30e45f5cea932f82883d7aaaaae0720708070ab34fc311e338024ca12d",
+    "outputs/ease_bounded_history_v1/summary.json": "a6ae93e4289bc31d87776d44ec0b83db1ed180ee0ebaeeb25131c791ecb926ed",
+    "outputs/ease_abstaining_task_value_gate_v1/frozen_selection.json": "ea22cea0e5b793300d540bb4b884941fccb878afbcb32e08e5bff45ce0794436",
+    "outputs/ease_abstaining_task_value_gate_v1/oof_predictions.npz": "1d7ac6874efd3c4c4a06f2fa4d1a5e53d4d33f976be81ed223f18d5c902e3ae4"
+  },
+  "checkpoints": {
+    "outputs/ease_task_retention_training_v1/retained/seed_0/policy.pt": "3190e96c2d867237db6f5aedbc46f71ef61ca35f36e0dc3df663018141c50627",
+    "outputs/ease_task_retention_training_v1/retained/seed_1/policy.pt": "4a0495a5b7f719a1d3586554545e11ba39c58840ccdcc78e9fecf1aa2a5993ad",
+    "outputs/ease_task_retention_training_v1/retained/seed_2/policy.pt": "d351c6b49b8252a903ed98f2840207e8881f064b1902bc3b71ceb678273345a2",
+    "outputs/ease_estimator_repair_v1/seed_0/policy.pt": "26dd3d2785e3da7f7daeda03b588f19a5d1572e5db961d09d33c124ec8a733b1",
+    "outputs/ease_estimator_repair_v1/seed_1/policy.pt": "7b9727d0a1f583f158f454fcd1f3d1807636973e455d432f4927fcdc83cf7a7b",
+    "outputs/ease_estimator_repair_v1/seed_2/policy.pt": "62506dc0d29746b80fdeaa1fe549e3010dafe33eb6c6a97284beb9848a96ec37",
+    "outputs/ease_broad_history_v1/seed_0/policy.pt": "2d809ac80788ba548c19a2b577e3228eae32af4a59f591010dc6fa8972ec5a80",
+    "outputs/ease_broad_history_v1/seed_1/policy.pt": "69bec791582226b1fff68ac3432476f3d1881e40b7ffc39ea850fed2262027a0",
+    "outputs/ease_broad_history_v1/seed_2/policy.pt": "5d3303a645c6b540e606cd7dcbcbe1ee4b1574148e47d981a00b2184e83674b2",
+    "outputs/ease_candidate_history_v1/seed_0/policy.pt": "b2f775ea86ba60b82ff71b972c8fc36daf29caca051ea4cc8493ac3cbc26a6a9",
+    "outputs/ease_candidate_history_v1/seed_1/policy.pt": "918cccdf8aae26426069fb6f8c567906bcbe9722fafc2ac5813bebb5698e403b",
+    "outputs/ease_candidate_history_v1/seed_2/policy.pt": "4ef24d776eacaea79098f6f8c8134012b8c72c441d9b6228d0baacdca8a7f5b3"
+  },
+  "grid": [
+    {
+      "min_advantage": 0.1,
+      "max_spread": 2.0,
+      "quantile": 0.1
+    },
+    {
+      "min_advantage": 0.1,
+      "max_spread": 2.0,
+      "quantile": 0.25
+    },
+    {
+      "min_advantage": 0.1,
+      "max_spread": 2.0,
+      "quantile": 0.5
+    },
+    {
+      "min_advantage": 0.1,
+      "max_spread": 2.0,
+      "quantile": 0.75
+    },
+    {
+      "min_advantage": 0.1,
+      "max_spread": 2.0,
+      "quantile": 0.9
+    },
+    {
+      "min_advantage": 0.1,
+      "max_spread": 2.0,
+      "quantile": 1.0
+    },
+    {
+      "min_advantage": 0.5,
+      "max_spread": 2.0,
+      "quantile": 0.1
+    },
+    {
+      "min_advantage": 0.5,
+      "max_spread": 2.0,
+      "quantile": 0.25
+    },
+    {
+      "min_advantage": 0.5,
+      "max_spread": 2.0,
+      "quantile": 0.5
+    },
+    {
+      "min_advantage": 0.5,
+      "max_spread": 2.0,
+      "quantile": 0.75
+    },
+    {
+      "min_advantage": 0.5,
+      "max_spread": 2.0,
+      "quantile": 0.9
+    },
+    {
+      "min_advantage": 0.5,
+      "max_spread": 2.0,
+      "quantile": 1.0
+    },
+    {
+      "min_advantage": 0.9,
+      "max_spread": 2.0,
+      "quantile": 0.1
+    },
+    {
+      "min_advantage": 0.9,
+      "max_spread": 2.0,
+      "quantile": 0.25
+    },
+    {
+      "min_advantage": 0.9,
+      "max_spread": 2.0,
+      "quantile": 0.5
+    },
+    {
+      "min_advantage": 0.9,
+      "max_spread": 2.0,
+      "quantile": 0.75
+    },
+    {
+      "min_advantage": 0.9,
+      "max_spread": 2.0,
+      "quantile": 0.9
+    },
+    {
+      "min_advantage": 0.9,
+      "max_spread": 2.0,
+      "quantile": 1.0
+    },
+    {
+      "min_advantage": 2.0,
+      "max_spread": 0.0,
+      "quantile": 0.0
+    }
+  ],
+  "folds": "Four folds, each holding two complete source families from different bodies. Eight ancestral source families total: original placement, prior shifted placement, and all four added descendants stay together, across every phase and estimator seed. Twelve placements per fold. All four bodies remain represented in each training fold. Held placements excluded.",
+  "model": "Reuse E126 four fold ensembles and final three models exactly; no neural retraining. Frozen seeds126100..126102. All inherited normalizations and OOF predictions reused by hash.",
+  "similarity": "Nearest standardized RMS distance in measured Gram/cross history only (features33:124), active joint dimensions only. Same phase, joint count, and local-history flag. No positions, goals, actions, IDs, or outcome labels in metric. No clipping of standardized history distances.",
+  "calibration": "Per-fold history mean/std from training rows only, std floor1e-6. For each training row compute nearest distance excluding its complete ancestral family. Per phase/DOF/local threshold is a fixed quantile of finite leave-family-out training distances. Empty support rejects. Final bank/calibration rebuilt from all fitting rows. Runtime has no family or case ID.",
+  "selection": "18 predeclared minimum-advantage/history-quantile rules plus full abstention. Consensus of all three model advantages and history support required. Reconstruct first accepted clean phase using saved full-task counterfactual outcomes. Require zero E120 regressions; maximize gains, then fewer switches, larger advantage, smaller support quantile. No held optimization. Pooled fitting validation is selection data, not an unbiased test estimate.",
+  "inference": "At most one up-to8-step correction-off pulse, then resume E120. Otherwise E120 throughout. No physics selector. Histories from all clean fitting outcomes enter support, not just successes. Similarity is not a calibrated success probability.",
+  "evaluation": "All72 original episodes after freezing; fitting and reused held-development placements reported separately. Existing training bodies only. E120 unchanged. Compare prior gate gains and losses as well."
+}
