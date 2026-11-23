@@ -1,0 +1,13 @@
+{
+  "experiment": "E170",
+  "scope": "Privileged fitting diagnostic: two fixed variants x48 six-joint cases. E120+release baseline37/48; E169 both/probe-protected reference41/48 with4 collisions. Four exact E169 both replays before interventions. No held execution or training.",
+  "intervention": "Keep E169 both geometry/probe protection. Only descent palm/pad rows receive a one-step clearance execution-error allowance. fixed_allowance:3mm; history_allowance:1mm plus maximum positive predicted-minus-actual clearance error over previous8 eligible descent steps, capped at20mm before the1mm floor. This uses past measured errors, never future outcomes. Same fixed parameters for every case. Convert allowance to effective-distance subtraction allowance/alpha, leaving actual geometry and reporting unchanged. Initial history empty; reset each episode. No outcome-dependent tuning.",
+  "preserved": "E120 weights, frozen estimator bias, calibration, probe schedule/aperture, all phase budgets/goals and265mm release fix, strict contact/success scoring. Same linear QP, activation and fallback. No safety guarantee. Full gripper transforms privileged; gripper plane conservative outside table footprint.",
+  "screen": "More than41 successes, fewer than4 collision episodes and zero lost reference successes. Report all failures and stalls even if screen fails.",
+  "inputs": {
+    "outputs/ease_probe_gripper_clearance_v1/both/records.json": "063e5a4168a490fd1922cb3adbfb3f89cd984f04d86a48c739145b078f3bbbc9",
+    "outputs/ease_release_clearance_control_v1/records.json": "8e78a35dca667c23a502b59687524b7c402d321497ffef65e8a50c37648835ea",
+    "/mnt/c/Users/faisa/piperx-openpi/examples/ease_fm/probe_gripper_clearance.py": "29488fff8e0ad172b0fd7bccd4dfcdb102d93d9d2f81ee5eb388e00fe1bc8e7b",
+    "/mnt/c/Users/faisa/piperx-openpi/examples/ease_fm/link_clearance_diagnostic.py": "ed179f471c7fca8f6772d333ed846d0588c5d9bfe832284a486f9414a845da82"
+  }
+}
