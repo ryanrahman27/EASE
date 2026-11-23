@@ -1,0 +1,14 @@
+{
+  "experiment": "E166",
+  "scope": "All48 six-joint fitting placements,4 exact seven-joint no-op replays,44 seven-joint baseline results reused. Adaptive fitting study after E164 completed and E165 began; no held outcomes.",
+  "hypothesis": "E164 higher approach removes some elbow contacts but creates a gripper/table descent regression. Limit the descent position reference to reduce the initial large Cartesian request while retaining original phase completion at the actual final goal.",
+  "rule": "Retain E165 once-per-episode lateral-distance>8mm high-approach decision. Only for active six-joint episodes during descend, cap norm of position-error vector to30mm (one cube side), leaving tool-axis orientation error unchanged. Compute original clipped DLS base and capped-position DLS base with the same live E120 reference Jacobian and frozen bias. Preserve the original bounded E120 action residual (original complete action minus original DLS base) and add it to the new base, then original +/- .04 clip. No gain/damping change, global rate limit, body lookup, geometry, exact Jacobian, object/contact signal or physics selector.",
+  "preserved": "E161265mm lower/release target, original final descent goal240mm, full-goal phase completion and100-step descent budget, all other phase budgets and actions, calibration, fixed probe and frozen bias. Inactive episodes must exactly match the E161 baseline.",
+  "screen": "More than37/48 six-joint successes, fewer than10 approach/descent first contacts, no more than11 collision episodes, and no lost E161 six-joint success. Report all paired changes against baseline and E165, without automatic held test or checkpoint replacement.",
+  "inputs": {
+    "outputs/ease_release_clearance_control_v1/records.json": "8e78a35dca667c23a502b59687524b7c402d321497ffef65e8a50c37648835ea",
+    "outputs/ease_release_clearance_control_v1/cases.json": "bb06c1302362e1e0232c548d822a24705ead6f0ca83e0ac6c283894efa0d7a25",
+    "outputs/ease_release_clearance_control_v1/verification.json": "a6f26f40f74316e0544cf9a29a0dc7d2c70255bf40a75f90fbc1c5f40700e5cf"
+  },
+  "position_error_cap_m": 0.03
+}
