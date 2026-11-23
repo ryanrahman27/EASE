@@ -1,0 +1,10 @@
+{
+  "experiment": "E145",
+  "motivation": "E144 constant-history matched diagnosis: preserving measured calibration lowers clean next-motion error. Test this as an analytical engineering control, not a neural gain.",
+  "controller": "Initial J0 is solved from actual32-step calibration statistics at first task prediction. Every subsequent prediction uses last32 measured transitions with .98 recency and ridge1e-6, solving (Q^T W Q + lambda I) J = Q^T W X + lambda J0. Fixed J0, current measured data, frozen measured bias. Same DLS/task/probe/controller parameters. No privileged Jacobian or physics selector. Float64 solve with history castfloat32 thenfloat64, matching E144 uniform32.",
+  "evaluation": "All96 fitting placements; no training, outcome-selected subset or parameter sweep. Compare E144 uniform32 to isolate prior term, and other fixed references once complete. This is development on known bodies, no fresh/held tests. E120 unchanged.",
+  "inputs": {
+    "outputs/ease_history_estimator_control_v1/cases.json": "bb06c1302362e1e0232c548d822a24705ead6f0ca83e0ac6c283894efa0d7a25",
+    "outputs/ease_history_estimator_control_v1/diagnosis_constant/summary.json": "503cebd4013195b99e2b163a050eb49d144a7e506d0f9438133ac3789d5d7a16"
+  }
+}
