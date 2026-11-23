@@ -1,0 +1,31 @@
+{
+  "experiment": "E133",
+  "inputs": {
+    "outputs/ease_short_horizon_paired_v1/targets.npz": "1e6aabe70948e24c519a156bee3dacbd794e7bd08358ae73ebf97371b7f54956",
+    "outputs/ease_short_horizon_paired_v1/target_rows.json": "655e709f238c4a99588c8e5ae5429d2e001a51357cb388d887a4f65d50c4fe80",
+    "outputs/ease_broad_task_value_gate_v1/gate_dataset.npz": "a14fdd52baf4a6e861a09934d785d1c88f37b7990f569c59480febb419a83138",
+    "outputs/ease_broad_task_value_gate_v1/gate_rows.json": "d44908b48191785740bf11d560c66fedd855ea8996f336c4b6c9cab4267163ad",
+    "outputs/ease_bounded_history_v1/summary.json": "a6ae93e4289bc31d87776d44ec0b83db1ed180ee0ebaeeb25131c791ecb926ed",
+    "outputs/ease_bounded_history_v1/records.json": "660cfa30e45f5cea932f82883d7aaaaae0720708070ab34fc311e338024ca12d"
+  },
+  "design": "Same1108 clean matched starts and four ancestral fitting-family folds. Predict off-minus-on one-step Cartesian displacement from estimated history Jacobian times known clipped command difference. No object/contact state, simulator Jacobian, future inputs, or final success training labels. Uses original139 measured input columns only.",
+  "models": "Analytical raw response; learned one global scalar; nine phase-specific scalars; global3x3 linear response. Zero intercept ensures zero prediction for identical actions. Ridge1e-6 times mean squared design magnitude, training folds only. No neural seed selection. Projection onto goal direction gives first-order progress benefit. Baseline common movement estimated from J*(on-bias), scaled by learned response where applicable. No collision-risk or physics selector.",
+  "selection": "Primary scalar >10 micrometers at first clean phase, up to8-step off pulse then E120. Secondary fixed model/margin grid; choose zero E120 task losses, maximum gains, fewest switches, simplest model then highest margin. This is adaptive development after E132, not an independent confirmatory test.",
+  "margins": [
+    0.0,
+    5e-06,
+    1e-05,
+    2.5e-05,
+    5e-05,
+    0.0001,
+    1000000000.0
+  ],
+  "kinds": [
+    "analytical",
+    "scalar",
+    "phase_scalar",
+    "linear"
+  ],
+  "held_evaluated": false,
+  "E120_unchanged": true
+}
