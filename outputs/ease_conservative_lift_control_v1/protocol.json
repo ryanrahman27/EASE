@@ -1,0 +1,12 @@
+{
+  "experiment": "E158",
+  "hypothesis": "E154 standard learned weights improve77/96 vs uniform74/E12072 but regress cases. E156 lift-only projection rescues case13 with uniform, not full learned weights. E157 attenuates learned log weights by fixed.25 and renormalizes mass, retaining lower prediction error. Test this one conservative model under the unchanged lift-only rule; no temperature sweep or new weight training. Compare every pre-lift state with an actual matched conservative standard rollout.",
+  "rule": "Only during lift, use the fixed E151 home objective.05(home-q),.015damping,maxabs.01rad and final+/-.04 clamp. Projector map is current32 observed transitions,.98recency,1e-6ridge toward initial measured calibration. All other phases execute the unmodified primary task controller. Primary maps are uniform32, E157 conservative learned fixed-uniform ensemble, E120 ensemble. No privileged geometry, simulator Jacobian or physics selector. No coefficient sweep.",
+  "diagnostic": "Outcome-informed fitting cases13(persistent six-joint loss),1(previous posture regression),6(seven-joint success),10(seven-joint failure), all three methods. These12 episodes are diagnostic, not representative rates. Continue to all96 fitting placements only if learned succeeds on13,1,6; retain case10 regardless. No coefficient or checkpoint tuning. This diagnostic gate is declared before new-projector outcomes.",
+  "full_gate": "If full fitting proceeds, learned must exceed both matched uniform and E120 ensembles overall, neither joint count decline, no higher collision count, and retain1,13,18. Report every regression. Otherwise no fresh test. E120 immutable.",
+  "inputs": {
+    "outputs/ease_conservative_history_weights_v1/summary.json": "20207ba5d09d7b99e1a605676072d4423795844a6a77f801d6e4677caa2fe8fb",
+    "outputs/ease_conservative_history_weights_v1/verification.json": "ce3ff0acc880011e1c00c1b00ce0288d26d8a78b616e3ec12bdff8796974e3bc",
+    "outputs/ease_conservative_history_weights_v1/frozen.json": "66a7691eb69bf74fd228f3d98fe77b1b90cfdc964be6d04aea35bebbb1642551"
+  }
+}
