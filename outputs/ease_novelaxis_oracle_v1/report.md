@@ -1,0 +1,42 @@
+# E88: exact-Jacobian diagnostic on unseen arm arrangements
+
+All 16 fixed E87 cases were evaluated with the analytical history estimator and an exact instantaneous simulator Jacobian. Only the Jacobian source changes: calibration, adaptive measured bias, geometry filter, phase sequence, task budgets, physics and success rules remain unchanged. Both variants continue updating measured statistics. Later histories differ because actions differ. No direction correction is applied. This is a privileged diagnostic, not a learned-policy result or a guaranteed performance upper bound.
+
+| Group | Controller | Success | Collisions | Steps including calibration |
+|---|---|---:|---:|---:|
+| all | analytical | 7/16 | 7 | 5493 |
+| all | exact_jacobian | 8/16 | 6 | 5115 |
+| 6 | analytical | 2/8 | 5 | 2733 |
+| 6 | exact_jacobian | 3/8 | 4 | 2646 |
+| 7 | analytical | 5/8 | 2 | 2760 |
+| 7 | exact_jacobian | 5/8 | 2 | 2469 |
+| axis_dev87_6_ZYXYXY | analytical | 2/4 | 1 | 1229 |
+| axis_dev87_6_ZYXYXY | exact_jacobian | 3/4 | 0 | 1196 |
+| axis_dev87_6_ZYXYZY | analytical | 0/4 | 4 | 1504 |
+| axis_dev87_6_ZYXYZY | exact_jacobian | 0/4 | 4 | 1450 |
+| axis_dev87_7_ZYXZXZY | analytical | 2/4 | 2 | 1420 |
+| axis_dev87_7_ZYXZXZY | exact_jacobian | 2/4 | 2 | 1143 |
+| axis_dev87_7_ZYZYXYX | analytical | 3/4 | 0 | 1340 |
+| axis_dev87_7_ZYZYXYX | exact_jacobian | 3/4 | 0 | 1326 |
+
+Paired outcome changes:
+
+- {"baseline_collision": true, "baseline_success": false, "case": 2, "dof": 6, "exact_collision": false, "exact_success": true}
+
+Exact kinematics increases success from 7/16 to 8/16 and reduces collisions from 7 to 6. The sole recovery is six-joint case 2; no successes are lost. Six-joint success is 3/8 versus 2/8; seven-joint remains 5/8. All four ZYXYZY cases still collide and fail with exact Jacobians. Cases 1 and 8 fail without collisions in both variants.
+
+Interpretation: local Jacobian estimation error explains at least one recoverable failure under this intervention, but correcting it does not resolve most failures. The shared controller, geometric path selection, actuator dynamics, grasp execution and phase logic remain candidate limitations. This experiment does not isolate which of them is causal, and exact local kinematics does not establish a collision-free global path.
+
+Next: inspect the difficult six-joint family with a separately labeled path-feasibility diagnostic. Compare the actual descent path with feasible endpoint configurations and identify whether an alternate arm posture can reach the grasp without table contact. Keep fixed-case outcomes separate from any subsequently tuned controller. Do not claim broad transfer reliability or initiate more estimator training solely from this result.
+
+Verification: 32 saved task traces; all 16 analytical baselines exactly reproduce E87; all calibration probes match; exact Jacobian call counts equal task steps and are zero during calibration; input, checkpoint and source hashes remain unchanged. All 109 EASE tests pass, including the new test that exact-Jacobian substitution preserves measured bias and statistics. No retraining or reserved-test evaluation occurred.
+
+## Saved video evidence
+
+Videos are illustrative, explicitly outcome-selected examples, not a representative success-rate sample. The manifest records reference hashes, video hashes, frame counts and exact replay checks. Playback shows complete tasks at real-time simulation speed, omitting calibration; controller, final outcome, phase and cumulative collision status are labeled.
+
+- Matched E87 candidate_0 case 6: baseline failure and response-corrected success.
+- E88 exact-Jacobian case 2: success; case 4: failure.
+- Gallery: `outputs/ease_novelaxis_oracle_v1/videos/index.html`.
+
+Ongoing recording convention: save protocol/settings before evaluation, each completed rollout immediately, aggregate results and audits at completion, and labeled video demos of both successes and failures when present. Verify video replays against saved results and disclose example selection. Preserve old artifacts.

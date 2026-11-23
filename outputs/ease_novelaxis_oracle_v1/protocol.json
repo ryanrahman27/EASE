@@ -1,0 +1,21 @@
+{
+  "experiment": "E88",
+  "inputs": {
+    "outputs/ease_direction_novelaxis_v1/cases.json": "b92e989e1db069b5d195bfb07151f3cd0a03e59bb314cf94568cff6b3ee5d0a1",
+    "outputs/ease_direction_novelaxis_v1/axis_catalog.json": "bc812c707bbca7129148013b4d567e811a0b52fc5a0f693a2ee1b03612bfc07c",
+    "outputs/ease_direction_novelaxis_v1/protocol.json": "4c79204c53e2920d4aeb3951a3791ff92ef0555883a2af6646788351f7d48416",
+    "outputs/ease_direction_novelaxis_v1/records.json": "90e2aa98c70a13741b361b3c8b61f9c9cec6bd96bb7226f6299ac67f5622d774"
+  },
+  "checkpoints": {
+    "outputs/ease_robust_training_v1/seed_0/policy.pt": "bb2eadf92edc2f698fd137f6d1a7c8ec0a7283cd34e1d5a0fc390645e66392f1",
+    "outputs/ease_robust_training_v1/seed_1/policy.pt": "141e03fdac6d03a8ef035db3b8d3218cbbe73193450e06821e10b310380fc42d",
+    "outputs/ease_robust_training_v1/seed_2/policy.pt": "cf0d4d5d9fb80d5a20f5b117ea897a057e9c81ede715b785dad7523ec77520a0",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_0/policy.pt": "7cc59ce83397a3856939a849f229e0a962bfe0e1df3add7680aac42b8c5d0fec",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_1/policy.pt": "67a01fc8cdbec4d7c5ee5e602e5d1a16d6cfa80a8520c28a89eb2a861437b2d6",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_2/policy.pt": "f87c12bd330baf384432c5d275eda41f189ddb557f6083f487082a76447b2b71"
+  },
+  "test_evaluated": false,
+  "design": "All16 E87 cases, unchanged home/physics/calibration/phase budgets/filter/success rules. Two arms per case: measured analytical Jacobian baseline and exact instantaneous simulator Jacobian substitution. Same measured adaptive bias and online statistic updates in both. Original geometry filter only; no E82 direction correction. No additional IK screening, replacement, retraining or tuning.",
+  "interpretation": "Privileged diagnostic, not a deployable policy, upper bound or learned result. Exact local kinematics need not solve global path constraints, dynamics, grasping or phase sequencing. Different closed-loop trajectories cause later histories and biases to differ. Only the Jacobian source is intervened upon.",
+  "verification": "Every analytical result/trace must equal E87 analytical baseline; every probe equals saved E87 probe. Exact Jacobian calls equal task steps and zero during calibration. Input/checkpoint/source hashes checked. Report all paired gains and losses; no success gate or policy promotion."
+}
