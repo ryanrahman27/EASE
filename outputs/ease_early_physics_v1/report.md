@@ -1,0 +1,490 @@
+# E109: safer actions before first collision across motion phases
+
+72 full tasks: all36 original training-body task/seed pairs, baseline and fixed physics selector. Same E108 five alternatives,40ms prediction, static admissibility and nearest-original-target ranking. Same weights, apertures and budgets. Extend eligibility to descend/lift/transport/lower/retreat, but only before any earlier forbidden contact. Approach/calibration unchanged; no route planner. Descent interventions can alter later probe/history states. No tuning after outcomes.
+The24 training and12 held-placement pairs share four original training bodies. No E105 or reserved final test. Exact physical-model/state access is privileged; this is not learned dynamics or history-only control.
+
+| Group | Mode | Success | Collisions | Contact-free failures | Grasped | Lifted | Steps | Changes | Warnings | No safe option |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| all | baseline | 22/36 | 14 | 0 | 36 | 36 | 13406 | 0 | 14 | 0 |
+| all | physics | 22/36 | 14 | 0 | 36 | 34 | 13581 | 50 | 61 | 11 |
+| train | baseline | 18/24 | 6 | 0 | 24 | 24 | 8786 | 0 | 6 | 0 |
+| train | physics | 18/24 | 6 | 0 | 24 | 24 | 8803 | 6 | 12 | 6 |
+| validation | baseline | 4/12 | 8 | 0 | 12 | 12 | 4620 | 0 | 8 | 0 |
+| validation | physics | 4/12 | 8 | 0 | 12 | 10 | 4778 | 44 | 49 | 5 |
+| 6 | baseline | 14/18 | 4 | 0 | 18 | 18 | 5803 | 0 | 4 | 0 |
+| 6 | physics | 14/18 | 4 | 0 | 18 | 18 | 5800 | 4 | 7 | 3 |
+| 7 | baseline | 8/18 | 10 | 0 | 18 | 18 | 7603 | 0 | 10 | 0 |
+| 7 | physics | 8/18 | 10 | 0 | 18 | 16 | 7781 | 46 | 54 | 8 |
+| seed0 | baseline | 7/12 | 5 | 0 | 12 | 12 | 4344 | 0 | 5 | 0 |
+| seed0 | physics | 7/12 | 5 | 0 | 12 | 11 | 4411 | 20 | 24 | 4 |
+| seed1 | baseline | 7/12 | 5 | 0 | 12 | 12 | 4644 | 0 | 5 | 0 |
+| seed1 | physics | 7/12 | 5 | 0 | 12 | 12 | 4627 | 16 | 19 | 3 |
+| seed2 | baseline | 8/12 | 4 | 0 | 12 | 12 | 4418 | 0 | 4 | 0 |
+| seed2 | physics | 8/12 | 4 | 0 | 12 | 11 | 4543 | 14 | 18 | 4 |
+
+## Paired task changes
+
+[]
+
+## Retention gate
+
+**FAIL**
+
+{
+  "train": {
+    "retains_all_successes": true,
+    "collisions_nonincreasing": true,
+    "success_improves": false,
+    "per_seed_nondecreasing": true
+  },
+  "validation": {
+    "retains_all_successes": true,
+    "collisions_nonincreasing": true
+  }
+}
+
+## Task progress
+
+Phase reached counts use the original position/tool-axis completion rules, including final-state tolerance on timed-out phases. Phases still advance at the original time limit. Grasped/lifted are original sticky flags, not maintained-grasp guarantees.
+
+| Phase | Mode | Reached /36 | Control steps |
+|---|---|---:|---:|
+| descend | baseline | 34 | 1024 |
+| descend | physics | 34 | 1024 |
+| lift | baseline | 32 | 1894 |
+| lift | physics | 30 | 1927 |
+| transport | baseline | 33 | 899 |
+| transport | physics | 31 | 986 |
+| lower | baseline | 36 | 1134 |
+| lower | physics | 36 | 1060 |
+| retreat | baseline | 32 | 1633 |
+| retreat | physics | 28 | 1762 |
+
+Changed-action progress uses same-state40ms squared position plus .15-scaled tool-axis error. The original action is a simulator counterfactual and may collide; compare it only as a diagnostic. Progress does not rank candidate selection in this experiment. Actions and seeds are correlated, not independent samples.
+
+[
+  {
+    "phase": "descend",
+    "changed": 1,
+    "choices": {
+      "brake": 1
+    },
+    "selected_reduces_error": 0,
+    "selected_increases_error": 1,
+    "original_reduces_error": 0
+  },
+  {
+    "phase": "lift",
+    "changed": 41,
+    "choices": {
+      "hold": 41
+    },
+    "selected_reduces_error": 0,
+    "selected_increases_error": 41,
+    "original_reduces_error": 3
+  },
+  {
+    "phase": "transport",
+    "changed": 3,
+    "choices": {
+      "hold": 2,
+      "brake": 1
+    },
+    "selected_reduces_error": 0,
+    "selected_increases_error": 3,
+    "original_reduces_error": 1
+  },
+  {
+    "phase": "lower",
+    "changed": 2,
+    "choices": {
+      "brake": 1,
+      "half": 1
+    },
+    "selected_reduces_error": 1,
+    "selected_increases_error": 1,
+    "original_reduces_error": 1
+  },
+  {
+    "phase": "retreat",
+    "changed": 3,
+    "choices": {
+      "hold": 3
+    },
+    "selected_reduces_error": 0,
+    "selected_increases_error": 3,
+    "original_reduces_error": 0
+  }
+]
+
+## Failures
+
+[
+  {
+    "case": 1,
+    "seed": 0,
+    "mode": "baseline",
+    "first_collision_phase": "retreat",
+    "selector_status": null,
+    "grasped": true,
+    "lifted": true,
+    "unreached_phases": []
+  },
+  {
+    "case": 1,
+    "seed": 0,
+    "mode": "physics",
+    "first_collision_phase": "retreat",
+    "selector_status": "no admissible contact-free candidate",
+    "grasped": true,
+    "lifted": true,
+    "unreached_phases": []
+  },
+  {
+    "case": 1,
+    "seed": 2,
+    "mode": "baseline",
+    "first_collision_phase": "lower",
+    "selector_status": null,
+    "grasped": true,
+    "lifted": true,
+    "unreached_phases": [
+      "retreat",
+      "settle"
+    ]
+  },
+  {
+    "case": 1,
+    "seed": 2,
+    "mode": "physics",
+    "first_collision_phase": "lower",
+    "selector_status": "no admissible contact-free candidate",
+    "grasped": true,
+    "lifted": true,
+    "unreached_phases": [
+      "retreat",
+      "settle"
+    ]
+  },
+  {
+    "case": 2,
+    "seed": 0,
+    "mode": "baseline",
+    "first_collision_phase": "lower",
+    "selector_status": null,
+    "grasped": true,
+    "lifted": true,
+    "unreached_phases": [
+      "release"
+    ]
+  },
+  {
+    "case": 2,
+    "seed": 0,
+    "mode": "physics",
+    "first_collision_phase": "lower",
+    "selector_status": "forbidden contact already at control boundary",
+    "grasped": true,
+    "lifted": true,
+    "unreached_phases": [
+      "release"
+    ]
+  },
+  {
+    "case": 2,
+    "seed": 1,
+    "mode": "baseline",
+    "first_collision_phase": "lower",
+    "selector_status": null,
+    "grasped": true,
+    "lifted": true,
+    "unreached_phases": []
+  },
+  {
+    "case": 2,
+    "seed": 1,
+    "mode": "physics",
+    "first_collision_phase": "lower",
+    "selector_status": "no admissible contact-free candidate",
+    "grasped": true,
+    "lifted": true,
+    "unreached_phases": []
+  },
+  {
+    "case": 6,
+    "seed": 1,
+    "mode": "baseline",
+    "first_collision_phase": "lower",
+    "selector_status": null,
+    "grasped": true,
+    "lifted": true,
+    "unreached_phases": []
+  },
+  {
+    "case": 6,
+    "seed": 1,
+    "mode": "physics",
+    "first_collision_phase": "lower",
+    "selector_status": "no admissible contact-free candidate",
+    "grasped": true,
+    "lifted": true,
+    "unreached_phases": []
+  },
+  {
+    "case": 8,
+    "seed": 0,
+    "mode": "baseline",
+    "first_collision_phase": "descend",
+    "selector_status": null,
+    "grasped": true,
+    "lifted": true,
+    "unreached_phases": []
+  },
+  {
+    "case": 8,
+    "seed": 0,
+    "mode": "physics",
+    "first_collision_phase": "descend",
+    "selector_status": "no admissible contact-free candidate",
+    "grasped": true,
+    "lifted": true,
+    "unreached_phases": []
+  },
+  {
+    "case": 8,
+    "seed": 1,
+    "mode": "baseline",
+    "first_collision_phase": "transport",
+    "selector_status": null,
+    "grasped": true,
+    "lifted": true,
+    "unreached_phases": []
+  },
+  {
+    "case": 8,
+    "seed": 1,
+    "mode": "physics",
+    "first_collision_phase": "transport",
+    "selector_status": "forbidden contact already at control boundary",
+    "grasped": true,
+    "lifted": true,
+    "unreached_phases": [
+      "transport",
+      "retreat"
+    ]
+  },
+  {
+    "case": 8,
+    "seed": 2,
+    "mode": "baseline",
+    "first_collision_phase": "lift",
+    "selector_status": null,
+    "grasped": true,
+    "lifted": true,
+    "unreached_phases": [
+      "retreat",
+      "settle"
+    ]
+  },
+  {
+    "case": 8,
+    "seed": 2,
+    "mode": "physics",
+    "first_collision_phase": "lift",
+    "selector_status": "no admissible contact-free candidate",
+    "grasped": true,
+    "lifted": true,
+    "unreached_phases": [
+      "retreat",
+      "settle"
+    ]
+  },
+  {
+    "case": 10,
+    "seed": 0,
+    "mode": "baseline",
+    "first_collision_phase": "descend",
+    "selector_status": null,
+    "grasped": true,
+    "lifted": true,
+    "unreached_phases": []
+  },
+  {
+    "case": 10,
+    "seed": 0,
+    "mode": "physics",
+    "first_collision_phase": "descend",
+    "selector_status": "no admissible contact-free candidate",
+    "grasped": true,
+    "lifted": true,
+    "unreached_phases": [
+      "lift",
+      "retreat",
+      "settle"
+    ]
+  },
+  {
+    "case": 10,
+    "seed": 1,
+    "mode": "baseline",
+    "first_collision_phase": "transport",
+    "selector_status": null,
+    "grasped": true,
+    "lifted": true,
+    "unreached_phases": [
+      "descend",
+      "lift",
+      "transport",
+      "retreat",
+      "settle"
+    ]
+  },
+  {
+    "case": 10,
+    "seed": 1,
+    "mode": "physics",
+    "first_collision_phase": "transport",
+    "selector_status": "no admissible contact-free candidate",
+    "grasped": true,
+    "lifted": true,
+    "unreached_phases": [
+      "descend",
+      "lift",
+      "transport",
+      "retreat",
+      "settle"
+    ]
+  },
+  {
+    "case": 10,
+    "seed": 2,
+    "mode": "baseline",
+    "first_collision_phase": "descend",
+    "selector_status": null,
+    "grasped": true,
+    "lifted": true,
+    "unreached_phases": [
+      "descend",
+      "probe",
+      "close",
+      "release"
+    ]
+  },
+  {
+    "case": 10,
+    "seed": 2,
+    "mode": "physics",
+    "first_collision_phase": "descend",
+    "selector_status": "no admissible contact-free candidate",
+    "grasped": true,
+    "lifted": true,
+    "unreached_phases": [
+      "descend",
+      "probe",
+      "close",
+      "release"
+    ]
+  },
+  {
+    "case": 11,
+    "seed": 0,
+    "mode": "baseline",
+    "first_collision_phase": "lift",
+    "selector_status": null,
+    "grasped": true,
+    "lifted": true,
+    "unreached_phases": [
+      "lift",
+      "transport",
+      "retreat",
+      "settle"
+    ]
+  },
+  {
+    "case": 11,
+    "seed": 0,
+    "mode": "physics",
+    "first_collision_phase": "transport",
+    "selector_status": "no admissible contact-free candidate",
+    "grasped": true,
+    "lifted": false,
+    "unreached_phases": [
+      "lift",
+      "transport",
+      "retreat",
+      "settle"
+    ]
+  },
+  {
+    "case": 11,
+    "seed": 1,
+    "mode": "baseline",
+    "first_collision_phase": "lift",
+    "selector_status": null,
+    "grasped": true,
+    "lifted": true,
+    "unreached_phases": [
+      "lift",
+      "transport",
+      "settle"
+    ]
+  },
+  {
+    "case": 11,
+    "seed": 1,
+    "mode": "physics",
+    "first_collision_phase": "lift",
+    "selector_status": "forbidden contact already at control boundary",
+    "grasped": true,
+    "lifted": true,
+    "unreached_phases": [
+      "lift",
+      "transport",
+      "retreat",
+      "settle"
+    ]
+  },
+  {
+    "case": 11,
+    "seed": 2,
+    "mode": "baseline",
+    "first_collision_phase": "lift",
+    "selector_status": null,
+    "grasped": true,
+    "lifted": true,
+    "unreached_phases": []
+  },
+  {
+    "case": 11,
+    "seed": 2,
+    "mode": "physics",
+    "first_collision_phase": "lift",
+    "selector_status": "no admissible contact-free candidate",
+    "grasped": true,
+    "lifted": false,
+    "unreached_phases": [
+      "lift",
+      "transport",
+      "retreat",
+      "settle"
+    ]
+  }
+]
+
+## Decision
+
+The rule fails the task-success/retention gate. Keep the original controller; collision reduction or intermediate phase progress alone is not sufficient for promotion.
+No horizon, candidate or phase tuning after these outcomes. Full traces retain all failures, alternatives and state predictions. Before another control change, identify whether failure is due to no feasible alternative, loss of task progress, or a contact in an unmodified phase.
+
+## Verification
+
+36 full baseline replays, 72 approach prefixes, and 13343 selected next states/contact unions match exactly. All changed actions occur before any prior collision. Inputs/checkpoints unchanged. Videos replay full serialized results; task success/failure videos are executed motion, not lookahead animation.
+
+## Interpretation of this run
+
+Both modes finish22/36 tasks with14 collision failures; no task gains or losses. The physics selector changes50 actions before any previous collision. Of these,49 increase the immediate squared pose error and only one reduces it. The original static-filter-selected commands also reduce this error in only five of these same-state counterfactuals; the problem is not explained solely by replacing otherwise productive commands.
+Phase completion worsens: lift32 to30/36, transport33 to31/36, retreat32 to28/36. Descend remains34/36 and lower36/36. Total executed steps rise13406 to13581; sticky lifted flags drop36 to34. These are progress regressions in already-failing tasks, even though binary success retention passes. There are no collision-free full-task failures in either mode.
+At the first logged collision of11 physics trials no alternative satisfies both contact-free prediction and static eligibility. In three trials forbidden contact is already present at the control boundary, where the rule intentionally does not intervene. This is a finite candidate/horizon limitation, not proof that no safe trajectory exists. The same40ms model accurately predicts the selected next states; accurate local prediction does not by itself supply a useful action.
+Next, use training-state counterfactual audits to test whether a broader set of goal-directed actions can provide both clearance and progress before changing the executed controller. Evaluate predicted progress and continued feasibility, rather than only closeness to the current command. Keep this completed run as a negative result; do not change its candidate set or rescore success.
+
+Regression suite:131 tests passed in12.32s. Runtime assertions cover selected actions and all baseline/full-prefix replays.
