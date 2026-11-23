@@ -1,0 +1,18 @@
+"""Derive E156 from frozen E155 code with one phase restriction and prefix audits."""
+from pathlib import Path
+
+def run():
+    source=Path('outputs/ease_prior_projector_control_v1/source/prior_projector_control.py').read_text()
+    replacements={
+      'E155':'E156',
+      'ease_prior_projector_control_v1':'ease_lift_posture_control_v1',
+      "if self.phase!='probe':":"if self.phase=='lift':",
+      'Posture projection should preserve actual hand motion. Uniform zero-centered regularization may be a useful task controller but distort weakly observed map directions; the calibration-prior map has lower full-Jacobian error. Isolate this by using the same analytical calibration-prior map for the secondary projector, while keeping each primary task estimator unchanged.':'E154 standard learned fixed-uniform reaches77/96 versus uniform74/E12072, but legacy case13 still collides at lift. E155 all-phase prior-map projection rescues13 but regresses7-joint controls6/10. Test the identical projection only during lift, where the motivating link/table collision occurs. All pre-lift actions/states must match the original standard controller exactly.',
+      'Same fixed E151 home objective.05(home-q),.015damping,maxabs.01rad and final+/-.04 clamp. Only projector J changes: current32 observed transitions,.98recency,1e-6ridge toward initial measured calibration. Primary task map remains uniform32, E153 fixed-uniform learned ensemble, or E120 ensemble. No privileged geometry, simulator Jacobian or physics selector. Fixed probes untouched.':'Only during lift, use the fixed E151 home objective.05(home-q),.015damping,maxabs.01rad and final+/-.04 clamp. Projector map is current32 observed transitions,.98recency,1e-6ridge toward initial measured calibration. All other phases execute the unmodified primary task controller. Primary maps are uniform32, E153 learned fixed-uniform ensemble, E120 ensemble. No privileged geometry, simulator Jacobian or physics selector. No coefficient sweep.'}
+    for before,after in replacements.items():assert before in source;source=source.replace(before,after)
+    needle="            rows.append(r);save(path,rows);save(ROOT/'posture'/f'{case}_{method}.json',saved);assert all(np.array_equal(a['base_action'],a['final_action']) for a in saved if a['phase']=='probe');print('E156',stage,case,method,r['success'],flush=True)"
+    replacement="""            trial=read(ROOT/'trials'/f'{case}_{method}_frozen_bias.json');base_root=Path('outputs/ease_fixed_uniform_control_v1/standard') if method=='learned_ensemble' else Path('outputs/ease_history_estimator_control_v1');baseline=read(base_root/'trials'/f'{case}_{method}_frozen_bias.json');prefix=lambda trace:trace[:next(i for i,x in enumerate(trace) if x['phase']=='lift')];assert prefix(trial['trace'])==prefix(baseline['trace']);count=len(prefix(trial['trace']));np.testing.assert_array_equal(np.load(ROOT/'states'/f'{case}_{method}_frozen_bias.npz')['states'][:count],np.load(base_root/'states'/f'{case}_{method}_frozen_bias.npz')['states'][:count]);assert all(np.array_equal(a['base_action'],a['final_action']) for a in saved if a['phase']!='lift')
+            rows.append(r);save(path,rows);save(ROOT/'posture'/f'{case}_{method}.json',saved);print('E156',stage,case,method,r['success'],'exact pre-lift prefix',flush=True)"""
+    assert needle in source;source=source.replace(needle,replacement);target=Path(__file__).with_name('lift_posture_control.py');assert not target.exists();target.write_text(source);print('Created E156 from frozen E155 with lift-only intervention and exact prefix checks',flush=True)
+
+if __name__=='__main__':run()

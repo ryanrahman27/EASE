@@ -67,7 +67,7 @@ def prepare():
                         handoff_control = True
 ''' + runner[pos:]
     runner = runner.replace("env.object_history=[]", "env.reject_locked=False;env.align_steps=0;env.object_history=[]")
-    runner = runner.replace("logs.append(dict(estimator_jacobian=", "logs.append(dict(aligning=aligning,estimator_jacobian=")
+    runner = runner.replace("logs.append(dict(estimator_jacobian=", "logs.append(dict(aligning=bool(aligning),estimator_jacobian=")
     (HERE / "readiness_recovery.py").write_text(runner[:runner.index("if __name__==")] + "if __name__ == '__main__':\n    import sys\n    run(sys.argv[1])\n")
     video = (HERE / "metric_readiness_videos.py").read_text().replace("metric_readiness import ROOT", "readiness_recovery import ROOT").replace("E179", "E180").replace("fitting projection metric and grasp-readiness comparison", "fitting grasp-readiness and alignment recovery").replace("Frozen E120 nominal policy in all four conditions; projection metric and universal handoff ablations.", "Protected E120 baseline, readiness checks and bounded alignment recovery.").replace('<img width="1000" src="../comparison.png">', '')
     (HERE / "readiness_recovery_videos.py").write_text(video)
