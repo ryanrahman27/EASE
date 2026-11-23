@@ -1,0 +1,16 @@
+{
+  "experiment": "E141",
+  "inputs": {
+    "outputs/ease_expanded_structured_pairs_v1/dataset.npz": "017f16b9a56ebb97a3af4d75ad831fd016b7ee2e03e0c43195cdfdfe74182ddf",
+    "outputs/ease_expanded_structured_pairs_v1/rows.json": "8aff042142eab8b91b133e6971612052dabe50bf8e4d61508290a3021f74a67c",
+    "outputs/ease_expanded_structured_pairs_v1/cases.json": "bb06c1302362e1e0232c548d822a24705ead6f0ca83e0ac6c283894efa0d7a25",
+    "outputs/ease_expanded_structured_pairs_v1/fresh_cases.json": "99941693b57211e20d40468fb9d8d1e14d5d47171b0c5f1ad7a501c88d41e728",
+    "outputs/ease_paired_effect_classifier_v1/summary.json": "d498e455607ba19ccccc0923ca9d20e16f3b44e87a3090d0dd377463cc9fa2e5"
+  },
+  "design": "Direct motion-estimator study after unsuccessful terminal-task gates. Learn transition weights inside an explicit least-squares solve; clearly a learned/analytical hybrid, not the original inverse-free MotionTransformer or flow policy. Same2208 clean phase-entry histories, same four fitting-family folds; next observed joint motion and tool motion are supervision only. No final success labels in loss, no privileged Jacobian, no body IDs or object/contact features.",
+  "observations": "Last32 measured dq/dx transitions, padded7 joints; dx is tool XYZ increment plus ROT_SCALE times tool-up-vector increment. Weight network sees only eight scalar per-transition features: log dq norm, log position-motion norm, log rotation-motion norm, joint midpoint distance to current pose divided by sqrt(dof), age, log uniform-model position/rotation residual norms, leverage. All available from past history. No future action/motion enters the weight network.",
+  "architecture": "8->32 embedding; two32-wide4-head Transformer encoder layers, feedforward64,GELU,dropout0; scalar transition log-weight head initializedzero. Weights exp(log5*tanh(head)) multiply fixed.98 recency. Ridge1e-6*exp(log10*tanh(parameter)), initialized1e-6. Solve weighted normal equations explicitly. Initial estimator exactly32-transition .98-weighted ridge. Learned weights shared across all joints and both motion modalities.",
+  "training": "Four family folds x3 seeds141100..141102;1500 AdamW steps,lr3e-4,weight_decay1e-4,batch128 starts, both on/off one-step measured transitions per start, clipgrad1. Loss normalized measured forward-motion MSE plus.001 mean log-weight squared plus.001 log-ridge squared. Group motion scales (XYZ/rotation) from training rows only, RMS floor1e-5. No success labels, checkpoint/seed selection or teacher-Jacobian target.",
+  "evaluation": "Compare out-of-fold next-motion predictions with uniform32 history and original analytical Gram/cross. Report position/rotation errors separately, per seed and joint count. Histories and paired queries are dependent, not independent episode counts. No task rollout or fresh/held test in this prediction stage.",
+  "advancement": "Only consider full-task control if pooled position MSE improves at least10% over uniform32, each seed is no worse, each joint-count pooled MSE is no worse, and pooled rotation MSE is <=1.05x uniform32. Otherwise diagnose before controller rollout. E120 immutable."
+}
