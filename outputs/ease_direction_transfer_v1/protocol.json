@@ -1,0 +1,16 @@
+{
+  "experiment": "E84",
+  "checkpoints": {
+    "outputs/ease_robust_training_v1/seed_0/policy.pt": "bb2eadf92edc2f698fd137f6d1a7c8ec0a7283cd34e1d5a0fc390645e66392f1",
+    "outputs/ease_robust_training_v1/seed_1/policy.pt": "141e03fdac6d03a8ef035db3b8d3218cbbe73193450e06821e10b310380fc42d",
+    "outputs/ease_robust_training_v1/seed_2/policy.pt": "cf0d4d5d9fb80d5a20f5b117ea897a057e9c81ede715b785dad7523ec77520a0",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_0/policy.pt": "7cc59ce83397a3856939a849f229e0a962bfe0e1df3add7680aac42b8c5d0fec",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_1/policy.pt": "67a01fc8cdbec4d7c5ee5e602e5d1a16d6cfa80a8520c28a89eb2a861437b2d6",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_2/policy.pt": "f87c12bd330baf384432c5d275eda41f189ddb557f6083f487082a76447b2b71"
+  },
+  "design": "All17 separate E73 placements x7 frozen estimators x2 modes =238 complete tasks; no outcome selection. Original phase transitions, budgets, contacts and success criteria. Baseline geometry filtering, sustained correction exploratory primary, No pulse selection or retuning. Same bodies and previously studied development placements; not new embodiments or a reserved final test.",
+  "settings": "Import E82 corrected_action unchanged: fixed no-velocity response model, +/-0.01 single-joint candidates, +/-0.04 bounds, 21 path points, 2mm warning, >1e-6 clearance improvement, predicted task-error allowance0.001. Known whole-arm geometry with object held at current pose. No simulator future outcomes in action selection.",
+  "pulse": "One five-step pulse starting on first online warning, including that step and continuing across phase boundaries if needed. No retrigger. Sustained mode checks throughout task. Calibration32 and all subsequent measured updates retained; each mode calibrated identically.",
+  "gate": "Primary must improve pooled learned task success, not increase pooled collisions, and retain EVERY baseline-successful six-joint case. Report every loss, checkpoint and DOF breakdown, interactions and additional geometry queries. No tuning on outcomes; historical development data, not independent generalization.",
+  "test_evaluated": false
+}
