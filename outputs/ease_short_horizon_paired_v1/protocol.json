@@ -1,0 +1,117 @@
+{
+  "experiment": "E132",
+  "date": "2026-11-15",
+  "inputs": {
+    "outputs/ease_privileged_task_state_v1/features.npz": "cc630707ceb901740a2a723fc31e1892a32d38e9e29adf7c0c7d52f459f1fd97",
+    "outputs/ease_privileged_task_state_v1/primary_outcomes.json": "3d4f6b0ee517e37b5176e236dace94188d93a24e9f4a9049ef3ae57af1b2bd9f",
+    "outputs/ease_privileged_task_state_v1/selected_rules.json": "4338ec44862fed1b98f611497d3b8f5c5acca7d50edff5163f204e687f03db65",
+    "outputs/ease_privileged_task_state_v1/verification.json": "47fc314c59d70811e9354b59d72cb0c55d6cc5f621b4c33a35099a237c3a5e07",
+    "outputs/ease_privileged_task_state_v1/protocol.json": "09be8600ea28292564be16927efb37227ff27732bdf0b72ecba32aa0935d35f6",
+    "outputs/ease_broad_task_value_gate_v1/gate_rows.json": "d44908b48191785740bf11d560c66fedd855ea8996f336c4b6c9cab4267163ad",
+    "outputs/ease_broad_task_value_gate_v1/collection/records.json": "e5ee0ff13edf6fbb1d8f2f7c890f0b10da4f6ac7397ed2a936ae29e7cc70bdb7",
+    "outputs/ease_abstaining_task_value_gate_v1/oof_predictions.npz": "1d7ac6874efd3c4c4a06f2fa4d1a5e53d4d33f976be81ed223f18d5c902e3ae4",
+    "outputs/ease_bounded_history_v1/records.json": "660cfa30e45f5cea932f82883d7aaaaae0720708070ab34fc311e338024ca12d",
+    "outputs/ease_bounded_history_v1/summary.json": "a6ae93e4289bc31d87776d44ec0b83db1ed180ee0ebaeeb25131c791ecb926ed",
+    "outputs/ease_privileged_task_state_v1/models/fold_0/126100.pt": "4f4dae65cb24201d5f0201cdd74d6ed8261a6333c2932a985ed37048884e6a06",
+    "outputs/ease_privileged_task_state_v1/models/fold_0/126101.pt": "82e3d5153faca991fa253fe2c265ee222e949f50ad9d3d7dd9e69fbee7d21a48",
+    "outputs/ease_privileged_task_state_v1/models/fold_0/126102.pt": "3ebed26ae51e35e687a94764d940b5b43c85cfa4297d923d7edfd645dcd50461",
+    "outputs/ease_privileged_task_state_v1/models/fold_0/normalization.npz": "fd1f43af4dcbe768dd3e4bae2f7f6978088fa28194b53adeb22e97bef41a1656",
+    "outputs/ease_privileged_task_state_v1/models/fold_0/training.json": "7191b3ea090f2927bd4c88e00e3d279f7b6ea771cea3037c4cb85fa5c324c535",
+    "outputs/ease_privileged_task_state_v1/models/fold_1/126100.pt": "4ea241dcd88193b907f7a8909584cef9e539693c3e24ce57251318e9654a9040",
+    "outputs/ease_privileged_task_state_v1/models/fold_1/126101.pt": "94bec7b998f1b06ca5a118834703359b2e921bc9cb19bdbfffb0cbfbd8b4075d",
+    "outputs/ease_privileged_task_state_v1/models/fold_1/126102.pt": "217571ee94a0b6269e8ab5eee5ff619c688c195909b33f04677fd0a0ca0fa401",
+    "outputs/ease_privileged_task_state_v1/models/fold_1/normalization.npz": "8912b6bd72120a9426b4f9ab55dc8ebc79bff422fe4158f169d721fd4a83eacd",
+    "outputs/ease_privileged_task_state_v1/models/fold_1/training.json": "3192c41c33c28507fd826d3f2be031c3a28a3496722376b591c7039edbc3f367",
+    "outputs/ease_privileged_task_state_v1/models/fold_2/126100.pt": "a798bfd369a759a41744dde517dd115ce8d95c31f9e0974c0dc3804340d0c2a2",
+    "outputs/ease_privileged_task_state_v1/models/fold_2/126101.pt": "0eb484d720249a6d690d12f333b491b5f72c61fe1aea7e4b9f95306f92354275",
+    "outputs/ease_privileged_task_state_v1/models/fold_2/126102.pt": "84b05084e9c87bbf6d5dc8cedab68daee46e229663b4f9318b99cb2ad9c98278",
+    "outputs/ease_privileged_task_state_v1/models/fold_2/normalization.npz": "40993c90ba502af23d3ab6c5a49f39258033c26ba014a89b30ecf2ebbe4e219a",
+    "outputs/ease_privileged_task_state_v1/models/fold_2/training.json": "8c7328263a0c3827005fd49eb1bcae276963f9cf91ba941b4f5c057d407d5b50",
+    "outputs/ease_privileged_task_state_v1/models/fold_3/126100.pt": "0c14a3f9521bef63315e2bb7532c1c7a25e414841383aca207d8331686781274",
+    "outputs/ease_privileged_task_state_v1/models/fold_3/126101.pt": "f66e8bcd73af41925a132b7a0f800b9278f871d855961d40d9e143e9fc6f9c38",
+    "outputs/ease_privileged_task_state_v1/models/fold_3/126102.pt": "fb38effe072ceab86a012264d7124e4ea37bc0f0220455f2873cadfa3eeed355",
+    "outputs/ease_privileged_task_state_v1/models/fold_3/normalization.npz": "5e1da0a06f8424b82b4564d0b11edf0b4b0b0e46a9c9e1a07b5069a23ebcaf1d",
+    "outputs/ease_privileged_task_state_v1/models/fold_3/training.json": "aeb54dfdd1053507f5c9ad7924b12ef1ff33a7b2656cc65ad7e59d08f81050b6"
+  },
+  "horizons": [
+    1,
+    2,
+    4,
+    8
+  ],
+  "grid": [
+    {
+      "progress_margin": 0.0,
+      "risk_cap": 0.05
+    },
+    {
+      "progress_margin": 0.0,
+      "risk_cap": 0.1
+    },
+    {
+      "progress_margin": 0.0,
+      "risk_cap": 0.25
+    },
+    {
+      "progress_margin": 0.0001,
+      "risk_cap": 0.05
+    },
+    {
+      "progress_margin": 0.0001,
+      "risk_cap": 0.1
+    },
+    {
+      "progress_margin": 0.0001,
+      "risk_cap": 0.25
+    },
+    {
+      "progress_margin": 0.00025,
+      "risk_cap": 0.05
+    },
+    {
+      "progress_margin": 0.00025,
+      "risk_cap": 0.1
+    },
+    {
+      "progress_margin": 0.00025,
+      "risk_cap": 0.25
+    },
+    {
+      "progress_margin": 0.0005,
+      "risk_cap": 0.05
+    },
+    {
+      "progress_margin": 0.0005,
+      "risk_cap": 0.1
+    },
+    {
+      "progress_margin": 0.0005,
+      "risk_cap": 0.25
+    },
+    {
+      "progress_margin": 0.001,
+      "risk_cap": 0.05
+    },
+    {
+      "progress_margin": 0.001,
+      "risk_cap": 0.1
+    },
+    {
+      "progress_margin": 0.001,
+      "risk_cap": 0.25
+    },
+    {
+      "progress_margin": 1000000000.0,
+      "risk_cap": 0.0
+    }
+  ],
+  "inputs_label": "Same182 privileged E131 inputs, explicitly simulator-only upper-information reference; not measured/deployable sensing.",
+  "target": "At1,2,4,8 steps after identical phase-entry states: (entry-goal distance on minus off), meters, and any forbidden collision during that prefix separately for on/off. Entry goal frozen for all horizons even if the scripted phase advances. At most8-step off pulse then E120 resumes. No final success labels in training.",
+  "dense": "Four continuous paired progress labels plus eight prefix-collision labels per original phase entry. Same1108 fitting rows; no new independent starts or simulator rollouts. Phase transitions within the window are recorded rather than filtered using future information.",
+  "training": "Same four ancestral-family splits,3 seeds126100..126102,1500 full-batch AdamW steps, lr.001 weight_decay.001.182-64-32-12 tanh-hidden network:4 linear standardized progress outputs,8 collision logits. Sum of mean normalized-progress MSE and mean collision BCE, equal task weights. Input normalization fixed to E131 fold; progress mean/std training-fold only, floor1e-6m. No resampling, early stopping or checkpoint selection.",
+  "initialization": "Original139-column and hidden32-layer weights/biases match same-seed baseline; extra43 input columns zero. Output head changes to12 targets; objective and output parameterization change together.",
+  "primary": "Off selected at first clean phase iff all3 predictions show8-step progress benefit >0.00025m and every predicted off collision probability at1/2/4/8 steps is <0.1. At most one pulse. Oracle diagnostic uses actual short progress/collision under the same thresholds; it uses future data and is NOT an inference policy.",
+  "secondary": "Same fixed progress-margin/risk-cap grid for learned short targets. Choose zero E120 final-success losses, most gains, fewer switches, higher progress margin, lower risk cap. Final outcomes used only for tuning-validation rule selection, never model training. Full abstention included.",
+  "evaluation": "144 fitting placement/estimator full-task successes reconstructed from matched continuations. Compare E120, E131 long-target primary, learned short primary and true-short-target diagnostic. Original held-placement benchmark untouched. No fresh online-policy rollout or post-collision trajectory equivalence claim.",
+  "baseline": "E120 immutable. Short-horizon prediction improvement alone cannot justify promotion."
+}
