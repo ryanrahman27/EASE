@@ -39,7 +39,7 @@ def long_batch(batch,device):
     return mdq.transpose(1,2)@(mdq*weights[:,:,None])+eye,mdq.transpose(1,2)@(mdx*weights[:,:,None]),mask,target
 
 
-def run(data,parents,output,steps=2000):
+def run(data,parents,output,steps=2000,retention=False):
     torch.set_num_threads(4);root=Path(output);root.mkdir(parents=True,exist_ok=False)
     manifest=register(data);profiles=[]
     for entry in manifest['calibrations']:
@@ -47,7 +47,9 @@ def run(data,parents,output,steps=2000):
         h=np.load(Path(data)/entry['file']);p=np.zeros((32,7),np.float32);p[:,:h.shape[1]]=h[:,:,3];profiles.append(p)
     profiles=torch.tensor(np.stack(profiles),device='cuda')
     hashes={str(Path(parents)/f'seed_{s}'/'policy.pt'):fingerprint(Path(parents)/f'seed_{s}'/'policy.pt') for s in range(3)}
-    protocol=dict(experiment='E44',steps=steps,batch=128,lr=.00005,parents=hashes,data=data,
+    lr=.00002 if retention else .00005
+    protocol=dict(experiment='E45' if retention else 'E44',steps=steps,batch=128,lr=lr,parents=hashes,data=data,
+        retention=retention,anchor='If enabled: frozen corresponding E35 teacher prediction penalty on every synthetic batch, coefficient 2 for six joints / .5 for seven joints. Starts from E35, not E44. Architecture unchanged; no native data.',
         training_manifest_sha256=fingerprint(Path(data)/'manifest.json'),test_evaluated=False,
         training='Alternate E35 synthetic noisy short histories with synthetic 33-256-step histories: 32-step full-rank probe then rank-1/2/3 motion, .98 weighting, 1e-6 ridge; motion amplitudes .0002-.012, Jacobian scales .03-.8; mostly clean observations. Targets are clean weighted ridge estimates. No native robot rollouts or geometry in training. Fixed final checkpoints, no best-seed selection.',
         evaluation='Fixed synthetic validation batch and subsequent existing observed native development tasks; independent final test remains reserved.')
@@ -58,19 +60,32 @@ def run(data,parents,output,steps=2000):
     for seed in range(3):
         torch.manual_seed(44000+seed);folder=root/f'seed_{seed}';folder.mkdir();parent=Path(parents)/f'seed_{seed}'/'policy.pt'
         model=MotionTransformer().cuda();model.load_state_dict(torch.load(parent,map_location='cuda',weights_only=True))
+        teacher=None
+        if retention:
+            teacher=MotionTransformer().cuda();teacher.load_state_dict(model.state_dict());teacher.eval()
+            for parameter in teacher.parameters():parameter.requires_grad_(False)
         def validation_loss():
             model.eval()
             with torch.no_grad():
                 g,c,m,target=validation;return float(((model(g,c,m)-target).square()*m[:,:,None]).sum()/(3*m.sum()))
-        initial=validation_loss();model.train();optimizer=torch.optim.AdamW(model.parameters(),lr=.00005);losses=[]
+        initial=validation_loss();model.train();optimizer=torch.optim.AdamW(model.parameters(),lr=lr);losses=[];fit_losses=[];anchor_losses=[]
         for step in range(steps):
             g,c,m,target=long_batch(128,'cuda') if step%2==0 else synthetic_batch(profiles,128,'cuda')
-            loss=((model(g,c,m)-target).square()*m[:,:,None]).sum()/(3*m.sum());assert torch.isfinite(loss)
-            optimizer.zero_grad();loss.backward();torch.nn.utils.clip_grad_norm_(model.parameters(),1);optimizer.step();losses.append(float(loss))
-            if (step+1)%500==0:print('train',seed,step+1,float(loss),flush=True)
+            prediction=model(g,c,m)
+            fit_loss=((prediction-target).square()*m[:,:,None]).sum()/(3*m.sum())
+            anchor_loss=prediction.sum()*0
+            if teacher is not None:
+                with torch.no_grad():old=teacher(g,c,m)
+                weight=torch.where(m.sum(-1)==6,2.,.5)[:,None,None]
+                anchor_loss=((prediction-old).square()*m[:,:,None]*weight).sum()/(3*m.sum())
+            loss=fit_loss+anchor_loss;assert torch.isfinite(loss)
+            fit_losses.append(float(fit_loss.detach()));anchor_losses.append(float(anchor_loss.detach()))
+            optimizer.zero_grad();loss.backward();torch.nn.utils.clip_grad_norm_(model.parameters(),1);optimizer.step();losses.append(float(loss.detach()))
+            if (step+1)%500==0:print('train',seed,step+1,float(loss.detach()),flush=True)
         final=validation_loss();torch.save(model.state_dict(),folder/'policy.pt')
         (folder/'training.json').write_text(json.dumps(dict(seed=seed,steps=steps,policy_sha256=fingerprint(folder/'policy.pt'),
-            parent_sha256=hashes[str(parent)],validation_initial=initial,validation_final=final,losses=losses),indent=2))
+            parent_sha256=hashes[str(parent)],validation_initial=initial,validation_final=final,losses=losses,
+            fit_losses=fit_losses,anchor_losses=anchor_losses),indent=2))
         print('complete seed',seed,'synthetic validation',initial,final,flush=True)
     for path,sha in hashes.items():assert fingerprint(path)==sha
     (root/'status.json').write_text(json.dumps(dict(status='complete',test_evaluated=False)))
@@ -79,4 +94,4 @@ def run(data,parents,output,steps=2000):
 if __name__=='__main__':
     p=argparse.ArgumentParser()
     for key in ['data','parents','output']:p.add_argument('--'+key,required=True)
-    p.add_argument('--steps',type=int,default=2000);run(**vars(p.parse_args()))
+    p.add_argument('--steps',type=int,default=2000);p.add_argument('--retention',action='store_true');run(**vars(p.parse_args()))

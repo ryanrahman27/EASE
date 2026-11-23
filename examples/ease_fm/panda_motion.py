@@ -47,13 +47,13 @@ class MotionDiagnostic(PoseController):
         super().update(before,after,command)
 
 
-def run(assets,models,cases,reference,output,variant='baseline',robots='panda'):
+def run(assets,models,cases,reference,output,variant='baseline',robots='panda',experiment=None):
     torch.set_num_threads(4);root=Path(output);root.mkdir(parents=True,exist_ok=False)
     tasks=json.loads((Path(cases)/'cases.json').read_text());loaded,hashes=load_models(models);manifest=verify_assets(assets)
-    protocol=dict(experiment='E44' if variant=='trained' else 'E43',variant=variant,robots=robots,source=cases,reference=reference,
+    protocol=dict(experiment=experiment or ('E44' if variant=='trained' else 'E43'),variant=variant,robots=robots,source=cases,reference=reference,
         cases_sha256=fingerprint(Path(cases)/'cases.json'),commit=manifest['commit'],checkpoints=hashes,test_evaluated=False,
         intervention='Baseline exact E42 object-height release. Scale feeds unscaled tool-direction cross statistics through the same neural estimator and rescales predicted direction Jacobian by .15. Smooth uses .8 previous+.2 new predicted Jacobian. Analytical control is unchanged. Shadow analytical predictions are diagnostic only; no fallback or action blending.',
-        scope='Same nine observed Panda cases, same calibration and fixed model weights. Logged one-step prediction errors use next measured motion; no simulator Jacobian access.')
+        scope='Matched observed native cases for selected robots, same calibration and fixed model weights. Logged one-step prediction errors use next measured motion; no simulator Jacobian access.')
     (root/'protocol.json').write_text(json.dumps(protocol,indent=2));(root/'source').mkdir()
     for name in ['panda_motion.py','panda_grasp.py','native_reliability.py','pick_place_control.py','real_arms.py','real_arm_pick_place.py','motion_transformer.py']:
         shutil.copyfile(Path(__file__).with_name(name),root/'source'/name)
@@ -81,4 +81,4 @@ if __name__=='__main__':
     p=argparse.ArgumentParser()
     for key in ['assets','models','cases','reference','output']:p.add_argument('--'+key,required=True)
     p.add_argument('--variant',choices=['baseline','scale','smooth','trained'],default='baseline')
-    p.add_argument('--robots',default='panda');run(**vars(p.parse_args()))
+    p.add_argument('--robots',default='panda');p.add_argument('--experiment');run(**vars(p.parse_args()))
