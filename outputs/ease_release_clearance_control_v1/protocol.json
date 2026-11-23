@@ -1,0 +1,14 @@
+{
+  "experiment": "E161",
+  "scope": "All96 fitting placements, frozen E120 ensemble. No held outcomes or execution. This intervention is separate from E160 and uses the original unscaled controller.",
+  "motivation": "Fitting audit shows pad/table contacts during lowering and retreat. The rigid fixture pad bottom is25mm below the grasp-center site when upright. Original lower/release site height245mm above200mm tabletop leaves20mm nominal pad clearance, vulnerable to tilt/tracking error. Add a fixed20mm margin rather than querying simulator collision distances.",
+  "design": "Only lower and release grasp-center target heights change from245 to265mm. This is elevated release with a short free fall, not gentle contact placement. Original grasp, lift, transport, retreat, calibration, local probe, E120 bounded residual, controller gain/damping, phase budgets and strict task/contact criteria unchanged. No object pose/contact signal, exact Jacobian, physics selector or adaptive height search.",
+  "verification": "Every complete state and trace before first lower action must exactly equal the original E144 E120 ensemble. Verify identical calibration and frozen bias. All96 placements retained, including pre-lower failures.",
+  "screen": "Success strictly above original E12072/96, neither DOF worse than36/48, no more than21 collision episodes; report all rescues/regressions and lost successes separately. Fitting development only; no automatic held test or promotion.",
+  "lower_release_height_m": 0.265,
+  "inputs": {
+    "outputs/ease_history_estimator_control_v1/cases.json": "bb06c1302362e1e0232c548d822a24705ead6f0ca83e0ac6c283894efa0d7a25",
+    "outputs/ease_history_estimator_control_v1/records.json": "de5c9cc01991102f6f1660814a68ab191105879b5b7030e4ef678e04e4f1bc92",
+    "outputs/ease_history_estimator_control_v1/frozen.json": "ca4dc4774dfac2b2c758a9f44014e53811c0396d793ff1d23557ee438cb63976"
+  }
+}
