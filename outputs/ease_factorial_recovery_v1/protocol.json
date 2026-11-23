@@ -1,0 +1,23 @@
+{
+  "experiment": "E26",
+  "seed": 0,
+  "steps_per_model": 15000,
+  "batch": 32,
+  "lr": 0.0003,
+  "manifest_sha256": "e28aa6cf6d4b402bb3847785d7ac125e8f015a16da7b70870d6582dbcea0d958",
+  "test_evaluated": false,
+  "models": [
+    "reactive",
+    "history"
+  ],
+  "data_conditions": [
+    "original",
+    "shared_recovery"
+  ],
+  "training": "Four fresh directly supervised action policies; same initialization, uniform-row batch stream, capacity and budget per condition. No latent distillation.",
+  "history": "Training calibration prefixes only; current observations always available. Reactive context length zero.",
+  "recovery": "Fixed union from E24 seed0 reactive and E23 seed0 history policies on new training tasks only; expert 16-action branches at steps 0,1,2,4,8,16,32,64,100, reject contact branches.",
+  "evaluation": "All training goals plus four factorial validation conditions; failed gates retained as diagnostic; history correct/empty/twin with one fixed probe seed.",
+  "reference": "Frozen E24 privileged teachers evaluated on factorial validation; trained on previous dataset, not new teachers or upper bounds.",
+  "scope": "Single-seed bounded experiment; one recovery round; no validation tuning"
+}

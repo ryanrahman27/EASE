@@ -1,5 +1,6 @@
 """E23 fixed-budget pilot: privileged gate, then matched history/pose encoders."""
 import argparse
+from dataclasses import replace
 import json
 from pathlib import Path
 import shutil
@@ -17,7 +18,7 @@ from .history_distill import make_student, frozen_equal
 def evaluate(data, manifest, model, split, mode, device, calibration_seed=930000, intervention=None):
     arms = {a['seed']: Arm(**a) for a in manifest['arms']}
     pairs = {p['id']: p for p in manifest['pairs']}
-    cases = [(arms[body], goal, pairs[goal['pair']]) for goal in manifest['goals'][split]
+    cases = [(replace(arms[body], home=tuple(goal['home'])) if 'home' in goal else arms[body], goal, pairs[goal['pair']]) for goal in manifest['goals'][split]
              for body in pairs[goal['pair']]['bodies']]
     records = []
     for offset in range(0, len(cases), 48):
@@ -28,7 +29,7 @@ def evaluate(data, manifest, model, split, mode, device, calibration_seed=930000
         for i, (arm, _, pair) in enumerate(batch):
             if mode == 'oracle': histories[i] = oracle_tokens(arm, padded=True)
             elif mode != 'reactive':
-                donor = arms[next(b for b in pair['bodies'] if b != arm.seed)] if mode == 'twin' else arm
+                donor = replace(arms[next(b for b in pair['bodies'] if b != arm.seed)], home=arm.home) if mode == 'twin' else arm
                 # Training evaluation uses a fresh calibration seed, outside the 16 training probes.
                 history, _ = calibration(donor, calibration_seed + pair['id'])
                 histories[i, :, :arm.dof] = history
@@ -51,6 +52,7 @@ def evaluate(data, manifest, model, split, mode, device, calibration_seed=930000
                     arm, goal, pair = batch[i]
                     records.append({'body_seed': arm.seed, 'goal_id': goal['id'], 'pair': pair['id'],
                         'mode': mode, 'split': split, 'steps': envs[i].steps, 'error_at_10': early[i],
+                        'condition': goal.get('condition', 'unspecified'),
                         **{k: info[k] for k in ('success', 'error', 'collision')}})
                     active[i] = False
             if not active.any(): break
