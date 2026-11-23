@@ -11,6 +11,7 @@ from .mixed_data import load
 from .mixed_sim import Arm, MixedReach, explore
 from .full_control import commands
 from .diverse_oracle import oracle_tokens
+from .pose_policy import PosePolicy
 
 def evaluate(data, checkpoint, output, device="cpu", privileged=False, intervention=None, intervention_modes=None):
     torch.set_num_threads(4)
@@ -24,7 +25,8 @@ def evaluate(data, checkpoint, output, device="cpu", privileged=False, intervent
     if metadata["policy_sha256"] != fingerprint(checkpoint):
         raise ValueError("Checkpoint mismatch")
     history = True
-    model = JointFlowPolicy(history=history, auxiliary=metadata.get("auxiliary_weight") is not None).to(device)
+    policy_class=PosePolicy if metadata.get('context_input')=='initial_pose' else JointFlowPolicy
+    model = policy_class(history=history, auxiliary=metadata.get("auxiliary_weight") is not None).to(device)
     model.load_state_dict(torch.load(checkpoint, map_location=device, weights_only=True))
     model.eval()
     for parameter in model.parameters():

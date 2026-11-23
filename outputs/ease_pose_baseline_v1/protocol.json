@@ -1,0 +1,17 @@
+{
+  "experiment": "E21",
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "steps": 10000,
+  "batch": 32,
+  "lr": 0.0003,
+  "input": "First q and ee from sampled context, repeated; no velocity/actions/deltas",
+  "matching": "Same seed, architecture, frozen teacher, training rows, sampled contexts, lengths, normalization and optimizer as E17/E19; changed encoder input during training and inference",
+  "limitations": "First sampled training-window pose need not be an episode initial pose; evaluation uses initial calibration pose. Full-history baseline trained on Windows, pose model in WSL; intact policy replay verified in E20.",
+  "gate_policy": "Keep all seeds and report failed training gates; no tuning on validation",
+  "manifest_sha256": "7e5c8439cddb7edabb188e303d2cd1e788d2f55dc23205d4659e36e8cf17b6d1",
+  "final_test_evaluated": false
+}

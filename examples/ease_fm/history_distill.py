@@ -15,14 +15,16 @@ from .full_control import add_recovery, rollout
 from .joint_policy import JointFlowPolicy
 from .mixed_data import MixedData
 from .mixed_sim import Arm, MixedReach, explore
+from .pose_policy import PosePolicy
 
 
 def encoder_key(name):
     return name.startswith('history_') or name=='empty'
 
 
-def make_student(teacher,contexts,device,seed=0):
-    student=copy.deepcopy(teacher)
+def make_student(teacher,contexts,device,seed=0,pose_only=False):
+    student=PosePolicy(history=True).to(device) if pose_only else copy.deepcopy(teacher)
+    if pose_only: student.load_state_dict(teacher.state_dict())
     torch.manual_seed(seed)
     fresh=JointFlowPolicy(history=True).to(device).state_dict()
     state=student.state_dict()
@@ -41,12 +43,12 @@ def frozen_equal(student,teacher):
     return all(torch.equal(value,reference[name]) for name,value in student.state_dict().items() if not encoder_key(name))
 
 
-def run(data,source,teacher,output,steps=10000,device='cuda',seed=0,diagnostic=False):
+def run(data,source,teacher,output,steps=10000,device='cuda',seed=0,diagnostic=False,pose_only=False):
     torch.set_num_threads(4)
     root=Path(output); source=Path(source); teacher_path=Path(teacher)
     dataset=MixedData(data)
     shared=json.loads((source/'shared_recovery.json').read_text())
-    for relative,digest in shared['hashes'].items(): assert fingerprint(source/relative)==digest
+    for relative,digest in shared['hashes'].items(): assert fingerprint(source/relative.replace('\\','/'))==digest
     dataset=add_recovery(dataset,[source/f'original_{kind}/recovery.npz' for kind in ['flow','direct']])
     meta=json.loads((teacher_path.parent/'training.json').read_text())
     manifest_hash=fingerprint(Path(data)/'manifest.json')
@@ -57,14 +59,16 @@ def run(data,source,teacher,output,steps=10000,device='cuda',seed=0,diagnostic=F
     teacher_model=JointFlowPolicy(history=True).to(device)
     teacher_model.load_state_dict(torch.load(teacher_path,map_location=device,weights_only=True))
     teacher_model.eval().requires_grad_(False)
-    student=make_student(teacher_model,dataset.contexts,device,seed)
+    student=make_student(teacher_model,dataset.contexts,device,seed,pose_only)
     arms=[Arm(**a) for a in dataset.manifest['arms'] if a['split']=='train']
     ids={a.seed:i for i,a in enumerate(arms)}
     masks=torch.tensor([[j<a.dof for j in range(7)] for a in arms],device=device)
     physical=torch.tensor(np.stack([oracle_tokens(a,padded=True) for a in arms]),device=device)
     with torch.no_grad(): target=teacher_model.encode(physical,torch.full((len(arms),),32,device=device),masks)
     row_body=torch.tensor([ids[dataset.episode_body[e]] for e in dataset.row_episode],device=device)
-    protocol={'experiment':'E17','scope':'Training-body latent distillation; no unseen-body evaluation',
+    protocol={'experiment':'E21' if pose_only else 'E17','scope':'Training-body latent distillation; no unseen-body evaluation',
+        'context_input':'initial_pose' if pose_only else 'full_history',
+        'pose_only_design':'Keep first q/ee in each sampled history window; repeat across token positions; zero other features; same lengths and full-history normalization as paired baseline' if pose_only else None,
         'teacher':str(teacher_path),'teacher_sha256':fingerprint(teacher_path),'teacher_steps':meta['steps'],
         'manifest_sha256':manifest_hash,'recovery_hashes':shared['hashes'],'seed':seed,'steps':steps,'batch':32,'lr':.0003,
         'teacher_training_gate_passed':teacher_passed,'diagnostic_despite_failed_gate':not teacher_passed,
@@ -99,6 +103,7 @@ def run(data,source,teacher,output,steps=10000,device='cuda',seed=0,diagnostic=F
     student.eval()
     torch.save(student.state_dict(),root/'policy.pt')
     (root/'training.json').write_text(json.dumps({'kind':'direct','seed':seed,'steps':steps,'losses':losses,
+        'context_input':'initial_pose' if pose_only else 'full_history',
         'manifest_sha256':manifest_hash,'policy_sha256':fingerprint(root/'policy.pt'),
         'controller_bitwise_unchanged':True,'trainable_parameters':protocol['trainable_parameters']},indent=2))
     # Independent calibration episodes, paired across bodies; no physical values enter student.encode.
@@ -130,4 +135,5 @@ if __name__=='__main__':
     for name in ['data','source','teacher','output']: parser.add_argument('--'+name,required=True)
     parser.add_argument('--steps',type=int,default=10000); parser.add_argument('--device',default='cuda')
     parser.add_argument('--seed',type=int,default=0); parser.add_argument('--diagnostic',action='store_true')
+    parser.add_argument('--pose-only',action='store_true')
     run(**vars(parser.parse_args()))
