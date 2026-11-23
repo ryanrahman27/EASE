@@ -110,18 +110,19 @@ def targets(xy,target):
             ('settle',np.r_[target,.35],0.,40)]
 
 
-def rollout(env,home,controller=None,render=None,reset=True):
+def rollout(env,home,controller=None,render=None,reset=True,sequence=None):
     obs=env.reset(home) if reset else env.observe();trace=[];phases=[];renderer=None
     if render:
         from PIL import Image
         Path(render).mkdir(parents=True,exist_ok=True);renderer=mujoco.Renderer(env.model,height=480,width=640)
         camera=mujoco.MjvCamera();camera.lookat[:]=[.25,0,.35];camera.distance=1.5;camera.azimuth=130;camera.elevation=-25
-    for phase,goal,aperture,budget in targets(env.xy,env.target):
+    for phase,goal,aperture,budget in (targets(env.xy,env.target) if sequence is None else sequence):
         held=0;reached=False
         for t in range(budget):
             error=np.r_[goal-obs['position'],ROT_SCALE*rotation_error(np.eye(3),obs['rotation'])]
             if controller is None:
-                jac=env.jacobian();bias=env.data.qfrc_bias[:env.n]/(800*env.arm.strength)
+                jac=env.jacobian()
+                bias=env.privileged_bias() if hasattr(env,'privileged_bias') else env.data.qfrc_bias[:env.n]/(800*env.arm.strength)
             else:jac,bias=controller.predict()
             action=np.clip(jac.T@np.linalg.solve(jac@jac.T+.015**2*np.eye(6),.35*error)+bias,-.04,.04)
             before=obs;obs,command,info=env.step(action,aperture)

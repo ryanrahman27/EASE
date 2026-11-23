@@ -1,0 +1,14 @@
+{
+  "experiment": "E40",
+  "commit": "cda5236f98383f6fbaa4820c6b18dba892cd087f",
+  "checkpoints": {
+    "outputs/ease_robust_training_v1/seed_0/policy.pt": "bb2eadf92edc2f698fd137f6d1a7c8ec0a7283cd34e1d5a0fc390645e66392f1",
+    "outputs/ease_robust_training_v1/seed_1/policy.pt": "141e03fdac6d03a8ef035db3b8d3218cbbe73193450e06821e10b310380fc42d",
+    "outputs/ease_robust_training_v1/seed_2/policy.pt": "cf0d4d5d9fb80d5a20f5b117ea897a057e9c81ede715b785dad7523ec77520a0"
+  },
+  "candidates": "Three fixed cube positions per robot: (.3,0),(.35,-.06),(.4,.04); move +.06 m in Y. Endpoint IK screening only, retain failures; no policy-success filtering.",
+  "native": "Upstream model mechanics/actuators/compensation preserved. Tool center piper link6 z=.105; panda hand z=.1034, tool +Z away from fingers. Native grippers map normalized openness.",
+  "control": "Same frozen E35 estimators and common scripted sequencer as E38. Grasp-center height .24 for PiPER, .22 for Panda based on gripper depth; lower+.005. Same 32-step bounded probe for every method; no reset thereafter.",
+  "scope": "First development integration with real robot designs in simulation; not hardware or broad transfer validation.",
+  "test_evaluated": false
+}
