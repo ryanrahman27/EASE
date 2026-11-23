@@ -1,0 +1,34 @@
+{
+  "experiment": "E125",
+  "checkpoints": {
+    "outputs/ease_task_retention_training_v1/retained/seed_0/policy.pt": "3190e96c2d867237db6f5aedbc46f71ef61ca35f36e0dc3df663018141c50627",
+    "outputs/ease_task_retention_training_v1/retained/seed_1/policy.pt": "4a0495a5b7f719a1d3586554545e11ba39c58840ccdcc78e9fecf1aa2a5993ad",
+    "outputs/ease_task_retention_training_v1/retained/seed_2/policy.pt": "d351c6b49b8252a903ed98f2840207e8881f064b1902bc3b71ceb678273345a2",
+    "outputs/ease_estimator_repair_v1/seed_0/policy.pt": "26dd3d2785e3da7f7daeda03b588f19a5d1572e5db961d09d33c124ec8a733b1",
+    "outputs/ease_estimator_repair_v1/seed_1/policy.pt": "7b9727d0a1f583f158f454fcd1f3d1807636973e455d432f4927fcdc83cf7a7b",
+    "outputs/ease_estimator_repair_v1/seed_2/policy.pt": "62506dc0d29746b80fdeaa1fe549e3010dafe33eb6c6a97284beb9848a96ec37",
+    "outputs/ease_broad_history_v1/seed_0/policy.pt": "2d809ac80788ba548c19a2b577e3228eae32af4a59f591010dc6fa8972ec5a80",
+    "outputs/ease_broad_history_v1/seed_1/policy.pt": "69bec791582226b1fff68ac3432476f3d1881e40b7ffc39ea850fed2262027a0",
+    "outputs/ease_broad_history_v1/seed_2/policy.pt": "5d3303a645c6b540e606cd7dcbcbe1ee4b1574148e47d981a00b2184e83674b2",
+    "outputs/ease_candidate_history_v1/seed_0/policy.pt": "b2f775ea86ba60b82ff71b972c8fc36daf29caca051ea4cc8493ac3cbc26a6a9",
+    "outputs/ease_candidate_history_v1/seed_1/policy.pt": "918cccdf8aae26426069fb6f8c567906bcbe9722fafc2ac5813bebb5698e403b",
+    "outputs/ease_candidate_history_v1/seed_2/policy.pt": "4ef24d776eacaea79098f6f8c8134012b8c72c441d9b6228d0baacdca8a7f5b3"
+  },
+  "inputs": {
+    "outputs/ease_bounded_history_v1/records.json": "660cfa30e45f5cea932f82883d7aaaaae0720708070ab34fc311e338024ca12d",
+    "outputs/ease_bounded_history_v1/summary.json": "a6ae93e4289bc31d87776d44ec0b83db1ed180ee0ebaeeb25131c791ecb926ed",
+    "outputs/ease_bounded_history_v1/cases.json": "d1b687e1d7869859813195bc25da66c99dbf54816abb0e7a41394fd02859969f"
+  },
+  "reused_inputs": {
+    "outputs/ease_task_value_gate_v1/collection/records.json": "f324301a07472d3a834da4f9256d509658cb7f5da9f4d79785c8fcadf034814d",
+    "outputs/ease_task_value_gate_v1/gate.pt": "1d894649e7f7b405c9ce2448617c4d1ce3405d843f15e7f70a57c8c5ed632757",
+    "outputs/ease_task_value_gate_v1/summary.json": "5da7fff905a65831b021d4ac03f79efb6f0b3ec466a737340f7acc088f9b297d",
+    "outputs/ease_task_value_gate_v1/records.json": "86f67455702d7e58758e762231fc462652061d0a87b1619b8b2c1ef3f04d57b0"
+  },
+  "placement_seed": 125000,
+  "placements": "Object XY uniform in[0.275,0.425] x[-0.10,0.10] meters; destination preserves source displacement plus independent +/-20mm jitter. Two variants per16 fitting source cases. Same home and new calibration seeds. Geometry coverage revised after plotting the existing split, before collecting any new outcomes. No held labels, outcome or IK screening. Exact held cases unchanged/excluded from training; negative-Y spatial region is now included in fitting support.",
+  "collection": "48 fitting placements x3 frozen estimator seeds x10 trajectories =1440 collection episodes. Reuse480 E124 fitting-only episodes, collect960 new episodes. Nine independent phase-entry off-pulses plus E120-on. Exact prefix/snapshot checks for1296 pairs; exclude only prior-collision starts from fitting. No held outcomes in training.",
+  "model": "Same139-64-32-2 tanh gate, seed124000,1500 full-batch AdamW updates, learning rate0.001 weight decay0.001, BCE paired success labels. Refit from scratch on all clean fitting data; normalization fitting-only. No architecture, threshold or training-step change and no held-driven selection.",
+  "inference": "Same one-pulse rule: predicted off-success minus on-success >0.10 at a phase entry, up to8 off actions within that phase, then resume E120 for remainder. At most one intervention. No physics selector, IDs or future outcomes as gate features.",
+  "evaluation": "Retest original24 placements x3 estimator seeds =72 episodes. Compare E120 baseline and prior E124 gate, separate original fitting versus unchanged held placements, audit all previous gains. New placements are training data, not a new held benchmark. E120 remains immutable; no unseen bodies."
+}
