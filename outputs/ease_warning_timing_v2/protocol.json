@@ -1,0 +1,7 @@
+{
+  "experiment": "E77",
+  "design": "Read-only post-hoc E76 timing and first-contact coverage audit. All 96 learned trajectories, no new selection, fitting, threshold changes or actions.",
+  "scoring": "Preserve E76 one-step false-alarm labels. For every warning on a noncollision step, report exact steps until first collision on the unchanged trajectory. Do not select a new horizon or relabel the E76 gate.",
+  "limits": "Observed future collision does not establish warning usefulness under an intervention. Repeated checkpoints on a placement are dependent. Geometry identities are resolved from the original model; no new rollouts or task-success claims.",
+  "test_evaluated": false
+}
