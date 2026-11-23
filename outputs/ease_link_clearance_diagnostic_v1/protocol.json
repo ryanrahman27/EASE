@@ -1,0 +1,27 @@
+{
+  "experiment": "E168",
+  "scope": "PRIVILEGED GEOMETRY DIAGNOSTIC ONLY. All48 six-joint fitting placements x2 constraint metrics=96 new intervention episodes. Four E161 six-joint ancestry roots replayed exactly with constraint layer disabled before interventions. No held cases, seven-joint intervention or training data/weights changed.",
+  "baseline": "Frozen E120 three-reference/three-correction ensemble with original bounded residual and E161265mm lower/release height. No higher approach, centering, descent cap or global rate limiter. Same calibration, fixed close probe, frozen measured bias, task waypoints, phase budgets and original strict success/contact scoring.",
+  "privileged_inputs": "Exact simulator link-capsule/table signed distances and their current-q finite-difference gradients using scratch forward kinematics, h=1e-5rad. All six arm capsules constrained against table; gripper, object, ground and self-contact are still scored but not constrained. No future dynamics rollouts, object-pose controller input or collision outcome filtering. This is not history-only learned adaptation or a safety guarantee.",
+  "constraint": "After original full E120 action a, solve closest-command convex QP subject to G*u >= G*frozen_bias - .5*(distance-.003m), original +/- .04 command bounds and actual joint target bounds +/-2.5rad. The model assumes measured joint increment approximately command-bias; inertia, model error, nonlinear geometry and within-step motion can violate real clearance. Activate gradient/optimization only when minimum current link/table distance<=.030m. If nominal action already satisfies all constraints exactly, retain it bit-for-bit. No post-selection parameter sweep.",
+  "metrics": "joint_projection minimizes squared joint-action deviation. task_projection uses H=J_E120.T@J_E120+.015**2*I, retaining E120 estimated tool Jacobian, to favor preservation of task motion. H is normalized by mean diagonal for numerical conditioning. Identical constraints and parameters in both variants.",
+  "solver": "SLSQP analytic objective and linear-constraint gradients,60iterations,ftol1e-12. Accept only successful finite solution satisfying linear inequalities within1e-7m and command bounds; otherwise use clipped frozen-bias hold and log constraint slack/fallback. No silent relaxation; fallback is not guaranteed safe or progressive.",
+  "isolation": "Layer starts only after calibration and is disabled during the unchanged fixed probe. All non-probe task phases receive the same constraints. Record actual substep link/table distances separately from original forbidden-contact labels, commands, constraint matrices/slacks, QP status and full states/histories.",
+  "evaluation": "Report success, all collision episodes, early approach/descent first contacts, actual minimum clearance, constraint violations, fallbacks, phase noncompletion and every paired rescue/regression versus release-fixed E12037/48. A positive fitting screen requires higher success, fewer early first contacts, no higher collisions and no lost baseline success. A collision reduction without progress is not task improvement. No automatic baseline replacement or held test.",
+  "margin_m": 0.003,
+  "activation_m": 0.03,
+  "barrier_alpha": 0.5,
+  "finite_difference_rad": 1e-05,
+  "replay_cases": [
+    0,
+    1,
+    3,
+    4
+  ],
+  "inputs": {
+    "outputs/ease_release_clearance_control_v1/records.json": "8e78a35dca667c23a502b59687524b7c402d321497ffef65e8a50c37648835ea",
+    "outputs/ease_release_clearance_control_v1/cases.json": "bb06c1302362e1e0232c548d822a24705ead6f0ca83e0ac6c283894efa0d7a25",
+    "outputs/ease_release_clearance_control_v1/verification.json": "a6f26f40f74316e0544cf9a29a0dc7d2c70255bf40a75f90fbc1c5f40700e5cf",
+    "outputs/ease_release_clearance_control_v1/protocol.json": "00929285a5d2405320b91937c4170c40b01f7c20f9a8f60c124cd449393319ac"
+  }
+}
