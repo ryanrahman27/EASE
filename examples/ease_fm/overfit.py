@@ -75,7 +75,7 @@ def evaluate(model,kind,q,task,action,arm,episodes,goals,device):
     return {'teacher':teacher,'records':records}
 
 
-def run(data,output,steps=5000,device='cuda'):
+def run(data,output,steps=5000,device='cuda',recovery=None):
     torch.set_num_threads(4)
     root=Path(output); root.mkdir(parents=True,exist_ok=False)
     dataset=MixedData(data)
@@ -87,9 +87,25 @@ def run(data,output,steps=5000,device='cuda'):
     rows=np.flatnonzero(np.isin(dataset.row_episode,chosen))
     q,task,mask,action,valid=[x[rows].to(device) for x in dataset.tensors]
     q,mask,action,valid=q[:,:arm.dof],mask[:,:arm.dof],action[:,:,:arm.dof],valid[:,:,:arm.dof]
+    original_rows=len(q)
+    if recovery:
+        recovery_path=Path(recovery)
+        recovery_meta=json.loads((recovery_path.parent/'protocol.json').read_text())
+        recovery_record=json.loads((recovery_path.parent/'collection.json').read_text())
+        if recovery_meta['body_seed']!=arm.seed or recovery_meta['episode_files']!=[e['file'] for e in episodes]:
+            raise ValueError('Recovery subset mismatch')
+        if recovery_meta['manifest_sha256']!=fingerprint(Path(data)/'manifest.json') or recovery_record['sha256']!=fingerprint(recovery_path):
+            raise ValueError('Recovery provenance mismatch')
+        with np.load(recovery) as extra:
+            q=torch.cat([q,torch.tensor(extra['joints'],device=device)])
+            task=torch.cat([task,torch.tensor(extra['task'],device=device)])
+            action=torch.cat([action,torch.tensor(extra['action'],device=device)])
+            valid=torch.cat([valid,torch.tensor(extra['valid'],device=device)])
+            mask=torch.ones(q.shape[:2],dtype=torch.bool,device=device)
     goals={g['id']:g for g in manifest['goals']['train']}
-    protocol={'experiment':'E09','scope':'Training overfit gate, not transfer evaluation','body_seed':arm.seed,
-        'goals':[0,1,2,3],'episode_files':[e['file'] for e in episodes],'transitions':len(rows),'steps':steps,'seed':0,
+    protocol={'experiment':'E10' if recovery else 'E09','scope':'Training overfit gate, not transfer evaluation','body_seed':arm.seed,
+        'goals':[0,1,2,3],'episode_files':[e['file'] for e in episodes],'transitions':len(q),'original_transitions':original_rows,
+        'recovery_sha256':fingerprint(Path(recovery)) if recovery else None,'steps':steps,'seed':0,
         'batch_size':32,'learning_rate':.0003,'history':False,'weights_updated_only_on_selected_training_rows':True,
         'variants':['flow','direct_chunk','direct_mlp'],'capacity_control':'flow/direct_chunk use identical architecture and initialization; MLP is an intentionally simpler diagnostic',
         'evaluation_updates':sorted(set([min(1000,steps),steps])),'flow_rollout_noise_repeats':3,
@@ -99,7 +115,7 @@ def run(data,output,steps=5000,device='cuda'):
     source=root/'source'; source.mkdir()
     for p in Path(__file__).parent.glob('*.py'):
         shutil.copyfile(p,source/p.name)
-    print('selected',len(episodes),'episodes',len(rows),'transitions',flush=True)
+    print('selected',len(episodes),'episodes',len(q),'transitions',flush=True)
     for kind in protocol['variants']:
         folder=root/kind; folder.mkdir()
         torch.manual_seed(0)
@@ -137,7 +153,7 @@ def run(data,output,steps=5000,device='cuda'):
                 print(kind,step,losses[-1],flush=True)
             if step in protocol['evaluation_updates']:
                 model.eval()
-                result=evaluate(model,kind,q,task,action,arm,episodes,goals,device)
+                result=evaluate(model,kind,q[:original_rows],task[:original_rows],action[:original_rows],arm,episodes,goals,device)
                 (folder/f'evaluation_{step}.json').write_text(json.dumps(result,indent=2))
                 torch.save(model.state_dict(),folder/f'policy_{step}.pt')
                 print(kind,step,'success',sum(r['success'] for r in result['records']),'/',len(result['records']),'teacher RMSE',result['teacher']['rmse_rad'],flush=True)
@@ -150,4 +166,5 @@ def run(data,output,steps=5000,device='cuda'):
 if __name__=='__main__':
     p=argparse.ArgumentParser(); p.add_argument('--data',required=True); p.add_argument('--output',required=True)
     p.add_argument('--steps',type=int,default=5000); p.add_argument('--device',default='cuda')
+    p.add_argument('--recovery')
     run(**vars(p.parse_args()))

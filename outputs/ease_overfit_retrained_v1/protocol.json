@@ -1,0 +1,43 @@
+{
+  "experiment": "E10",
+  "scope": "Training overfit gate, not transfer evaluation",
+  "body_seed": 20261018,
+  "goals": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "episode_files": [
+    "20261018_0_nominal.npz",
+    "20261018_1_nominal.npz",
+    "20261018_1_broad_start.npz",
+    "20261018_2_nominal.npz",
+    "20261018_2_broad_start.npz",
+    "20261018_3_nominal.npz",
+    "20261018_3_broad_start.npz"
+  ],
+  "transitions": 994,
+  "original_transitions": 522,
+  "recovery_sha256": "ff6008bd99c54291a1182acbd5ba6a1c11b69330181aa2598543c30413a91caa",
+  "steps": 5000,
+  "seed": 0,
+  "batch_size": 32,
+  "learning_rate": 0.0003,
+  "history": false,
+  "weights_updated_only_on_selected_training_rows": true,
+  "variants": [
+    "flow",
+    "direct_chunk",
+    "direct_mlp"
+  ],
+  "capacity_control": "flow/direct_chunk use identical architecture and initialization; MLP is an intentionally simpler diagnostic",
+  "evaluation_updates": [
+    1000,
+    5000
+  ],
+  "flow_rollout_noise_repeats": 3,
+  "gate": "All selected episodes succeed; flow must succeed for all three noise repeats",
+  "test_evaluated": false,
+  "manifest_sha256": "eaee66531407c973185931fa2c2b74630dc236bca99bcbc6a9615a9f05727118"
+}
