@@ -1,0 +1,1303 @@
+{
+  "experiment": "E82",
+  "selection": [
+    {
+      "case": 1,
+      "method": "parent_0",
+      "dof": 6,
+      "success": false,
+      "steps": 374,
+      "selected_steps": [
+        83
+      ],
+      "first_contact": 93,
+      "warning_lead": 10
+    },
+    {
+      "case": 1,
+      "method": "parent_1",
+      "dof": 6,
+      "success": false,
+      "steps": 506,
+      "selected_steps": [
+        92
+      ],
+      "first_contact": 108,
+      "warning_lead": 16
+    },
+    {
+      "case": 1,
+      "method": "candidate_2",
+      "dof": 6,
+      "success": true,
+      "steps": 352,
+      "selected_steps": [
+        111
+      ],
+      "first_contact": null,
+      "warning_lead": null
+    },
+    {
+      "case": 2,
+      "method": "parent_0",
+      "dof": 6,
+      "success": true,
+      "steps": 440,
+      "selected_steps": [
+        283
+      ],
+      "first_contact": null,
+      "warning_lead": null
+    },
+    {
+      "case": 2,
+      "method": "candidate_1",
+      "dof": 6,
+      "success": false,
+      "steps": 452,
+      "selected_steps": [
+        162
+      ],
+      "first_contact": 163,
+      "warning_lead": 1
+    },
+    {
+      "case": 4,
+      "method": "parent_2",
+      "dof": 6,
+      "success": false,
+      "steps": 265,
+      "selected_steps": [
+        127
+      ],
+      "first_contact": 127,
+      "warning_lead": 0
+    },
+    {
+      "case": 6,
+      "method": "parent_1",
+      "dof": 7,
+      "success": false,
+      "steps": 362,
+      "selected_steps": [
+        112
+      ],
+      "first_contact": 112,
+      "warning_lead": 0
+    },
+    {
+      "case": 8,
+      "method": "parent_0",
+      "dof": 7,
+      "success": false,
+      "steps": 571,
+      "selected_steps": [
+        45
+      ],
+      "first_contact": 45,
+      "warning_lead": 0
+    },
+    {
+      "case": 8,
+      "method": "parent_1",
+      "dof": 7,
+      "success": false,
+      "steps": 544,
+      "selected_steps": [
+        136
+      ],
+      "first_contact": 142,
+      "warning_lead": 6
+    },
+    {
+      "case": 8,
+      "method": "candidate_0",
+      "dof": 7,
+      "success": false,
+      "steps": 305,
+      "selected_steps": [
+        24
+      ],
+      "first_contact": 24,
+      "warning_lead": 0
+    },
+    {
+      "case": 8,
+      "method": "candidate_1",
+      "dof": 7,
+      "success": false,
+      "steps": 278,
+      "selected_steps": [
+        146
+      ],
+      "first_contact": 146,
+      "warning_lead": 0
+    },
+    {
+      "case": 10,
+      "method": "parent_2",
+      "dof": 7,
+      "success": false,
+      "steps": 357,
+      "selected_steps": [
+        113
+      ],
+      "first_contact": 113,
+      "warning_lead": 0
+    },
+    {
+      "case": 10,
+      "method": "candidate_1",
+      "dof": 7,
+      "success": false,
+      "steps": 605,
+      "selected_steps": [
+        238
+      ],
+      "first_contact": 242,
+      "warning_lead": 4
+    },
+    {
+      "case": 10,
+      "method": "candidate_2",
+      "dof": 7,
+      "success": false,
+      "steps": 400,
+      "selected_steps": [
+        33
+      ],
+      "first_contact": 33,
+      "warning_lead": 0
+    },
+    {
+      "case": 11,
+      "method": "parent_1",
+      "dof": 7,
+      "success": false,
+      "steps": 534,
+      "selected_steps": [
+        89
+      ],
+      "first_contact": 94,
+      "warning_lead": 5
+    },
+    {
+      "case": 11,
+      "method": "parent_2",
+      "dof": 7,
+      "success": false,
+      "steps": 442,
+      "selected_steps": [
+        87
+      ],
+      "first_contact": 90,
+      "warning_lead": 3
+    },
+    {
+      "case": 11,
+      "method": "candidate_0",
+      "dof": 7,
+      "success": false,
+      "steps": 397,
+      "selected_steps": [
+        99
+      ],
+      "first_contact": 294,
+      "warning_lead": 195
+    },
+    {
+      "case": 11,
+      "method": "candidate_2",
+      "dof": 7,
+      "success": false,
+      "steps": 302,
+      "selected_steps": [
+        196
+      ],
+      "first_contact": 200,
+      "warning_lead": 4
+    },
+    {
+      "case": 12,
+      "method": "candidate_0",
+      "dof": 6,
+      "success": false,
+      "steps": 315,
+      "selected_steps": [
+        81
+      ],
+      "first_contact": 81,
+      "warning_lead": 0
+    },
+    {
+      "case": 13,
+      "method": "parent_1",
+      "dof": 7,
+      "success": false,
+      "steps": 412,
+      "selected_steps": [
+        229
+      ],
+      "first_contact": 229,
+      "warning_lead": 0
+    },
+    {
+      "case": 13,
+      "method": "candidate_1",
+      "dof": 7,
+      "success": false,
+      "steps": 293,
+      "selected_steps": [
+        21
+      ],
+      "first_contact": 21,
+      "warning_lead": 0
+    },
+    {
+      "case": 14,
+      "method": "parent_1",
+      "dof": 7,
+      "success": false,
+      "steps": 444,
+      "selected_steps": [
+        65
+      ],
+      "first_contact": 65,
+      "warning_lead": 0
+    },
+    {
+      "case": 15,
+      "method": "parent_0",
+      "dof": 7,
+      "success": false,
+      "steps": 405,
+      "selected_steps": [
+        11
+      ],
+      "first_contact": 12,
+      "warning_lead": 1
+    },
+    {
+      "case": 15,
+      "method": "parent_2",
+      "dof": 7,
+      "success": false,
+      "steps": 385,
+      "selected_steps": [
+        12
+      ],
+      "first_contact": 13,
+      "warning_lead": 1
+    },
+    {
+      "case": 15,
+      "method": "candidate_0",
+      "dof": 7,
+      "success": false,
+      "steps": 347,
+      "selected_steps": [
+        11
+      ],
+      "first_contact": 13,
+      "warning_lead": 2
+    },
+    {
+      "case": 15,
+      "method": "candidate_1",
+      "dof": 7,
+      "success": false,
+      "steps": 378,
+      "selected_steps": [
+        11
+      ],
+      "first_contact": 12,
+      "warning_lead": 1
+    },
+    {
+      "case": 15,
+      "method": "candidate_2",
+      "dof": 7,
+      "success": false,
+      "steps": 374,
+      "selected_steps": [
+        11
+      ],
+      "first_contact": 13,
+      "warning_lead": 2
+    }
+  ],
+  "coverage": [
+    {
+      "case": 0,
+      "method": "parent_0",
+      "dof": 6,
+      "success": true,
+      "steps": 288,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 0,
+      "method": "parent_1",
+      "dof": 6,
+      "success": true,
+      "steps": 240,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 0,
+      "method": "parent_2",
+      "dof": 6,
+      "success": true,
+      "steps": 232,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 0,
+      "method": "candidate_0",
+      "dof": 6,
+      "success": true,
+      "steps": 224,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 0,
+      "method": "candidate_1",
+      "dof": 6,
+      "success": true,
+      "steps": 240,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 0,
+      "method": "candidate_2",
+      "dof": 6,
+      "success": true,
+      "steps": 210,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 1,
+      "method": "parent_0",
+      "dof": 6,
+      "success": false,
+      "steps": 374,
+      "first_contact": 93,
+      "first_warning": 83,
+      "advance_warning": true
+    },
+    {
+      "case": 1,
+      "method": "parent_1",
+      "dof": 6,
+      "success": false,
+      "steps": 506,
+      "first_contact": 108,
+      "first_warning": 92,
+      "advance_warning": true
+    },
+    {
+      "case": 1,
+      "method": "parent_2",
+      "dof": 6,
+      "success": true,
+      "steps": 251,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 1,
+      "method": "candidate_0",
+      "dof": 6,
+      "success": true,
+      "steps": 229,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 1,
+      "method": "candidate_1",
+      "dof": 6,
+      "success": true,
+      "steps": 255,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 1,
+      "method": "candidate_2",
+      "dof": 6,
+      "success": true,
+      "steps": 352,
+      "first_contact": null,
+      "first_warning": 111,
+      "advance_warning": false
+    },
+    {
+      "case": 2,
+      "method": "parent_0",
+      "dof": 6,
+      "success": true,
+      "steps": 440,
+      "first_contact": null,
+      "first_warning": 283,
+      "advance_warning": false
+    },
+    {
+      "case": 2,
+      "method": "parent_1",
+      "dof": 6,
+      "success": true,
+      "steps": 219,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 2,
+      "method": "parent_2",
+      "dof": 6,
+      "success": true,
+      "steps": 225,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 2,
+      "method": "candidate_0",
+      "dof": 6,
+      "success": true,
+      "steps": 208,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 2,
+      "method": "candidate_1",
+      "dof": 6,
+      "success": false,
+      "steps": 452,
+      "first_contact": 163,
+      "first_warning": 162,
+      "advance_warning": true
+    },
+    {
+      "case": 2,
+      "method": "candidate_2",
+      "dof": 6,
+      "success": true,
+      "steps": 209,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 3,
+      "method": "parent_0",
+      "dof": 6,
+      "success": true,
+      "steps": 225,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 3,
+      "method": "parent_1",
+      "dof": 6,
+      "success": true,
+      "steps": 230,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 3,
+      "method": "parent_2",
+      "dof": 6,
+      "success": true,
+      "steps": 212,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 3,
+      "method": "candidate_0",
+      "dof": 6,
+      "success": true,
+      "steps": 214,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 3,
+      "method": "candidate_1",
+      "dof": 6,
+      "success": true,
+      "steps": 205,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 3,
+      "method": "candidate_2",
+      "dof": 6,
+      "success": true,
+      "steps": 203,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 4,
+      "method": "parent_0",
+      "dof": 6,
+      "success": false,
+      "steps": 360,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 4,
+      "method": "parent_1",
+      "dof": 6,
+      "success": true,
+      "steps": 225,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 4,
+      "method": "parent_2",
+      "dof": 6,
+      "success": false,
+      "steps": 265,
+      "first_contact": 127,
+      "first_warning": 127,
+      "advance_warning": false
+    },
+    {
+      "case": 4,
+      "method": "candidate_0",
+      "dof": 6,
+      "success": true,
+      "steps": 222,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 4,
+      "method": "candidate_1",
+      "dof": 6,
+      "success": true,
+      "steps": 232,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 4,
+      "method": "candidate_2",
+      "dof": 6,
+      "success": true,
+      "steps": 225,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 5,
+      "method": "parent_0",
+      "dof": 6,
+      "success": true,
+      "steps": 222,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 5,
+      "method": "parent_1",
+      "dof": 6,
+      "success": true,
+      "steps": 223,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 5,
+      "method": "parent_2",
+      "dof": 6,
+      "success": true,
+      "steps": 212,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 5,
+      "method": "candidate_0",
+      "dof": 6,
+      "success": true,
+      "steps": 229,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 5,
+      "method": "candidate_1",
+      "dof": 6,
+      "success": true,
+      "steps": 213,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 5,
+      "method": "candidate_2",
+      "dof": 6,
+      "success": true,
+      "steps": 223,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 6,
+      "method": "parent_0",
+      "dof": 7,
+      "success": true,
+      "steps": 247,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 6,
+      "method": "parent_1",
+      "dof": 7,
+      "success": false,
+      "steps": 362,
+      "first_contact": 112,
+      "first_warning": 112,
+      "advance_warning": false
+    },
+    {
+      "case": 6,
+      "method": "parent_2",
+      "dof": 7,
+      "success": true,
+      "steps": 257,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 6,
+      "method": "candidate_0",
+      "dof": 7,
+      "success": true,
+      "steps": 289,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 6,
+      "method": "candidate_1",
+      "dof": 7,
+      "success": true,
+      "steps": 234,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 6,
+      "method": "candidate_2",
+      "dof": 7,
+      "success": true,
+      "steps": 277,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 7,
+      "method": "parent_0",
+      "dof": 7,
+      "success": true,
+      "steps": 319,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 7,
+      "method": "parent_1",
+      "dof": 7,
+      "success": true,
+      "steps": 276,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 7,
+      "method": "parent_2",
+      "dof": 7,
+      "success": true,
+      "steps": 250,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 7,
+      "method": "candidate_0",
+      "dof": 7,
+      "success": true,
+      "steps": 290,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 7,
+      "method": "candidate_1",
+      "dof": 7,
+      "success": true,
+      "steps": 333,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 7,
+      "method": "candidate_2",
+      "dof": 7,
+      "success": true,
+      "steps": 281,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 8,
+      "method": "parent_0",
+      "dof": 7,
+      "success": false,
+      "steps": 571,
+      "first_contact": 45,
+      "first_warning": 45,
+      "advance_warning": false
+    },
+    {
+      "case": 8,
+      "method": "parent_1",
+      "dof": 7,
+      "success": false,
+      "steps": 544,
+      "first_contact": 142,
+      "first_warning": 136,
+      "advance_warning": true
+    },
+    {
+      "case": 8,
+      "method": "parent_2",
+      "dof": 7,
+      "success": true,
+      "steps": 295,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 8,
+      "method": "candidate_0",
+      "dof": 7,
+      "success": false,
+      "steps": 305,
+      "first_contact": 24,
+      "first_warning": 24,
+      "advance_warning": false
+    },
+    {
+      "case": 8,
+      "method": "candidate_1",
+      "dof": 7,
+      "success": false,
+      "steps": 278,
+      "first_contact": 146,
+      "first_warning": 146,
+      "advance_warning": false
+    },
+    {
+      "case": 8,
+      "method": "candidate_2",
+      "dof": 7,
+      "success": true,
+      "steps": 241,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 9,
+      "method": "parent_0",
+      "dof": 7,
+      "success": true,
+      "steps": 324,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 9,
+      "method": "parent_1",
+      "dof": 7,
+      "success": true,
+      "steps": 265,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 9,
+      "method": "parent_2",
+      "dof": 7,
+      "success": true,
+      "steps": 261,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 9,
+      "method": "candidate_0",
+      "dof": 7,
+      "success": true,
+      "steps": 261,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 9,
+      "method": "candidate_1",
+      "dof": 7,
+      "success": true,
+      "steps": 261,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 9,
+      "method": "candidate_2",
+      "dof": 7,
+      "success": true,
+      "steps": 244,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 10,
+      "method": "parent_0",
+      "dof": 7,
+      "success": true,
+      "steps": 313,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 10,
+      "method": "parent_1",
+      "dof": 7,
+      "success": false,
+      "steps": 305,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 10,
+      "method": "parent_2",
+      "dof": 7,
+      "success": false,
+      "steps": 357,
+      "first_contact": 113,
+      "first_warning": 113,
+      "advance_warning": false
+    },
+    {
+      "case": 10,
+      "method": "candidate_0",
+      "dof": 7,
+      "success": false,
+      "steps": 429,
+      "first_contact": 53,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 10,
+      "method": "candidate_1",
+      "dof": 7,
+      "success": false,
+      "steps": 605,
+      "first_contact": 242,
+      "first_warning": 238,
+      "advance_warning": true
+    },
+    {
+      "case": 10,
+      "method": "candidate_2",
+      "dof": 7,
+      "success": false,
+      "steps": 400,
+      "first_contact": 33,
+      "first_warning": 33,
+      "advance_warning": false
+    },
+    {
+      "case": 11,
+      "method": "parent_0",
+      "dof": 7,
+      "success": true,
+      "steps": 326,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 11,
+      "method": "parent_1",
+      "dof": 7,
+      "success": false,
+      "steps": 534,
+      "first_contact": 94,
+      "first_warning": 89,
+      "advance_warning": true
+    },
+    {
+      "case": 11,
+      "method": "parent_2",
+      "dof": 7,
+      "success": false,
+      "steps": 442,
+      "first_contact": 90,
+      "first_warning": 87,
+      "advance_warning": true
+    },
+    {
+      "case": 11,
+      "method": "candidate_0",
+      "dof": 7,
+      "success": false,
+      "steps": 397,
+      "first_contact": 294,
+      "first_warning": 99,
+      "advance_warning": true
+    },
+    {
+      "case": 11,
+      "method": "candidate_1",
+      "dof": 7,
+      "success": true,
+      "steps": 248,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 11,
+      "method": "candidate_2",
+      "dof": 7,
+      "success": false,
+      "steps": 302,
+      "first_contact": 200,
+      "first_warning": 196,
+      "advance_warning": true
+    },
+    {
+      "case": 12,
+      "method": "parent_0",
+      "dof": 6,
+      "success": true,
+      "steps": 313,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 12,
+      "method": "parent_1",
+      "dof": 6,
+      "success": true,
+      "steps": 296,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 12,
+      "method": "parent_2",
+      "dof": 6,
+      "success": true,
+      "steps": 287,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 12,
+      "method": "candidate_0",
+      "dof": 6,
+      "success": false,
+      "steps": 315,
+      "first_contact": 81,
+      "first_warning": 81,
+      "advance_warning": false
+    },
+    {
+      "case": 12,
+      "method": "candidate_1",
+      "dof": 6,
+      "success": true,
+      "steps": 308,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 12,
+      "method": "candidate_2",
+      "dof": 6,
+      "success": true,
+      "steps": 283,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 13,
+      "method": "parent_0",
+      "dof": 7,
+      "success": true,
+      "steps": 237,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 13,
+      "method": "parent_1",
+      "dof": 7,
+      "success": false,
+      "steps": 412,
+      "first_contact": 229,
+      "first_warning": 229,
+      "advance_warning": false
+    },
+    {
+      "case": 13,
+      "method": "parent_2",
+      "dof": 7,
+      "success": true,
+      "steps": 292,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 13,
+      "method": "candidate_0",
+      "dof": 7,
+      "success": true,
+      "steps": 244,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 13,
+      "method": "candidate_1",
+      "dof": 7,
+      "success": false,
+      "steps": 293,
+      "first_contact": 21,
+      "first_warning": 21,
+      "advance_warning": false
+    },
+    {
+      "case": 13,
+      "method": "candidate_2",
+      "dof": 7,
+      "success": true,
+      "steps": 220,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 14,
+      "method": "parent_0",
+      "dof": 7,
+      "success": true,
+      "steps": 239,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 14,
+      "method": "parent_1",
+      "dof": 7,
+      "success": false,
+      "steps": 444,
+      "first_contact": 65,
+      "first_warning": 65,
+      "advance_warning": false
+    },
+    {
+      "case": 14,
+      "method": "parent_2",
+      "dof": 7,
+      "success": true,
+      "steps": 223,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 14,
+      "method": "candidate_0",
+      "dof": 7,
+      "success": true,
+      "steps": 263,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 14,
+      "method": "candidate_1",
+      "dof": 7,
+      "success": true,
+      "steps": 262,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 14,
+      "method": "candidate_2",
+      "dof": 7,
+      "success": true,
+      "steps": 250,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 15,
+      "method": "parent_0",
+      "dof": 7,
+      "success": false,
+      "steps": 405,
+      "first_contact": 12,
+      "first_warning": 11,
+      "advance_warning": true
+    },
+    {
+      "case": 15,
+      "method": "parent_1",
+      "dof": 7,
+      "success": true,
+      "steps": 263,
+      "first_contact": null,
+      "first_warning": null,
+      "advance_warning": false
+    },
+    {
+      "case": 15,
+      "method": "parent_2",
+      "dof": 7,
+      "success": false,
+      "steps": 385,
+      "first_contact": 13,
+      "first_warning": 12,
+      "advance_warning": true
+    },
+    {
+      "case": 15,
+      "method": "candidate_0",
+      "dof": 7,
+      "success": false,
+      "steps": 347,
+      "first_contact": 13,
+      "first_warning": 11,
+      "advance_warning": true
+    },
+    {
+      "case": 15,
+      "method": "candidate_1",
+      "dof": 7,
+      "success": false,
+      "steps": 378,
+      "first_contact": 12,
+      "first_warning": 11,
+      "advance_warning": true
+    },
+    {
+      "case": 15,
+      "method": "candidate_2",
+      "dof": 7,
+      "success": false,
+      "steps": 374,
+      "first_contact": 13,
+      "first_warning": 11,
+      "advance_warning": true
+    }
+  ],
+  "checkpoints": {
+    "outputs/ease_robust_training_v1/seed_0/policy.pt": "bb2eadf92edc2f698fd137f6d1a7c8ec0a7283cd34e1d5a0fc390645e66392f1",
+    "outputs/ease_robust_training_v1/seed_1/policy.pt": "141e03fdac6d03a8ef035db3b8d3218cbbe73193450e06821e10b310380fc42d",
+    "outputs/ease_robust_training_v1/seed_2/policy.pt": "cf0d4d5d9fb80d5a20f5b117ea897a057e9c81ede715b785dad7523ec77520a0",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_0/policy.pt": "7cc59ce83397a3856939a849f229e0a962bfe0e1df3add7680aac42b8c5d0fec",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_1/policy.pt": "67a01fc8cdbec4d7c5ee5e602e5d1a16d6cfa80a8520c28a89eb2a861437b2d6",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_2/policy.pt": "f87c12bd330baf384432c5d275eda41f189ddb557f6083f487082a76447b2b71"
+  },
+  "design": "First fixed no-velocity 2mm warning in every learned E78 trajectory, irrespective of outcome; include collision-step-only warnings, and report collisions without advance warning. Historical predictions were causal and replay-verified in E78. No retrospective fixed lookback from collision.",
+  "measurement": "Three 20-step phase-held branches: unchanged baseline; direction corrections first five steps then baseline; direction corrections all20 steps. Frozen no-velocity E75 ResponseModel fit causally through calibration and branch measurements. At fixed 2mm warning, enumerate baseline plus +/-0.01rad single-joint corrections, clipped +/-0.04. Score21-point predicted displacement paths with whole-arm geometry; object held at current pose. Choose only clearance improvements >1e-6 with predicted task error <= baseline+0.001 (task units), using learned Jacobian for progress. No dynamic lookahead in selection. Fixed coordinate order; no tuning.",
+  "limits": "Known privileged geometry and measured simulator state; learned Jacobian and response errors limit selection. Clearance includes initial point, so no improvement may be available when already close. 27 historical first-warning states, including only two successful trajectories. Local phase-held continuations, not full-task success or independent validation.",
+  "test_evaluated": false
+}
