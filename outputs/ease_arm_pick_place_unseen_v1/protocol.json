@@ -1,0 +1,10 @@
+{
+  "experiment": "E37",
+  "scope": "Development feasibility; three fixed cube positions, 6 cm lateral transfer, endpoint IK filtering only; all rollout outcomes retained",
+  "split": "development",
+  "families_per_dof": 2,
+  "selection": "First distinct families in manifest order per joint count; first body per family, no success selection",
+  "seed": 37000,
+  "orientation": "Downward local Z direction; yaw unconstrained",
+  "test_evaluated": false
+}
