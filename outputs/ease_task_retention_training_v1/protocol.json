@@ -1,0 +1,33 @@
+{
+  "experiment": "E99",
+  "inputs": {
+    "outputs/ease_probe_distillation_v1/contexts.npz": "2674b90904bc304c41f796ac1b38f8091d83043c595fa88cb6ba57bd559ed28c",
+    "outputs/ease_probe_distillation_v1/provenance.json": "e1d84e5da2f27d1df757daf390b2796cef655be96bd4db13371e9d4520882146",
+    "outputs/ease_arm_pick_place_v2/cases.json": "9913082036080a0260394a0e9c8bfc9993ffb64bbf6e3019699bb88827d3f1cb",
+    "outputs/ease_arm_pick_place_v2/axis_catalog.json": "89fe5fcd4ded136798585ae58ad9339ad53b15a874c705f014bfc1646f86e406"
+  },
+  "parents": {
+    "outputs/ease_robust_training_v1/seed_0/policy.pt": "bb2eadf92edc2f698fd137f6d1a7c8ec0a7283cd34e1d5a0fc390645e66392f1",
+    "outputs/ease_robust_training_v1/seed_1/policy.pt": "141e03fdac6d03a8ef035db3b8d3218cbbe73193450e06821e10b310380fc42d",
+    "outputs/ease_robust_training_v1/seed_2/policy.pt": "cf0d4d5d9fb80d5a20f5b117ea897a057e9c81ede715b785dad7523ec77520a0",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_0/policy.pt": "7cc59ce83397a3856939a849f229e0a962bfe0e1df3add7680aac42b8c5d0fec",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_1/policy.pt": "67a01fc8cdbec4d7c5ee5e602e5d1a16d6cfa80a8520c28a89eb2a861437b2d6",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_2/policy.pt": "f87c12bd330baf384432c5d275eda41f189ddb557f6083f487082a76447b2b71"
+  },
+  "training_bodies": [
+    84000,
+    84001,
+    84002,
+    84003,
+    84004,
+    84005,
+    84006,
+    84007
+  ],
+  "test_evaluated": false,
+  "data": "Reuse all E98 local-motion contexts/splits. Add all12 existing feasible training placements (four manifest training bodies) driven by each of three E66 parents:36 full trajectories. Original calibration seed38000+case; same phase budgets and geometry filter, no route planner. At close insert fixed32-step E95 probe then resume parent. Save every pre-action context and complete trajectory, including failures/contacts; train on post-probe continuation contexts only. Third placement per body (case%3==2) is validation for every driver; other placements train. No evaluation-arm trajectories. Existing IK homes are privileged training setup only.",
+  "training": "Start original E66 parents, not E98 students. Paired data_only/retained models per seed; identical2000 batches, AdamW lr2e-5, batch128, gradient clip1. Batch64 synthetic replay+32 E98 local+32 new task continuation contexts. Analytical ridge MSE targets on all rows; original synthetic parent anchor retained (six2/seven.5). Only retained adds .01 times masked pre-filter joint-action MSE versus frozen parent on task contexts, normalized by.04^2; same .015 damping,.35 error gain, measured bias and clipping. No target geometric Jacobians. No best-step/seed selection.",
+  "evaluation": "All16 existing E97 tasks x3 seeds x parent/data_only/retained=144 tasks. Identical original-parent prefix and probe; replace only post-probe neural weights on admitted routes. Evaluate both conditions regardless of losses. Gate per condition: pooled success strictly improves, collisions do not increase, every parent success retained for both DOFs, and no seed loses successes. Paired comparison isolates added action-retention loss. E98 comparison also changes data mixture and cannot isolate only task data.",
+  "videos": "Prespecified case2 candidate_0, case10 candidate_2 and case15 candidate_2, all three conditions. Add first new regression for each condition with parent and that condition if absent; add missing outcome category if needed. Every full video replay must match saved serialized result.",
+  "limits": "Training tasks cover four of eight training bodies; local data cover all eight. Validation holds out placements on same bodies. Action loss concerns unclamped-through-physics pre-filter commands, not contact outcomes or executed dynamics. Evaluation is phase-specific, privileged-planner development data; no final test or whole-policy promotion."
+}
