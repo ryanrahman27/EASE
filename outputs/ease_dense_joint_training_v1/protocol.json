@@ -1,0 +1,27 @@
+{
+  "experiment": "E150",
+  "inputs": {
+    "outputs/ease_dense_joint_supervision_v1/dataset.npz": "686a1026c1646c90e20dd24120c85fe7948b28f253f31d78427ac280876cf018",
+    "outputs/ease_dense_joint_supervision_v1/verification.json": "82cd836524ece6e54bb709b8abfb4f3c0cf14ce89c0df0fec9d57cc3a412d0f4",
+    "outputs/ease_calibration_prior_learning_v1/frozen.json": "8033de10f1e23b197f5ab81d161601031557ecfbdc74e207f5362786e909ed65",
+    "outputs/ease_calibration_prior_learning_v1/models/fold_0/141100.pt": "842b1e996206f7ef9bd448aa99c579b98b5ce5314159a79ecacade7dec862822",
+    "outputs/ease_calibration_prior_learning_v1/models/fold_0/141101.pt": "dfc91f3b6197ce42c813d31517239238b46012eb4c3b2ed0ab2909d69c8631ee",
+    "outputs/ease_calibration_prior_learning_v1/models/fold_0/141102.pt": "6c145d0f0f4062070afc2e528b53fc34037bd66725a1a752ed56d8c73b0d594e",
+    "outputs/ease_calibration_prior_learning_v1/models/fold_0/normalization.npz": "1c1b355114b591d17c9d1d14b1bf9da9da61e07e62079398f23fcb0a23623d51",
+    "outputs/ease_calibration_prior_learning_v1/models/fold_1/141100.pt": "45c25cb4b6a3783e4ae7798d5f631fab21e9463096211ae6a4b31384c6d27f98",
+    "outputs/ease_calibration_prior_learning_v1/models/fold_1/141101.pt": "9111a1fd407399416a33b4c50544575834e8cd7ed24e3f9c873c2bf84229b96f",
+    "outputs/ease_calibration_prior_learning_v1/models/fold_1/141102.pt": "371d3de0cacb13aadf22de95d0ff1f1ba0c144c440feaa5127f1a1ce4b9f93fd",
+    "outputs/ease_calibration_prior_learning_v1/models/fold_1/normalization.npz": "e245471230f7f1abcf81dd584a31026ad7607a07a5f28584eea50a1a00c9f687",
+    "outputs/ease_calibration_prior_learning_v1/models/fold_2/141100.pt": "471d02f4bfd11b37dd535fc3275d30f2b5fb9bcb7479c00dd9aa83fea79e3679",
+    "outputs/ease_calibration_prior_learning_v1/models/fold_2/141101.pt": "debd43bed934511f140870db33d23fc4ece7c1c6148b8b563574536d28e9bb90",
+    "outputs/ease_calibration_prior_learning_v1/models/fold_2/141102.pt": "eec3dae08af31fa877a9f1ad28cc57169b89c86a9bf6508b465eafe3f946bbae",
+    "outputs/ease_calibration_prior_learning_v1/models/fold_2/normalization.npz": "73196daf01850a81ef2286f3b6e7c338c0992b825a8cc7d948cf25e3fee2a37a",
+    "outputs/ease_calibration_prior_learning_v1/models/fold_3/141100.pt": "4536782bad6f00a050293171e2f374a58af147ad40535ab1e60652969bc303cf",
+    "outputs/ease_calibration_prior_learning_v1/models/fold_3/141101.pt": "520edfdc75729ecbfd112abc34f3b855710701a3cf4d0568ce2d67c42be4b0c8",
+    "outputs/ease_calibration_prior_learning_v1/models/fold_3/141102.pt": "07b4ca9fed8b8f88b44bdd2e48ff5d38b242d84204c9fb58566b406b015e8a86",
+    "outputs/ease_calibration_prior_learning_v1/models/fold_3/normalization.npz": "d3ceb9fa4d346d332b7588a38e9cd778177288d2ee7b9e080ba3f3856510b584"
+  },
+  "design": "Same738 phase-entry histories, same96 fitting placements, same four ancestry-family folds, same three fixed E146 starting checkpoints. Compare continued observed-next-motion supervision against equal-weight observed plus all signed joint-probe targets. This controls for extra fitting updates and context selection. Probes are measured simulated transitions; no exact Jacobian labels or future input.",
+  "training": "Each condition/fold/seed:1000 AdamW steps,lr1e-4,wd1e-4,batch128 histories,clip1,.001 log-weight regularization. Sample placements uniformly and histories uniformly within placement. Keep E146 training-only normalization, architecture, initial measured calibration prior, .98 recency and1e-6 ridge unchanged. Observed objective uses original next joint/tool motion. Mixed objective averages observed normalizedMSE and mean active-probe normalizedMSE equally. All three final Jacobians averaged; no best checkpoint/seed selection.",
+  "screen": "Primary mixed ensemble: at least5% lower directional position MSE than fixed E146 on these histories; neither joint count directional error worse; directional rotation MSE<=1.05x; observed-next-motion position MSE<=1.05x. Also report observed-only fine-tuning to isolate dense-target effect. Passing permits complete fitting control only. E120 unchanged; held/fresh sets remain closed."
+}
