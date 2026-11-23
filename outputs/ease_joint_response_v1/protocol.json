@@ -1,0 +1,15 @@
+{
+  "experiment": "E59",
+  "checkpoints": {
+    "outputs/ease_robust_training_v1/seed_0/policy.pt": "bb2eadf92edc2f698fd137f6d1a7c8ec0a7283cd34e1d5a0fc390645e66392f1",
+    "outputs/ease_robust_training_v1/seed_1/policy.pt": "141e03fdac6d03a8ef035db3b8d3218cbbe73193450e06821e10b310380fc42d",
+    "outputs/ease_robust_training_v1/seed_2/policy.pt": "cf0d4d5d9fb80d5a20f5b117ea897a057e9c81ede715b785dad7523ec77520a0"
+  },
+  "reference": "outputs/ease_procedural_pose_v1",
+  "source_sha256": "3e9bbd1ec3bd23e0c49c7a94362978b94372e6400821dc6721ce2d2a99ef7769",
+  "scope": "32 exact E55 analytical/E35 trajectories, all 150 transitions, eight procedural training bodies. No native data or benchmark final-test use. Body holdout applies to response fitting only: upstream E35 drivers previously trained on these bodies.",
+  "design": "Eight leave-one-body-out folds, no tuning. Fit on analytical/original_0/original_1 from seven other bodies; original_2 trajectories from those bodies form separate trajectory validation. All four drivers of the omitted body are body validation. Training normalization only. No selected checkpoint or refit on evaluation rows.",
+  "model": "Shared per-joint linear ridge residual correction to command-minus-bias, fixed lambda .001 in mean-squared objective. Inputs: current limited command, pre-step qvel, q, sin(q), cos(q), measured bias, previous command and previous realized dq. No body/joint ID, geometry, gains, Jacobian or future state. First history inputs zero. Baselines: command-minus-bias and a command/velocity-only residual ridge.",
+  "limits": "One-step regression on driver trajectories, no counterfactual actions, no task-success or closed-loop stability claim. All transitions retained including contacts. Fold estimates share training bodies and are dependent.",
+  "test_evaluated": false
+}
