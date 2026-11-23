@@ -1,0 +1,23 @@
+{
+  "experiment": "E28",
+  "manifest_sha256": "e28aa6cf6d4b402bb3847785d7ac125e8f015a16da7b70870d6582dbcea0d958",
+  "methods": [
+    "identified_frozen",
+    "identified_online",
+    "twin_online"
+  ],
+  "calibration_seeds": [
+    930000,
+    940000,
+    950000
+  ],
+  "calibration_steps": 32,
+  "ridge": 1e-06,
+  "forgetting": 0.98,
+  "bias_update": 0.2,
+  "control_gain": 0.5,
+  "damping": 0.015,
+  "scope": "Analytical observation-only identification/control diagnostic, not a trained Transformer result. Fixed E27 cases and success criterion. No parameter selection on validation.",
+  "privileged": "True Jacobian is recorded only for diagnosis, never passed to the controller.",
+  "test_evaluated": false
+}
