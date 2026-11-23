@@ -1,0 +1,12 @@
+{
+  "experiment": "E148",
+  "scope": "Training-only measured directional supervision, no new task controller or held/fresh outcome. Same96 E144 constant-controller fitting episodes and original four family splits. At most one state per task phase, the first clean pre-action state with a saved predecessor (step>=1); fixed local-probe phase excluded. No selection by later success, motion error or model disagreement.",
+  "probes": "From each reconstructed state execute one40ms simulation step for each active joint with command frozen measured calibration bias plus or minus.01rad on that joint, clipped to +/- .04 and existing joint target limits. Other joints receive calibrated holding bias. Current phase gripper command fixed. Every branch starts from identical saved qpos/qvel and reconstructed preceding ctrl, then mj_forward and zero qacc_warmstart. Saved trajectories do not contain complete integrator state: these are explicitly reconstructed counterfactuals, not claims of exact original-episode continuation. Both signs and all joints retained, including contact branches.",
+  "labels": "Actual observed joint displacement and tool position/up-vector displacement are labels. No exact Jacobian call, numerical Jacobian label, simulator parameter or future query enters network history features. The supervised query is the measured joint increment after the branch. Target is measured tool displacement. History and initial measured calibration prior are held fixed across all branches. Padded14-query slots with explicit active-query mask.",
+  "reason": "One-next-motion supervision constrains only the executed direction, whereas inverse control queries the whole map. Joint-balanced branch measurements constrain additional directions while preserving deployment observations. Simulation branch actions are data collection only, never a deployment physics selector.",
+  "inputs": {
+    "outputs/ease_history_estimator_control_v1/records_constant.json": "3ff358a8fed9ff206b2a15ce6f4cd3633159e4a3df0224075a1a7b0463bdb033",
+    "outputs/ease_history_estimator_control_v1/cases.json": "bb06c1302362e1e0232c548d822a24705ead6f0ca83e0ac6c283894efa0d7a25",
+    "outputs/ease_history_estimator_control_v1/folds.json": "44047aad737943df74bca2e28acde7a77ed91a963d9f38a5928008c398aeb0a8"
+  }
+}
