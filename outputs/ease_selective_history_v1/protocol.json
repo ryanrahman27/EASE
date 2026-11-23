@@ -1,0 +1,25 @@
+{
+  "experiment": "E122",
+  "checkpoints": {
+    "outputs/ease_task_retention_training_v1/retained/seed_0/policy.pt": "3190e96c2d867237db6f5aedbc46f71ef61ca35f36e0dc3df663018141c50627",
+    "outputs/ease_task_retention_training_v1/retained/seed_1/policy.pt": "4a0495a5b7f719a1d3586554545e11ba39c58840ccdcc78e9fecf1aa2a5993ad",
+    "outputs/ease_task_retention_training_v1/retained/seed_2/policy.pt": "d351c6b49b8252a903ed98f2840207e8881f064b1902bc3b71ceb678273345a2",
+    "outputs/ease_estimator_repair_v1/seed_0/policy.pt": "26dd3d2785e3da7f7daeda03b588f19a5d1572e5db961d09d33c124ec8a733b1",
+    "outputs/ease_estimator_repair_v1/seed_1/policy.pt": "7b9727d0a1f583f158f454fcd1f3d1807636973e455d432f4927fcdc83cf7a7b",
+    "outputs/ease_estimator_repair_v1/seed_2/policy.pt": "62506dc0d29746b80fdeaa1fe549e3010dafe33eb6c6a97284beb9848a96ec37",
+    "outputs/ease_broad_history_v1/seed_0/policy.pt": "2d809ac80788ba548c19a2b577e3228eae32af4a59f591010dc6fa8972ec5a80",
+    "outputs/ease_broad_history_v1/seed_1/policy.pt": "69bec791582226b1fff68ac3432476f3d1881e40b7ffc39ea850fed2262027a0",
+    "outputs/ease_broad_history_v1/seed_2/policy.pt": "5d3303a645c6b540e606cd7dcbcbe1ee4b1574148e47d981a00b2184e83674b2",
+    "outputs/ease_candidate_history_v1/seed_0/policy.pt": "b2f775ea86ba60b82ff71b972c8fc36daf29caca051ea4cc8493ac3cbc26a6a9",
+    "outputs/ease_candidate_history_v1/seed_1/policy.pt": "918cccdf8aae26426069fb6f8c567906bcbe9722fafc2ac5813bebb5698e403b",
+    "outputs/ease_candidate_history_v1/seed_2/policy.pt": "4ef24d776eacaea79098f6f8c8134012b8c72c441d9b6228d0baacdca8a7f5b3"
+  },
+  "inputs": {
+    "outputs/ease_bounded_history_v1/records.json": "660cfa30e45f5cea932f82883d7aaaaae0720708070ab34fc311e338024ca12d",
+    "outputs/ease_bounded_history_v1/summary.json": "a6ae93e4289bc31d87776d44ec0b83db1ed180ee0ebaeeb25131c791ecb926ed",
+    "outputs/ease_bounded_history_v1/cases.json": "d1b687e1d7869859813195bc25da66c99dbf54816abb0e7a41394fd02859969f"
+  },
+  "gate": "Retain E120 for first8 task transitions. Thereafter enable its unchanged25% residual capped0.001 rad/joint only if E119 preceding EWMA squared6D motion prediction error <=0.95 times E118 error. EWMA0.9 decay, zero initialization, no phase reset. Predictions made before observing each transition; errors from actual measured joint/task motion. Probe unchanged; its measured transitions contribute evidence. Gate uses no outcomes, identities, contacts, physics simulation or future transitions. No cumulative budget.",
+  "diagnosis": "Exactly replay six E120 gains and four E120 losses versus E118 with shadow causal gate, including held gains only as diagnostic; threshold fixed before inspection. Compare clean pre-collision phase error evidence. Association is not causal action value.",
+  "evaluation": "One fixed gate, all24 training-body placements x3 seeds. No fitting or parameter sweep; compare all E118/E120 successes and six specific gains. No unseen-body evaluation or physics selector."
+}
