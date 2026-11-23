@@ -98,15 +98,20 @@ def evaluate(manifest, model, split, mode, device, probe=930000):
         masks = np.zeros((size, 7), bool)
         envs = []; observations = []
         for i, (arm, goal) in enumerate(batch):
-            key = (arm.seed, tuple(arm.home))
-            if key not in cache: cache[key] = statistics(calibration(arm, probe+goal['pair'])[0])
-            g, c, b = cache[key]; n = arm.dof
+            n = arm.dof
+            if mode == 'empty_neural_online':
+                g, c, b = 1e-6*np.eye(n), np.zeros((n,3)), np.zeros(n)
+            else:
+                donor = replace(arms[next(b for b in pairs[goal['pair']] if b != arm.seed)],home=arm.home) if mode == 'twin_neural_online' else arm
+                key = (donor.seed, tuple(donor.home))
+                if key not in cache: cache[key] = statistics(calibration(donor, probe+goal['pair'])[0])
+                g, c, b = cache[key]
             gram[i, :n, :n] = g; cross[i, :n] = c; bias[i, :n] = b; masks[i, :n] = True
             env = MixedReach(arm, synchronize=True); envs.append(env)
             observations.append(env.reset(0, goal['xyz'], spread=0))
         mask = torch.tensor(masks, device=device); active = np.ones(size, bool); predicted = None
         for step in range(150):
-            if predicted is None or mode == 'neural_online':
+            if predicted is None or mode in ('neural_online','empty_neural_online','twin_neural_online'):
                 predicted = model(torch.tensor(gram, device=device, dtype=torch.float32),
                     torch.tensor(cross, device=device, dtype=torch.float32), mask).cpu().numpy()
             for i in np.flatnonzero(active):

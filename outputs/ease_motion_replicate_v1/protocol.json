@@ -1,0 +1,25 @@
+{
+  "experiment": "E31",
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "pilot": "outputs/ease_motion_transformer_v1",
+  "steps": 15000,
+  "manifest_sha256": "e28aa6cf6d4b402bb3847785d7ac125e8f015a16da7b70870d6582dbcea0d958",
+  "probes": [
+    930000,
+    940000,
+    950000
+  ],
+  "modes": [
+    "neural_frozen",
+    "neural_online",
+    "hybrid_online",
+    "empty_neural_online",
+    "twin_neural_online"
+  ],
+  "scope": "Reuse observed E30 seed0 and train seeds1/2 unchanged; no validation tuning. Random-network control uses one probe per model seed. Empty starts without calibration and learns statistics only during task execution.",
+  "test_evaluated": false
+}
