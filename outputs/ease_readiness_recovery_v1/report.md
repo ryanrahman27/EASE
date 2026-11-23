@@ -1,0 +1,20 @@
+# E180 fitting evaluation of grasp-readiness checks and bounded alignment
+
+Each candidate ran 48 complete pick-and-place episodes on the original six-joint fitting placements. The comparator uses the 48 audited E179 baseline trajectories. Every candidate reaches close entry on the exact baseline trajectory. The routed handoff, probe protection, release height, E120 weights and analytical comparison from earlier experiments retain their original definitions.
+
+| Condition | Successes | Collision episodes | Complete trajectories identical to E120 |
+|---|---:|---:|---:|
+| Archived E120 baseline | 48/48 | 0 | 48 |
+| checks_only | 47/48 | 0 | 47 |
+| bounded_alignment | 48/48 | 0 | 47 |
+
+Case 40 passes the entry checks and exactly reproduces the original successful trajectory. Case 42 is the only baseline grasp that fails the entry checks. For accepted non-routed grasps, ordinary E120 closing continues. The recovery condition spends up to 12 of the original 40 close steps aligning to the pick pose with the fingers open. It checks position, orientation and object drift before each attempt to close.
+
+Case 42 failed under checks_only. Alignment commands used = 0. First ready close step (zero based) = None. Final consecutive two-pad steps = 0. Abort = True. Collision = False.
+Case 42 succeeded under bounded_alignment. Alignment commands used = 5. First ready close step (zero based) = 5. Final consecutive two-pad steps = 35. Abort = False. Collision = False.
+
+## Research status
+
+E177 established simulated pick-and-place transfer to 12 newly sampled six-joint bodies across four previously used axis families. Protected E120 and the analytical estimator each completed 42/48 placements. E120 uniquely solved three placements and the analytical estimator uniquely solved three. E180 measures fitting retention and provides one recovery opportunity. A claim that learned adaptation improves transfer still needs a prospective paired advantage across fresh bodies, with body-level uncertainty and a matched control for history adaptation.
+
+[Success and failure videos](videos/index.html) · [All paired outcomes](paired.json) · [Protocol and checkpoint hashes](protocol.json)
