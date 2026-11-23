@@ -1,0 +1,13 @@
+{
+  "experiment": "E143",
+  "inputs": {
+    "outputs/ease_anchored_history_weights_v1/oof.npz": "30db7ccb014bc249e8df5158f30f14eaec28b7c7331ef5fdca18d65ff64cf165",
+    "outputs/ease_anchored_history_weights_v1/references.npz": "cfcface2aa1ad77e600fa3bf35609d2876e2510698dda59369cde613b83e1746",
+    "outputs/ease_anchored_history_weights_v1/summary.json": "980101fdeaea7a96d4ec7bb60f6b3a39a799a61d6b0b086f39174af13725a349",
+    "outputs/ease_anchored_history_weights_v1/frozen.json": "98f997c6d130aafa2b135807c69aceebeee9b36d9503421df8fb923b796d51e9",
+    "outputs/ease_learned_history_weights_v1/dataset.npz": "e530b56ff809c84ab2d827e484e5be361acff6f99c5623cea961f60a6fc50328"
+  },
+  "design": "E142 average improves position MSE about5.9% over the tuned constant, but one individual seed is slightly worse and fails its all-seed screen. Test a new fixed predictor averaging all three Jacobians. Do not choose a seed or ensemble size using validation. Evaluate all three leave-one-seed-out pairs as robustness diagnostics. Averaging Jacobians is equivalent to averaging the linear next-motion predictions for a fixed measured joint query.",
+  "gate": "All-three mean position MSE<=.95x selected constant; scaled rotation MSE<=1.05x; neither joint count worse; each leave-one-seed-out pair position MSE no worse than constant. No task-success labels or held/fresh outcomes used. No retraining. This is an ensemble method, not a single-seed Transformer gain.",
+  "control": "If the fixed ensemble passes, compare complete fitting episodes against E120, an E120 ensemble, the tuned constant kernel, uniform32, and original analytical history. Preserve all regressions. E120 remains immutable; no promotion from prediction scores alone."
+}
