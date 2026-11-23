@@ -31,7 +31,7 @@ def bounded_error(goal,position,limit=.004):
     return error*min(1.,limit/max(float(np.linalg.norm(error)),1e-12))
 
 
-def rollout(env,controller=None,render=None,target_x=None,contact_hold=False,precise_grasp=False,object_release=False,pregrasp_hook=None):
+def rollout(env,controller=None,render=None,target_x=None,contact_hold=False,precise_grasp=False,object_release=False,pregrasp_hook=None,step_observer=None):
     obs=env.observe();trace=[];phases=[];failure=None
     renderer=None
     if render:
@@ -60,7 +60,8 @@ def rollout(env,controller=None,render=None,target_x=None,contact_hold=False,pre
             else:
                 if controller is None:jac,bias=(env.jacobian() if target_x is None else env.full_jacobian()),env.privileged_bias()
                 else:jac,bias=controller.predict()
-                action=np.clip(jac.T@np.linalg.solve(jac@jac.T+.015**2*np.eye(len(error)),.35*error)+bias,-.04,.04)
+                motion=jac.T@np.linalg.solve(jac@jac.T+.015**2*np.eye(len(error)),.35*error)
+                action=np.clip(motion+bias,-.04,.04)
             before=obs;obs,command,info=env.step(action,aperture)
             if controller is not None and hold_target is None:controller.update(before,obs,command)
             pe=float(np.linalg.norm(goal-obs['position']));re=float(np.linalg.norm(np.array([0,0,1])-obs['rotation'][:,2]))
@@ -68,6 +69,11 @@ def rollout(env,controller=None,render=None,target_x=None,contact_hold=False,pre
             pads,_=env.contacts()
             trace.append(dict(phase=phase,position=obs['position'].tolist(),object=env.data.xpos[env.obj].tolist(),
                 position_error=pe,rotation_error=re,pads=len(pads),bad=info['bad']))
+            if step_observer is not None:
+                step_observer(trace[-1],before,obs,command,action,
+                    None if hold_target is not None else motion,
+                    None if hold_target is not None else bias,
+                    None if hold_target is not None else jac,error)
             pos_tol,rot_tol=(.002,.03) if precise_grasp and phase=='descend' else (.006,.08)
             held=held+1 if pe<pos_tol and re<rot_tol else 0
             if env.bad:failure='forbidden_contact';break

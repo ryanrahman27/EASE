@@ -1,0 +1,15 @@
+{
+  "experiment": "E49",
+  "reference": "outputs/ease_split_refresh_v1",
+  "reference_sha256": "03dd545af8ddb760497cd7f7af2e929e2d6dad89ba012a23568c4306eadfa87b",
+  "checkpoints": {
+    "outputs/ease_robust_training_v1/seed_0/policy.pt": "bb2eadf92edc2f698fd137f6d1a7c8ec0a7283cd34e1d5a0fc390645e66392f1",
+    "outputs/ease_robust_training_v1/seed_1/policy.pt": "141e03fdac6d03a8ef035db3b8d3218cbbe73193450e06821e10b310380fc42d",
+    "outputs/ease_robust_training_v1/seed_2/policy.pt": "cf0d4d5d9fb80d5a20f5b117ea897a057e9c81ede715b785dad7523ec77520a0"
+  },
+  "cases_sha256": "6983880bf356462ef01a28fafdd296673d11fb22e29049de2cc75057cabcbb87",
+  "asset_commit": "cda5236f98383f6fbaa4820c6b18dba892cd087f",
+  "scope": "192 exact prefix replays: all E48 conditions/controllers/cases. Stop after 16 descent steps (0.64 s), or earlier task termination. Episode outcomes are inherited from E48, not new full-episode evaluations. No controller intervention, tuning or training.",
+  "diagnostics": "Log the actual damped-Jacobian motion term, pre-update bias, raw sum, clipped action, executed command, measured dq, singular values and pose response. Command_jump compares each descent action with the last probe command; only the first value is the handoff discontinuity. Diagnostic only.",
+  "test_evaluated": false
+}
