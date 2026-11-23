@@ -1,0 +1,564 @@
+{
+  "experiment": "E177",
+  "scope": "Prospective new procedural six-joint bodies, not untouched axis families or commercial robots.12 bodies x4 placements=48 candidate tasks; both frozen E120 and analytical. No retraining, retuning, replacement or policy-success screening.",
+  "cohort": "Seeds1770100..1770111;3 bodies per four previously used axis families. Independent +/-10% length,mass,strength,damping perturbations around archived parent bodies. Both familiar and development-axis families are labeled separately. Exact body signatures and seeds checked against all pre-existing case manifests.",
+  "initialization": "Only common initial approach posture is screened: target[.34,0,.33], original collision-free IK,10 starts, seed1772000+body. No descend/grasp/transport endpoint screening. All4 placements retained for each accepted body. Reject only uninitializable bodies or initial contacts; no replacements. Report all48-candidate and accepted-task denominators.",
+  "bodies": [
+    {
+      "body": 0,
+      "arm": {
+        "seed": 1770100,
+        "split": "prospective_e177",
+        "family": "six_amb_train_0",
+        "lengths": [
+          0.20229368692301772,
+          0.19446353661794313,
+          0.23367149049209804,
+          0.1427531091005784,
+          0.15607093658348836,
+          0.11204862007660388
+        ],
+        "masses": [
+          0.7094870162633347,
+          1.005262916400784,
+          1.2507571676627,
+          1.1189701058516834,
+          1.156680481729885,
+          0.9549525606080864
+        ],
+        "strength": 1.1983445351183009,
+        "damping": 1.700896119943632,
+        "home": [
+          0.0,
+          0.45,
+          0.0,
+          0.0,
+          -0.65,
+          0.0
+        ]
+      },
+      "parent_seed": 84000,
+      "ik_start": [
+        0.7498333254235745,
+        2.1600221374869806,
+        -2.4,
+        1.5790827153852247,
+        1.603730039937797,
+        1.8175039563448734
+      ]
+    },
+    {
+      "body": 1,
+      "arm": {
+        "seed": 1770101,
+        "split": "prospective_e177",
+        "family": "six_amb_train_0",
+        "lengths": [
+          0.17494841829107022,
+          0.22146368825397617,
+          0.21413882912682874,
+          0.14145968559613825,
+          0.15906461341441333,
+          0.10660089457176372
+        ],
+        "masses": [
+          0.7654939803808679,
+          0.8765683691121308,
+          1.1815094019131096,
+          1.2239926740673082,
+          1.1130812110287471,
+          1.0285568835139214
+        ],
+        "strength": 1.1147006968322162,
+        "damping": 1.785186045293594,
+        "home": [
+          0.0,
+          0.45,
+          0.0,
+          0.0,
+          -0.65,
+          0.0
+        ]
+      },
+      "parent_seed": 84000,
+      "ik_start": [
+        0.7498333254235745,
+        2.1600221374869806,
+        -2.4,
+        1.5790827153852247,
+        1.603730039937797,
+        1.8175039563448734
+      ]
+    },
+    {
+      "body": 2,
+      "arm": {
+        "seed": 1770102,
+        "split": "prospective_e177",
+        "family": "six_amb_train_0",
+        "lengths": [
+          0.18720738960297822,
+          0.1913732063243475,
+          0.22008179672061695,
+          0.1591673673217268,
+          0.1667121432841119,
+          0.10051443328567371
+        ],
+        "masses": [
+          0.7120466396534811,
+          0.9042362470776133,
+          1.1701793282778792,
+          1.3192814594383002,
+          1.0118177956707652,
+          0.9334111995494662
+        ],
+        "strength": 1.1091595160800902,
+        "damping": 1.5206197839063282,
+        "home": [
+          0.0,
+          0.45,
+          0.0,
+          0.0,
+          -0.65,
+          0.0
+        ]
+      },
+      "parent_seed": 84000,
+      "ik_start": [
+        0.7498333254235745,
+        2.1600221374869806,
+        -2.4,
+        1.5790827153852247,
+        1.603730039937797,
+        1.8175039563448734
+      ]
+    },
+    {
+      "body": 3,
+      "arm": {
+        "seed": 1770103,
+        "split": "prospective_e177",
+        "family": "six_amb_train_1",
+        "lengths": [
+          0.17584022284327042,
+          0.21837376462895375,
+          0.2158945236393099,
+          0.15679956561306063,
+          0.1609471870286672,
+          0.10738488588802539
+        ],
+        "masses": [
+          0.7964107427816677,
+          0.9327452767062377,
+          1.33609066397318,
+          1.2624511676589807,
+          1.1479084269647708,
+          1.019196125535993
+        ],
+        "strength": 1.149035057206097,
+        "damping": 1.5856917150453678,
+        "home": [
+          0.0,
+          0.45,
+          0.0,
+          0.0,
+          -0.65,
+          0.0
+        ]
+      },
+      "parent_seed": 84001,
+      "ik_start": [
+        2.2386404975686336,
+        -0.013113513474217652,
+        1.7869273560069514,
+        -2.314406460434537,
+        2.253635174930896,
+        1.3541890237127832
+      ]
+    },
+    {
+      "body": 4,
+      "arm": {
+        "seed": 1770104,
+        "split": "prospective_e177",
+        "family": "six_amb_train_1",
+        "lengths": [
+          0.18609531263095483,
+          0.1910595033194645,
+          0.2130714118990634,
+          0.13748918200719273,
+          0.14658254286765915,
+          0.11354729956169653
+        ],
+        "masses": [
+          0.7066900070148706,
+          0.895634665230145,
+          1.2563191836315322,
+          1.2959546398802182,
+          1.0394845121800833,
+          0.928113172198399
+        ],
+        "strength": 1.2323616925998244,
+        "damping": 1.5895269210361196,
+        "home": [
+          0.0,
+          0.45,
+          0.0,
+          0.0,
+          -0.65,
+          0.0
+        ]
+      },
+      "parent_seed": 84001,
+      "ik_start": [
+        2.2386404975686336,
+        -0.013113513474217652,
+        1.7869273560069514,
+        -2.314406460434537,
+        2.253635174930896,
+        1.3541890237127832
+      ]
+    },
+    {
+      "body": 5,
+      "arm": {
+        "seed": 1770105,
+        "split": "prospective_e177",
+        "family": "six_amb_train_1",
+        "lengths": [
+          0.17574403162596489,
+          0.2122726601024921,
+          0.24969838446947273,
+          0.16330798260938326,
+          0.14606609844894955,
+          0.11404618745434622
+        ],
+        "masses": [
+          0.7829678302011208,
+          1.0072999359880734,
+          1.2510642491416177,
+          1.3087538520893933,
+          1.1697682418074196,
+          0.928185675770235
+        ],
+        "strength": 1.2226030547538287,
+        "damping": 1.786124335852525,
+        "home": [
+          0.0,
+          0.45,
+          0.0,
+          0.0,
+          -0.65,
+          0.0
+        ]
+      },
+      "parent_seed": 84001,
+      "ik_start": [
+        2.2386404975686336,
+        -0.013113513474217652,
+        1.7869273560069514,
+        -2.314406460434537,
+        2.253635174930896,
+        1.3541890237127832
+      ]
+    },
+    {
+      "body": 6,
+      "arm": {
+        "seed": 1770106,
+        "split": "prospective_e177",
+        "family": "axis_dev87_6_ZYXYXY",
+        "lengths": [
+          0.19616218881623648,
+          0.1925445228559337,
+          0.22972682149771823,
+          0.1521822645230326,
+          0.14814669501968955,
+          0.11354862967750479
+        ],
+        "masses": [
+          0.85410973774675,
+          0.9404275312431754,
+          1.2505909230979033,
+          1.2134374896713622,
+          1.1887850513047822,
+          0.965410467826806
+        ],
+        "strength": 1.0701429466401315,
+        "damping": 1.516252066928427,
+        "home": [
+          0.0,
+          0.45,
+          0.0,
+          0.0,
+          -0.65,
+          0.0
+        ]
+      },
+      "parent_seed": 870100,
+      "ik_start": [
+        0.8295401251057063,
+        1.0817934478755118,
+        0.780781183954009,
+        -2.4,
+        2.3764061463966977,
+        -1.0731657736395026
+      ]
+    },
+    {
+      "body": 7,
+      "arm": {
+        "seed": 1770107,
+        "split": "prospective_e177",
+        "family": "axis_dev87_6_ZYXYXY",
+        "lengths": [
+          0.19595712300597679,
+          0.21864254581886677,
+          0.24025584676950523,
+          0.15777969752873666,
+          0.16176777558555644,
+          0.11162728357727601
+        ],
+        "masses": [
+          0.6740006118436708,
+          0.9531886074440103,
+          1.25707521169929,
+          1.101072754108509,
+          1.1416264948893546,
+          0.9998604983223903
+        ],
+        "strength": 1.1303906361153053,
+        "damping": 1.8873277289877604,
+        "home": [
+          0.0,
+          0.45,
+          0.0,
+          0.0,
+          -0.65,
+          0.0
+        ]
+      },
+      "parent_seed": 870101,
+      "ik_start": [
+        -0.4309080728583946,
+        0.26906640117754604,
+        -0.7088450475266186,
+        2.049361113041836,
+        -0.8306003391595205,
+        0.5555114019856702
+      ]
+    },
+    {
+      "body": 8,
+      "arm": {
+        "seed": 1770108,
+        "split": "prospective_e177",
+        "family": "axis_dev87_6_ZYXYXY",
+        "lengths": [
+          0.1795571355489977,
+          0.22978643874533347,
+          0.23958221154659623,
+          0.15699529128556433,
+          0.14754882773345007,
+          0.12010619635961503
+        ],
+        "masses": [
+          0.702592812167612,
+          0.8993842932949088,
+          1.2089155981918973,
+          1.307444197273291,
+          1.0287522606745416,
+          1.079669272802244
+        ],
+        "strength": 1.055763362248185,
+        "damping": 1.648813363735239,
+        "home": [
+          0.0,
+          0.45,
+          0.0,
+          0.0,
+          -0.65,
+          0.0
+        ]
+      },
+      "parent_seed": 870100,
+      "ik_start": [
+        0.8295401251057063,
+        1.0817934478755118,
+        0.780781183954009,
+        -2.4,
+        2.3764061463966977,
+        -1.0731657736395026
+      ]
+    },
+    {
+      "body": 9,
+      "arm": {
+        "seed": 1770109,
+        "split": "prospective_e177",
+        "family": "axis_dev87_6_ZYXYZY",
+        "lengths": [
+          0.21556788548801006,
+          0.235981002505015,
+          0.21908874745613174,
+          0.14017681460144,
+          0.1771602581531717,
+          0.10636718734452333
+        ],
+        "masses": [
+          0.8215243336676602,
+          0.9199794692145796,
+          1.3288884725830694,
+          1.4162418347200818,
+          1.0722812347142379,
+          1.0464165401895886
+        ],
+        "strength": 0.9744209773651027,
+        "damping": 1.8183284126226151,
+        "home": [
+          0.0,
+          0.45,
+          0.0,
+          0.0,
+          -0.65,
+          0.0
+        ]
+      },
+      "parent_seed": 870102,
+      "ik_start": [
+        0.2026955739001405,
+        2.0531935434842894,
+        1.5831116442203643,
+        -2.143320431508716,
+        -0.7633966161973887,
+        -2.4
+      ]
+    },
+    {
+      "body": 10,
+      "arm": {
+        "seed": 1770110,
+        "split": "prospective_e177",
+        "family": "axis_dev87_6_ZYXYZY",
+        "lengths": [
+          0.19886795487833103,
+          0.17852680777526533,
+          0.23649231576665142,
+          0.13482792872099797,
+          0.15602556153920685,
+          0.1172091314044248
+        ],
+        "masses": [
+          0.7978343978930885,
+          0.8470212904091678,
+          1.0969938938897685,
+          1.2710676481461523,
+          1.2494104604084655,
+          1.032354381023668
+        ],
+        "strength": 1.2355532491386447,
+        "damping": 1.5070835355771683,
+        "home": [
+          0.0,
+          0.45,
+          0.0,
+          0.0,
+          -0.65,
+          0.0
+        ]
+      },
+      "parent_seed": 870103,
+      "ik_start": [
+        0.7042198205858735,
+        2.2519944654664035,
+        1.9956209781972325,
+        -1.6872385373443468,
+        -1.0255285841501451,
+        -2.4
+      ]
+    },
+    {
+      "body": 11,
+      "arm": {
+        "seed": 1770111,
+        "split": "prospective_e177",
+        "family": "axis_dev87_6_ZYXYZY",
+        "lengths": [
+          0.21819299237499615,
+          0.21377543924709408,
+          0.2152621048040621,
+          0.1348466714124981,
+          0.15819958688436375,
+          0.10302035779961867
+        ],
+        "masses": [
+          0.6823908638614629,
+          0.9609615402627651,
+          1.1181932205728298,
+          1.2284465625992111,
+          1.0606592328920534,
+          0.917949481051052
+        ],
+        "strength": 1.131454095844179,
+        "damping": 1.724305539233411,
+        "home": [
+          0.0,
+          0.45,
+          0.0,
+          0.0,
+          -0.65,
+          0.0
+        ]
+      },
+      "parent_seed": 870102,
+      "ik_start": [
+        0.2026955739001405,
+        2.0531935434842894,
+        1.5831116442203643,
+        -2.143320431508716,
+        -0.7633966161973887,
+        -2.4
+      ]
+    }
+  ],
+  "placements": [
+    [
+      0.3,
+      -0.06
+    ],
+    [
+      0.34,
+      -0.015
+    ],
+    [
+      0.38,
+      0.04
+    ],
+    [
+      0.32,
+      0.07
+    ]
+  ],
+  "target_rule": "Same X, Y+0.06",
+  "controller": "Frozen E176 controller and estimator recipes, including early/late gates, static object-safe planning, protections, guarded handoff, release fix, history rules and success scoring. New data adapter removes only assertions against unrelated historical fitting-case files.",
+  "budget": "Both:32 calibration steps,32 pre-close probe steps, same action bounds/dt. Approach80, descend100 or300 only after accepted route, close40,lift100,transport100,lower100,release40,retreat80,settle40. Same reach early-exit rule. Maximum944 control steps including calibration when routed,744 otherwise. Actual phase lengths may differ; report them, no forced padding or extra retries.",
+  "checkpoints": {
+    "outputs/ease_task_retention_training_v1/retained/seed_0/policy.pt": "3190e96c2d867237db6f5aedbc46f71ef61ca35f36e0dc3df663018141c50627",
+    "outputs/ease_task_retention_training_v1/retained/seed_1/policy.pt": "4a0495a5b7f719a1d3586554545e11ba39c58840ccdcc78e9fecf1aa2a5993ad",
+    "outputs/ease_task_retention_training_v1/retained/seed_2/policy.pt": "d351c6b49b8252a903ed98f2840207e8881f064b1902bc3b71ceb678273345a2",
+    "outputs/ease_estimator_repair_v1/seed_0/policy.pt": "26dd3d2785e3da7f7daeda03b588f19a5d1572e5db961d09d33c124ec8a733b1",
+    "outputs/ease_estimator_repair_v1/seed_1/policy.pt": "7b9727d0a1f583f158f454fcd1f3d1807636973e455d432f4927fcdc83cf7a7b",
+    "outputs/ease_estimator_repair_v1/seed_2/policy.pt": "62506dc0d29746b80fdeaa1fe549e3010dafe33eb6c6a97284beb9848a96ec37",
+    "outputs/ease_broad_history_v1/seed_0/policy.pt": "2d809ac80788ba548c19a2b577e3228eae32af4a59f591010dc6fa8972ec5a80",
+    "outputs/ease_broad_history_v1/seed_1/policy.pt": "69bec791582226b1fff68ac3432476f3d1881e40b7ffc39ea850fed2262027a0",
+    "outputs/ease_broad_history_v1/seed_2/policy.pt": "5d3303a645c6b540e606cd7dcbcbe1ee4b1574148e47d981a00b2184e83674b2",
+    "outputs/ease_candidate_history_v1/seed_0/policy.pt": "b2f775ea86ba60b82ff71b972c8fc36daf29caca051ea4cc8493ac3cbc26a6a9",
+    "outputs/ease_candidate_history_v1/seed_1/policy.pt": "918cccdf8aae26426069fb6f8c567906bcbe9722fafc2ac5813bebb5698e403b",
+    "outputs/ease_candidate_history_v1/seed_2/policy.pt": "4ef24d776eacaea79098f6f8c8134012b8c72c441d9b6228d0baacdca8a7f5b3"
+  },
+  "reference_protocol_sha256": "16d900a24bac9456ecdf0b3c1733d2694d54589844a1a4da4b1dc227d85f10cd",
+  "replay": "Before any prospective episode, both estimators exactly replay fitting cases0,26,43,64,67:10 full compatibility episodes.",
+  "analysis": "Paired outcomes, collisions, interactions, all failures, per body/family and body-cluster descriptive uncertainty. Single deterministic rollout per case/method. No post-outcome tuning. Failure videos are retained.",
+  "videos": "First accepted case of each body and all success/collision-discordant cases for both estimators; append any missing outcome category. Every case has complete raw state/action/history records.",
+  "reserved_legacy_tests_evaluated": false
+}
