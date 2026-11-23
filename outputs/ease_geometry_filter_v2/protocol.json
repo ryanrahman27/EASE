@@ -1,0 +1,22 @@
+{
+  "experiment": "E72",
+  "checkpoints": {
+    "outputs/ease_robust_training_v1/seed_0/policy.pt": "bb2eadf92edc2f698fd137f6d1a7c8ec0a7283cd34e1d5a0fc390645e66392f1",
+    "outputs/ease_robust_training_v1/seed_1/policy.pt": "141e03fdac6d03a8ef035db3b8d3218cbbe73193450e06821e10b310380fc42d",
+    "outputs/ease_robust_training_v1/seed_2/policy.pt": "cf0d4d5d9fb80d5a20f5b117ea897a057e9c81ede715b785dad7523ec77520a0",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_0/policy.pt": "7cc59ce83397a3856939a849f229e0a962bfe0e1df3add7680aac42b8c5d0fec",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_1/policy.pt": "67a01fc8cdbec4d7c5ee5e602e5d1a16d6cfa80a8520c28a89eb2a861437b2d6",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_2/policy.pt": "f87c12bd330baf384432c5d275eda41f189ddb557f6083f487082a76447b2b71"
+  },
+  "inputs": {
+    "outputs/ease_arm_pick_place_v2/cases.json": "9913082036080a0260394a0e9c8bfc9993ffb64bbf6e3019699bb88827d3f1cb",
+    "outputs/ease_arm_pick_place_v2/axis_catalog.json": "89fe5fcd4ded136798585ae58ad9339ad53b15a874c705f014bfc1646f86e406",
+    "outputs/ease_arm_pick_place_unseen_v1/cases.json": "944fbb927dac19a433547a0bd7f54790a6ba7e6dcb0aa7341c35488833de7753",
+    "outputs/ease_arm_pick_place_unseen_v1/axis_catalog.json": "56bd6c4afecb761916a879b2627cc7146793eda3731cc542b9560b422f9597bc"
+  },
+  "test_evaluated": false,
+  "design": "All16 original procedural placements, seven frozen estimators, original baseline and shared geometry filter:224 trials. Original phase budgets, physics, collision masks, success rules and measured32-step probes unchanged. All failed cases retained. V2 passes scale1 actions through bit-exactly; v1 interrupted and preserved because reconstructing them through bias arithmetic introduced roundoff.",
+  "filter": "Known robot/scene geometry and exact current simulator pose; separate model with2mm geometry margin. Evaluate midpoint/end of joint-target interpolation, including commanded finger position, object fixed at current pose. Candidate action is bias + scale*(clipped action-bias), scale1,.5,.25,0; clipped bias retained. First candidate whose minimum forbidden clearance is at least min(2mm,current clearance)-1e-6. If none qualifies, choose greatest clearance (ties prefer smaller scale). No task Jacobian access, model training or dynamic lookahead. Geometry queries cost recorded separately.",
+  "limits": "Privileged kinematics and object/scene pose are extra information shared equally across estimators. Forward kinematic checks do not predict dynamic overshoot or carried-object motion and are not a safety guarantee. Two interpolation samples do not guarantee continuous-path clearance. An already penetrating state permits nonworsening motion. This is not a history-only policy or new embodiment validation.",
+  "decision": "Advance to frozen fresh-placement validation only if pooled learned success improves, pooled collisions do not increase and every checkpoint retains its aggregate six-joint success count. Report all casewise losses, filter fallback and query costs. Otherwise retain original controller and do not tune margins/scales on outcomes."
+}

@@ -1,0 +1,40 @@
+# E72: shared geometry-based action filtering
+
+Development test on the original 16 procedural manipulation placements. Seven frozen estimators, original phase budgets and matched calibration states; 224 trials. A separate kinematic model checks midpoint/end of joint-target interpolations and scales motion while preserving measured bias. Physics, contact masks, success rules and neural weights are unchanged.
+
+**Information difference:** the filter receives the known robot geometry/kinematics and exact current simulator configuration, object pose and scene geometry. Both learned and analytical estimators receive the identical filter. These are additional privileged observations unavailable to a history-only policy. No dynamic future rollout or task Jacobian is used. This experiment cannot establish improved learned embodiment identification.
+
+| Estimator | Mode | Success /16 | Six /7 | Seven /9 | Collisions | Control steps | Geometry queries | Changed actions | Fallbacks |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| analytical | baseline | 11 | 7 | 4 | 5 | 4927 | 0 | 0 | 0 |
+| analytical | geometry | 11 | 7 | 4 | 4 | 4930 | 16346 | 527 | 140 |
+| parent_0 | baseline | 10 | 4 | 6 | 5 | 5226 | 0 | 0 | 0 |
+| parent_0 | geometry | 12 | 5 | 7 | 3 | 5715 | 22663 | 1183 | 526 |
+| parent_1 | baseline | 9 | 6 | 3 | 6 | 5610 | 0 | 0 | 0 |
+| parent_1 | geometry | 9 | 6 | 3 | 6 | 5856 | 25022 | 1502 | 1143 |
+| parent_2 | baseline | 12 | 6 | 6 | 4 | 4674 | 0 | 0 | 0 |
+| parent_2 | geometry | 12 | 6 | 6 | 4 | 4958 | 16654 | 557 | 293 |
+| candidate_0 | baseline | 11 | 6 | 5 | 5 | 4853 | 0 | 0 | 0 |
+| candidate_0 | geometry | 11 | 6 | 5 | 5 | 4978 | 15716 | 393 | 157 |
+| candidate_1 | baseline | 11 | 6 | 5 | 5 | 5131 | 0 | 0 | 0 |
+| candidate_1 | geometry | 11 | 6 | 5 | 5 | 5309 | 19877 | 931 | 368 |
+| candidate_2 | baseline | 12 | 6 | 6 | 4 | 4613 | 0 | 0 | 0 |
+| candidate_2 | geometry | 13 | 7 | 6 | 3 | 4806 | 16186 | 560 | 197 |
+
+Pooled learned success: 65/96 to 68/96 (3 recoveries, 0 regressions). Six-joint: 34 to 36/42; seven-joint: 31 to 32/54. Collision cases: 29 to 26. Control steps including calibration: 30107 to 31622. Geometry queries: 116118; modified actions: 5126; no-feasible-candidate fallbacks: 2684.
+
+Prespecified advancement rule: PASS; per-checkpoint aggregate six-joint retention=True. Freeze this filter for fresh-placement validation before adoption.
+
+The three recoveries are concentrated in E35 seed 0 (cases 2 and 11) and E66 seed 2 (case 1); the other four learned checkpoints have unchanged success counts. Analytical success stays 11/16, while its collision count falls from five to four. These are descriptive repeated development cases, not independent evidence of a uniform model improvement.
+
+Checks are kinematic samples, not a continuous swept-volume or dynamics guarantee. The object is frozen at its current pose in geometry queries, including when carried; actuator transients and untested points along the path may differ. When already within the clearance margin, nonworsening motion is allowed. When no candidate qualifies, maximum sampled clearance is used and the fallback is recorded. Neither collisions nor failures are masked. The effect of geometry access is inseparable from the filter in this comparison.
+
+Verification: all 112 unfiltered baseline traces and probes reproduce E68 exactly; model/input hashes and physical margins are unchanged. Trial uniqueness, filter-log coverage and query totals are audited. All 102 EASE-FM tests pass, including physical-state isolation and exact pass-through of unmodified actions. Query counts are computational work, not a measured real-time latency guarantee.
+
+Version history: v1 was interrupted after detecting that bias arithmetic could introduce roundoff even at full scale; its partial trials and source are retained. V2 passes full-scale actions through bit-exactly. No thresholds were changed in response to aggregate task outcomes. All completed v2 outcomes are retained. No training, native tuning or reserved final-test evaluation.
+
+### Interpretation and next decision
+
+The prespecified development gate passes; freeze the filter for fresh-placement validation, retaining all casewise regressions. Next validate this frozen filter on E71 placements, and subsequently compare against a shared action-scaling control to distinguish geometry-conditioned decisions from simply slowing motion.
+
+The broader research status remains proof of working simulated cross-kinematic control with limited manipulation robustness. Neither this diagnostic nor the prior placement results establishes learned superiority over analytical identification, broad new-embodiment manipulation, or hardware performance. Publication readiness remains unresolved.
