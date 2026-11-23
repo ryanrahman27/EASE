@@ -1,0 +1,27 @@
+{
+  "experiment": "E14",
+  "date": "2026-10-17",
+  "scope": "Single-seed frozen validation; one new body per family, eight validation goals each",
+  "models": [
+    "direct",
+    "flow"
+  ],
+  "modes": [
+    "empty",
+    "correct8",
+    "correct32",
+    "wrong32"
+  ],
+  "primary": "Correct32 versus same-DoF wrong32 on novel-axis six-joint body; report familiar-family results separately",
+  "weights_updated": false,
+  "test_evaluated": false,
+  "synchronized_observations": true,
+  "context": "Separate bounded-excitation episode then reset; frozen context during task",
+  "calibration_seed": "goal seed + 500000",
+  "flow_noise_seed": "goal seed + 600000; paired across conditions",
+  "checkpoints": {
+    "direct": "4f39ed376147eab7cc8b7c6b8c6a7d10a5e6db1ab92bfec5f8317fd22e27952c",
+    "flow": "e58b539cf4f6a74c89fddc11591a764cfc5e5e6c56a7cc653f065d0da393e10b"
+  },
+  "manifest_sha256": "7a07bcfd6cf6eb47ba09ad0162488040902231633891c0edbc9d902c27226e2f"
+}
