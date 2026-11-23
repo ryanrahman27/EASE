@@ -1,0 +1,11 @@
+{
+  "experiment": "E167",
+  "scope": "PRIVILEGED DIAGNOSTIC ONLY.48 six-joint fitting placements x2 matched controllers=96 new episodes. Registered after E164/E165 outcomes, while E166 finishes. No held evaluation, no learned training or labels, E120 unchanged.",
+  "design": "Exact current MuJoCo tool-position/tool-axis Jacobian in the original E149 DLS controller, frozen measured calibration bias and original close probe. Compare release-only265mm lower/release targets versus identical controller plus E165 once-per-episode lateral-distance>8mm conditional400mm approach target. All other goals, budgets, success and contact criteria unchanged.",
+  "interpretation": "Matched comparison isolates route change with exact local kinematics. This is not E120: no learned reference/correction model or bounded E120 residual is used. It is not a mathematical task-success upper bound or collision-free planner. No lookahead, collision clearance query or route selection from simulator geometry. Used only to diagnose whether accurate current motion maps remove the earlier route/contact problem.",
+  "verification": "Release-only pre-lower states and traces must exactly reproduce E149; both variants must match original calibration and frozen bias. Inactive conditional routes must reproduce the complete matched release-only trajectory. All48 placements retained.",
+  "inputs": {
+    "outputs/ease_release_clearance_control_v1/cases.json": "bb06c1302362e1e0232c548d822a24705ead6f0ca83e0ac6c283894efa0d7a25",
+    "outputs/ease_release_clearance_control_v1/records.json": "8e78a35dca667c23a502b59687524b7c402d321497ffef65e8a50c37648835ea"
+  }
+}
