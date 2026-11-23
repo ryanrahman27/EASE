@@ -1,0 +1,20 @@
+{
+  "experiment": "E114",
+  "checkpoints": {
+    "outputs/ease_task_retention_training_v1/retained/seed_0/policy.pt": "3190e96c2d867237db6f5aedbc46f71ef61ca35f36e0dc3df663018141c50627",
+    "outputs/ease_task_retention_training_v1/retained/seed_1/policy.pt": "4a0495a5b7f719a1d3586554545e11ba39c58840ccdcc78e9fecf1aa2a5993ad",
+    "outputs/ease_task_retention_training_v1/retained/seed_2/policy.pt": "d351c6b49b8252a903ed98f2840207e8881f064b1902bc3b71ceb678273345a2"
+  },
+  "inputs": {
+    "outputs/ease_unseen_progress_v1/cases.json": "e25348fad02c14a6d3fafa872e3ce1df5b9b158208e3efa73c76cb61be1f16ac",
+    "outputs/ease_unseen_progress_v1/axis_catalog.json": "bc812c707bbca7129148013b4d567e811a0b52fc5a0f693a2ee1b03612bfc07c"
+  },
+  "episodes": 192,
+  "design": "16 reused E112 unseen-body development tasks (8 bodies, 4 previously studied axis families; 2 placements/body), three learned seeds plus analytical estimator, each online/frozen_response/frozen_all. 192 full tasks. No outcome filtering or tuning. Reserved final test untouched.",
+  "controller": "One frozen E99 retained checkpoint throughout each learned rollout; no parent/student phase switch. Analytical is the existing regularized measured-history least-squares estimator. Identical DLS action mapping, joint clipping, phase goals/budgets and physical scene. No geometry filter, route planner, physics selector, gravity oracle, model Jacobian or home-Jacobian prior. Scene supplies observed q/tool pose and fixed reset configuration.",
+  "history": "Identical32 home-relative calibration transitions per case, tiny identity/zero statistics initialization. After calibration: online updates response and bias, switches to recent32 history before local probe; frozen_response preserves calibrated gram/cross/history but updates measured command bias; frozen_all preserves gram/cross/history and bias. Every condition executes32 local probe steps before close, no reset; probe commands use condition-specific measured bias. Frozen means no further adaptation after calibration, not empty history.",
+  "metrics": "Full-task success, collision, grasp/lift, phase progress, steps and own-trajectory prediction residuals; six/seven-joint, seed and body breakdown. Paired task gains/losses. Analytical16 episodes per mode, not triplicated as independent seeds. Reused development tasks, no confirmatory heldout or flow-policy claim.",
+  "verification": "Block mj_jacSite through calibration and execution. Direct PickPlace subclass has no selector or geometry querying API. Assert frozen state and exact paired calibration. Save complete state trajectories/models and checkpoint hashes; exact video replay.",
+  "videos": "First success and first failure per method/mode where available, plus all modes for first learned-online gain and loss against each frozen control for seed0. Outcome-selected diagnostic examples; preserve all trial records and states.",
+  "test_evaluated": false
+}
