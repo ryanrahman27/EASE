@@ -1,0 +1,21 @@
+{
+  "experiment": "E164",
+  "scope": "All48 six-joint fitting placements for each of two fixed variants. All48 seven-joint E161 episodes reused unchanged per variant; four seven-joint ancestry-root episodes replayed exactly per variant to verify no-op implementation.96 new intervention episodes plus8 exact replays, not192 independent new trials. No held evaluation.",
+  "baseline": "Unchanged E120 three-model ensemble plus the fixed E161265mm lower/release target. Original E120 checkpoints and E161 results immutable. Preserve calibration, close32 probe, frozen measured bias, success/contact definitions and phase budgets.",
+  "high_approach": "Only on six-joint bodies, raise approach target from330 to400mm. Original descent target240mm and all other task targets, budgets and phase rules unchanged. This may lengthen descent; do not extend its100-step budget after outcomes.",
+  "centered_early": "Only on six-joint bodies during approach/descent, after original complete E120 action, compute comfort gradient g=-sign(q)*max(abs(q)-2.0,0). Project .05*g using N=I-J.T@solve(J@J.T+.015**2 I,J), with the live E120 reference measured-history motion estimate. Uniformly cap projected delta at.005rad/joint, then retain original +/- .04 action clip. No home attractor, fixed joint index, body lookup, extra probe or condition search. Log projection residual and actual action.",
+  "diagnosis": "E163 privileged OFFLINE geometry audit found all11 six-joint collision episodes on body84000; logged contact labels3/4 are geometry IDs attached to link1/link2, not link3/link4. Inspected starting postures had6\u20139mm elbow margin and joints near limits. Geometry is never provided to either controller or estimator.",
+  "screen": "Compare all48 six-joint success/collision/first-contact phases and every paired rescue/regression to E16137/48 successes,11 collision episodes. A qualifying variant must improve six-joint success, reduce early approach/descent first contacts, not increase collisions, and retain every E161 six-joint success. If both qualify, prefer high_approach as the simpler controller. No automatic held test or baseline replacement.",
+  "inputs": {
+    "outputs/ease_release_clearance_control_v1/records.json": "8e78a35dca667c23a502b59687524b7c402d321497ffef65e8a50c37648835ea",
+    "outputs/ease_release_clearance_control_v1/cases.json": "bb06c1302362e1e0232c548d822a24705ead6f0ca83e0ac6c283894efa0d7a25",
+    "outputs/ease_release_clearance_control_v1/protocol.json": "00929285a5d2405320b91937c4170c40b01f7c20f9a8f60c124cd449393319ac",
+    "outputs/ease_release_clearance_control_v1/verification.json": "a6f26f40f74316e0544cf9a29a0dc7d2c70255bf40a75f90fbc1c5f40700e5cf"
+  },
+  "seven_replay_cases": [
+    6,
+    7,
+    9,
+    10
+  ]
+}
