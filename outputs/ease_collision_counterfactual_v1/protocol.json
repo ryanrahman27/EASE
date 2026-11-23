@@ -1,0 +1,20 @@
+{
+  "experiment": "E74",
+  "checkpoints": {
+    "outputs/ease_robust_training_v1/seed_0/policy.pt": "bb2eadf92edc2f698fd137f6d1a7c8ec0a7283cd34e1d5a0fc390645e66392f1",
+    "outputs/ease_robust_training_v1/seed_1/policy.pt": "141e03fdac6d03a8ef035db3b8d3218cbbe73193450e06821e10b310380fc42d",
+    "outputs/ease_robust_training_v1/seed_2/policy.pt": "cf0d4d5d9fb80d5a20f5b117ea897a057e9c81ede715b785dad7523ec77520a0",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_0/policy.pt": "7cc59ce83397a3856939a849f229e0a962bfe0e1df3add7680aac42b8c5d0fec",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_1/policy.pt": "67a01fc8cdbec4d7c5ee5e602e5d1a16d6cfa80a8520c28a89eb2a861437b2d6",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_2/policy.pt": "f87c12bd330baf384432c5d275eda41f189ddb557f6083f487082a76447b2b71"
+  },
+  "inputs": {
+    "outputs/ease_geometry_transfer_v1/records.json": "830f7df89bc55893c72b36abe72685ca5c66c7228889d21bb8a6a7a28f150acb",
+    "outputs/ease_phase_fresh_v1/cases.json": "e6f855d9e942af5259ae8554e916ff25e58e44328ac4251de6d773df4f020df4"
+  },
+  "test_evaluated": false,
+  "selection": "Every unsuccessful E73 geometry-filter trial, including analytical. Replay original full trace exactly, diagnose first forbidden-contact control step only. No new task selection or success screening.",
+  "branches": "Five one-control-step branches from identical pre-contact simulator state: filtered selected action; half of its motion component with measured bias retained; bias-only; analytical estimate computed from the SAME measured Gram/cross/bias; selected action after zeroing incoming arm/finger velocities (object velocity unchanged). Commands stay clipped. No future control updates or full task recovery measured.",
+  "geometry": "Compare frozen filter midpoint/endpoint check with21 evenly spaced samples INCLUDING start along the commanded joint/finger line. Also reconstruct forbidden clearance at each of20 actual dynamic substep joint/finger states. Object pose is not advanced in that diagnostic reconstruction; all observed first collisions are finger/table, so that pair is unaffected.",
+  "limits": "Failure-conditioned diagnostic, not a policy success evaluation. Exact simulator clones and velocity resets are privileged interventions, not deployable controls. Zeroing velocity changes state and constraint initialization; it does not simulate an implementable brake. One-step contact avoidance may only postpone failure. Denser samples do not prove continuous clearance. Same-history analytical action is not the independently rolled-out analytical controller."
+}
