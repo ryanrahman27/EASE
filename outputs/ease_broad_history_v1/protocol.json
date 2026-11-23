@@ -1,0 +1,23 @@
+{
+  "experiment": "E118",
+  "inputs": {
+    "outputs/ease_estimator_repair_v1/contexts.npz": "02a5f7ac4349f4494b403195fd3430912403cbea9ae4b27601ea2331ec568246",
+    "outputs/ease_estimator_repair_v1/context_provenance.json": "3365f1d88a58fa876fd90a4b89b0dd117efbd3d04c3bec633d42ff8785ccc44b",
+    "outputs/ease_estimator_repair_v1/records.json": "deec141cd03448176a919920df533db205d180a08e4c065b247854706483e338",
+    "outputs/ease_estimator_repair_v1/summary.json": "fb8049c4fb5e161d9296881c09fe5d26e3cd4c7cb6510f033db66ffbd21ef21a"
+  },
+  "checkpoints": {
+    "outputs/ease_task_retention_training_v1/retained/seed_0/policy.pt": "3190e96c2d867237db6f5aedbc46f71ef61ca35f36e0dc3df663018141c50627",
+    "outputs/ease_task_retention_training_v1/retained/seed_1/policy.pt": "4a0495a5b7f719a1d3586554545e11ba39c58840ccdcc78e9fecf1aa2a5993ad",
+    "outputs/ease_task_retention_training_v1/retained/seed_2/policy.pt": "d351c6b49b8252a903ed98f2840207e8881f064b1902bc3b71ceb678273345a2",
+    "outputs/ease_estimator_repair_v1/seed_0/policy.pt": "26dd3d2785e3da7f7daeda03b588f19a5d1572e5db961d09d33c124ec8a733b1",
+    "outputs/ease_estimator_repair_v1/seed_1/policy.pt": "7b9727d0a1f583f158f454fcd1f3d1807636973e455d432f4927fcdc83cf7a7b",
+    "outputs/ease_estimator_repair_v1/seed_2/policy.pt": "62506dc0d29746b80fdeaa1fe549e3010dafe33eb6c6a97284beb9848a96ec37"
+  },
+  "design": "Keep all12 original tasks; add one prespecified shifted task per original on the same4 training bodies (x +/-12mm,y +/-8mm with parity). Retain original reset q; no success/IK filtering of shifts. Newcase calibration seeds38000+case differ. Eight shifted fitting placements and four fresh held placements; original four held placements remain excluded. No unseen-body execution or data.",
+  "collection": "Reuse48 original E99/analytical trajectories and36 E117 candidates. Add48 trajectories on12 shifted cases using analytical/E117 three seeds; record all successes/failures and histories. Reuse original E117 context dataset; only clean fitting histories enter loss. Fresh and original held histories never enter optimizer.",
+  "training": "Three fixed2000-update runs from E117 final checkpoints, AdamW1e-5, clip1, batch128:32 original fitting rows,32 shifted descend/lower rows,32 shifted other rows,32 synthetic. Main ridge MSE +0.10 normalized task action loss (descent/lower weight3) +0.02 measured-response loss +0.25 matrix preservation on protected rows. Successful E117 reference task: preserve its same-history action/matrix. On original fitting cases where E117 failed but E99 succeeded: preserve E99. Otherwise analytical targets. No action objective during explicit probe. Same-history targets, no privileged inference or selector. No held-based checkpoint selection.",
+  "evaluation": "72 candidate full episodes on all24 cases. Compare original successes against E99 and E117 union, shifted against E117. Require overall/reference improvement, zero lost reference successes, no joint-count/seed decline, no collision increase; original and fresh held results reported separately. No unseen testing in this experiment, even if gate passes.",
+  "videos": "First success/failure per reference and candidate seed; paired first gain/loss per seed and first fresh-held gain/loss. Keep source models, predictions, full states and all outcomes.",
+  "test_evaluated": false
+}
