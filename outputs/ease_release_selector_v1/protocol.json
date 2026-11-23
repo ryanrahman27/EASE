@@ -1,0 +1,31 @@
+{
+  "experiment": "E113",
+  "inputs": {
+    "outputs/ease_unseen_progress_v1/cases.json": "e25348fad02c14a6d3fafa872e3ce1df5b9b158208e3efa73c76cb61be1f16ac",
+    "outputs/ease_unseen_progress_v1/axis_catalog.json": "bc812c707bbca7129148013b4d567e811a0b52fc5a0f693a2ee1b03612bfc07c",
+    "outputs/ease_unseen_progress_v1/summary.json": "8c56382e7a6cf699c975801bba57db5953638db2d934c4ed5f264b361c5c3ba5",
+    "/mnt/c/Users/faisa/piperx-openpi/examples/ease_fm/unseen_progress_selector.py": "fe52797b765dd40d06779baa3c340960c3b3778feb3d0743091cad1460841ec3",
+    "/mnt/c/Users/faisa/piperx-openpi/examples/ease_fm/progress_action_bank.py": "a146b32f701a25b5bce965d6d73d377bd8b548ddb6c2aba30c5bd073577fc2ea",
+    "/mnt/c/Users/faisa/piperx-openpi/examples/ease_fm/unseen_progress_rollout.py": "537ccd198c41bdc68e6534a7d632a1a2eb79d96837bdd16bcbdfb8f3e39662cd"
+  },
+  "checkpoints": {
+    "outputs/ease_robust_training_v1/seed_0/policy.pt": "bb2eadf92edc2f698fd137f6d1a7c8ec0a7283cd34e1d5a0fc390645e66392f1",
+    "outputs/ease_robust_training_v1/seed_1/policy.pt": "141e03fdac6d03a8ef035db3b8d3218cbbe73193450e06821e10b310380fc42d",
+    "outputs/ease_robust_training_v1/seed_2/policy.pt": "cf0d4d5d9fb80d5a20f5b117ea897a057e9c81ede715b785dad7523ec77520a0",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_0/policy.pt": "7cc59ce83397a3856939a849f229e0a962bfe0e1df3add7680aac42b8c5d0fec",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_1/policy.pt": "67a01fc8cdbec4d7c5ee5e602e5d1a16d6cfa80a8520c28a89eb2a861437b2d6",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_2/policy.pt": "f87c12bd330baf384432c5d275eda41f189ddb557f6083f487082a76447b2b71",
+    "outputs/ease_task_retention_training_v1/data_only/seed_0/policy.pt": "3b752f0136a32812e1abb4c2d59910d4846c87c3d439d492f241fa2763620037",
+    "outputs/ease_task_retention_training_v1/data_only/seed_1/policy.pt": "852d03bcadbaa650ffaaab71e9ac71bf0b03c5f2128b2f994348cd8f45c30bd7",
+    "outputs/ease_task_retention_training_v1/data_only/seed_2/policy.pt": "58b2bec0d87998d117e29d172b50a42adfd16b2ba64515677f6f656a86b02040",
+    "outputs/ease_task_retention_training_v1/retained/seed_0/policy.pt": "3190e96c2d867237db6f5aedbc46f71ef61ca35f36e0dc3df663018141c50627",
+    "outputs/ease_task_retention_training_v1/retained/seed_1/policy.pt": "4a0495a5b7f719a1d3586554545e11ba39c58840ccdcc78e9fecf1aa2a5993ad",
+    "outputs/ease_task_retention_training_v1/retained/seed_2/policy.pt": "d351c6b49b8252a903ed98f2840207e8881f064b1902bc3b71ceb678273345a2"
+  },
+  "design": "All24 six-joint E112 task/seed pairs, original frozen selector versus same selector extended to release:48 full episodes. Reused development cohort, not independent transfer evidence. No checkpoint/threshold/bank/ranking/aperture/budget changes. Release retains original1% pose-error progress criterion, even near its target. Before first forbidden contact only; no rescue after prior collision.",
+  "gate": "Strict task-success improvement, retain every original-selector success, nonincreasing collisions and no per-seed decline. All failures included. No tuning after outcomes.",
+  "verification": "Every original-selector full serialized replay equals E112. All extended runs equal original before release. Every selected prediction matches execution. Diagnose candidate constraint intersections at the first collision and log release decisions.",
+  "videos": "Case0 seed0 both modes, every gain/loss both modes, first remaining collision and contact-free failure both modes. Also first release-warning pair, even if outcome unchanged. Outcome-selected illustrations, full serialized replay.",
+  "limits": "Exact simulator state/model access remains privileged. Fixed40ms horizon; unchanged progress gate may preclude release safety actions. This experiment isolates extending phase eligibility, not optimizing release.",
+  "reserved_test_evaluated": false
+}
