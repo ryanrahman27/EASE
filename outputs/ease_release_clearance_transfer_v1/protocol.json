@@ -1,0 +1,8 @@
+{
+  "experiment": "E162",
+  "scope": "Matched fitting-only controller comparison on96 placements. Added after partial E161 fitting outcomes showed rescues, before any E162 outcome. No parameter change or optimization; adaptive development, not independent validation.",
+  "intervention": "Exactly the E161 lower/release target height265mm, original245mm for the reference. No rate limiter. E120 comparison reused from E161; additionally test uniform32 and frozen E153/E154 three-model learned weighted-map ensemble with original four family folds. No retraining, seed selection, contact/geometry input or physics selector.",
+  "comparisons": "For each estimator, compare original versus elevated release, both DOFs, collisions and paired rescues/regressions. Then compare learned versus analytical and E120 under the same elevated-release controller. All three references stay immutable. All96 placements per estimator, no success filtering or held execution.",
+  "checks": "All states and traces before first lower action must match the corresponding original controller exactly. Preserve calibration, fixed probe, frozen bias, histories, original task criteria and budgets.",
+  "interpretation": "Elevated release allows a short drop; not gentle contact placement. A task-controller gain does not establish learned-estimator superiority. No held test is opened or selected by this study."
+}
