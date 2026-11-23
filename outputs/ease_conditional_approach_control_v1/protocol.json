@@ -1,0 +1,16 @@
+{
+  "experiment": "E165",
+  "scope": "All48 six-joint fitting placements plus4 seven-joint exact no-op replays;44 seven-joint results reused unchanged. No held execution. Added after partial E164 outcomes, so this is adaptive fitting development.",
+  "motivation": "Unconditional higher approach rescues case13 but creates an unnecessary vertical excursion and descent collision at originally aligned case1. High approach also moves some approach contacts into descent, showing that extra height alone is not full collision avoidance.",
+  "rule": "At task entry after unchanged calibration, measure lateral distance from current tool position to object XY target. For six-joint bodies only, raise approach330 to400mm only if lateral distance>8mm, the original task position tolerance. No threshold sweep, body ID, pose lookup, geometry, simulator Jacobian or physics selector. Other cases retain the E161 baseline exactly. Decision frozen once at entry; no later re-evaluation.",
+  "preserved": "E120 ensemble weights/residual,265mm lower/release fix,240mm descent, all other targets, phase budgets, probe, frozen measured bias and strict success/contact criteria unchanged. Short-drop release remains disclosed.",
+  "checks": "All inactive episodes must reproduce original complete states/traces exactly. Identical calibration and frozen bias for all new runs. Compare against E161 and E164 high approach; preserve all outcomes.",
+  "screen": "Above37/48 six-joint success, fewer than10 approach/descent first-contact episodes, no more than11 collision episodes, no lost E161 six-joint successes. No automatic held evaluation or E120 replacement.",
+  "threshold_m": 0.008,
+  "raised_height_m": 0.4,
+  "inputs": {
+    "outputs/ease_release_clearance_control_v1/records.json": "8e78a35dca667c23a502b59687524b7c402d321497ffef65e8a50c37648835ea",
+    "outputs/ease_release_clearance_control_v1/cases.json": "bb06c1302362e1e0232c548d822a24705ead6f0ca83e0ac6c283894efa0d7a25",
+    "outputs/ease_release_clearance_control_v1/verification.json": "a6f26f40f74316e0544cf9a29a0dc7d2c70255bf40a75f90fbc1c5f40700e5cf"
+  }
+}
