@@ -1,0 +1,25 @@
+{
+  "experiment": "E176",
+  "scope": "48 six-joint fitting cases x2 estimators=96 full episodes;5 exact E175 preflight replays. E120 full48 must also exactly reproduce E175. No held bodies or training.",
+  "methods": "E120 unchanged three-model reference/correction ensembles and bounded residual versus original analytical LocalPose: solve(gram,cross).T, forgetting.98, ridge floor1e-6; accumulated history before probe, last32 transitions from probe onward. Both update motion statistics online and freeze identical calibrated bias. Analytical has no neural correction.",
+  "controller": "Exact E175 early risk and late stall gates, strict object-safe grasp-first planner, route tracking, probe/table/gripper protection, causal clearance allowance, guarded close/lift,265mm release, task goals and scoring. Same simulator geometry/object/contact privilege. No estimator-specific retuning or case-ID controller rules.",
+  "budget": "Both:32 calibration steps,32 pre-close probe steps, same action bounds/dt. Approach80, descend100 or300 only after accepted route, close40,lift100,transport100,lower100,release40,retreat80,settle40. Same reach early-exit rule. Maximum944 control steps including calibration when routed,744 otherwise. Actual phase lengths may differ; report them, no forced padding or extra retries.",
+  "analysis": "Report paired successes/losses, collisions, grasp/lift, trigger and abort counts, per-family results, total/median actual interactions and prediction errors. One deterministic paired rollout per fitting case; placements are not independent morphology samples. No superiority claim from a tie or a fitting-only result.",
+  "videos": "Save all traces/states/actions/histories. Render both methods for cases0,26,43,62,65,67 and every discordant success/collision case, plus any missing success/failure category. Include archived E174 case26 failure for context, labeled historical and excluded from paired counts.",
+  "checkpoints": {
+    "outputs/ease_task_retention_training_v1/retained/seed_0/policy.pt": "3190e96c2d867237db6f5aedbc46f71ef61ca35f36e0dc3df663018141c50627",
+    "outputs/ease_task_retention_training_v1/retained/seed_1/policy.pt": "4a0495a5b7f719a1d3586554545e11ba39c58840ccdcc78e9fecf1aa2a5993ad",
+    "outputs/ease_task_retention_training_v1/retained/seed_2/policy.pt": "d351c6b49b8252a903ed98f2840207e8881f064b1902bc3b71ceb678273345a2",
+    "outputs/ease_estimator_repair_v1/seed_0/policy.pt": "26dd3d2785e3da7f7daeda03b588f19a5d1572e5db961d09d33c124ec8a733b1",
+    "outputs/ease_estimator_repair_v1/seed_1/policy.pt": "7b9727d0a1f583f158f454fcd1f3d1807636973e455d432f4927fcdc83cf7a7b",
+    "outputs/ease_estimator_repair_v1/seed_2/policy.pt": "62506dc0d29746b80fdeaa1fe549e3010dafe33eb6c6a97284beb9848a96ec37",
+    "outputs/ease_broad_history_v1/seed_0/policy.pt": "2d809ac80788ba548c19a2b577e3228eae32af4a59f591010dc6fa8972ec5a80",
+    "outputs/ease_broad_history_v1/seed_1/policy.pt": "69bec791582226b1fff68ac3432476f3d1881e40b7ffc39ea850fed2262027a0",
+    "outputs/ease_broad_history_v1/seed_2/policy.pt": "5d3303a645c6b540e606cd7dcbcbe1ee4b1574148e47d981a00b2184e83674b2",
+    "outputs/ease_candidate_history_v1/seed_0/policy.pt": "b2f775ea86ba60b82ff71b972c8fc36daf29caca051ea4cc8493ac3cbc26a6a9",
+    "outputs/ease_candidate_history_v1/seed_1/policy.pt": "918cccdf8aae26426069fb6f8c567906bcbe9722fafc2ac5813bebb5698e403b",
+    "outputs/ease_candidate_history_v1/seed_2/policy.pt": "4ef24d776eacaea79098f6f8c8134012b8c72c441d9b6228d0baacdca8a7f5b3"
+  },
+  "reference_sha256": "a74bc9a1c69e45e2145d394f2ea1b11619ddc6a60c83e264dbcd1c86659f3815",
+  "privileged": true
+}
