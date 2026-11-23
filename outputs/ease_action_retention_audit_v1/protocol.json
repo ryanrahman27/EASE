@@ -1,0 +1,405 @@
+{
+  "experiment": "E80",
+  "selection": [
+    {
+      "case": 1,
+      "method": "parent_0",
+      "dof": 6,
+      "success": false,
+      "steps": 374,
+      "selected_steps": [
+        93
+      ]
+    },
+    {
+      "case": 1,
+      "method": "parent_1",
+      "dof": 6,
+      "success": false,
+      "steps": 506,
+      "selected_steps": [
+        108
+      ]
+    },
+    {
+      "case": 1,
+      "method": "candidate_2",
+      "dof": 6,
+      "success": true,
+      "steps": 352,
+      "selected_steps": [
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144,
+        145,
+        146,
+        147,
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        158,
+        159,
+        160,
+        161,
+        162,
+        163,
+        164,
+        165,
+        166,
+        167,
+        168,
+        169,
+        170,
+        171,
+        172,
+        173,
+        174,
+        175,
+        176,
+        177,
+        178,
+        179,
+        180,
+        181,
+        182,
+        183,
+        184,
+        185,
+        186,
+        187,
+        188,
+        189,
+        190,
+        191,
+        192,
+        193,
+        194,
+        195,
+        196,
+        197
+      ]
+    },
+    {
+      "case": 2,
+      "method": "parent_0",
+      "dof": 6,
+      "success": true,
+      "steps": 440,
+      "selected_steps": [
+        283,
+        284,
+        285,
+        286,
+        287,
+        288,
+        289,
+        290,
+        291,
+        292,
+        293,
+        294,
+        295,
+        296,
+        297,
+        298,
+        299,
+        300,
+        301,
+        302,
+        303,
+        304,
+        305
+      ]
+    },
+    {
+      "case": 2,
+      "method": "candidate_1",
+      "dof": 6,
+      "success": false,
+      "steps": 452,
+      "selected_steps": [
+        163
+      ]
+    },
+    {
+      "case": 4,
+      "method": "parent_2",
+      "dof": 6,
+      "success": false,
+      "steps": 265,
+      "selected_steps": [
+        127
+      ]
+    },
+    {
+      "case": 6,
+      "method": "parent_1",
+      "dof": 7,
+      "success": false,
+      "steps": 362,
+      "selected_steps": [
+        112
+      ]
+    },
+    {
+      "case": 8,
+      "method": "parent_0",
+      "dof": 7,
+      "success": false,
+      "steps": 571,
+      "selected_steps": [
+        45
+      ]
+    },
+    {
+      "case": 8,
+      "method": "parent_1",
+      "dof": 7,
+      "success": false,
+      "steps": 544,
+      "selected_steps": [
+        142
+      ]
+    },
+    {
+      "case": 8,
+      "method": "candidate_0",
+      "dof": 7,
+      "success": false,
+      "steps": 305,
+      "selected_steps": [
+        24
+      ]
+    },
+    {
+      "case": 8,
+      "method": "candidate_1",
+      "dof": 7,
+      "success": false,
+      "steps": 278,
+      "selected_steps": [
+        146
+      ]
+    },
+    {
+      "case": 10,
+      "method": "parent_2",
+      "dof": 7,
+      "success": false,
+      "steps": 357,
+      "selected_steps": [
+        113
+      ]
+    },
+    {
+      "case": 10,
+      "method": "candidate_0",
+      "dof": 7,
+      "success": false,
+      "steps": 429,
+      "selected_steps": [
+        53
+      ]
+    },
+    {
+      "case": 10,
+      "method": "candidate_1",
+      "dof": 7,
+      "success": false,
+      "steps": 605,
+      "selected_steps": [
+        242
+      ]
+    },
+    {
+      "case": 10,
+      "method": "candidate_2",
+      "dof": 7,
+      "success": false,
+      "steps": 400,
+      "selected_steps": [
+        33
+      ]
+    },
+    {
+      "case": 11,
+      "method": "parent_1",
+      "dof": 7,
+      "success": false,
+      "steps": 534,
+      "selected_steps": [
+        94
+      ]
+    },
+    {
+      "case": 11,
+      "method": "parent_2",
+      "dof": 7,
+      "success": false,
+      "steps": 442,
+      "selected_steps": [
+        90
+      ]
+    },
+    {
+      "case": 11,
+      "method": "candidate_0",
+      "dof": 7,
+      "success": false,
+      "steps": 397,
+      "selected_steps": [
+        294
+      ]
+    },
+    {
+      "case": 11,
+      "method": "candidate_2",
+      "dof": 7,
+      "success": false,
+      "steps": 302,
+      "selected_steps": [
+        200
+      ]
+    },
+    {
+      "case": 12,
+      "method": "candidate_0",
+      "dof": 6,
+      "success": false,
+      "steps": 315,
+      "selected_steps": [
+        81
+      ]
+    },
+    {
+      "case": 13,
+      "method": "parent_1",
+      "dof": 7,
+      "success": false,
+      "steps": 412,
+      "selected_steps": [
+        229
+      ]
+    },
+    {
+      "case": 13,
+      "method": "candidate_1",
+      "dof": 7,
+      "success": false,
+      "steps": 293,
+      "selected_steps": [
+        21
+      ]
+    },
+    {
+      "case": 14,
+      "method": "parent_1",
+      "dof": 7,
+      "success": false,
+      "steps": 444,
+      "selected_steps": [
+        65
+      ]
+    },
+    {
+      "case": 15,
+      "method": "parent_0",
+      "dof": 7,
+      "success": false,
+      "steps": 405,
+      "selected_steps": [
+        12
+      ]
+    },
+    {
+      "case": 15,
+      "method": "parent_2",
+      "dof": 7,
+      "success": false,
+      "steps": 385,
+      "selected_steps": [
+        13
+      ]
+    },
+    {
+      "case": 15,
+      "method": "candidate_0",
+      "dof": 7,
+      "success": false,
+      "steps": 347,
+      "selected_steps": [
+        13
+      ]
+    },
+    {
+      "case": 15,
+      "method": "candidate_1",
+      "dof": 7,
+      "success": false,
+      "steps": 378,
+      "selected_steps": [
+        12
+      ]
+    },
+    {
+      "case": 15,
+      "method": "candidate_2",
+      "dof": 7,
+      "success": false,
+      "steps": 374,
+      "selected_steps": [
+        13
+      ]
+    }
+  ],
+  "checkpoints": {
+    "outputs/ease_robust_training_v1/seed_0/policy.pt": "bb2eadf92edc2f698fd137f6d1a7c8ec0a7283cd34e1d5a0fc390645e66392f1",
+    "outputs/ease_robust_training_v1/seed_1/policy.pt": "141e03fdac6d03a8ef035db3b8d3218cbbe73193450e06821e10b310380fc42d",
+    "outputs/ease_robust_training_v1/seed_2/policy.pt": "cf0d4d5d9fb80d5a20f5b117ea897a057e9c81ede715b785dad7523ec77520a0",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_0/policy.pt": "7cc59ce83397a3856939a849f229e0a962bfe0e1df3add7680aac42b8c5d0fec",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_1/policy.pt": "67a01fc8cdbec4d7c5ee5e602e5d1a16d6cfa80a8520c28a89eb2a861437b2d6",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_2/policy.pt": "f87c12bd330baf384432c5d275eda41f189ddb557f6083f487082a76447b2b71"
+  },
+  "design": "All E78 successful learned trajectories containing response warnings plus every learned first contact. Selected after outcomes for causal-geometry diagnosis, not representative performance estimation.",
+  "measurement": "Five one-step cloned branches: selected action; half and quarter task component with clipped measured bias retained; bias-only; analytical Jacobian fitted from identical measured history. Same aperture and unchanged incoming velocity. Every action clipped +/- .04. Branches bypass geometry filtering and do not update controllers. Report collisions, pads, object pose and task error.",
+  "limits": "Simulator clones provide privileged diagnostic counterfactuals, not an inference-time selection oracle. Outcome-selected controls from two successful trajectories are dependent. One-step avoidance can postpone contact and is not task recovery. E78 gate remains failed.",
+  "test_evaluated": false
+}
