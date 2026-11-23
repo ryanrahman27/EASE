@@ -1,0 +1,32 @@
+{
+  "experiment": "E17",
+  "scope": "Training-body latent distillation; no unseen-body evaluation",
+  "teacher": "outputs\\ease_budget_v1\\privileged\\30000\\policy.pt",
+  "teacher_sha256": "96d1ed818a3b4db15726714f52c0c5617e96db97c44820b3d1473417a127cf9d",
+  "teacher_steps": 30000,
+  "manifest_sha256": "7e5c8439cddb7edabb188e303d2cd1e788d2f55dc23205d4659e36e8cf17b6d1",
+  "recovery_hashes": {
+    "original_flow\\recovery.npz": "13be20a9caa0b7853805e0e6bb25d4fbec0ea6c0f5f41234c7131304da88e822",
+    "original_direct\\recovery.npz": "1148f3eae181241f2ea94f7415a9c4e5409287e32a763b766be87a842c71123c"
+  },
+  "seed": 0,
+  "steps": 10000,
+  "batch": 32,
+  "lr": 0.0003,
+  "loss": "Masked per-joint raw latent MSE against frozen privileged encoder targets; no action or task loss",
+  "student_initialization": "Fresh seed-0 history modules; inherited frozen teacher controller and joint/task normalization",
+  "trainable_parameters": 105408,
+  "total_parameters": 244289,
+  "history": "Same other-episode variable 0..32 context sampling as E15/E16; measured-history training normalization",
+  "sampling": "Uniform original+recovery rows; recovery rows supply body/context selection only, not action supervision",
+  "evaluation_modes": [
+    "correct32",
+    "empty",
+    "wrong_axes32"
+  ],
+  "wrong_donor": "First training arm of same DoF and different axis family",
+  "privileged_information": "Training target only; no physical parameters or identity input at student inference",
+  "test_evaluated": false,
+  "validation_evaluated": false,
+  "interpretation": "Distillation diagnostic includes pretrained privileged-controller training; not matched total compute against end-to-end baseline"
+}

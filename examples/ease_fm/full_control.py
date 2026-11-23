@@ -107,8 +107,9 @@ def rollout(dataset,model,kind,folder,device,collect=False,mode='correct32'):
         length=0 if mode=='empty' else 32
         for i,(env,e) in enumerate(zip(envs,batch)):
             donor=env.arm
-            if mode=='wrong32':
-                donor=next(a for a in arms.values() if a.dof==env.arm.dof and a.seed!=env.arm.seed)
+            if mode in ('wrong32','wrong_axes32'):
+                donor=next(a for a in arms.values() if a.dof==env.arm.dof and a.seed!=env.arm.seed
+                           and (mode!='wrong_axes32' or a.family!=env.arm.family))
             key=(donor.seed,e['goal_id'])
             if length and key not in cache:
                 cache[key]=explore(MixedReach(donor, synchronize=manifest.get('synchronized_observations',False)),goals[e['goal_id']]['seed']+900000,32)
