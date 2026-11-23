@@ -1,0 +1,327 @@
+{
+  "experiment": "E110",
+  "inputs": {
+    "outputs/ease_early_physics_v1/trials/0_0_None_baseline.json": "0cf5604e99768eda0c512156b2110ac42582fee9a27f48ec6f5b396fd89c0ee1",
+    "outputs/ease_early_physics_v1/trials/0_1_None_baseline.json": "a1b517ee2f848a8040cd56910311a9febcb7714deb6cee7bb170901814ac45a4",
+    "outputs/ease_early_physics_v1/trials/0_2_None_baseline.json": "1764b55d9419ad2aa1a831d5b7848ccd211070edfc7872ca8faa6cc3e43c31e8",
+    "outputs/ease_early_physics_v1/trials/1_0_None_baseline.json": "dd139b8ded6c6e8751a1ef41437fd042e5fa2a4a34e89146feb2cab271f85191",
+    "outputs/ease_early_physics_v1/trials/1_1_None_baseline.json": "16bf34aa2e3ce15c177ed649c00dd4301f11d4cc6d73b50e52e1e52f7c9051da",
+    "outputs/ease_early_physics_v1/trials/1_2_None_baseline.json": "81d045239f4f083ab31b253caaf862a7af0481897c18c06f9f3de2d8759dd344",
+    "outputs/ease_early_physics_v1/trials/2_0_None_baseline.json": "9498ba82d72dbdebb15dfa5f999924eeb1efcba930ac650838da4d260bff223f",
+    "outputs/ease_early_physics_v1/trials/2_1_None_baseline.json": "c60a7962b9de17d4ef3a08b42c4c8567745cdecfedd51d8d9f9b8eaafa108731",
+    "outputs/ease_early_physics_v1/trials/2_2_None_baseline.json": "fe866fa8411f8f71fc1db64db26b91c1b5a7dac7d76642baa9fdbfa96a4586e8",
+    "outputs/ease_early_physics_v1/trials/3_0_None_baseline.json": "4c162a04863abbc39eeb8fc6f277745a7629c0a270a43c08dfc06e45cbd1a1f3",
+    "outputs/ease_early_physics_v1/trials/3_1_None_baseline.json": "7c46f5bab44b3dadc04cba545f322ec5eb217a6429021b4147d9a6094ff46aac",
+    "outputs/ease_early_physics_v1/trials/3_2_None_baseline.json": "cd4288c9a57b03162912e9aa197782dc03b4c3796fd11125b9c60e0cf7183d53",
+    "outputs/ease_early_physics_v1/trials/4_0_None_baseline.json": "20bdfeca77b1ccbe187be69d1b6f6fccf7de9ee4d565166e5fcb02799ee34098",
+    "outputs/ease_early_physics_v1/trials/4_1_None_baseline.json": "81483e417a30e1eb1cf7e0c4ad64ff663c0b69d349d6375a8b2c65487adb5ea9",
+    "outputs/ease_early_physics_v1/trials/4_2_None_baseline.json": "d3f182b8d3e5a96e38221a598e2907626e146f1652d66ea4e1c514e1fa2f3bad",
+    "outputs/ease_early_physics_v1/trials/5_0_None_baseline.json": "5af60a9383ae6b0d1fc63d8b614b53424b6f71dd25bfdbbb2d74a4a81a5f3823",
+    "outputs/ease_early_physics_v1/trials/5_1_None_baseline.json": "91af9e14183684cb1d096ac50634caa69b02f3f0aa04fcd2a07870cc0c7282d5",
+    "outputs/ease_early_physics_v1/trials/5_2_None_baseline.json": "a5c8a9700f183bd5acbc9c5902c9de163dafeaad249db371bd85c442ceb50d51",
+    "outputs/ease_early_physics_v1/trials/6_0_None_baseline.json": "2b7dec1293ed02a1ce1e40d1e75e0963da80d2276f3f988aa3a56dc29fcb26c4",
+    "outputs/ease_early_physics_v1/trials/6_1_None_baseline.json": "ccbbc7e33accf7c7a1af85e6f2a560375ac6f5a324366d7251d063f5d18ae45a",
+    "outputs/ease_early_physics_v1/trials/6_2_None_baseline.json": "bf75dda7f64b6a35cb764b5e98cf558e0ff0fc67b5c5f8426e697f69781eb102",
+    "outputs/ease_early_physics_v1/trials/7_0_None_baseline.json": "72c9ce25371b1f364a2cecc109c44b0e1f1a2e0db77f23e7686bb4c19529b935",
+    "outputs/ease_early_physics_v1/trials/7_1_None_baseline.json": "01b9897ba02ccc712a62d5357fd6e26c94e9c6edb4423c39ca34e9493b4dea7d",
+    "outputs/ease_early_physics_v1/trials/7_2_None_baseline.json": "e8624e8788c894b1db2adb7e6b0a419a3d49679486f2e3586daa6df8cf12158f",
+    "outputs/ease_early_physics_v1/trials/8_0_None_baseline.json": "04c0534ce4e8f72e67e7cbc1715b68c272a1d3025151a3b5605b7f48b4bbe9f8",
+    "outputs/ease_early_physics_v1/trials/8_1_None_baseline.json": "dfd56106839f2b97507fda2db0272521556b2b063608c7f27227d67bc9d77acd",
+    "outputs/ease_early_physics_v1/trials/8_2_None_baseline.json": "2c6a7113002338d9b12e99ef4b9a6b8260e692cf61348faad415364637c2ab7f",
+    "outputs/ease_early_physics_v1/trials/9_0_None_baseline.json": "89d7c9498d42cd9d32999a005b2d724bc321f76f17e408f2707d2404ba2a2e0f",
+    "outputs/ease_early_physics_v1/trials/9_1_None_baseline.json": "078336d0e897730c3f6a67e0385a626986a1ee17269d1211c4ce73c4628ba9c8",
+    "outputs/ease_early_physics_v1/trials/9_2_None_baseline.json": "b669a8aab3c8476bd5a4006f5d110e053d21080d6d44322a9b3300a7b059c57b",
+    "outputs/ease_early_physics_v1/trials/10_0_None_baseline.json": "1427cdeb36f66ba3bac8e166f808a2aadaddfb8b0768bacb068ab82fd631c961",
+    "outputs/ease_early_physics_v1/trials/10_1_None_baseline.json": "fa8676203e4e33a46e98e770f39e04ce639c144a600b601b0ffc81f7daa15cd8",
+    "outputs/ease_early_physics_v1/trials/10_2_None_baseline.json": "cdf02d7d2c500016f6aa77f8bf2b0082d7df060c71a1a55c450f8bfca6835d9e",
+    "outputs/ease_early_physics_v1/trials/11_0_None_baseline.json": "13d6bb7218575e9c8d9888adcca6095900778ca22b928cdac043af231f127256",
+    "outputs/ease_early_physics_v1/trials/11_1_None_baseline.json": "94f503cd02c13411e4b020360e4aa24f3daadecad990aadc9d83757a27eefff5",
+    "outputs/ease_early_physics_v1/trials/11_2_None_baseline.json": "73d6331653af44005dd3aa0e4c5768c9b1f43fdd13a0606f053504661b1d3db7"
+  },
+  "checkpoints": {
+    "outputs/ease_robust_training_v1/seed_0/policy.pt": "bb2eadf92edc2f698fd137f6d1a7c8ec0a7283cd34e1d5a0fc390645e66392f1",
+    "outputs/ease_robust_training_v1/seed_1/policy.pt": "141e03fdac6d03a8ef035db3b8d3218cbbe73193450e06821e10b310380fc42d",
+    "outputs/ease_robust_training_v1/seed_2/policy.pt": "cf0d4d5d9fb80d5a20f5b117ea897a057e9c81ede715b785dad7523ec77520a0",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_0/policy.pt": "7cc59ce83397a3856939a849f229e0a962bfe0e1df3add7680aac42b8c5d0fec",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_1/policy.pt": "67a01fc8cdbec4d7c5ee5e602e5d1a16d6cfa80a8520c28a89eb2a861437b2d6",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_2/policy.pt": "f87c12bd330baf384432c5d275eda41f189ddb557f6083f487082a76447b2b71",
+    "outputs/ease_task_retention_training_v1/data_only/seed_0/policy.pt": "3b752f0136a32812e1abb4c2d59910d4846c87c3d439d492f241fa2763620037",
+    "outputs/ease_task_retention_training_v1/data_only/seed_1/policy.pt": "852d03bcadbaa650ffaaab71e9ac71bf0b03c5f2128b2f994348cd8f45c30bd7",
+    "outputs/ease_task_retention_training_v1/data_only/seed_2/policy.pt": "58b2bec0d87998d117e29d172b50a42adfd16b2ba64515677f6f656a86b02040",
+    "outputs/ease_task_retention_training_v1/retained/seed_0/policy.pt": "3190e96c2d867237db6f5aedbc46f71ef61ca35f36e0dc3df663018141c50627",
+    "outputs/ease_task_retention_training_v1/retained/seed_1/policy.pt": "4a0495a5b7f719a1d3586554545e11ba39c58840ccdcc78e9fecf1aa2a5993ad",
+    "outputs/ease_task_retention_training_v1/retained/seed_2/policy.pt": "d351c6b49b8252a903ed98f2840207e8881f064b1902bc3b71ceb678273345a2"
+  },
+  "selections": [
+    {
+      "case": 0,
+      "seed": 0,
+      "step": 37,
+      "kind": "successful_control"
+    },
+    {
+      "case": 0,
+      "seed": 0,
+      "step": 122,
+      "kind": "successful_control"
+    },
+    {
+      "case": 0,
+      "seed": 0,
+      "step": 155,
+      "kind": "successful_control"
+    },
+    {
+      "case": 0,
+      "seed": 0,
+      "step": 171,
+      "kind": "successful_control"
+    },
+    {
+      "case": 0,
+      "seed": 0,
+      "step": 231,
+      "kind": "successful_control"
+    },
+    {
+      "case": 0,
+      "seed": 1,
+      "step": 37,
+      "kind": "successful_control"
+    },
+    {
+      "case": 0,
+      "seed": 1,
+      "step": 131,
+      "kind": "successful_control"
+    },
+    {
+      "case": 0,
+      "seed": 1,
+      "step": 157,
+      "kind": "successful_control"
+    },
+    {
+      "case": 0,
+      "seed": 1,
+      "step": 169,
+      "kind": "successful_control"
+    },
+    {
+      "case": 0,
+      "seed": 1,
+      "step": 223,
+      "kind": "successful_control"
+    },
+    {
+      "case": 0,
+      "seed": 2,
+      "step": 37,
+      "kind": "successful_control"
+    },
+    {
+      "case": 0,
+      "seed": 2,
+      "step": 124,
+      "kind": "successful_control"
+    },
+    {
+      "case": 0,
+      "seed": 2,
+      "step": 146,
+      "kind": "successful_control"
+    },
+    {
+      "case": 0,
+      "seed": 2,
+      "step": 158,
+      "kind": "successful_control"
+    },
+    {
+      "case": 0,
+      "seed": 2,
+      "step": 214,
+      "kind": "successful_control"
+    },
+    {
+      "case": 1,
+      "seed": 0,
+      "step": 315,
+      "kind": "warning"
+    },
+    {
+      "case": 1,
+      "seed": 2,
+      "step": 233,
+      "kind": "warning"
+    },
+    {
+      "case": 2,
+      "seed": 0,
+      "step": 186,
+      "kind": "warning"
+    },
+    {
+      "case": 2,
+      "seed": 1,
+      "step": 183,
+      "kind": "warning"
+    },
+    {
+      "case": 6,
+      "seed": 0,
+      "step": 37,
+      "kind": "successful_control"
+    },
+    {
+      "case": 6,
+      "seed": 0,
+      "step": 139,
+      "kind": "successful_control"
+    },
+    {
+      "case": 6,
+      "seed": 0,
+      "step": 179,
+      "kind": "successful_control"
+    },
+    {
+      "case": 6,
+      "seed": 0,
+      "step": 191,
+      "kind": "successful_control"
+    },
+    {
+      "case": 6,
+      "seed": 0,
+      "step": 276,
+      "kind": "successful_control"
+    },
+    {
+      "case": 6,
+      "seed": 1,
+      "step": 218,
+      "kind": "warning"
+    },
+    {
+      "case": 6,
+      "seed": 2,
+      "step": 37,
+      "kind": "successful_control"
+    },
+    {
+      "case": 6,
+      "seed": 2,
+      "step": 131,
+      "kind": "successful_control"
+    },
+    {
+      "case": 6,
+      "seed": 2,
+      "step": 224,
+      "kind": "successful_control"
+    },
+    {
+      "case": 6,
+      "seed": 2,
+      "step": 237,
+      "kind": "successful_control"
+    },
+    {
+      "case": 6,
+      "seed": 2,
+      "step": 308,
+      "kind": "successful_control"
+    },
+    {
+      "case": 7,
+      "seed": 1,
+      "step": 37,
+      "kind": "successful_control"
+    },
+    {
+      "case": 7,
+      "seed": 1,
+      "step": 153,
+      "kind": "successful_control"
+    },
+    {
+      "case": 7,
+      "seed": 1,
+      "step": 210,
+      "kind": "successful_control"
+    },
+    {
+      "case": 7,
+      "seed": 1,
+      "step": 231,
+      "kind": "successful_control"
+    },
+    {
+      "case": 7,
+      "seed": 1,
+      "step": 298,
+      "kind": "successful_control"
+    },
+    {
+      "case": 8,
+      "seed": 0,
+      "step": 56,
+      "kind": "warning"
+    },
+    {
+      "case": 8,
+      "seed": 1,
+      "step": 216,
+      "kind": "warning"
+    },
+    {
+      "case": 8,
+      "seed": 2,
+      "step": 131,
+      "kind": "warning"
+    },
+    {
+      "case": 10,
+      "seed": 0,
+      "step": 85,
+      "kind": "warning"
+    },
+    {
+      "case": 10,
+      "seed": 1,
+      "step": 357,
+      "kind": "warning"
+    },
+    {
+      "case": 10,
+      "seed": 2,
+      "step": 65,
+      "kind": "warning"
+    },
+    {
+      "case": 11,
+      "seed": 0,
+      "step": 162,
+      "kind": "warning"
+    },
+    {
+      "case": 11,
+      "seed": 1,
+      "step": 158,
+      "kind": "warning"
+    },
+    {
+      "case": 11,
+      "seed": 2,
+      "step": 147,
+      "kind": "warning"
+    }
+  ],
+  "design": "First pre-collision clean warning from each E109 baseline pair with one; plus first step of five motion phases from first successful case in each DOF/seed stratum. All original training bodies; preserve train/held placement labels. Replay each selected baseline completely and exactly; never execute audited alternatives.",
+  "candidates": "Same five E108 alternatives versus expanded bank including those five, each joint +/- .01/.02/.04 around clipped measured bias,64 deterministic isotropic directions alternating .02/.04 norm around bias, and three finite-difference goal-directed actions with scales .25/.5/1. All increments clipped +/- .04. Directional response fit uses simulated40ms end pose around bias with +/- .01 probes, damping .015 and gain .35. No task Jacobian access. Frozen RNG11000000+case*100000+seed*10000+step. No candidate/horizon tuning.",
+  "criteria": "Primary40ms: original static admissibility, zero forbidden physical contact, and reduction of squared XYZ plus .15-scaled tool-axis error by at least max(1e-8,1% initial error). Report separate2mm minimum clearance over predicted2ms states using geometry-only expanded model with predicted object/fingers. Choose best40ms progress, tie larger clearance then name. Hold its absolute target to160ms and report continued contact-free progress, without reranking at160ms. This is not closed-loop replanning or full-task success.",
+  "limits": "Privileged exact physics-state/model finite-difference candidate audit. Outcome/prediction-selected states and successful controls are not independent trial samples or new embodiments. Candidate simulations may contact/move objects; only copies evolve. No training or executed controller change, no reserved final test.",
+  "videos": "Reuse original E104 baseline success/failure videos only for selected trajectory pairs, with exact hashes and explicit unchanged-policy labels.",
+  "test_evaluated": false
+}
