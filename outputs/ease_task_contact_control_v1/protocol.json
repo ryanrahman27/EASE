@@ -1,0 +1,27 @@
+{
+  "experiment": "E160",
+  "scope": "All96 fitting placements on four known bodies; no E159/fresh or other held execution. Keep E120 weights and original results immutable.",
+  "design": "Two matched controller interventions: E120 ensemble and uniform32. After the original complete action (including bounded E120 residual), subtract frozen calibrated bias and scale this joint-motion vector uniformly by min(1, .004/norm(Jv position), .0045/norm(Jv scaled-axis), .02/maxabs(v)). Add the same bias and retain the original final +/- .04 clip. J is the current measured-history estimate; no simulator Jacobian, geometry, future physics, object pose or contact input. This is a rate limiter, not a safety guarantee.",
+  "isolation": "Preserve all task waypoints, phase budgets/termination, success and contact criteria, initial32 calibration, close32 probe, history updates and frozen bias. Apply only after calibration and never to probe. No new checkpoint training or sweep. Existing E144 reference episodes reused, plus exact replay of eight prespecified ancestry-root cases for both baselines before interventions.",
+  "verification_cases": [
+    0,
+    1,
+    3,
+    4,
+    6,
+    7,
+    9,
+    10
+  ],
+  "evaluation": "Report all96 success, six/seven success, collision count, first-contact phases, paired gains/losses for each estimator and against E120. Positive fitting screen requires improvement over own baseline, neither DOF worse, no higher collisions; separately report zero-loss retention. No automatic held testing or promotion. If limiting slows progress, report phase-budget failures rather than extending budgets after outcomes.",
+  "parameters": {
+    "position_step_m": 0.004,
+    "scaled_axis_step": 0.0045,
+    "joint_step_rad": 0.02
+  },
+  "inputs": {
+    "outputs/ease_history_estimator_control_v1/records.json": "de5c9cc01991102f6f1660814a68ab191105879b5b7030e4ef678e04e4f1bc92",
+    "outputs/ease_history_estimator_control_v1/cases.json": "bb06c1302362e1e0232c548d822a24705ead6f0ca83e0ac6c283894efa0d7a25",
+    "outputs/ease_history_estimator_control_v1/frozen.json": "ca4dc4774dfac2b2c758a9f44014e53811c0396d793ff1d23557ee438cb63976"
+  }
+}
