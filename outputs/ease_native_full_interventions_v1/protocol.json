@@ -1,0 +1,21 @@
+{
+  "experiment": "E65",
+  "checkpoints": {
+    "outputs/ease_robust_training_v1/seed_0/policy.pt": "bb2eadf92edc2f698fd137f6d1a7c8ec0a7283cd34e1d5a0fc390645e66392f1",
+    "outputs/ease_robust_training_v1/seed_1/policy.pt": "141e03fdac6d03a8ef035db3b8d3218cbbe73193450e06821e10b310380fc42d",
+    "outputs/ease_robust_training_v1/seed_2/policy.pt": "cf0d4d5d9fb80d5a20f5b117ea897a057e9c81ede715b785dad7523ec77520a0",
+    "outputs/ease_response_corrected_training_v1/prediction/seed_0/policy.pt": "c365cdfcd6a361b8dbe89dc34c7fe4ea8aea0c891cff5729194b21d7c0fd991d",
+    "outputs/ease_response_corrected_training_v1/prediction/seed_1/policy.pt": "d71a62cc955f320926cd5d92e88796cb9e92cee9cf7a73b0152d074dc8e41139",
+    "outputs/ease_response_corrected_training_v1/prediction/seed_2/policy.pt": "d8cc22d89c7c04646a467e9146f522dbccd4d0cf7738472aeeadb562926c6270",
+    "outputs/ease_response_corrected_training_v1/control/seed_0/policy.pt": "9302844857f92e3cd721a5c1680d53456f572a59db3dc722d69b178368f93767",
+    "outputs/ease_response_corrected_training_v1/control/seed_1/policy.pt": "8a207205a4029feff38a6ceae4fe4656ca711fbc44b563e39b2fc8e6ddc2425d",
+    "outputs/ease_response_corrected_training_v1/control/seed_2/policy.pt": "62dff63af9873a0d68c8974888bfcdb2d27b1858cd0473056a78a0ee33b13617"
+  },
+  "asset_commit": "cda5236f98383f6fbaa4820c6b18dba892cd087f",
+  "source_sha256": "c8915651837c0cd16aaae4aad6b54a515669b3deb6082a2bc052d95ce8d700f3",
+  "schedules_sha256": "44e2cefef18867bbd4339cbb2d8a888015a3dad13796ad69f45093fa6a0b3e35",
+  "cases_sha256": "6983880bf356462ef01a28fafdd296673d11fb22e29049de2cc75057cabcbb87",
+  "design": "All twelve E63 development cases, including successes. Ten estimators (analytical plus nine frozen learned models), crossed with measured additive bias versus zero additive bias for all 1700 steps after shared 32-step calibration. All geometry contacts disabled. Same fixed references, gains, thresholds and evolving history statistics. Analytical substitution from calibration is independent of the unused learned checkpoint, so run it once per case/bias condition rather than counting nine identical copies. All 120 measured-bias trials must exactly replay E63. No tuning, training, phase-dependent switching or early stopping.",
+  "metric": "All nine phases must hold XYZ error <.006 m and direction norm <.08 for their final eight steps. Report paired gains/losses, robot and seed breakdown. Diagnostic unconstrained tracking, not manipulation or independent embodiment validation.",
+  "test_evaluated": false
+}
