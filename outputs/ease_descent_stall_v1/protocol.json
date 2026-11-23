@@ -1,0 +1,13 @@
+{
+  "experiment": "E172",
+  "scope": "One fixed fitting candidate x48 six-joint cases, plus4 exact E170 replays. Adaptive fitting development after E171 regressions; no held evidence. E17044/48 zero collisions remains protected reference; E120+release primary baseline unchanged.",
+  "gate": "Measured local late descent stall: at least60 descent observations,25mm<position error<75mm, less than1mm error reduction over previous19 intervals, any absolute joint>=2.4rad. Latch for rest of descent. All thresholds frozen before E172 outcomes. Read-only gate diagnosis on E170 triggers only cases26,62,65,67; no case IDs or body identities enter control. Earlier broader stall rules also triggered successful case43 and are archived.",
+  "recovery": "When active, direct E120 task objective plus joint-limit posture regularization: H=J.T J+.03^2 I, preferred relative command -0.02*sign(q) on joints abs(q)>2.35, zero elsewhere. Unconstrained center solve(H,J.T*.35*error+.03^2*posture)+frozen_bias, projected with same bounds and clearance constraints. Outside active descent use exact E170 action/protection. No extra steps, new task Jacobian, phase goal or aperture change.",
+  "preserved": "E120 weights/frozen bias, calibration, history-based descent clearance allowance, probe protection/schedule,265mm release, original task budgets and strict scoring. Same QP solver and logged fallback. Privileged geometry diagnostic; not guaranteed safety or learned-only transfer.",
+  "screen": "More than44 successes, zero collisions, no lost E170 successes. Also report all four descent errors and exact trace/state retention for every nonactivated episode.",
+  "inputs": {
+    "outputs/ease_descent_execution_v1/history_allowance/records.json": "0b823dca0acf78881670195602ba7fbce29f9ba5f3b18f683461923852f7a244",
+    "outputs/ease_descent_stall_v1/diagnosis_60_local.json": "8c16e0ba685bd94cb4d64d404fbbbd01ce1596ebd354d3eac7693361e3c99c7e",
+    "/mnt/c/Users/faisa/piperx-openpi/examples/ease_fm/descent_progress.py": "a375b84e5693fa76c709e69ba4f51c432efc7d63f1fc052d1b32b170838d088d"
+  }
+}
