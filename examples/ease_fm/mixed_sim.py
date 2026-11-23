@@ -66,8 +66,9 @@ def arm_xml(arm):
 
 
 class MixedReach:
-    def __init__(self, arm, horizon=150):
+    def __init__(self, arm, horizon=150, synchronize=False):
         self.arm, self.horizon = arm, horizon
+        self.synchronize = synchronize
         self.xml = arm_xml(arm)
         self.model = mujoco.MjModel.from_xml_string(self.xml)
         self.data = mujoco.MjData(self.model)
@@ -103,6 +104,11 @@ class MixedReach:
         contact = False
         for _ in range(20):
             mujoco.mj_step(self.model, self.data)
+            contact |= bool(self.data.ncon)
+        if self.synchronize:
+            # mj_step integrates qpos after computing derived Cartesian fields.
+            # Refresh them before observations, reward, or the next expert query.
+            mujoco.mj_forward(self.model, self.data)
             contact |= bool(self.data.ncon)
         if not np.isfinite(self.data.qpos).all() or not np.isfinite(self.data.qvel).all():
             raise RuntimeError("Nonfinite mixed-arm state")

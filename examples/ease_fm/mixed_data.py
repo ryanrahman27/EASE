@@ -25,15 +25,15 @@ def expert_rollout(env, seed, goal, spread=.05):
             "history": np.asarray(histories)}, {k: info[k] for k in ["success", "collision", "error"]}
 
 
-def build(output, train_goals=40, eval_goals=8, seed=20261018):
+def build(output, train_goals=40, eval_goals=8, seed=20261018, synchronize=False):
     output = Path(output)
     output.mkdir(parents=True, exist_ok=False)
     arms = [sample_arm(seed+i, "six", "train") for i in range(3)]
     arms += [sample_arm(seed+100+i, "seven", "train") for i in range(3)]
     arms += [sample_arm(seed+1000, "six", "validation"), sample_arm(seed+1100, "seven", "validation"),
              sample_arm(seed+1200, "six_novel", "validation_topology"), sample_arm(seed+2000, "six", "test")]
-    envs = [MixedReach(arm) for arm in arms]
-    manifest = {"schema": "ease_mixed_v1", "seed": seed, "arms": [arm.manifest() for arm in arms],
+    envs = [MixedReach(arm, synchronize=synchronize) for arm in arms]
+    manifest = {"schema": "ease_mixed_v1", "seed": seed, "synchronized_observations": synchronize, "arms": [arm.manifest() for arm in arms],
                 "goals": {}, "episodes": [], "calibrations": [], "feasibility_audit": [],
                 "observation": "joint q,dq; measured ee XYZ; goal XYZ; joint validity",
                 "privileged_inputs": False, "success_threshold_m": .03, "hold_steps": 5,
@@ -175,4 +175,5 @@ if __name__ == "__main__":
     parser.add_argument("--train-goals", type=int, default=40)
     parser.add_argument("--eval-goals", type=int, default=8)
     parser.add_argument("--seed", type=int, default=20261018)
+    parser.add_argument("--synchronize", action="store_true")
     build(**vars(parser.parse_args()))
