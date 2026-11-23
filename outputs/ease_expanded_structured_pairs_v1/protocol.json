@@ -1,0 +1,34 @@
+{
+  "experiment": "E138",
+  "checkpoints": {
+    "outputs/ease_task_retention_training_v1/retained/seed_0/policy.pt": "3190e96c2d867237db6f5aedbc46f71ef61ca35f36e0dc3df663018141c50627",
+    "outputs/ease_task_retention_training_v1/retained/seed_1/policy.pt": "4a0495a5b7f719a1d3586554545e11ba39c58840ccdcc78e9fecf1aa2a5993ad",
+    "outputs/ease_task_retention_training_v1/retained/seed_2/policy.pt": "d351c6b49b8252a903ed98f2840207e8881f064b1902bc3b71ceb678273345a2",
+    "outputs/ease_estimator_repair_v1/seed_0/policy.pt": "26dd3d2785e3da7f7daeda03b588f19a5d1572e5db961d09d33c124ec8a733b1",
+    "outputs/ease_estimator_repair_v1/seed_1/policy.pt": "7b9727d0a1f583f158f454fcd1f3d1807636973e455d432f4927fcdc83cf7a7b",
+    "outputs/ease_estimator_repair_v1/seed_2/policy.pt": "62506dc0d29746b80fdeaa1fe549e3010dafe33eb6c6a97284beb9848a96ec37",
+    "outputs/ease_broad_history_v1/seed_0/policy.pt": "2d809ac80788ba548c19a2b577e3228eae32af4a59f591010dc6fa8972ec5a80",
+    "outputs/ease_broad_history_v1/seed_1/policy.pt": "69bec791582226b1fff68ac3432476f3d1881e40b7ffc39ea850fed2262027a0",
+    "outputs/ease_broad_history_v1/seed_2/policy.pt": "5d3303a645c6b540e606cd7dcbcbe1ee4b1574148e47d981a00b2184e83674b2",
+    "outputs/ease_candidate_history_v1/seed_0/policy.pt": "b2f775ea86ba60b82ff71b972c8fc36daf29caca051ea4cc8493ac3cbc26a6a9",
+    "outputs/ease_candidate_history_v1/seed_1/policy.pt": "918cccdf8aae26426069fb6f8c567906bcbe9722fafc2ac5813bebb5698e403b",
+    "outputs/ease_candidate_history_v1/seed_2/policy.pt": "4ef24d776eacaea79098f6f8c8134012b8c72c441d9b6228d0baacdca8a7f5b3"
+  },
+  "inputs": {
+    "outputs/ease_broad_task_value_gate_v1/cases.json": "231122397d1c787fafb138fa54197ad7f7064d823b0727cb36a839753d9a70d9",
+    "outputs/ease_broad_task_value_gate_v1/gate_rows.json": "d44908b48191785740bf11d560c66fedd855ea8996f336c4b6c9cab4267163ad",
+    "outputs/ease_broad_task_value_gate_v1/gate_dataset.npz": "a14fdd52baf4a6e861a09934d785d1c88f37b7990f569c59480febb419a83138",
+    "outputs/ease_broad_task_value_gate_v1/collection/records.json": "e5ee0ff13edf6fbb1d8f2f7c890f0b10da4f6ac7397ed2a936ae29e7cc70bdb7",
+    "outputs/ease_family_consensus_gate_v1/fresh_cases.json": "99941693b57211e20d40468fb9d8d1e14d5d47171b0c5f1ad7a501c88d41e728",
+    "outputs/ease_bounded_history_v1/records.json": "660cfa30e45f5cea932f82883d7aaaaae0720708070ab34fc311e338024ca12d",
+    "outputs/ease_compact_response_value_v1/dataset.npz": "41f14707da4e179460a40d1e5f35e1c6447dccf56a58782cfc35550b3f2fae6e",
+    "outputs/ease_structured_response_v1/dataset.npz": "4dbc239b887a0ce504fe3f5133b8ca9be0e0b00ca5c4645810d239094b577724"
+  },
+  "design": "Add48 fitting placements (six per original ancestral source), seed138000, identical distribution to E125 expansion but independent draws. No reachability/success filtering. Known four training bodies and original homes. All3 motion-estimator seeds. Each on baseline plus nine independently paired8-step off pulses:1440 new full episodes. Keep all outcomes and all exact states/actions; exclude only starts already contaminated by forbidden collision from fitting.",
+  "training": "Join original1108 clean starts with all new clean starts. Same four ancestral-family folds, descendants remain grouped. Compare fixed E136 scalar+ridge1 conjunction; E137 leave-one-training-family-out consensus; and a prespecified moderately nonlinear task-value model (ExtraTrees128 trees, depth5, minimum12 leaf samples, random_state138000), always paired with fitted scalar motion response. Targets remain one-step paired Cartesian response and final-success advantage.32 measured structured features only. Fixed value margin.05 and progress10um; no threshold search. Select positive gains with zero E120 losses on all288 fitting episodes, maximize gains, fewer switches, favor ridge then consensus then trees. Original144 subset retention reported separately.",
+  "fresh_test": "E137 seed137000 fresh48 placements were saved before its outcome analysis and remain unexecuted. Preserve exactly. If a nontrivial no-loss candidate qualifies, freeze all-fitting model(s) and rule, then evaluate all144 fresh placement/estimator episodes paired against E120. No fresh-test based tuning, no unseen-body claim.",
+  "cache": "Within a case/seed, memoize frozen model Jacobian predictions by exact model identity,n,Gram bytes,cross bytes; return live bias separately. Cache cleared for each case. Same optimization used by original E125 collection. No approximate caching.",
+  "E120_unchanged": true,
+  "held_evaluated": false,
+  "fresh_evaluated": false
+}
