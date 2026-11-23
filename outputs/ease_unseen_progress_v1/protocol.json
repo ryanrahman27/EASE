@@ -1,0 +1,884 @@
+{
+  "experiment": "E112",
+  "inputs": {
+    "outputs/ease_direction_novelaxis_v1/cases.json": "b92e989e1db069b5d195bfb07151f3cd0a03e59bb314cf94568cff6b3ee5d0a1",
+    "outputs/ease_direction_novelaxis_v1/axis_catalog.json": "bc812c707bbca7129148013b4d567e811a0b52fc5a0f693a2ee1b03612bfc07c",
+    "outputs/ease_progress_selector_v1/protocol.json": "38eb3e1f508a8d2bd1a84f2b38041d775b09f96b20dafa0d502a67585d3bba86",
+    "outputs/ease_progress_selector_v1/summary.json": "7a22e7f5bf26bc82c0f57edcf6dc7fed093f80e975b30c4c73b56f8608c5ef64",
+    "/mnt/c/Users/faisa/piperx-openpi/examples/ease_fm/progress_selector.py": "8eb444154e624eb0a228de23e38d99155f74bb08df2a912f910bc254ccf8f95d",
+    "/mnt/c/Users/faisa/piperx-openpi/examples/ease_fm/progress_action_bank.py": "a146b32f701a25b5bce965d6d73d377bd8b548ddb6c2aba30c5bd073577fc2ea",
+    "/mnt/c/Users/faisa/piperx-openpi/examples/ease_fm/early_physics_rollout.py": "b1001b286049f3cd1f93e679d207bf8e8ac88b5d45aa7bef8d2aca0821eff23e"
+  },
+  "checkpoints": {
+    "outputs/ease_robust_training_v1/seed_0/policy.pt": "bb2eadf92edc2f698fd137f6d1a7c8ec0a7283cd34e1d5a0fc390645e66392f1",
+    "outputs/ease_robust_training_v1/seed_1/policy.pt": "141e03fdac6d03a8ef035db3b8d3218cbbe73193450e06821e10b310380fc42d",
+    "outputs/ease_robust_training_v1/seed_2/policy.pt": "cf0d4d5d9fb80d5a20f5b117ea897a057e9c81ede715b785dad7523ec77520a0",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_0/policy.pt": "7cc59ce83397a3856939a849f229e0a962bfe0e1df3add7680aac42b8c5d0fec",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_1/policy.pt": "67a01fc8cdbec4d7c5ee5e602e5d1a16d6cfa80a8520c28a89eb2a861437b2d6",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_2/policy.pt": "f87c12bd330baf384432c5d275eda41f189ddb557f6083f487082a76447b2b71",
+    "outputs/ease_task_retention_training_v1/data_only/seed_0/policy.pt": "3b752f0136a32812e1abb4c2d59910d4846c87c3d439d492f241fa2763620037",
+    "outputs/ease_task_retention_training_v1/data_only/seed_1/policy.pt": "852d03bcadbaa650ffaaab71e9ac71bf0b03c5f2128b2f994348cd8f45c30bd7",
+    "outputs/ease_task_retention_training_v1/data_only/seed_2/policy.pt": "58b2bec0d87998d117e29d172b50a42adfd16b2ba64515677f6f656a86b02040",
+    "outputs/ease_task_retention_training_v1/retained/seed_0/policy.pt": "3190e96c2d867237db6f5aedbc46f71ef61ca35f36e0dc3df663018141c50627",
+    "outputs/ease_task_retention_training_v1/retained/seed_1/policy.pt": "4a0495a5b7f719a1d3586554545e11ba39c58840ccdcc78e9fecf1aa2a5993ad",
+    "outputs/ease_task_retention_training_v1/retained/seed_2/policy.pt": "d351c6b49b8252a903ed98f2840207e8881f064b1902bc3b71ceb678273345a2"
+  },
+  "candidates": [
+    {
+      "candidate": 0,
+      "body": 0,
+      "arm": {
+        "seed": 1120100,
+        "split": "prospective_e112",
+        "family": "axis_dev87_6_ZYXYXY",
+        "lengths": [
+          0.17222374998887488,
+          0.21029748763700284,
+          0.26218457968575154,
+          0.15503906709548712,
+          0.16283444570273695,
+          0.1079463295006985
+        ],
+        "masses": [
+          0.8431565349137914,
+          0.9466164727600488,
+          1.3282806766825224,
+          1.2861378088128743,
+          1.116474585068377,
+          1.0953101637678777
+        ],
+        "strength": 1.078185707320421,
+        "damping": 1.5536644615841235,
+        "home": [
+          0.0,
+          0.45,
+          0.0,
+          0.0,
+          -0.65,
+          0.0
+        ]
+      },
+      "xy": [
+        0.34,
+        -0.015
+      ],
+      "target": [
+        0.34,
+        0.045
+      ],
+      "ik_start": [
+        2.4,
+        -0.22846808576874664,
+        0.9211122873852826,
+        -1.8266739949372048,
+        1.1275215412590764,
+        -0.5383372000480292
+      ]
+    },
+    {
+      "candidate": 1,
+      "body": 0,
+      "arm": {
+        "seed": 1120100,
+        "split": "prospective_e112",
+        "family": "axis_dev87_6_ZYXYXY",
+        "lengths": [
+          0.17222374998887488,
+          0.21029748763700284,
+          0.26218457968575154,
+          0.15503906709548712,
+          0.16283444570273695,
+          0.1079463295006985
+        ],
+        "masses": [
+          0.8431565349137914,
+          0.9466164727600488,
+          1.3282806766825224,
+          1.2861378088128743,
+          1.116474585068377,
+          1.0953101637678777
+        ],
+        "strength": 1.078185707320421,
+        "damping": 1.5536644615841235,
+        "home": [
+          0.0,
+          0.45,
+          0.0,
+          0.0,
+          -0.65,
+          0.0
+        ]
+      },
+      "xy": [
+        0.315,
+        0.04
+      ],
+      "target": [
+        0.315,
+        0.1
+      ],
+      "ik_start": [
+        2.4,
+        -0.22846808576874664,
+        0.9211122873852826,
+        -1.8266739949372048,
+        1.1275215412590764,
+        -0.5383372000480292
+      ]
+    },
+    {
+      "candidate": 2,
+      "body": 1,
+      "arm": {
+        "seed": 1120101,
+        "split": "prospective_e112",
+        "family": "axis_dev87_6_ZYXYXY",
+        "lengths": [
+          0.21204350959280144,
+          0.21532174728891063,
+          0.23763017724796864,
+          0.17084113518456834,
+          0.17000182578509432,
+          0.11001000971309147
+        ],
+        "masses": [
+          0.646519939868761,
+          0.9235050127216502,
+          1.3542570254966182,
+          1.1651775681550458,
+          1.1020036967766296,
+          0.9093659343135702
+        ],
+        "strength": 1.1654640524623232,
+        "damping": 1.7581757845502548,
+        "home": [
+          0.0,
+          0.45,
+          0.0,
+          0.0,
+          -0.65,
+          0.0
+        ]
+      },
+      "xy": [
+        0.34,
+        -0.015
+      ],
+      "target": [
+        0.34,
+        0.045
+      ],
+      "ik_start": [
+        -1.8771632636639783,
+        2.3299225430669623,
+        -2.1914285299906013,
+        -0.12241262532755451,
+        -0.8560870003896196,
+        2.4
+      ]
+    },
+    {
+      "candidate": 3,
+      "body": 1,
+      "arm": {
+        "seed": 1120101,
+        "split": "prospective_e112",
+        "family": "axis_dev87_6_ZYXYXY",
+        "lengths": [
+          0.21204350959280144,
+          0.21532174728891063,
+          0.23763017724796864,
+          0.17084113518456834,
+          0.17000182578509432,
+          0.11001000971309147
+        ],
+        "masses": [
+          0.646519939868761,
+          0.9235050127216502,
+          1.3542570254966182,
+          1.1651775681550458,
+          1.1020036967766296,
+          0.9093659343135702
+        ],
+        "strength": 1.1654640524623232,
+        "damping": 1.7581757845502548,
+        "home": [
+          0.0,
+          0.45,
+          0.0,
+          0.0,
+          -0.65,
+          0.0
+        ]
+      },
+      "xy": [
+        0.315,
+        0.04
+      ],
+      "target": [
+        0.315,
+        0.1
+      ],
+      "ik_start": [
+        -1.8771632636639783,
+        2.3299225430669623,
+        -2.1914285299906013,
+        -0.12241262532755451,
+        -0.8560870003896196,
+        2.4
+      ]
+    },
+    {
+      "candidate": 4,
+      "body": 2,
+      "arm": {
+        "seed": 1120102,
+        "split": "prospective_e112",
+        "family": "axis_dev87_6_ZYXYZY",
+        "lengths": [
+          0.22755537986326707,
+          0.21044148016105063,
+          0.2010237890878025,
+          0.139983421703279,
+          0.1731905677473389,
+          0.09727863677042528
+        ],
+        "masses": [
+          0.6801255990656331,
+          0.9414750059561849,
+          1.3039515681301526,
+          1.260782155840434,
+          1.096461034240487,
+          0.9558728421567149
+        ],
+        "strength": 0.9722568441159186,
+        "damping": 1.6420487066279716,
+        "home": [
+          0.0,
+          0.45,
+          0.0,
+          0.0,
+          -0.65,
+          0.0
+        ]
+      },
+      "xy": [
+        0.34,
+        -0.015
+      ],
+      "target": [
+        0.34,
+        0.045
+      ],
+      "ik_start": [
+        0.2773253681431025,
+        2.1546009469535115,
+        1.7512326539309402,
+        -1.9422116913383212,
+        -0.9412367396117569,
+        -2.4
+      ]
+    },
+    {
+      "candidate": 5,
+      "body": 2,
+      "arm": {
+        "seed": 1120102,
+        "split": "prospective_e112",
+        "family": "axis_dev87_6_ZYXYZY",
+        "lengths": [
+          0.22755537986326707,
+          0.21044148016105063,
+          0.2010237890878025,
+          0.139983421703279,
+          0.1731905677473389,
+          0.09727863677042528
+        ],
+        "masses": [
+          0.6801255990656331,
+          0.9414750059561849,
+          1.3039515681301526,
+          1.260782155840434,
+          1.096461034240487,
+          0.9558728421567149
+        ],
+        "strength": 0.9722568441159186,
+        "damping": 1.6420487066279716,
+        "home": [
+          0.0,
+          0.45,
+          0.0,
+          0.0,
+          -0.65,
+          0.0
+        ]
+      },
+      "xy": [
+        0.315,
+        0.04
+      ],
+      "target": [
+        0.315,
+        0.1
+      ],
+      "ik_start": [
+        0.2773253681431025,
+        2.1546009469535115,
+        1.7512326539309402,
+        -1.9422116913383212,
+        -0.9412367396117569,
+        -2.4
+      ]
+    },
+    {
+      "candidate": 6,
+      "body": 3,
+      "arm": {
+        "seed": 1120103,
+        "split": "prospective_e112",
+        "family": "axis_dev87_6_ZYXYZY",
+        "lengths": [
+          0.1956371300368445,
+          0.1867019482268136,
+          0.2515511424477543,
+          0.1517817578759672,
+          0.14657281359418278,
+          0.10570641065031323
+        ],
+        "masses": [
+          0.7354354334346749,
+          0.9678858734234728,
+          1.1339196465030643,
+          1.33681824166805,
+          1.0953469392218023,
+          0.9318527291618436
+        ],
+        "strength": 1.2866503299254477,
+        "damping": 1.4477597372780397,
+        "home": [
+          0.0,
+          0.45,
+          0.0,
+          0.0,
+          -0.65,
+          0.0
+        ]
+      },
+      "xy": [
+        0.34,
+        -0.015
+      ],
+      "target": [
+        0.34,
+        0.045
+      ],
+      "ik_start": [
+        0.7635666047238736,
+        2.3443695715751693,
+        2.0364875228469383,
+        -1.4782171495247365,
+        -1.1950695639558462,
+        -2.4
+      ]
+    },
+    {
+      "candidate": 7,
+      "body": 3,
+      "arm": {
+        "seed": 1120103,
+        "split": "prospective_e112",
+        "family": "axis_dev87_6_ZYXYZY",
+        "lengths": [
+          0.1956371300368445,
+          0.1867019482268136,
+          0.2515511424477543,
+          0.1517817578759672,
+          0.14657281359418278,
+          0.10570641065031323
+        ],
+        "masses": [
+          0.7354354334346749,
+          0.9678858734234728,
+          1.1339196465030643,
+          1.33681824166805,
+          1.0953469392218023,
+          0.9318527291618436
+        ],
+        "strength": 1.2866503299254477,
+        "damping": 1.4477597372780397,
+        "home": [
+          0.0,
+          0.45,
+          0.0,
+          0.0,
+          -0.65,
+          0.0
+        ]
+      },
+      "xy": [
+        0.315,
+        0.04
+      ],
+      "target": [
+        0.315,
+        0.1
+      ],
+      "ik_start": [
+        0.7635666047238736,
+        2.3443695715751693,
+        2.0364875228469383,
+        -1.4782171495247365,
+        -1.1950695639558462,
+        -2.4
+      ]
+    },
+    {
+      "candidate": 8,
+      "body": 4,
+      "arm": {
+        "seed": 1120104,
+        "split": "prospective_e112",
+        "family": "axis_dev87_7_ZYZYXYX",
+        "lengths": [
+          0.16824010003339512,
+          0.19414030489163175,
+          0.16619611684119018,
+          0.13402406022748295,
+          0.1402577089136186,
+          0.09666143676968532,
+          0.06956333741113152
+        ],
+        "masses": [
+          1.0074627686702706,
+          1.2910235507374517,
+          1.1976164228849888,
+          1.0621680679720804,
+          0.9487114295681542,
+          1.0133575842611469,
+          1.0206125557577366
+        ],
+        "strength": 0.9531992498786557,
+        "damping": 2.082937355195492,
+        "home": [
+          0.0,
+          0.45,
+          0.0,
+          0.0,
+          -0.65,
+          0.0,
+          0.0
+        ]
+      },
+      "xy": [
+        0.34,
+        -0.015
+      ],
+      "target": [
+        0.34,
+        0.045
+      ],
+      "ik_start": [
+        0.3638614459613365,
+        1.0936121504008625,
+        2.3003281928007957,
+        -1.1152500096000968,
+        -2.0467364395446768,
+        -2.4,
+        -0.010422242588886035
+      ]
+    },
+    {
+      "candidate": 9,
+      "body": 4,
+      "arm": {
+        "seed": 1120104,
+        "split": "prospective_e112",
+        "family": "axis_dev87_7_ZYZYXYX",
+        "lengths": [
+          0.16824010003339512,
+          0.19414030489163175,
+          0.16619611684119018,
+          0.13402406022748295,
+          0.1402577089136186,
+          0.09666143676968532,
+          0.06956333741113152
+        ],
+        "masses": [
+          1.0074627686702706,
+          1.2910235507374517,
+          1.1976164228849888,
+          1.0621680679720804,
+          0.9487114295681542,
+          1.0133575842611469,
+          1.0206125557577366
+        ],
+        "strength": 0.9531992498786557,
+        "damping": 2.082937355195492,
+        "home": [
+          0.0,
+          0.45,
+          0.0,
+          0.0,
+          -0.65,
+          0.0,
+          0.0
+        ]
+      },
+      "xy": [
+        0.315,
+        0.04
+      ],
+      "target": [
+        0.315,
+        0.1
+      ],
+      "ik_start": [
+        0.3638614459613365,
+        1.0936121504008625,
+        2.3003281928007957,
+        -1.1152500096000968,
+        -2.0467364395446768,
+        -2.4,
+        -0.010422242588886035
+      ]
+    },
+    {
+      "candidate": 10,
+      "body": 5,
+      "arm": {
+        "seed": 1120105,
+        "split": "prospective_e112",
+        "family": "axis_dev87_7_ZYZYXYX",
+        "lengths": [
+          0.14085488147022007,
+          0.18505438358976165,
+          0.1845354044356646,
+          0.12627695764174415,
+          0.14895572076748154,
+          0.0943177702726932,
+          0.06370590668785953
+        ],
+        "masses": [
+          0.9286623536930141,
+          1.1379131627594958,
+          1.1959893916419113,
+          1.1568033613993094,
+          0.9463496537618985,
+          1.1434779490450149,
+          0.9848726631645675
+        ],
+        "strength": 0.7736910433276917,
+        "damping": 1.702073722271746,
+        "home": [
+          0.0,
+          0.45,
+          0.0,
+          0.0,
+          -0.65,
+          0.0,
+          0.0
+        ]
+      },
+      "xy": [
+        0.34,
+        -0.015
+      ],
+      "target": [
+        0.34,
+        0.045
+      ],
+      "ik_start": [
+        0.9331662212015156,
+        0.8383537811447722,
+        -1.5893372942110942,
+        1.5768081505843001,
+        -0.16049830025963574,
+        1.40899881050878,
+        -0.8263069778875772
+      ]
+    },
+    {
+      "candidate": 11,
+      "body": 5,
+      "arm": {
+        "seed": 1120105,
+        "split": "prospective_e112",
+        "family": "axis_dev87_7_ZYZYXYX",
+        "lengths": [
+          0.14085488147022007,
+          0.18505438358976165,
+          0.1845354044356646,
+          0.12627695764174415,
+          0.14895572076748154,
+          0.0943177702726932,
+          0.06370590668785953
+        ],
+        "masses": [
+          0.9286623536930141,
+          1.1379131627594958,
+          1.1959893916419113,
+          1.1568033613993094,
+          0.9463496537618985,
+          1.1434779490450149,
+          0.9848726631645675
+        ],
+        "strength": 0.7736910433276917,
+        "damping": 1.702073722271746,
+        "home": [
+          0.0,
+          0.45,
+          0.0,
+          0.0,
+          -0.65,
+          0.0,
+          0.0
+        ]
+      },
+      "xy": [
+        0.315,
+        0.04
+      ],
+      "target": [
+        0.315,
+        0.1
+      ],
+      "ik_start": [
+        0.9331662212015156,
+        0.8383537811447722,
+        -1.5893372942110942,
+        1.5768081505843001,
+        -0.16049830025963574,
+        1.40899881050878,
+        -0.8263069778875772
+      ]
+    },
+    {
+      "candidate": 12,
+      "body": 6,
+      "arm": {
+        "seed": 1120106,
+        "split": "prospective_e112",
+        "family": "axis_dev87_7_ZYXZXZY",
+        "lengths": [
+          0.18339464562341426,
+          0.16332072281574347,
+          0.19130240103280316,
+          0.12409288133340125,
+          0.14079060926753126,
+          0.10118739298280242,
+          0.07020363033988497
+        ],
+        "masses": [
+          0.8836572435038824,
+          1.0888415547747954,
+          1.19479490449341,
+          1.0427836329490676,
+          0.8877199190242007,
+          1.0919078584023871,
+          0.8639247344751134
+        ],
+        "strength": 0.9656638082061483,
+        "damping": 1.8738373673774702,
+        "home": [
+          0.0,
+          0.45,
+          0.0,
+          0.0,
+          -0.65,
+          0.0,
+          0.0
+        ]
+      },
+      "xy": [
+        0.34,
+        -0.015
+      ],
+      "target": [
+        0.34,
+        0.045
+      ],
+      "ik_start": [
+        -0.8798065620349205,
+        -0.9847495925925759,
+        -2.366849997823812,
+        -1.5809386998869353,
+        -1.3720509893561545,
+        0.9704434437494868,
+        -2.4
+      ]
+    },
+    {
+      "candidate": 13,
+      "body": 6,
+      "arm": {
+        "seed": 1120106,
+        "split": "prospective_e112",
+        "family": "axis_dev87_7_ZYXZXZY",
+        "lengths": [
+          0.18339464562341426,
+          0.16332072281574347,
+          0.19130240103280316,
+          0.12409288133340125,
+          0.14079060926753126,
+          0.10118739298280242,
+          0.07020363033988497
+        ],
+        "masses": [
+          0.8836572435038824,
+          1.0888415547747954,
+          1.19479490449341,
+          1.0427836329490676,
+          0.8877199190242007,
+          1.0919078584023871,
+          0.8639247344751134
+        ],
+        "strength": 0.9656638082061483,
+        "damping": 1.8738373673774702,
+        "home": [
+          0.0,
+          0.45,
+          0.0,
+          0.0,
+          -0.65,
+          0.0,
+          0.0
+        ]
+      },
+      "xy": [
+        0.315,
+        0.04
+      ],
+      "target": [
+        0.315,
+        0.1
+      ],
+      "ik_start": [
+        -0.8798065620349205,
+        -0.9847495925925759,
+        -2.366849997823812,
+        -1.5809386998869353,
+        -1.3720509893561545,
+        0.9704434437494868,
+        -2.4
+      ]
+    },
+    {
+      "candidate": 14,
+      "body": 7,
+      "arm": {
+        "seed": 1120107,
+        "split": "prospective_e112",
+        "family": "axis_dev87_7_ZYXZXZY",
+        "lengths": [
+          0.1638014397493523,
+          0.16517062893801973,
+          0.2118413237104236,
+          0.13927980293104184,
+          0.15378224606699886,
+          0.08907212009538208,
+          0.07032090843565085
+        ],
+        "masses": [
+          1.0048455615016951,
+          1.128632254442235,
+          1.0326709880985927,
+          1.1684891124411338,
+          0.9991977286217476,
+          1.1486410509767737,
+          0.8477600763331059
+        ],
+        "strength": 0.9169784112753179,
+        "damping": 2.0480790404001294,
+        "home": [
+          0.0,
+          0.45,
+          0.0,
+          0.0,
+          -0.65,
+          0.0,
+          0.0
+        ]
+      },
+      "xy": [
+        0.34,
+        -0.015
+      ],
+      "target": [
+        0.34,
+        0.045
+      ],
+      "ik_start": [
+        1.0035229339473288,
+        0.4040455529376953,
+        0.8316926314014847,
+        0.6113844967049803,
+        2.0202696261606596,
+        1.266998625749113,
+        -0.22856958007769707
+      ]
+    },
+    {
+      "candidate": 15,
+      "body": 7,
+      "arm": {
+        "seed": 1120107,
+        "split": "prospective_e112",
+        "family": "axis_dev87_7_ZYXZXZY",
+        "lengths": [
+          0.1638014397493523,
+          0.16517062893801973,
+          0.2118413237104236,
+          0.13927980293104184,
+          0.15378224606699886,
+          0.08907212009538208,
+          0.07032090843565085
+        ],
+        "masses": [
+          1.0048455615016951,
+          1.128632254442235,
+          1.0326709880985927,
+          1.1684891124411338,
+          0.9991977286217476,
+          1.1486410509767737,
+          0.8477600763331059
+        ],
+        "strength": 0.9169784112753179,
+        "damping": 2.0480790404001294,
+        "home": [
+          0.0,
+          0.45,
+          0.0,
+          0.0,
+          -0.65,
+          0.0,
+          0.0
+        ]
+      },
+      "xy": [
+        0.315,
+        0.04
+      ],
+      "target": [
+        0.315,
+        0.1
+      ],
+      "ik_start": [
+        1.0035229339473288,
+        0.4040455529376953,
+        0.8316926314014847,
+        0.6113844967049803,
+        2.0202696261606596,
+        1.266998625749113,
+        -0.22856958007769707
+      ]
+    }
+  ],
+  "design": "Eight prospectively sampled bodies, two per E87 novel axis order, two fixed placements each, all three frozen checkpoint seeds, baseline versus E111 selector. Body parameter perturbations +/-10%, seeds1120100..1120107. No replacement, checkpoint selection or policy-success screening. These axis orders were used in earlier development, but are outside the original training-body layouts; new body parameters are prospective.",
+  "screening": "All nine task endpoints must pass existing collision-free IK with10 attempts, seed1121000+candidate. Save every rejection; accepted home is first endpoint. Screening checks feasibility, not policy success. Report accepted-task and all16-candidate denominators.",
+  "control": "Exact E111 selector/bank unchanged,40ms, progress and nonpenetration checks. No route planner, no added budgets, no retraining, no rescue after first contact. Same parent-to-retained32-step probe transition. Calibration seed38000+accepted-case and bank seed11000000+case*100000+checkpoint-seed*10000+step unchanged from E111.",
+  "gate": "Strict overall success increase, retain every baseline success, nonincreasing collisions, no per-seed or per-DOF success decline. Report all losses even if aggregate improves. No tuning after evaluation. Body-cluster bootstrap10000 resamples seed1125000, descriptive only.",
+  "verification": "Adapter compatibility: six prespecified E111 pairs (cases1/8/10, seeds0/1) both modes exact full serialization. All selected next states/contact unions exact; baseline and selector calibration/approach prefixes identical. Frozen source/checkpoint hashes verified before and after.",
+  "videos": "First accepted case seed0 both modes; every paired gain/loss both modes; first remaining selector collision and first contact-free selector failure both modes; append missing outcome category. Outcome-selected illustrations, full serialized replay/frame/hash verification.",
+  "scope": "Prospective replication cohort, not reserved final test. Exact state, physics, geometry and IK initialization are privileged. Procedural arms, not commercial MJCF/hardware. Axis families previously inspected in development; no claim of untouched axis-family evaluation.",
+  "test_evaluated": false
+}
