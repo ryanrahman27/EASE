@@ -1,0 +1,41 @@
+{
+  "experiment": "E101",
+  "inputs": {
+    "outputs/ease_probe_distillation_v1/contexts.npz": "2674b90904bc304c41f796ac1b38f8091d83043c595fa88cb6ba57bd559ed28c",
+    "outputs/ease_probe_distillation_v1/provenance.json": "e1d84e5da2f27d1df757daf390b2796cef655be96bd4db13371e9d4520882146",
+    "outputs/ease_task_retention_training_v1/task_contexts.npz": "f9ac3709496b274753563f6c2ed363784fe70818ee31fb83600e84366662bab2",
+    "outputs/ease_task_retention_training_v1/provenance.json": "9b21d004219ce6c636f0356ece4afa30d3a88471746123f73cf6f096f8a0f099",
+    "outputs/ease_arm_pick_place_v2/cases.json": "9913082036080a0260394a0e9c8bfc9993ffb64bbf6e3019699bb88827d3f1cb",
+    "outputs/ease_arm_pick_place_v2/axis_catalog.json": "89fe5fcd4ded136798585ae58ad9339ad53b15a874c705f014bfc1646f86e406"
+  },
+  "parents": {
+    "outputs/ease_robust_training_v1/seed_0/policy.pt": "bb2eadf92edc2f698fd137f6d1a7c8ec0a7283cd34e1d5a0fc390645e66392f1",
+    "outputs/ease_robust_training_v1/seed_1/policy.pt": "141e03fdac6d03a8ef035db3b8d3218cbbe73193450e06821e10b310380fc42d",
+    "outputs/ease_robust_training_v1/seed_2/policy.pt": "cf0d4d5d9fb80d5a20f5b117ea897a057e9c81ede715b785dad7523ec77520a0",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_0/policy.pt": "7cc59ce83397a3856939a849f229e0a962bfe0e1df3add7680aac42b8c5d0fec",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_1/policy.pt": "67a01fc8cdbec4d7c5ee5e602e5d1a16d6cfa80a8520c28a89eb2a861437b2d6",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_2/policy.pt": "f87c12bd330baf384432c5d275eda41f189ddb557f6083f487082a76447b2b71",
+    "outputs/ease_task_retention_training_v1/data_only/seed_0/policy.pt": "3b752f0136a32812e1abb4c2d59910d4846c87c3d439d492f241fa2763620037",
+    "outputs/ease_task_retention_training_v1/data_only/seed_1/policy.pt": "852d03bcadbaa650ffaaab71e9ac71bf0b03c5f2128b2f994348cd8f45c30bd7",
+    "outputs/ease_task_retention_training_v1/data_only/seed_2/policy.pt": "58b2bec0d87998d117e29d172b50a42adfd16b2ba64515677f6f656a86b02040",
+    "outputs/ease_task_retention_training_v1/retained/seed_0/policy.pt": "3190e96c2d867237db6f5aedbc46f71ef61ca35f36e0dc3df663018141c50627",
+    "outputs/ease_task_retention_training_v1/retained/seed_1/policy.pt": "4a0495a5b7f719a1d3586554545e11ba39c58840ccdcc78e9fecf1aa2a5993ad",
+    "outputs/ease_task_retention_training_v1/retained/seed_2/policy.pt": "d351c6b49b8252a903ed98f2840207e8881f064b1902bc3b71ceb678273345a2"
+  },
+  "training_bodies": [
+    84000,
+    84001,
+    84002,
+    84003,
+    84004,
+    84005,
+    84006,
+    84007
+  ],
+  "test_evaluated": false,
+  "data": "36 full trajectories on the same12 original training placements, original E66 parent prefix and32-step probe. Fixed E99 retained student drives post-probe continuation. All failures/contacts retained. Train only post-probe contexts; third placement per body held out across every driver. This is one collection round from the starting student, not iterative on-policy aggregation. No evaluation-arm data.",
+  "training": "Both conditions start E99 retained checkpoint for each seed. Fixed2000 updates, AdamW lr2e-5, clip1, batch128:64 synthetic+32 local+16 parent-task+16 extra-task. Replay extra-task comes from E99 parent contexts; onpolicy extra-task comes from newly collected student contexts. Same synthetic/local/parent rows and identical extra-index uniform draws per pair. Analytical ridge fit and synthetic E66 parent anchor (six2/seven.5) plus .01 action retention against E66 on all32 task rows in BOTH conditions. Final checkpoints only. Extra source distribution is the only training intervention.",
+  "evaluation": "All16 development tasks x3 seeds x original parent/replay/onpolicy=144 full tasks, unchanged original-parent/planner/probe prefix. Also compare saved E99 retained starting checkpoints. Strict gate: improve pooled success, nonincreasing collisions, retain every original parent AND starting-student success, no seed success decline against either reference. Report all outcomes, no seed/DOF selection.",
+  "videos": "Cases2 seed0,10 seed2,15 seed2 allthree modes; append first regression against either reference for each condition with corresponding reference video. Include success and failure. Full replay/hash/frame verification.",
+  "limits": "Training tasks cover four original training bodies, local data eight. Privileged geometry/route planning at evaluation. Reused development tasks, no final test, no broad policy promotion."
+}
