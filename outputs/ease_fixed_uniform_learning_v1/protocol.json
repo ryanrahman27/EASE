@@ -1,0 +1,12 @@
+{
+  "experiment": "E153",
+  "motivation": "Uniform32 is the strongest nonprivileged fixed-controller reference so far, despite worse prediction error. Earlier weighted models changed kernel/ridge or introduced a calibration prior. Isolate learned relative weighting while retaining exactly the uniform baseline recency.98 and zero-centered ridge1e-6.",
+  "data": "Exactly E1466706 clean every-fourth measured transitions from96 fitting placements, four original ancestry-family folds, same placement-balanced sampling and training-only normalization. Adaptive development data, not independent final tests. No added directional-probe supervision.",
+  "model": "Original8-feature32-wide2-layer history Transformer; positive weights with bounded logits and normalized recency mass. Fixed.98recency and1e-6 zero-centered ridge in float64. No calibration-prior term or feature. The dataset prior field is ignored by this model and its reference. Initial output exactly uniform32. No body ID, phase, object/contact or future query enters model features.",
+  "training": "Same E146 three fixed seeds,1500updates,AdamW3e-4,wd1e-4,batch128,clip1,normalized measured-next-motionMSE+.001 normalizedlogweight-square. Reuse the training implementation through explicit adapters; no best seed/checkpoint selection. Average all three Jacobians.",
+  "screen": "At least5% lower ensemble position MSE than uniform32, neither joint count worse, scaled-rotation MSE<=1.05x. Passing allows full fitting control with the already fixed E151 posture rule and identical uniform/E120 references. It does not open fresh tests automatically. E120 unchanged.",
+  "inputs": {
+    "outputs/ease_calibration_prior_learning_v1/dataset.npz": "221feaf3c51b5cb9002d5aa57729523c45482899ea1a7262868a5bcc08e915dc",
+    "outputs/ease_calibration_prior_learning_v1/verification.json": "c1e9c9420bcdd03f36110cebf60a2e7538354c73a8814c42afe1178803b5c902"
+  }
+}
