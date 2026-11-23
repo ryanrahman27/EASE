@@ -1,0 +1,26 @@
+{
+  "experiment": "E66",
+  "steps": 2000,
+  "batch": 128,
+  "lr": 2e-05,
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "conditions": [
+    "geometric",
+    "analytical"
+  ],
+  "parents": {
+    "outputs/ease_robust_training_v1/seed_0/policy.pt": "bb2eadf92edc2f698fd137f6d1a7c8ec0a7283cd34e1d5a0fc390645e66392f1",
+    "outputs/ease_robust_training_v1/seed_1/policy.pt": "141e03fdac6d03a8ef035db3b8d3218cbbe73193450e06821e10b310380fc42d",
+    "outputs/ease_robust_training_v1/seed_2/policy.pt": "cf0d4d5d9fb80d5a20f5b117ea897a057e9c81ede715b785dad7523ec77520a0"
+  },
+  "contexts_sha256": "888e7e558752cb8184c6405d72cf031ca785097dfa413ed645b8466aa2846e05",
+  "provenance_sha256": "df2cb5734e0fb7051c7f0f63ab73fa40280b2b9a1baac4908143941b4d48ce71",
+  "design": "Matched final-checkpoint fine tuning from E35. Each batch has 64 synthetic E52 contexts plus 64 measured procedural contexts, restricted to analytical/original_0/original_1 training trajectories. Original_2 trajectories are validation (same eight bodies and goals). 3600 training, 1200 validation rows. Identical batches and optimizer budgets. Only measured target changes: current geometric Jacobian versus analytical solve of the observed Gram/cross statistics. Synthetic clean-ridge labels unchanged. No native data, response fit, control surrogate or privileged information at inference.",
+  "loss": "Masked six-output mean squared fit plus fixed E35 anchor (six-joint weight2, seven-joint .5). AdamW lr2e-5, gradient norm clip1, 2000 updates per condition/seed. No best-checkpoint or seed selection. Analytical targets generated in float64 with padded inactive diagonals filled; network inference remains inverse-free.",
+  "evaluation": "First all original 256 reaching tasks per checkpoint with existing bias correction. Then all twelve observed native common schedules and all twelve contact-enabled manipulation cases for all candidates, regardless of failures, reported diagnostically. Full six-/seven-joint retention required before promotion. Fixed E63/E46 E35 and analytical baselines; no final test.",
+  "test_evaluated": false
+}
