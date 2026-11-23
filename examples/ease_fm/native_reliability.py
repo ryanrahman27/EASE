@@ -14,6 +14,7 @@ from .real_arms import verify_assets
 from .pick_place_control import PoseController, calibrate
 from .arm_pick_place import ROT_SCALE
 from .benchmark import fingerprint
+from .pose_geometry import rotation_vector
 
 
 def sequence(env):
@@ -31,7 +32,8 @@ def bounded_error(goal,position,limit=.004):
     return error*min(1.,limit/max(float(np.linalg.norm(error)),1e-12))
 
 
-def rollout(env,controller=None,render=None,target_x=None,contact_hold=False,precise_grasp=False,object_release=False,pregrasp_hook=None,step_observer=None):
+def rollout(env,controller=None,render=None,target_x=None,contact_hold=False,precise_grasp=False,object_release=False,pregrasp_hook=None,step_observer=None,orientation_target=None):
+    assert orientation_target is None or target_x is None
     obs=env.observe();trace=[];phases=[];failure=None
     renderer=None
     if render:
@@ -55,6 +57,7 @@ def rollout(env,controller=None,render=None,target_x=None,contact_hold=False,pre
         for t in range(budget):
             reference+=bounded_error(goal,reference,.002)
             error=np.r_[reference-obs['position'],ROT_SCALE*(np.array([0,0,1])-obs['rotation'][:,2])]
+            if orientation_target is not None:error[3:]=ROT_SCALE*rotation_vector(orientation_target@obs['rotation'].T)
             if target_x is not None:error=np.r_[error,ROT_SCALE*(target_x-obs['rotation'][:,0])]
             if hold_target is not None:action=hold_target-obs['q']
             else:
@@ -65,6 +68,7 @@ def rollout(env,controller=None,render=None,target_x=None,contact_hold=False,pre
             before=obs;obs,command,info=env.step(action,aperture)
             if controller is not None and hold_target is None:controller.update(before,obs,command)
             pe=float(np.linalg.norm(goal-obs['position']));re=float(np.linalg.norm(np.array([0,0,1])-obs['rotation'][:,2]))
+            if orientation_target is not None:re=float(np.linalg.norm(rotation_vector(orientation_target@obs['rotation'].T)))
             if target_x is not None:re=max(re,float(np.linalg.norm(target_x-obs['rotation'][:,0])))
             pads,_=env.contacts()
             trace.append(dict(phase=phase,position=obs['position'].tolist(),object=env.data.xpos[env.obj].tolist(),

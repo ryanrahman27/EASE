@@ -1,0 +1,18 @@
+{
+  "experiment": "E51",
+  "cases_sha256": "6983880bf356462ef01a28fafdd296673d11fb22e29049de2cc75057cabcbb87",
+  "checkpoints": {
+    "outputs/ease_robust_training_v1/seed_0/policy.pt": "bb2eadf92edc2f698fd137f6d1a7c8ec0a7283cd34e1d5a0fc390645e66392f1",
+    "outputs/ease_robust_training_v1/seed_1/policy.pt": "141e03fdac6d03a8ef035db3b8d3218cbbe73193450e06821e10b310380fc42d",
+    "outputs/ease_robust_training_v1/seed_2/policy.pt": "cf0d4d5d9fb80d5a20f5b117ea897a057e9c81ede715b785dad7523ec77520a0"
+  },
+  "asset_commit": "cda5236f98383f6fbaa4820c6b18dba892cd087f",
+  "conditions": [
+    "hold",
+    "align"
+  ],
+  "test_evaluated": false,
+  "hypothesis": "E50 shows corner-oriented Panda grips and subsequent slip. Test full angular motion identification/control with six independent XYZ/rotation-vector coordinates, unlike E42 nine-component axis tracking. Compare upright initial yaw (hold) with nearest world-cardinal cube-face alignment (align). One configuration for both robots and all seeds; original E35 weights frozen.",
+  "control": "Measured angular increment log(R_after R_before.T), scaled .15; same two model calls, shared Gram/cross representation and bias update. Orientation error log(R_target R_current.T). Same gain .35, damping .015, joint clip .04, reference ramp .002. Existing eight-hold .006 m gate now requires full angular error <.08 rad. Native mechanics, phase budgets, object-release rule and final physical success unchanged. No added refresh or target-robot training.",
+  "fairness": "All twelve original E46 homes retained without new IK filtering. Both variants use the same 32 probe actions and seed 41000+case. Targets selected from the common pre-calibration home frame; cubes initially axis-aligned. All failures and total steps retained. Analytical/privileged get the same target. This is a development representation-and-control change, not independent final-test evidence."
+}
