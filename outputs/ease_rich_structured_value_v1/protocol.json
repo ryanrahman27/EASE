@@ -1,0 +1,15 @@
+{
+  "experiment": "E139",
+  "inputs": {
+    "outputs/ease_expanded_structured_pairs_v1/dataset.npz": "017f16b9a56ebb97a3af4d75ad831fd016b7ee2e03e0c43195cdfdfe74182ddf",
+    "outputs/ease_expanded_structured_pairs_v1/rows.json": "8aff042142eab8b91b133e6971612052dabe50bf8e4d61508290a3021f74a67c",
+    "outputs/ease_expanded_structured_pairs_v1/summary.json": "68a2808b50551af6a1cbf36d002dd065fe4031f8c4c4f5a8537a68cea90c64fb",
+    "outputs/ease_expanded_structured_pairs_v1/cases.json": "bb06c1302362e1e0232c548d822a24705ead6f0ca83e0ac6c283894efa0d7a25",
+    "outputs/ease_expanded_structured_pairs_v1/fresh_cases.json": "99941693b57211e20d40468fb9d8d1e14d5d47171b0c5f1ad7a501c88d41e728",
+    "outputs/ease_expanded_structured_pairs_v1/frozen_training.json": "558da723808a934ed721008615fc805162ce097b7f664caf3316041b0d61f4e1"
+  },
+  "design": "Same2208 rows, outcomes, family folds, local scalar prediction, fixed thresholds and model hyperparameters as E138. Expand task-value features32 to115 with measured joint positions7, mask7, tool position/orientation error6, analytical measured-history Jacobian columns42, current base action7, bounded off-minus-on proposal difference7, frozen measured bias7. No simulator geometry, object/contact truth, body/seed IDs or future inputs.",
+  "models": "Ridge1, family-deletion ridge consensus, and ExtraTrees128/depth5/min_leaf12/random_state138000 exactly as E138. Primary richer trees. Additional predeclared tree-consensus requires all six inner-family-deletion trees to exceed the same task threshold. Response scalar and progress threshold unchanged. Input representation and added tree-consensus are reported separately.",
+  "selection": "Fixed task-value>.05 and progress>10um, first clean phase, same8-step off pulse. Require zero E120 losses on288 fitting episodes; maximize gains, fewer switches; tie favor trees, ridge, consensus, tree_consensus. No threshold sweep. No original-held or reserved fresh outcomes used. Fresh48-placement set remains unexecuted unless a candidate qualifies.",
+  "limitation": "Measured state is ideal simulator observation, not a demonstrated sensor pipeline. New features may improve known-body placement generalization; no unseen-body claim."
+}
