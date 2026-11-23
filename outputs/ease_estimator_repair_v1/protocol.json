@@ -1,0 +1,17 @@
+{
+  "experiment": "E117",
+  "parents": {
+    "outputs/ease_task_retention_training_v1/retained/seed_0/policy.pt": "3190e96c2d867237db6f5aedbc46f71ef61ca35f36e0dc3df663018141c50627",
+    "outputs/ease_task_retention_training_v1/retained/seed_1/policy.pt": "4a0495a5b7f719a1d3586554545e11ba39c58840ccdcc78e9fecf1aa2a5993ad",
+    "outputs/ease_task_retention_training_v1/retained/seed_2/policy.pt": "d351c6b49b8252a903ed98f2840207e8881f064b1902bc3b71ceb678273345a2"
+  },
+  "inputs": {
+    "outputs/ease_arm_pick_place_v2/cases.json": "9913082036080a0260394a0e9c8bfc9993ffb64bbf6e3019699bb88827d3f1cb",
+    "outputs/ease_arm_pick_place_v2/axis_catalog.json": "89fe5fcd4ded136798585ae58ad9339ad53b15a874c705f014bfc1646f86e406"
+  },
+  "data": "All12 original training-body tasks x analytical/3 E99 checkpoints; frozen calibrated bias, response updates and32 local probe, no selector or geometry filter. Save identical pre-update histories, measured next transition, nominal task error and analytical targets. All outcomes retained. First2 placements/body train, third held out across every driver; no unseen-body data used.",
+  "training": "Three fixed final1500-update runs from E99 retained seeds, AdamW2e-5, batch128 (96 clean training-task contexts +32 synthetic), gradient clip1. Equal sampling of6/7DOF task contexts. Loss: ridge-matrix MSE +0.05 normalized analytical-action MSE on non-probe task rows +0.02 measured response MSE normalized by0.003^2. No parent-action anchor on task rows; targets are analytical actions from same history. No matrix solve in network inference. All targets/calibration/controller/scales unchanged. No validation-based checkpoint or seed selection.",
+  "evaluation": "Reuse48 baseline episodes; run36 candidate full training-body tasks (including held placements). Report matched prediction/action/response errors separately from task success. Gate: pooled success improves, no old success lost, no seed or DOF declines, no collision increase. No automatic unseen evaluation or promotion on failure.",
+  "videos": "First success/failure for each parent and candidate seed, analytical reference; paired first gain/loss for each seed, both methods. Outcome-selected diagnostic videos. All traces,states,models and hashes saved.",
+  "test_evaluated": false
+}
