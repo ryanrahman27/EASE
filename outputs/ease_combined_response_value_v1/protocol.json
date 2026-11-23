@@ -1,0 +1,32 @@
+{
+  "experiment": "E136",
+  "inputs": {
+    "outputs/ease_structured_response_v1/oof.npz": "ba9844c6f0153e01a97bd95629b91a5109f09ccc442dcc48a1eff55468fa4987",
+    "outputs/ease_structured_response_v1/verification.json": "6e05b16f41c597d08a06a26094644081fe80cea1d794a8768172fdd9ccc1089d",
+    "outputs/ease_compact_response_value_v1/oof.npz": "33b07d936969729ff6b35dcd0bda49b3ea64aaf678acf36098b02babc5d53fac",
+    "outputs/ease_compact_response_value_v1/verification.json": "55c03f166db170c65b992f2c5bd49c407c971d4c904ee66d38354d9855421825",
+    "outputs/ease_compact_response_value_v1/dataset.npz": "41f14707da4e179460a40d1e5f35e1c6447dccf56a58782cfc35550b3f2fae6e",
+    "outputs/ease_compact_response_value_v1/primary.json": "4f83680a312f2945264bb1c1d14762849c25671e9419f488fd466cb9bf98eda3"
+  },
+  "design": "Require E133 scalar predicted1-step progress AND E135 lambda1 predicted final paired task advantage. Same family-excluded OOF predictions; measured inputs only. Up to8 off actions in first accepted clean phase, then resume E120. No physics selector. No retraining or alternative penalties before selection.",
+  "primary": {
+    "motion_margin": 1e-05,
+    "value_margin": 0.05
+  },
+  "motion_margins": [
+    5e-06,
+    1e-05,
+    2.5e-05,
+    5e-05,
+    0.0001
+  ],
+  "value_margins": [
+    0.025,
+    0.05,
+    0.1,
+    0.2
+  ],
+  "selection": "20 fixed conjunction thresholds plus full abstention. Require zero E120 losses, maximize gains, fewer switches, larger task margin then motion margin. Adaptive fitting-validation selection after E133-E135; not unbiased performance.",
+  "held": "Evaluate only qualifying nontrivial no-loss candidate after freezing all thresholds and all-fitting model fits. Previously used original held placements are development validation, not an independent final benchmark.",
+  "E120_unchanged": true
+}
