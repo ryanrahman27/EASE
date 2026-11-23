@@ -13,7 +13,7 @@ from .benchmark import fingerprint
 
 class IdentifiedController:
     """No robot description or simulator state enters this controller."""
-    def __init__(self, history, online):
+    def __init__(self, history, online, update_jacobian=True, update_bias=True):
         dq = history[:, :, 3].astype(float)
         dx = history[:, 0, 8:11].astype(float)
         self.gram = dq.T @ dq + 1e-6*np.eye(dq.shape[1])
@@ -21,6 +21,8 @@ class IdentifiedController:
         self.jac = np.linalg.solve(self.gram, self.cross).T
         self.bias = (history[:, :, 2]*.04-dq).mean(0)
         self.online = online
+        self.update_jacobian = update_jacobian
+        self.update_bias = update_bias
 
     def action(self, observation):
         error = observation['task'][3:]-observation['task'][:3]
@@ -31,13 +33,15 @@ class IdentifiedController:
         if not self.online: return
         dq = (after['joints'][:, 0]-before['joints'][:, 0]).astype(float)
         dx = (after['task'][:3]-before['task'][:3]).astype(float)
-        self.gram = .98*self.gram + np.outer(dq, dq) + 2e-8*np.eye(len(dq))
-        self.cross = .98*self.cross + np.outer(dq, dx)
-        self.jac = np.linalg.solve(self.gram, self.cross).T
-        self.bias = .8*self.bias + .2*(executed-dq)
+        if self.update_jacobian:
+            self.gram = .98*self.gram + np.outer(dq, dq) + 2e-8*np.eye(len(dq))
+            self.cross = .98*self.cross + np.outer(dq, dx)
+            self.jac = np.linalg.solve(self.gram, self.cross).T
+        if self.update_bias:
+            self.bias = .8*self.bias + .2*(executed-dq)
 
 
-def run(data, output):
+def run(data, output, ablation=False):
     root = Path(output); root.mkdir(parents=True, exist_ok=False)
     manifest = register(data)
     protocol = dict(experiment='E28', manifest_sha256=fingerprint(Path(data)/'manifest.json'),
@@ -47,6 +51,10 @@ def run(data, output):
         scope='Analytical observation-only identification/control diagnostic, not a trained Transformer result. Fixed E27 cases and success criterion. No parameter selection on validation.',
         privileged='True Jacobian is recorded only for diagnosis, never passed to the controller.',
         test_evaluated=False)
+    if ablation:
+        protocol.update(experiment='E29', methods=['identified_online', 'jacobian_online', 'bias_online'],
+            scope='Post-E28 mechanistic ablation, no gain tuning. Online replay and isolated updates; simulator Jacobian API blocked for every rollout.',
+            privileged='No privileged Jacobian diagnostic; mj_jacSite raises if accessed in this CLI run.')
     (root/'protocol.json').write_text(json.dumps(protocol, indent=2))
     source = root/'source'; source.mkdir()
     for p in Path(__file__).parent.glob('*.py'): shutil.copyfile(p, source/p.name)
@@ -64,11 +72,12 @@ def run(data, output):
                         donor = replace(arms[next(b for b in pairs[goal['pair']]['bodies'] if b != body)], home=arm.home) if mode == 'twin_online' else arm
                         key = (donor.seed, tuple(donor.home), probe_seed)
                         if key not in cache: cache[key] = calibration(donor, probe_seed+goal['pair'])[0]
-                        controller = IdentifiedController(cache[key], mode != 'identified_frozen')
+                        controller = IdentifiedController(cache[key], mode != 'identified_frozen',
+                            update_jacobian=mode != 'bias_online', update_bias=mode != 'jacobian_online')
                         env = MixedReach(arm, synchronize=True)
                         before = env.reset(0, goal['xyz'], spread=0)
-                        true_jac = np.zeros((3, arm.dof)); mujoco.mj_jacSite(env.model, env.data, true_jac, None, 0)
-                        if mode != 'twin_online':
+                        if not ablation and mode != 'twin_online':
+                            true_jac = np.zeros((3, arm.dof)); mujoco.mj_jacSite(env.model, env.data, true_jac, None, 0)
                             diagnostics.append(dict(split=split, body_seed=body, goal_id=goal['id'], mode=mode,
                                 probe_seed=probe_seed, condition=goal.get('condition', 'train'),
                                 jacobian_relative_error=float(np.linalg.norm(controller.jac-true_jac)/np.linalg.norm(true_jac)),
@@ -93,4 +102,11 @@ def run(data, output):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--data', required=True); parser.add_argument('--output', required=True)
-    run(**vars(parser.parse_args()))
+    parser.add_argument('--ablation', action='store_true')
+    args = vars(parser.parse_args())
+    if args['ablation']:
+        from unittest.mock import patch
+        with patch.object(mujoco, 'mj_jacSite', side_effect=RuntimeError('Privileged Jacobian access forbidden')):
+            run(**args)
+    else:
+        run(**args)

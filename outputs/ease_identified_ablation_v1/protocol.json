@@ -1,0 +1,23 @@
+{
+  "experiment": "E29",
+  "manifest_sha256": "e28aa6cf6d4b402bb3847785d7ac125e8f015a16da7b70870d6582dbcea0d958",
+  "methods": [
+    "identified_online",
+    "jacobian_online",
+    "bias_online"
+  ],
+  "calibration_seeds": [
+    930000,
+    940000,
+    950000
+  ],
+  "calibration_steps": 32,
+  "ridge": 1e-06,
+  "forgetting": 0.98,
+  "bias_update": 0.2,
+  "control_gain": 0.5,
+  "damping": 0.015,
+  "scope": "Post-E28 mechanistic ablation, no gain tuning. Online replay and isolated updates; simulator Jacobian API blocked for every rollout.",
+  "privileged": "No privileged Jacobian diagnostic; mj_jacSite raises if accessed in this CLI run.",
+  "test_evaluated": false
+}
