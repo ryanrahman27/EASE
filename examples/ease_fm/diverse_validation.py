@@ -12,7 +12,7 @@ from .mixed_sim import Arm, MixedReach, explore
 from .full_control import commands
 from .diverse_oracle import oracle_tokens
 
-def evaluate(data, checkpoint, output, device="cpu", privileged=False):
+def evaluate(data, checkpoint, output, device="cpu", privileged=False, intervention=None, intervention_modes=None):
     torch.set_num_threads(4)
     manifest = load(data)
     if not manifest.get("synchronized_observations", False):
@@ -38,6 +38,9 @@ def evaluate(data, checkpoint, output, device="cpu", privileged=False):
                          for _, goal in cases], dim=1).to(device)
     modes = [("empty", 0)] + [(prefix+str(n), n) for n in [8,16,32] for prefix in ["correct","wrong"]]
     if privileged: modes=[('oracle',0)]
+    if intervention_modes is not None:
+        if privileged: raise ValueError('History interventions cannot use privileged inputs')
+        modes=[(name,32) for name in intervention_modes]
     records = []
     for mode, length in modes:
         contexts = np.zeros((len(cases), 32, max_joints, 11), np.float32)
@@ -54,6 +57,8 @@ def evaluate(data, checkpoint, output, device="cpu", privileged=False):
                     context = explore(MixedReach(donor, synchronize=True), goal["seed"]+500000, length)
                 contexts[idx, :length, :arm.dof] = context
             donors.append(None if donor is None else donor.seed)
+        if intervention is not None:
+            contexts=intervention(contexts,mode,joint_mask.cpu().numpy())
         with torch.no_grad():
             latent = model.encode(torch.from_numpy(contexts).to(device),
                                   torch.full((len(cases),), 32 if privileged else length, device=device), joint_mask) if history else None

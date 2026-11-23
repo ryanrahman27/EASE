@@ -1,0 +1,47 @@
+{
+  "offline_only": true,
+  "simulation_blocker": "Windows Application Control prevents MuJoCo DLL loading",
+  "experiment": "E20",
+  "date": "2026-10-18",
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "manifest_sha256": "7e5c8439cddb7edabb188e303d2cd1e788d2f55dc23205d4659e36e8cf17b6d1",
+  "modes": [
+    "correct32",
+    "shuffle_actions",
+    "shuffle_transitions",
+    "static_only",
+    "repeat_initial_static",
+    "dynamics_only"
+  ],
+  "features": "q,dq,action/.04,delta_q,delta_dq,ee_xyz,delta_ee_xyz",
+  "static_columns": [
+    0,
+    5,
+    6,
+    7
+  ],
+  "dynamic_columns": [
+    1,
+    2,
+    3,
+    4,
+    8,
+    9,
+    10
+  ],
+  "shuffle_actions": "Fixed permutation of action column only; state and response columns unchanged",
+  "shuffle_transitions": "Same permutation of complete transitions; preserves within-transition pairing",
+  "static_only": "Keep q and ee across time, zero velocity/action/deltas; movement remains implicit in the pose sequence",
+  "repeat_initial_static": "Repeat the first q and ee across 32 positions; zero other columns",
+  "dynamics_only": "Zero q and ee; retain velocity/action/deltas",
+  "interpretation": "Frozen feature interventions are potentially out of distribution; loss of performance is not a causal proof of necessity",
+  "calibration": "All conditions reuse 32 collected transitions; repeated static input does not establish a zero-interaction trained baseline",
+  "teacher_audit": "First-action error on all fixed original/recovery training states by body and near (<.06m)/far goal distance; state-weighted, not episode-balanced",
+  "weights_updated": false,
+  "final_test_evaluated": false,
+  "seed1_failed_training_gate_retained": true
+}
