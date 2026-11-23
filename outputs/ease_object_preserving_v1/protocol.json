@@ -1,0 +1,15 @@
+{
+  "experiment": "E174",
+  "scope": "Two fixed privileged fitting variants x48 cases,96 episodes and4 exact E170 replays. Preserve all44 successes, E120, probe protection and265mm release. No held test or training.",
+  "route": "Strict robot/object contact rejection in planning; current simulator object XY determines grasp at240mm and pregrasp320mm. Grasp-first inverse approach on the same IK branch, then geometric connection. Up to300 descent steps after accepted planning; phase reach scoring unchanged. Track route with joint gain1.0, lookahead3, original+/- .04 clipping and E170 safety QP. All other phases use E120; pick/lift XY uses the planned object XY. Object pose is privileged.",
+  "conditions": "object_route: staged route then usual probe/close/lift. guarded_handoff: same route/probe; on close entry require tool XY within8mm and Z within12mm of pick goal, axis error<.08 and object XY drift<=8mm. Hold current arm posture while closing if ready; otherwise keep fingers open. Require both pads contacting object at the END of each of the final5 close steps before lifting. Otherwise abort by holding current arm pose with fingers open for remaining scheduled phases. Aborts are failures under original scoring.",
+  "isolation": "Neither variant changes E120 weights or calibrated bias.32-step initial calibration/probe schedule, all non-descent budgets, original final placement target and strict success/contact scoring preserved. No new initial-state reset. Only activated route episodes can alter targets/apertures or abort; unavailable plans fall back exactly. Simulator geometry, object position and end-step pad contacts explicitly privileged.",
+  "screen": "More than44 successes, zero forbidden-contact episodes, no lost reference success; separately report object displacement, grasp/lift, aborts, extra steps and exact unchanged episodes. Static path validity does not ensure dynamic object preservation. No automatic promotion.",
+  "inputs": {
+    "outputs/ease_descent_execution_v1/history_allowance/records.json": "0b823dca0acf78881670195602ba7fbce29f9ba5f3b18f683461923852f7a244",
+    "outputs/ease_object_preserving_v1/planning_protocol.json": "a41a00d82ae38f7b1f9e130bbf0b0f0a4050f527d76f3e8032a2e951446e8530",
+    "outputs/ease_object_preserving_v1/planning_summary.json": "15c5d5a9c88d917f262c582b6fa297760d9d91c8f9baf67788e31870f50eebbd",
+    "/mnt/c/Users/faisa/piperx-openpi/examples/ease_fm/object_preserving_plan.py": "61622dea1a8e70b3c919ce76aa688a98338a27741d8e5885f002bc0430cd50aa"
+  },
+  "preflight_correction": "Replay stopped during initial calibration: generated phase bookkeeping was mistakenly inserted into the contacts callback. Restricted it to completion of controller steps. No intervention episode or completed replay existed. Original source/protocol/hash manifest archived; thresholds, plans and scoring unchanged."
+}
