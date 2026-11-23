@@ -1,0 +1,29 @@
+{
+  "experiment": "E16",
+  "scope": "Fixed-data training-budget diagnostic; no held-out evaluation",
+  "milestones": [
+    10000,
+    20000,
+    30000
+  ],
+  "seed": 0,
+  "batch_size": 32,
+  "lr": 0.0003,
+  "objective": "direct",
+  "contexts": [
+    "history",
+    "privileged"
+  ],
+  "parameters": 244289,
+  "manifest_sha256": "7e5c8439cddb7edabb188e303d2cd1e788d2f55dc23205d4659e36e8cf17b6d1",
+  "recovery_hashes": {
+    "original_flow\\recovery.npz": "13be20a9caa0b7853805e0e6bb25d4fbec0ea6c0f5f41234c7131304da88e822",
+    "original_direct\\recovery.npz": "1148f3eae181241f2ea94f7415a9c4e5409287e32a763b766be87a842c71123c"
+  },
+  "training_rows": 63622,
+  "training": "Replay from original initialization because E15 saved no optimizer state; uninterrupted optimizer and random streams through 30000 steps; checkpoint only during training",
+  "selection": "Report all budgets; no early stopping or held-out tuning",
+  "gate": "95 percent overall and 90 percent per training body",
+  "test_evaluated": false,
+  "validation_evaluated": false
+}

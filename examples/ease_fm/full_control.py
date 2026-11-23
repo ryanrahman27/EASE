@@ -21,7 +21,7 @@ def commands(model, kind, q, task, mask, noise, latent):
     return model(torch.zeros_like(noise),torch.zeros(len(q),device=q.device),q,task,mask,latent)[:,0].clamp(-1,1)*.04
 
 
-def fit(dataset,folder,kind,steps,device,manifest_hash,recovery_hash=None):
+def fit(dataset,folder,kind,steps,device,manifest_hash,recovery_hash=None,checkpoint_steps=(),on_checkpoint=None):
     folder.mkdir()
     q,task,mask,action,valid=[t.to(device) for t in dataset.tensors]
     torch.manual_seed(0)
@@ -54,6 +54,11 @@ def fit(dataset,folder,kind,steps,device,manifest_hash,recovery_hash=None):
         losses.append(loss.item())
         if (step+1)%1000==0:
             print(folder.name,step+1,'loss',losses[-1],flush=True)
+        if step+1 in checkpoint_steps and on_checkpoint is not None:
+            on_checkpoint(step+1,model,opt,losses,{
+                'batch':batch_rng.get_state(),'noise':noise_rng.get_state(),
+                'context':context_rng.bit_generator.state,
+                'torch':torch.get_rng_state(),'cuda':torch.cuda.get_rng_state_all() if torch.cuda.is_available() else []})
     model.eval()
     torch.save(model.state_dict(),folder/'policy.pt')
     (folder/'training.json').write_text(json.dumps({'kind':kind,'seed':0,'steps':steps,'losses':losses,

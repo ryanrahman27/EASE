@@ -23,7 +23,7 @@ def report(output):
             row={'phase':phase,'model':kind,'successes':sum(r['success'] for r in records),'trials':len(records),
                 'parameters':meta['parameters'],'training_rows':meta['transitions'],'mean_error_m':float(np.mean([r['error'] for r in records]))}
             for family in ['six','seven']:
-                cases=[r for r in records if r['family']==family]
+                cases=[r for r in records if r['family'].startswith(family)]
                 row[family]=[sum(r['success'] for r in cases),len(cases)]
             rows.append(row)
             for body in sorted({r['body_seed'] for r in records}):
@@ -33,7 +33,7 @@ def report(output):
     summary={'overall':rows,'by_body':bodies,'manifest_sha256':protocol['manifest_sha256'],
         'source_hashes':{p.name:fingerprint(p) for p in (root/'source').glob('*.py')}}
     (root/'control_report.json').write_text(json.dumps(summary,indent=2))
-    lines=['# Full training-body control: E12','','Single training seed; synchronized observations; correct32 frozen calibration. No held-out policy evaluation.','',
+    lines=[f"# Full training-body control: {protocol.get('experiment', 'unspecified')}",'','Single training seed; synchronized observations; correct32 frozen calibration. No held-out policy evaluation.','',
         '| Data | Objective | Six-joint | Seven-joint | Total | Training examples |', '|---|---|---:|---:|---:|---:|']
     for r in rows:
         six='/'.join(map(str,r['six'])); seven='/'.join(map(str,r['seven']))
@@ -48,11 +48,17 @@ def report(output):
     except ImportError:
         sys.path.insert(0,str(Path('.recovery-deps').resolve()))
         import matplotlib.pyplot as plt
-    fig,ax=plt.subplots(figsize=(11,5)); ids=sorted({r['body_seed'] for r in bodies}); x=np.arange(len(ids)); width=.19
+    fig,ax=plt.subplots(figsize=(max(11,len({r['body_seed'] for r in bodies})*1.1),5)); ids=sorted({r['body_seed'] for r in bodies}); x=np.arange(len(ids)); width=.19
     for index,(phase,kind) in enumerate([(p,k) for p in ['original','recovery'] for k in ['flow','direct']]):
         selected=[r for r in bodies if r['phase']==phase and r['model']==kind]
         ax.bar(x+(index-1.5)*width,[100*r['successes']/r['trials'] for r in selected],width,label=phase+' / '+kind)
-    ax.set_xticks(x,['6-joint 1','6-joint 2','6-joint 3','7-joint 1','7-joint 2','7-joint 3'])
+    labels=[]; family_counts={}
+    for body in ids:
+        family=next(r['family'] for r in bodies if r['body_seed']==body)
+        family_counts[family]=family_counts.get(family,0)+1
+        labels.append(f"{family}\nbody {family_counts[family]}")
+    ax.set_xticks(x,labels)
+    ax.tick_params(axis='x',labelsize=8)
     ax.set_ylabel('Training-episode success (%)'); ax.set_ylim(0,105)
     ax.axhline(90,color='gray',linestyle='--',linewidth=1,label='Per-body gate (90%)')
     ax.spines[['top','right']].set_visible(False)
