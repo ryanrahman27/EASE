@@ -21,9 +21,9 @@ def encoder_key(name):
     return name.startswith('history_') or name=='empty'
 
 
-def make_student(teacher,contexts,device):
+def make_student(teacher,contexts,device,seed=0):
     student=copy.deepcopy(teacher)
-    torch.manual_seed(0)
+    torch.manual_seed(seed)
     fresh=JointFlowPolicy(history=True).to(device).state_dict()
     state=student.state_dict()
     for name in state:
@@ -41,7 +41,7 @@ def frozen_equal(student,teacher):
     return all(torch.equal(value,reference[name]) for name,value in student.state_dict().items() if not encoder_key(name))
 
 
-def run(data,source,teacher,output,steps=10000,device='cuda'):
+def run(data,source,teacher,output,steps=10000,device='cuda',seed=0,diagnostic=False):
     torch.set_num_threads(4)
     root=Path(output); source=Path(source); teacher_path=Path(teacher)
     dataset=MixedData(data)
@@ -51,12 +51,13 @@ def run(data,source,teacher,output,steps=10000,device='cuda'):
     meta=json.loads((teacher_path.parent/'training.json').read_text())
     manifest_hash=fingerprint(Path(data)/'manifest.json')
     assert meta['manifest_sha256']==manifest_hash and meta['policy_sha256']==fingerprint(teacher_path)
-    assert json.loads((teacher_path.parent/'gate.json').read_text())['passed']
+    teacher_passed=json.loads((teacher_path.parent/'gate.json').read_text())['passed']
+    assert teacher_passed or diagnostic, 'Teacher training gate failed; explicit diagnostic mode required'
     root.mkdir(parents=True,exist_ok=False)
     teacher_model=JointFlowPolicy(history=True).to(device)
     teacher_model.load_state_dict(torch.load(teacher_path,map_location=device,weights_only=True))
     teacher_model.eval().requires_grad_(False)
-    student=make_student(teacher_model,dataset.contexts,device)
+    student=make_student(teacher_model,dataset.contexts,device,seed)
     arms=[Arm(**a) for a in dataset.manifest['arms'] if a['split']=='train']
     ids={a.seed:i for i,a in enumerate(arms)}
     masks=torch.tensor([[j<a.dof for j in range(7)] for a in arms],device=device)
@@ -65,9 +66,10 @@ def run(data,source,teacher,output,steps=10000,device='cuda'):
     row_body=torch.tensor([ids[dataset.episode_body[e]] for e in dataset.row_episode],device=device)
     protocol={'experiment':'E17','scope':'Training-body latent distillation; no unseen-body evaluation',
         'teacher':str(teacher_path),'teacher_sha256':fingerprint(teacher_path),'teacher_steps':meta['steps'],
-        'manifest_sha256':manifest_hash,'recovery_hashes':shared['hashes'],'seed':0,'steps':steps,'batch':32,'lr':.0003,
+        'manifest_sha256':manifest_hash,'recovery_hashes':shared['hashes'],'seed':seed,'steps':steps,'batch':32,'lr':.0003,
+        'teacher_training_gate_passed':teacher_passed,'diagnostic_despite_failed_gate':not teacher_passed,
         'loss':'Masked per-joint raw latent MSE against frozen privileged encoder targets; no action or task loss',
-        'student_initialization':'Fresh seed-0 history modules; inherited frozen teacher controller and joint/task normalization',
+        'student_initialization':'Fresh history modules at recorded seed; inherited frozen teacher controller and joint/task normalization',
         'trainable_parameters':sum(p.numel() for p in student.parameters() if p.requires_grad),
         'total_parameters':sum(p.numel() for p in student.parameters()),
         'history':'Same other-episode variable 0..32 context sampling as E15/E16; measured-history training normalization',
@@ -81,7 +83,7 @@ def run(data,source,teacher,output,steps=10000,device='cuda'):
     snapshot=root/'source'; snapshot.mkdir()
     for path in Path(__file__).parent.glob('*.py'): shutil.copyfile(path,snapshot/path.name)
     opt=torch.optim.AdamW([p for p in student.parameters() if p.requires_grad],lr=.0003)
-    rng=torch.Generator(device=device).manual_seed(1000); context_rng=np.random.default_rng(3000)
+    rng=torch.Generator(device=device).manual_seed(1000+seed); context_rng=np.random.default_rng(3000+seed)
     losses=[]
     for step in range(steps):
         idx=torch.randint(len(row_body),(32,),device=device,generator=rng)
@@ -96,7 +98,7 @@ def run(data,source,teacher,output,steps=10000,device='cuda'):
     assert frozen_equal(student,teacher_model)
     student.eval()
     torch.save(student.state_dict(),root/'policy.pt')
-    (root/'training.json').write_text(json.dumps({'kind':'direct','seed':0,'steps':steps,'losses':losses,
+    (root/'training.json').write_text(json.dumps({'kind':'direct','seed':seed,'steps':steps,'losses':losses,
         'manifest_sha256':manifest_hash,'policy_sha256':fingerprint(root/'policy.pt'),
         'controller_bitwise_unchanged':True,'trainable_parameters':protocol['trainable_parameters']},indent=2))
     # Independent calibration episodes, paired across bodies; no physical values enter student.encode.
@@ -127,4 +129,5 @@ if __name__=='__main__':
     parser=argparse.ArgumentParser()
     for name in ['data','source','teacher','output']: parser.add_argument('--'+name,required=True)
     parser.add_argument('--steps',type=int,default=10000); parser.add_argument('--device',default='cuda')
+    parser.add_argument('--seed',type=int,default=0); parser.add_argument('--diagnostic',action='store_true')
     run(**vars(parser.parse_args()))

@@ -10,8 +10,9 @@ from .joint_policy import JointFlowPolicy
 from .mixed_data import load
 from .mixed_sim import Arm, MixedReach, explore
 from .full_control import commands
+from .diverse_oracle import oracle_tokens
 
-def evaluate(data, checkpoint, output, device="cpu"):
+def evaluate(data, checkpoint, output, device="cpu", privileged=False):
     torch.set_num_threads(4)
     manifest = load(data)
     if not manifest.get("synchronized_observations", False):
@@ -36,13 +37,16 @@ def evaluate(data, checkpoint, output, device="cpu"):
                          generator=torch.Generator().manual_seed(goal["seed"]+600000))
                          for _, goal in cases], dim=1).to(device)
     modes = [("empty", 0)] + [(prefix+str(n), n) for n in [8,16,32] for prefix in ["correct","wrong"]]
+    if privileged: modes=[('oracle',0)]
     records = []
     for mode, length in modes:
         contexts = np.zeros((len(cases), 32, max_joints, 11), np.float32)
         donors = []
         for idx, (arm, goal) in enumerate(cases):
             donor = None
-            if length:
+            if privileged:
+                contexts[idx]=oracle_tokens(arm,padded=True)
+            elif length:
                 context = explore(MixedReach(arm, synchronize=True), goal["seed"]+500000, length)
                 if mode.startswith("wrong"):
                     donor = next(Arm(**item) for item in manifest["arms"]
@@ -52,7 +56,7 @@ def evaluate(data, checkpoint, output, device="cpu"):
             donors.append(None if donor is None else donor.seed)
         with torch.no_grad():
             latent = model.encode(torch.from_numpy(contexts).to(device),
-                                  torch.full((len(cases),), length, device=device), joint_mask) if history else None
+                                  torch.full((len(cases),), 32 if privileged else length, device=device), joint_mask) if history else None
         envs = [MixedReach(arm, synchronize=True) for arm, _ in cases]
         observations = [env.reset(goal["seed"], goal["xyz"]) for env, (_, goal) in zip(envs, cases)]
         active = np.ones(len(cases), dtype=bool)
@@ -79,9 +83,9 @@ def evaluate(data, checkpoint, output, device="cpu"):
             subset = [r for r in records if r["mode"] == mode and r["family"] == family]
             print(mode, family, sum(r["success"] for r in subset), "/", len(subset), flush=True)
     with Path(output).open("x") as file:
-        json.dump({"history": history, "training_seed": metadata["seed"],
+        json.dump({"history": not privileged, "privileged_inputs":privileged,"training_seed": metadata["seed"],
             "manifest_sha256": metadata["manifest_sha256"], "checkpoint_sha256": metadata["policy_sha256"],
-            "protocol": "Separate calibration episode then task reset; frozen context and weights; paired noise",
+            "protocol": "True physical parameters; zero calibration actions; frozen weights" if privileged else "Separate calibration episode then task reset; frozen context and weights; paired noise",
             "test_evaluated": False, "records": records}, file, indent=2)
 
 

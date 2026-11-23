@@ -21,19 +21,19 @@ def commands(model, kind, q, task, mask, noise, latent):
     return model(torch.zeros_like(noise),torch.zeros(len(q),device=q.device),q,task,mask,latent)[:,0].clamp(-1,1)*.04
 
 
-def fit(dataset,folder,kind,steps,device,manifest_hash,recovery_hash=None,checkpoint_steps=(),on_checkpoint=None):
+def fit(dataset,folder,kind,steps,device,manifest_hash,recovery_hash=None,checkpoint_steps=(),on_checkpoint=None,seed=0):
     folder.mkdir()
     q,task,mask,action,valid=[t.to(device) for t in dataset.tensors]
-    torch.manual_seed(0)
+    torch.manual_seed(seed)
     model=JointFlowPolicy(history=True).to(device)
     model.joint_mean.copy_(q[mask].mean(0)); model.joint_std.copy_(q[mask].std(0,unbiased=False).clamp_min(.01))
     model.task_mean.copy_(task.mean(0)); model.task_std.copy_(task.std(0,unbiased=False).clamp_min(.01))
     h=torch.tensor(np.concatenate([c.reshape(-1,11) for c in dataset.contexts]),device=device)
     model.history_mean.copy_(h.mean(0)); model.history_std.copy_(h.std(0,unbiased=False).clamp_min(.01))
     opt=torch.optim.AdamW(model.parameters(),lr=.0003)
-    batch_rng=torch.Generator(device=device).manual_seed(1000)
-    noise_rng=torch.Generator(device=device).manual_seed(2000)
-    context_rng=np.random.default_rng(3000)
+    batch_rng=torch.Generator(device=device).manual_seed(1000+seed)
+    noise_rng=torch.Generator(device=device).manual_seed(2000+seed)
+    context_rng=np.random.default_rng(3000+seed)
     losses=[]; start=time.perf_counter()
     for step in range(steps):
         idx=torch.randint(len(q),(32,),device=device,generator=batch_rng)
@@ -61,7 +61,7 @@ def fit(dataset,folder,kind,steps,device,manifest_hash,recovery_hash=None,checkp
                 'torch':torch.get_rng_state(),'cuda':torch.cuda.get_rng_state_all() if torch.cuda.is_available() else []})
     model.eval()
     torch.save(model.state_dict(),folder/'policy.pt')
-    (folder/'training.json').write_text(json.dumps({'kind':kind,'seed':0,'steps':steps,'losses':losses,
+    (folder/'training.json').write_text(json.dumps({'kind':kind,'seed':seed,'steps':steps,'losses':losses,
         'transitions':len(q),'parameters':sum(p.numel() for p in model.parameters()),'seconds':time.perf_counter()-start,
         'manifest_sha256':manifest_hash,'recovery_sha256':recovery_hash,'policy_sha256':fingerprint(folder/'policy.pt'),
         'torch':torch.__version__,'device':device},indent=2))

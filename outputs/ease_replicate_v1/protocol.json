@@ -1,0 +1,29 @@
+{
+  "experiment": "E19",
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "new_seeds": [
+    1,
+    2
+  ],
+  "teacher_steps": 30000,
+  "student_steps": 10000,
+  "batch": 32,
+  "lr": 0.0003,
+  "manifest_sha256": "7e5c8439cddb7edabb188e303d2cd1e788d2f55dc23205d4659e36e8cf17b6d1",
+  "recovery_hashes": {
+    "original_flow\\recovery.npz": "13be20a9caa0b7853805e0e6bb25d4fbec0ea6c0f5f41234c7131304da88e822",
+    "original_direct\\recovery.npz": "1148f3eae181241f2ea94f7415a9c4e5409287e32a763b766be87a842c71123c"
+  },
+  "fixed_data": "Same seed-0 recovery union for all seeds; this tests optimization variability conditional on a fixed dataset",
+  "seed_effect": "Teacher and student initialization plus training batch/context streams vary together; no isolated variance attribution",
+  "selection": "No seed dropping, checkpoint selection, early stopping, or validation tuning; failed gates retained and validation labeled diagnostic",
+  "validation": "Same 14 arms and 8 goals; student empty/correct/wrong 8/16/32; privileged teacher uses true parameters, no target-arm training",
+  "primary": "Per-seed correct32 versus both empty and wrong32 on novel families; all history lengths and families reported",
+  "diagnosis": "Compare frozen teacher and student on each withheld family; privileged reference is not a formal upper bound",
+  "final_test_evaluated": false,
+  "seed0": "Previously observed pilot; seeds 1 and 2 prespecified additional runs"
+}
