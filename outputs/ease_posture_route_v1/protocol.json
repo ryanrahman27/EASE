@@ -1,0 +1,15 @@
+{
+  "experiment": "E173",
+  "scope": "Privileged alternative-posture route execution on48 six-joint fitting cases per variant,96 episodes plus4 exact E170 replays. No held execution or training. E17044/48 zero collisions remains protected reference and E120+release primary baseline.",
+  "planning": "Use frozen posture_route_planner at the E172 measured local late-stall gate. Scratch IK/path queries only; exact current simulator geometry/object/jaw state privileged. All4 prior failure states have alternate static postures and sampled collision-free direct joint paths. Recompute online at first activation, never use an outcome or case lookup. Verify live state unchanged.",
+  "control": "Track dense route by nearest remaining node plus3 lookahead nodes, joint command clip(.35*(waypoint-q)+frozen_bias,+/-.04), then unchanged E170 clearance/error-allowance QP. E120 still estimates its metric and handles all other phases; route execution is explicitly privileged assistance, not learned-only control. No modified probe or gripper schedule.",
+  "budgets": "route_fixed preserves100 descent steps. route_extended allows up to300 descent steps only after a route is accepted, up to200 extra interactions; original reach termination still applies. Nonactivated episodes must reproduce complete reference traces/states exactly. All other budgets and265mm release fix unchanged.",
+  "gate": "At least60 descent observations,25mm<position error<75mm, less than1mm progress over previous19 intervals, any abs joint>=2.4. Attempt planning once. No IDs in control; parameters frozen before execution outcomes.",
+  "screen": "More than44 successes, zero collisions and no lost reference success. Separate static feasibility, task completion and interaction budget. Every failure and fallback retained.",
+  "inputs": {
+    "outputs/ease_descent_execution_v1/history_allowance/records.json": "0b823dca0acf78881670195602ba7fbce29f9ba5f3b18f683461923852f7a244",
+    "outputs/ease_posture_route_v1/planning_protocol.json": "824deb7aa543f2558712137eb9703ad1a7bf38894b1381de8d186f0ec2d1d3f2",
+    "outputs/ease_posture_route_v1/planning_summary.json": "a8702f9a18db8065f821e21a4e0685be22b7af8ee031697435241ced0ac2eadd",
+    "/mnt/c/Users/faisa/piperx-openpi/examples/ease_fm/posture_route_planner.py": "681b72474e15cd0ea0a2e789f643bbdfe3df24d45b75f70b3ed4f49d229735c7"
+  }
+}
