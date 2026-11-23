@@ -1,0 +1,26 @@
+{
+  "experiment": "E56",
+  "steps": 2000,
+  "batch": 128,
+  "lr": 2e-05,
+  "control_weight": 0.01,
+  "parents": {
+    "outputs/ease_robust_training_v1/seed_0/policy.pt": "bb2eadf92edc2f698fd137f6d1a7c8ec0a7283cd34e1d5a0fc390645e66392f1",
+    "outputs/ease_robust_training_v1/seed_1/policy.pt": "141e03fdac6d03a8ef035db3b8d3218cbbe73193450e06821e10b310380fc42d",
+    "outputs/ease_robust_training_v1/seed_2/policy.pt": "cf0d4d5d9fb80d5a20f5b117ea897a057e9c81ede715b785dad7523ec77520a0"
+  },
+  "conditions": [
+    "prediction",
+    "control"
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "test_evaluated": false,
+  "data": "Synthetic only. Shared XYZ/tool-Z statistics; 1\u2013256 transitions, full first 32 then rank 1\u20133, .98 decay, 1e-6 ridge, 6/7 joints, tangent-plane tool-Z responses, mostly clean measurement noise. Same batches per paired model.",
+  "loss": "Both: same clean-ridge MSE and frozen E35 anchor (6-joint weight 2, 7-joint .5) as E52. Control adds .01 times mean squared local residual divided by squared task error plus .002^2. Action uses gain .35, damping .015, clip .04 and limits +/-2.5; predicted displacement subtracts measured bias. Error J*dq with dq sigma .02 and scale exp U(-2.3,.7); bias clipped Gaussian sigma .006; q uniform +/-2.5. Independent context RNG; identical state batches to E52. No native data or geometry. Fixed coefficient, no sweep.",
+  "selection": "Fixed final checkpoints, no seed selection. Original 256 training tasks per seed first; all failures retained. Native development comparison requires six-joint retention before adoption. No final test.",
+  "evaluation": "Fixed independent synthetic batch; original training control; same twelve observed E46 manipulation tasks, original controller/tool-Z objective. No E51 angular intervention."
+}

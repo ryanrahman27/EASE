@@ -15,7 +15,7 @@ from .pick_place_control import calibrate
 from .native_reliability import rollout
 
 
-def run(assets, training, reference, output):
+def run(assets, training, reference, output, reuse_prediction=None):
     torch.set_num_threads(4)
     root=Path(output);root.mkdir(parents=True,exist_ok=False)
     train=Path(training);ref=Path(reference)
@@ -23,15 +23,33 @@ def run(assets, training, reference, output):
     verify_assets(assets)
     tasks=json.loads((ref/'cases.json').read_text());assert len(tasks)==12
     old=json.loads((ref/'records.json').read_text())
-    (root/'protocol.json').write_text(json.dumps(dict(experiment='E52 native development',training=training,reference=reference,
+    experiment=json.loads((train/'protocol.json').read_text())['experiment']
+    (root/'protocol.json').write_text(json.dumps(dict(experiment=experiment+' native development',training=training,reference=reference,
         cases_sha256=fingerprint(ref/'cases.json'),reference_sha256=fingerprint(ref/'records.json'),
-        selection='All six fixed final candidates, all twelve observed placements. Retain failed training gates as diagnostic. No controller change, no added probes, original 41000+case seeds. Compare to audited E46 original and analytical records.',test_evaluated=False),indent=2))
+        reuse_prediction=reuse_prediction,
+        selection='All six fixed final candidates, all twelve observed placements. Optional prediction-only reuse requires exact checkpoint/case hashes; reused records are labeled in audit. Retain failed training gates as diagnostic. No controller change, no added probes, original 41000+case seeds. Compare to audited E46 original and analytical records.',test_evaluated=False),indent=2))
     (root/'source').mkdir()
     for name in ['control_training_eval.py','native_reliability.py','pick_place_control.py','retention_fresh.py']:
         shutil.copy2(Path(__file__).with_name(name),root/'source'/name)
     (root/'trials').mkdir();rows=[];hashes={}
     for condition in ['prediction','control']:
         models,hh=load_models(train/condition);hashes.update(hh)
+        if condition=='prediction' and reuse_prediction:
+            source=Path(reuse_prediction);sp=json.loads((source/'protocol.json').read_text())
+            assert json.loads((source/'status.json').read_text())['status']=='complete'
+            assert sp['cases_sha256']==fingerprint(ref/'cases.json')
+            assert sp['reference_sha256']==fingerprint(ref/'records.json')
+            for seed in range(3):
+                old_path=Path(sp['training'])/'prediction'/f'seed_{seed}'/'policy.pt'
+                assert fingerprint(old_path)==fingerprint(train/'prediction'/f'seed_{seed}'/'policy.pt')
+            reused=[r for r in json.loads((source/'records.json').read_text()) if r['condition']=='prediction']
+            assert len(reused)==36
+            for row in reused:
+                rows.append(row)
+                (root/'trials'/f"prediction_{row['seed']}_{row['case']}.json").write_text(json.dumps(row))
+            (root/'reuse.json').write_text(json.dumps(dict(source=reuse_prediction,records_sha256=fingerprint(source/'records.json'),records=36,identical_prediction_checkpoints=True),indent=2))
+            print('Reused 36 prediction-only records with identical checkpoints/cases',flush=True)
+            continue
         for seed in range(3):
             method=f'neural_{seed}'
             for i,t in enumerate(tasks):
@@ -48,11 +66,12 @@ def run(assets, training, reference, output):
                 print(condition,seed,i,result['success'],result['failure'],flush=True)
     for path,sha in hashes.items():assert fingerprint(path)==sha
     (root/'records.json').write_text(json.dumps(rows))
-    (root/'audit.json').write_text(json.dumps(dict(checkpoints=hashes,calibration_matches=len(rows),test_evaluated=False),indent=2))
+    (root/'audit.json').write_text(json.dumps(dict(checkpoints=hashes,calibration_matches=len(rows),new_trials=36 if reuse_prediction else 72,reused_trials=36 if reuse_prediction else 0,test_evaluated=False),indent=2))
     (root/'status.json').write_text(json.dumps(dict(status='complete',test_evaluated=False)))
 
 
 if __name__=='__main__':
     p=argparse.ArgumentParser()
     for key in ['assets','training','reference','output']:p.add_argument('--'+key,required=True)
+    p.add_argument('--reuse-prediction')
     run(**vars(p.parse_args()))
