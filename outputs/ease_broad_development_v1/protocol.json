@@ -1,0 +1,29 @@
+{
+  "experiment": "E33",
+  "generation_seed": 330000,
+  "checkpoints": [
+    {
+      "seed": 0,
+      "folder": "outputs/ease_motion_transformer_v1",
+      "policy_sha256": "b3be78ef5e97ed3a725e4f01b130565d85a68827a1d167e836de362ea3d2dd3a"
+    },
+    {
+      "seed": 1,
+      "folder": "outputs/ease_motion_replicate_v1/seed_1",
+      "policy_sha256": "e32cb506b9d402f63efd7530ee8d0ed12a08180fbb1e8ec2a976f1af1b232875"
+    },
+    {
+      "seed": 2,
+      "folder": "outputs/ease_motion_replicate_v1/seed_2",
+      "policy_sha256": "5b1e3b56136add2e9ff8459644d2f29cdde44881f4bba61745a4954633c36fee"
+    }
+  ],
+  "prior_manifest_sha256": "e28aa6cf6d4b402bb3847785d7ac125e8f015a16da7b70870d6582dbcea0d958",
+  "test_evaluated": false,
+  "scope": "Separate development suite. Frozen checkpoints; no fitting, validation tuning, or final-test use.",
+  "families": "Eight new axis strings per DoF, all axes X/Y/Z sampled freely; exclude every prior registered arrangement.",
+  "physical": "Cross geometry and dynamics: nominal lengths .8..1.2 times nominal, masses .7..1.3, strength1 damping2; shifted lengths .55..1.55, masses .5..1.8; shifted strength .3..2 and damping .3..5.",
+  "postures": "Two shared homes per family: uniform +/- .45 or .85 rad plus .4 rad at joint1. Reject only contact or rank<3.",
+  "goals": "Eight shared target joint offsets per home across four physical variants. Target radius .2.. .55 rad in joint space; endpoint distance .06.. .18m, joint bounds +/-2.2, contact-free endpoints. No rollout-success filtering.",
+  "evaluation": "1024 cases, same 150-step horizon, action limit and success rule. Cold-start neural seeds0/1/2 versus fixed +.01 rad first-step analytical, zero-initialized analytical, and privileged expert reference. Same task interaction cost, zero separate calibration. All outcomes retained."
+}

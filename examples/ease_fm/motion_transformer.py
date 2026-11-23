@@ -41,6 +41,60 @@ def statistics(history):
     return dq.T @ dq+1e-6*np.eye(dq.shape[1]), dq.T @ dx, (history[:, :, 2]*.04-dq).mean(0)
 
 
+class MotionController:
+    """Reusable neural motion estimator + shared controller; no analytical J fit.
+
+    Share one evaluated MotionTransformer across robot instances. Each controller
+    owns only its measured-motion statistics. Call action(observation), execute
+    that command, then update(before, after, actual_executed_command).
+    """
+    def __init__(self, model, dof, history=None, online=True):
+        if dof not in (6,7):raise ValueError('This checkpoint supports six or seven joints')
+        self.model=model.eval();self.dof=dof;self.online=online;self.cached_jac=None
+        self.device=next(model.parameters()).device
+        if history is None:
+            self.gram=1e-6*np.eye(dof);self.cross=np.zeros((dof,3));self.bias=np.zeros(dof)
+        else:
+            history=np.asarray(history)
+            if history.ndim!=3 or history.shape[0]==0 or history.shape[1:]!=(dof,11) or not np.isfinite(history).all():
+                raise ValueError('History must contain finite measured transitions for the active joints')
+            self.gram,self.cross,self.bias=statistics(history)
+
+    @classmethod
+    def from_checkpoint(cls, folder, dof, history=None, online=True, device='cuda'):
+        folder=Path(folder);meta=json.loads((folder/'training.json').read_text())
+        if fingerprint(folder/'policy.pt')!=meta['policy_sha256']:raise ValueError('Checkpoint hash mismatch')
+        model=MotionTransformer().to(device)
+        model.load_state_dict(torch.load(folder/'policy.pt',map_location=device,weights_only=True))
+        return cls(model,dof,history,online)
+
+    @torch.no_grad()
+    def action(self, observation):
+        task=np.asarray(observation['task'])
+        if task.shape!=(6,) or not np.isfinite(task).all():raise ValueError('Expected finite EE and goal XYZ')
+        if self.cached_jac is None:
+            gram=torch.zeros((1,7,7),device=self.device);cross=torch.zeros((1,7,3),device=self.device)
+            gram[0,:self.dof,:self.dof]=torch.as_tensor(self.gram,device=self.device,dtype=torch.float32)
+            cross[0,:self.dof]=torch.as_tensor(self.cross,device=self.device,dtype=torch.float32)
+            mask=torch.arange(7,device=self.device)[None]<self.dof
+            self.cached_jac=self.model(gram,cross,mask)[0,:self.dof].cpu().numpy().T.astype(float)
+        jac=self.cached_jac
+        delta=jac.T@np.linalg.solve(jac@jac.T+.015**2*np.eye(3),.5*(task[3:]-task[:3]))
+        return np.clip(delta+self.bias,-.04,.04)
+
+    def update(self,before,after,executed):
+        if not self.online:return
+        dq=(np.asarray(after['joints'])[:,0]-np.asarray(before['joints'])[:,0]).astype(float)
+        dx=(np.asarray(after['task'])[:3]-np.asarray(before['task'])[:3]).astype(float)
+        executed=np.asarray(executed)
+        if dq.shape!=(self.dof,) or executed.shape!=(self.dof,) or not all(np.isfinite(x).all() for x in (dq,dx,executed)):
+            raise ValueError('Expected finite measured joint motion and executed commands')
+        self.gram=.98*self.gram+np.outer(dq,dq)+2e-8*np.eye(self.dof)
+        self.cross=.98*self.cross+np.outer(dq,dx)
+        self.bias=.8*self.bias+.2*(executed-dq)
+        self.cached_jac=None
+
+
 def fit(data, manifest, root, steps, device, seed):
     torch.manual_seed(seed); rng = np.random.default_rng(12000+seed)
     profiles = []
