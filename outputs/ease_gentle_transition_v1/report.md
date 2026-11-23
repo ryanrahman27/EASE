@@ -1,0 +1,70 @@
+# E103: gentle phase-transition training-arm screen
+
+All12 original training placements on four original training bodies x3 fixed E99 retained checkpoints x baseline/budget/gentle =108 complete tasks. Third placement per body remains held-placement validation (24 training,12 held-placement pairs). Original E66 prefix and32-step probe are identical; E99 retained continuation weights stay frozen. No route planner is used on these training tasks; the existing privileged geometry filter remains.
+
+Gentle scales the task-command correction around measured bias using cubic smoothstep during the first20 control steps (0.8s) of lift, transport, lower and retreat. Both gentle and budget-only allow20 extra maximum steps per affected phase. Original commands pass through exactly from step20 onward. Targets, gripper apertures, early-exit conditions, collision masks, success criteria and physics are unchanged. No contact feedback or estimator training is added. Ramp limits joint-command onset, not necessarily Cartesian velocity.
+
+| Group | Mode | Success | Collisions | Steps |
+|---|---|---:|---:|---:|
+| all | baseline | 22/36 | 14 | 13406 |
+| all | budget | 23/36 | 13 | 13503 |
+| all | gentle | 22/36 | 12 | 14363 |
+| train | baseline | 18/24 | 6 | 8786 |
+| train | budget | 19/24 | 5 | 8712 |
+| train | gentle | 17/24 | 5 | 9106 |
+| validation | baseline | 4/12 | 8 | 4620 |
+| validation | budget | 4/12 | 8 | 4791 |
+| validation | gentle | 5/12 | 7 | 5257 |
+| 6 | baseline | 14/18 | 4 | 5803 |
+| 6 | budget | 14/18 | 4 | 5819 |
+| 6 | gentle | 14/18 | 3 | 6225 |
+| 7 | baseline | 8/18 | 10 | 7603 |
+| 7 | budget | 9/18 | 9 | 7684 |
+| 7 | gentle | 8/18 | 9 | 8138 |
+| seed0 | baseline | 7/12 | 5 | 4344 |
+| seed0 | budget | 7/12 | 5 | 4349 |
+| seed0 | gentle | 8/12 | 3 | 4741 |
+| seed1 | baseline | 7/12 | 5 | 4644 |
+| seed1 | budget | 8/12 | 4 | 4702 |
+| seed1 | gentle | 7/12 | 4 | 4805 |
+| seed2 | baseline | 8/12 | 4 | 4418 |
+| seed2 | budget | 8/12 | 4 | 4452 |
+| seed2 | gentle | 7/12 | 5 | 4817 |
+
+## All gentle paired changes
+
+| Reference | Case | Seed | DOF | Held placement | Change | Collision |
+|---|---:|---:|---:|---|---|---|
+| baseline | 1 | 0 | 6 | False | gain | False |
+| baseline | 1 | 1 | 6 | False | loss | True |
+| baseline | 2 | 0 | 6 | True | gain | False |
+| baseline | 2 | 1 | 6 | True | gain | False |
+| baseline | 2 | 2 | 6 | True | loss | True |
+| baseline | 4 | 0 | 6 | False | loss | False |
+| baseline | 6 | 1 | 7 | False | gain | False |
+| baseline | 7 | 1 | 7 | False | loss | True |
+| budget | 1 | 0 | 6 | False | gain | False |
+| budget | 1 | 1 | 6 | False | loss | True |
+| budget | 2 | 0 | 6 | True | gain | False |
+| budget | 2 | 1 | 6 | True | gain | False |
+| budget | 2 | 2 | 6 | True | loss | True |
+| budget | 4 | 0 | 6 | False | loss | False |
+| budget | 6 | 1 | 7 | False | gain | False |
+| budget | 7 | 1 | 7 | False | loss | True |
+| budget | 10 | 1 | 7 | False | loss | False |
+
+## Prespecified gate
+
+**FAIL**: {'baseline': {'train': {'retains_all_successes': False, 'collisions_nonincreasing': True, 'success_improves': False, 'per_seed_nondecreasing': False}, 'validation': {'retains_all_successes': False, 'collisions_nonincreasing': True}}, 'budget': {'train': {'retains_all_successes': False, 'collisions_nonincreasing': True, 'success_improves': False, 'per_seed_nondecreasing': False}, 'validation': {'retains_all_successes': False, 'collisions_nonincreasing': True}}}
+
+Transfer evaluation is conditional on strict training improvement versus both controls, no lost successes or increased collisions, no training-seed decline, and held-placement retention. No ramp duration or seed is selected after outcomes. Contact/object traces are saved at40ms control-step endpoints, which cannot resolve every transient contact; E102 used finer2ms diagnostics.
+
+## Verification
+
+All36 original baseline full rollouts and108 prefixes through closing replay exactly. Input/checkpoint hashes are unchanged.131 tests pass, including monotonic ramp onset, bias-only preservation, bounds and exact original-command recovery. A calibration phase-counter initialization error was fixed before any completed trial; the failed-start source and note are preserved. All new video results must match saved full serialized trials, decoded frame counts and hashes. Figure transition_comparison.png / .pdf; gallery videos/index.html. No final-test evaluation or inference-time weight updates.
+
+## Decision
+
+The combined ramp is not adopted. Across all36 training-body pairs, gentle gives22 successes/12 collisions versus baseline22/14 and budget-only23/13. It gains four and loses four versus baseline, including three six-joint losses; versus budget it gains four and loses five. The24 training pairs decline18 to17 successes (budget19); held-placement success improves4 to5 but loses an existing success. Lower collision count does not establish reliable manipulation or retention. Both prespecified gates fail, so full development transfer is deliberately not evaluated. No final test is opened.
+
+Next isolate lift, transport, lowering and retreat ramps one at a time on the original training bodies, keeping the20-step ramp and matched time controls fixed. Report every phase condition and loss rather than choosing a seed or retrospectively changing the ramp duration. This separates effects that the current combined intervention cannot identify. Checkpoint weights, success criteria and geometry assumptions remain fixed; any later transfer run must first satisfy the training/held-placement retention gate.
