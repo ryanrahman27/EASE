@@ -1,0 +1,10 @@
+{
+  "experiment": "E152",
+  "scope": "Additional matched analytical calibration-prior control for E151. Registered after partial E151 outcomes were observed; no E151 coefficient or model was changed. This control isolates learned transition weights from the analytical calibration-prior architecture. Same96 fitting placements; E120 and fresh set unchanged.",
+  "rule": "Exactly the E151 damped projection N=I-J^T(JJ^T+.015^2I)^-1J times.05(home-q), uniformly scaled to maxabs<=.01rad, added after original non-probe action and then clipped+/-.04. Calibration and probe unchanged. Analytical J uses measured initial calibration prior plus32 recent transitions,.98recency,1e-6ridge.",
+  "gate": "Even if the E151 primary gate passes, do not attribute a learned task improvement or advance that claim unless learned-posture success also exceeds this matched analytical-prior posture reference. Report paired losses. No parameter sweep.",
+  "inputs": {
+    "outputs/ease_home_posture_control_v1/protocol.json": "14b623084c7a91a8a05de59efb78fc767a1a85cf80fa088599b44df6686e9ca0",
+    "/mnt/c/Users/faisa/piperx-openpi/examples/ease_fm/home_posture_control.py": "1d71ba31ec1f3f02da9e24d59832d4454b5bb835ad8efdee3e9194e66e9b4072"
+  }
+}
