@@ -1,0 +1,21 @@
+{
+  "experiment": "E30",
+  "seed": 0,
+  "steps": 15000,
+  "batch": 128,
+  "manifest_sha256": "e28aa6cf6d4b402bb3847785d7ac125e8f015a16da7b70870d6582dbcea0d958",
+  "test_evaluated": false,
+  "architecture": "Joint-token Transformer predicts 3D Jacobian columns from measured Gram/cross statistics. Shared damped Cartesian controller and measured tracking bias. No analytical inverse in neural Jacobian forward.",
+  "training": "Random linear motion systems using only training-probe excitation profiles plus synthetic Gaussian excitation. Ridge-solution supervision; no held-out geometry, expert actions, or task labels.",
+  "modes": [
+    "neural_frozen",
+    "neural_online",
+    "hybrid_online"
+  ],
+  "hybrid_warning": "Hybrid uses Transformer on the first task step only, then analytical identification; success is not evidence of neural-only transfer.",
+  "calibration_steps": 32,
+  "probe_seeds": [
+    930000
+  ],
+  "model_selection": "Fixed final checkpoint, no validation tuning"
+}
