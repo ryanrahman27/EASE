@@ -8779,3 +8779,7 @@ The frozen-history condition uses both E120 networks and current state feedback.
 Intervals resample 12 complete bodies with replacement, including all four placements of each sampled body. The inference applies to this simulated perturbation distribution and the four sampled axis families.
 
 Artifacts in `outputs/ease_fresh_recovery_v1`.
+
+## E182 matched-history diagnosis
+
+E181 cases 6, 38, 43, 25, 9 and 35. Verified 8,321 matched states and 18 success/failure videos. Case 25 displaced the cube before closing. Report in `outputs/ease_fresh_update_diagnosis_v1/report.md`.
