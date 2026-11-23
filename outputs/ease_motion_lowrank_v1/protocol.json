@@ -1,0 +1,16 @@
+{
+  "experiment": "E44",
+  "steps": 2000,
+  "batch": 128,
+  "lr": 5e-05,
+  "parents": {
+    "outputs/ease_robust_training_v1/seed_0/policy.pt": "bb2eadf92edc2f698fd137f6d1a7c8ec0a7283cd34e1d5a0fc390645e66392f1",
+    "outputs/ease_robust_training_v1/seed_1/policy.pt": "141e03fdac6d03a8ef035db3b8d3218cbbe73193450e06821e10b310380fc42d",
+    "outputs/ease_robust_training_v1/seed_2/policy.pt": "cf0d4d5d9fb80d5a20f5b117ea897a057e9c81ede715b785dad7523ec77520a0"
+  },
+  "data": "outputs/ease_paired_factorial_v2",
+  "training_manifest_sha256": "e28aa6cf6d4b402bb3847785d7ac125e8f015a16da7b70870d6582dbcea0d958",
+  "test_evaluated": false,
+  "training": "Alternate E35 synthetic noisy short histories with synthetic 33-256-step histories: 32-step full-rank probe then rank-1/2/3 motion, .98 weighting, 1e-6 ridge; motion amplitudes .0002-.012, Jacobian scales .03-.8; mostly clean observations. Targets are clean weighted ridge estimates. No native robot rollouts or geometry in training. Fixed final checkpoints, no best-seed selection.",
+  "evaluation": "Fixed synthetic validation batch and subsequent existing observed native development tasks; independent final test remains reserved."
+}

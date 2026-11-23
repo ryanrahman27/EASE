@@ -1,0 +1,17 @@
+{
+  "experiment": "E44",
+  "variant": "trained",
+  "robots": "piper,panda",
+  "source": "outputs/ease_native_reliability_expanded_v2",
+  "reference": "outputs/ease_panda_grasp_supported_v1",
+  "cases_sha256": "28c8a31b28abf796537173aa55513c1bc6f77b1e20212ec4d22d4628bc193653",
+  "commit": "cda5236f98383f6fbaa4820c6b18dba892cd087f",
+  "checkpoints": {
+    "outputs/ease_motion_lowrank_v1/seed_0/policy.pt": "5a11bce567aefa608fd464d927163f821fae3f50f40b34da3d9e52c49bf86ef5",
+    "outputs/ease_motion_lowrank_v1/seed_1/policy.pt": "9861639776cf9ec776df7508a937c7fad07f53a061805dca0a029ab5492f9aad",
+    "outputs/ease_motion_lowrank_v1/seed_2/policy.pt": "57bddf364c3bbb4c534db5813dd96be461bcf8443592e25dcbf82ec9a2893a61"
+  },
+  "test_evaluated": false,
+  "intervention": "Baseline exact E42 object-height release. Scale feeds unscaled tool-direction cross statistics through the same neural estimator and rescales predicted direction Jacobian by .15. Smooth uses .8 previous+.2 new predicted Jacobian. Analytical control is unchanged. Shadow analytical predictions are diagnostic only; no fallback or action blending.",
+  "scope": "Same nine observed Panda cases, same calibration and fixed model weights. Logged one-step prediction errors use next measured motion; no simulator Jacobian access."
+}
