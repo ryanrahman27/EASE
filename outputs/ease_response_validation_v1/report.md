@@ -1,0 +1,44 @@
+# E76: frozen response prediction on separate trajectories
+
+All 112 E72 geometry-filter trajectories replay exactly, including successes and failures. These 16 placements differ from E75, but reuse the same bodies and historical development data. This is neither an independent embodiment test nor a reserved final test. The E75 implementation is imported unchanged and verified against its saved source hash. Neural weights, actions, dynamics, probes and success outcomes are unchanged.
+
+Primary comparison: no-velocity response_linear versus command at the fixed clearance < 0.002 - 1e-6 m threshold. The online predictor uses only completed measurements, including 32 calibration steps. Scoring remains limited to descent/lowering before first forbidden contact, inclusive. Known geometry and exact current simulator state remain privileged inputs. Secondary velocity variants do not determine advancement.
+
+| Group | Predictor | Detected first contacts | Missed in scope | False alarms | Noncollision steps |
+|---|---|---:|---:|---:|---:|
+| all | command | 7/18 | 11 | 8 | 5202 |
+| all | response_linear | 16/18 | 2 | 10 | 5202 |
+| all | velocity_linear | 18/18 | 0 | 11 | 5202 |
+| all | velocity_curve | 18/18 | 0 | 11 | 5202 |
+| learned | command | 6/14 | 8 | 5 | 4556 |
+| learned | response_linear | 13/14 | 1 | 8 | 4556 |
+| learned | velocity_linear | 14/14 | 0 | 9 | 4556 |
+| learned | velocity_curve | 14/14 | 0 | 9 | 4556 |
+| learned_6 | command | 0/1 | 1 | 0 | 1914 |
+| learned_6 | response_linear | 1/1 | 0 | 0 | 1914 |
+| learned_6 | velocity_linear | 1/1 | 0 | 0 | 1914 |
+| learned_6 | velocity_curve | 1/1 | 0 | 0 | 1914 |
+| learned_7 | command | 6/13 | 7 | 5 | 2642 |
+| learned_7 | response_linear | 12/13 | 1 | 8 | 2642 |
+| learned_7 | velocity_linear | 13/13 | 0 | 9 | 2642 |
+| learned_7 | velocity_curve | 13/13 | 0 | 9 | 2642 |
+| successful_learned | command | 0/0 | 0 | 0 | 3410 |
+| successful_learned | response_linear | 0/0 | 0 | 0 | 3410 |
+| successful_learned | velocity_linear | 0/0 | 0 | 0 | 3410 |
+| successful_learned | velocity_curve | 0/0 | 0 | 0 | 3410 |
+
+Coverage of actual first contacts:
+
+- all: 18/30 contacts in scored phases; phase counts {'lift': 7, 'transport': 1, 'lower': 3, 'descend': 15, 'close': 2, 'retreat': 2}.
+- learned: 14/26 contacts in scored phases; phase counts {'lift': 7, 'transport': 1, 'lower': 3, 'close': 2, 'descend': 11, 'retreat': 2}.
+- learned_6: 1/5 contacts in scored phases; phase counts {'lift': 3, 'transport': 1, 'lower': 1}.
+- learned_7: 13/21 contacts in scored phases; phase counts {'close': 2, 'descend': 11, 'lift': 4, 'lower': 2, 'retreat': 2}.
+- successful_learned: 0/0 contacts in scored phases; phase counts {}.
+
+Primary gate: **FAIL**. More detected contacts and no increase in false-alarm count are both required.
+
+The frozen predictor fails the prespecified prediction gate. Retain the original controller; inspect false alarms and missed/out-of-scope contacts before proposing any action intervention. Do not tune this threshold on these outcomes.
+
+False alarms are warnings on executed noncollision steps, not proven task losses. Samples within trajectories and checkpoints sharing placements are dependent. Contacts outside the selected phases cannot be counted as detected. A prediction gain does not demonstrate collision avoidance or recovered pick-and-place tasks. No action changes, native tuning or final-test evaluation occurred.
+
+Verification: 112 complete traces, filter logs and calibration probes reproduce exactly; all 32968 task steps have 32+step prior updates. Input, checkpoint and frozen predictor hashes are unchanged.

@@ -1,0 +1,24 @@
+{
+  "experiment": "E76",
+  "inputs": {
+    "outputs/ease_arm_pick_place_v2/cases.json": "9913082036080a0260394a0e9c8bfc9993ffb64bbf6e3019699bb88827d3f1cb",
+    "outputs/ease_arm_pick_place_v2/axis_catalog.json": "89fe5fcd4ded136798585ae58ad9339ad53b15a874c705f014bfc1646f86e406",
+    "outputs/ease_arm_pick_place_unseen_v1/cases.json": "944fbb927dac19a433547a0bd7f54790a6ba7e6dcb0aa7341c35488833de7753",
+    "outputs/ease_arm_pick_place_unseen_v1/axis_catalog.json": "56bd6c4afecb761916a879b2627cc7146793eda3731cc542b9560b422f9597bc",
+    "outputs/ease_geometry_filter_v2/records.json": "c459dd03f274127ae4c369853932cd416926b37dffbda310722086f0180c1890",
+    "outputs/ease_response_prediction_v1/source/response_prediction.py": "5917ae1644e386ede7d84e7976a36ee72dc4eda494ef3761e0aa833352372ebc"
+  },
+  "checkpoints": {
+    "outputs/ease_robust_training_v1/seed_0/policy.pt": "bb2eadf92edc2f698fd137f6d1a7c8ec0a7283cd34e1d5a0fc390645e66392f1",
+    "outputs/ease_robust_training_v1/seed_1/policy.pt": "141e03fdac6d03a8ef035db3b8d3218cbbe73193450e06821e10b310380fc42d",
+    "outputs/ease_robust_training_v1/seed_2/policy.pt": "cf0d4d5d9fb80d5a20f5b117ea897a057e9c81ede715b785dad7523ec77520a0",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_0/policy.pt": "7cc59ce83397a3856939a849f229e0a962bfe0e1df3add7680aac42b8c5d0fec",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_1/policy.pt": "67a01fc8cdbec4d7c5ee5e602e5d1a16d6cfa80a8520c28a89eb2a861437b2d6",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_2/policy.pt": "f87c12bd330baf384432c5d275eda41f189ddb557f6083f487082a76447b2b71"
+  },
+  "test_evaluated": false,
+  "design": "112 unchanged E72 geometry trajectories on 16 other historical development placements; same bodies, not new embodiments or independent final test. Include successes and failures.",
+  "prediction": "Import frozen E75 ResponseArm without changes. Causal calibration and completed-step updates; same ridge, forgetting, 21 path samples and phases.",
+  "scoring": "Descend/lower steps up to first collision, inclusive. Separately report first contacts outside these phases. Primary no-velocity response_linear versus command at clearance < .002-1e-6. Velocity variants secondary only.",
+  "decision": "Primary passes only if more learned first contacts detected with no increase in noncollision false-alarm count. No threshold tuning or action changes. A pass only supports a subsequent complete-task intervention experiment."
+}
