@@ -1,0 +1,30 @@
+{
+  "experiment": "E124",
+  "checkpoints": {
+    "outputs/ease_task_retention_training_v1/retained/seed_0/policy.pt": "3190e96c2d867237db6f5aedbc46f71ef61ca35f36e0dc3df663018141c50627",
+    "outputs/ease_task_retention_training_v1/retained/seed_1/policy.pt": "4a0495a5b7f719a1d3586554545e11ba39c58840ccdcc78e9fecf1aa2a5993ad",
+    "outputs/ease_task_retention_training_v1/retained/seed_2/policy.pt": "d351c6b49b8252a903ed98f2840207e8881f064b1902bc3b71ceb678273345a2",
+    "outputs/ease_estimator_repair_v1/seed_0/policy.pt": "26dd3d2785e3da7f7daeda03b588f19a5d1572e5db961d09d33c124ec8a733b1",
+    "outputs/ease_estimator_repair_v1/seed_1/policy.pt": "7b9727d0a1f583f158f454fcd1f3d1807636973e455d432f4927fcdc83cf7a7b",
+    "outputs/ease_estimator_repair_v1/seed_2/policy.pt": "62506dc0d29746b80fdeaa1fe549e3010dafe33eb6c6a97284beb9848a96ec37",
+    "outputs/ease_broad_history_v1/seed_0/policy.pt": "2d809ac80788ba548c19a2b577e3228eae32af4a59f591010dc6fa8972ec5a80",
+    "outputs/ease_broad_history_v1/seed_1/policy.pt": "69bec791582226b1fff68ac3432476f3d1881e40b7ffc39ea850fed2262027a0",
+    "outputs/ease_broad_history_v1/seed_2/policy.pt": "5d3303a645c6b540e606cd7dcbcbe1ee4b1574148e47d981a00b2184e83674b2",
+    "outputs/ease_candidate_history_v1/seed_0/policy.pt": "b2f775ea86ba60b82ff71b972c8fc36daf29caca051ea4cc8493ac3cbc26a6a9",
+    "outputs/ease_candidate_history_v1/seed_1/policy.pt": "918cccdf8aae26426069fb6f8c567906bcbe9722fafc2ac5813bebb5698e403b",
+    "outputs/ease_candidate_history_v1/seed_2/policy.pt": "4ef24d776eacaea79098f6f8c8134012b8c72c441d9b6228d0baacdca8a7f5b3"
+  },
+  "inputs": {
+    "outputs/ease_bounded_history_v1/records.json": "660cfa30e45f5cea932f82883d7aaaaae0720708070ab34fc311e338024ca12d",
+    "outputs/ease_bounded_history_v1/summary.json": "a6ae93e4289bc31d87776d44ec0b83db1ed180ee0ebaeeb25131c791ecb926ed",
+    "outputs/ease_bounded_history_v1/cases.json": "d1b687e1d7869859813195bc25da66c99dbf54816abb0e7a41394fd02859969f"
+  },
+  "reused_inputs": {
+    "outputs/ease_matched_correction_v1/records.json": "10948babb771cddfd0710d36b205b74fe099b3f3cbb9655fab431cc92aea24b5"
+  },
+  "collection": "All16 fitting placements x3 frozen estimator seeds =48 pairs. Nine independent phase-entry off-pulses plus on =480 trajectories. Reuse70 E123 fitting trajectories only, generate410. Assert exact E120 on traces/states and all432 intervention prefixes. Preserve contaminated branches but exclude any with prior forbidden contact from fitting. No held trajectory or outcome in fitting.",
+  "features": "139 observable dimensions: phase one-hot, joint mask, measured padded q/bias, current position-goal error, Gram/cross history statistics, both proposed clipped DLS actions, local-history flag. No case/body/seed ID, XML, integration state, collision flags, outcome, future rollout, object oracle, or held-derived normalization.",
+  "model": "One shared139-64-32-2 tanh MLP predicts success of correction-on and one8-step off-pulse followed by E120. Standardization on fitting rows only. Fixed seed124000, AdamW learning rate0.001 weight decay0.001, full-batch BCE,1500 updates. No held-based checkpoint/threshold selection. Keep E118/E119 estimators frozen.",
+  "inference": "At each phase entry before any prior intervention, choose one off-pulse only if predicted P(success|off)-P(success|on)>0.10. Up to8 steps within that phase, then E120 permanently resumes. At most one pulse per episode, matching label continuation. No physics selector or inference simulator branching.",
+  "evaluation": "All24 placements x3 estimator seeds =72 episodes. Report E120 gains/failures, E118 retention and held placements separately. Do not promote if earlier successes are lost. No unseen bodies."
+}
