@@ -31,8 +31,15 @@ def bounded_error(goal,position,limit=.004):
     return error*min(1.,limit/max(float(np.linalg.norm(error)),1e-12))
 
 
-def rollout(env,controller=None):
+def rollout(env,controller=None,render=None,target_x=None):
     obs=env.observe();trace=[];phases=[];failure=None
+    renderer=None
+    if render:
+        from PIL import Image
+        Path(render).mkdir(parents=True,exist_ok=True)
+        renderer=mujoco.Renderer(env.model,height=480,width=640)
+        camera=mujoco.MjvCamera();camera.lookat[:]=[.25,0,.35]
+        camera.distance=1.3;camera.azimuth=130;camera.elevation=-25
     for phase,goal,aperture,budget in sequence(env):
         # The cube can settle below the nominal tool site inside native fingers.
         # Use allowed object-position feedback to avoid driving it into the table.
@@ -44,12 +51,14 @@ def rollout(env,controller=None):
         for t in range(budget):
             reference+=bounded_error(goal,reference,.002)
             error=np.r_[reference-obs['position'],ROT_SCALE*(np.array([0,0,1])-obs['rotation'][:,2])]
-            if controller is None:jac,bias=env.jacobian(),env.privileged_bias()
+            if target_x is not None:error=np.r_[error,ROT_SCALE*(target_x-obs['rotation'][:,0])]
+            if controller is None:jac,bias=(env.jacobian() if target_x is None else env.full_jacobian()),env.privileged_bias()
             else:jac,bias=controller.predict()
-            action=np.clip(jac.T@np.linalg.solve(jac@jac.T+.015**2*np.eye(6),.35*error)+bias,-.04,.04)
+            action=np.clip(jac.T@np.linalg.solve(jac@jac.T+.015**2*np.eye(len(error)),.35*error)+bias,-.04,.04)
             before=obs;obs,command,info=env.step(action,aperture)
             if controller is not None:controller.update(before,obs,command)
             pe=float(np.linalg.norm(goal-obs['position']));re=float(np.linalg.norm(np.array([0,0,1])-obs['rotation'][:,2]))
+            if target_x is not None:re=max(re,float(np.linalg.norm(target_x-obs['rotation'][:,0])))
             pads,_=env.contacts()
             trace.append(dict(phase=phase,position=obs['position'].tolist(),object=env.data.xpos[env.obj].tolist(),
                 position_error=pe,rotation_error=re,pads=len(pads),bad=info['bad']))
@@ -59,10 +68,14 @@ def rollout(env,controller=None):
         if phase in ('close','release','settle'):reached=held>=8
         phases.append(dict(phase=phase,reached=reached,steps=t+1,goal=goal.tolist()))
         if phase=='lower':release_goal=goal.copy()
+        if renderer:
+            renderer.update_scene(env.data,camera=camera)
+            Image.fromarray(renderer.render()).save(Path(render)/f'{phase}.png')
         if failure:break
         if not reached:failure='phase_timeout:'+phase;break
         if phase=='close' and len(env.contacts()[0])!=2:failure='no_bilateral_grasp';break
         if phase in ('lift','transport') and len(env.contacts()[0])!=2:failure='lost_grasp:'+phase;break
+    if renderer:renderer.close()
     obj=env.data.xpos[env.obj].copy();addr=env.model.jnt_dofadr[env.oj];velocity=env.data.qvel[addr:addr+6]
     success=bool(failure is None and env.grasped and env.lifted and not env.bad and
         np.linalg.norm(obj[:2]-env.target)<.025 and abs(obj[2]-.215)<.005 and

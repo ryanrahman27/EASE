@@ -1,0 +1,15 @@
+{
+  "experiment": "E42",
+  "variant": "yaw",
+  "cases_sha256": "28c8a31b28abf796537173aa55513c1bc6f77b1e20212ec4d22d4628bc193653",
+  "source": "outputs/ease_native_reliability_expanded_v2",
+  "checkpoints": {
+    "outputs/ease_robust_training_v1/seed_0/policy.pt": "bb2eadf92edc2f698fd137f6d1a7c8ec0a7283cd34e1d5a0fc390645e66392f1",
+    "outputs/ease_robust_training_v1/seed_1/policy.pt": "141e03fdac6d03a8ef035db3b8d3218cbbe73193450e06821e10b310380fc42d",
+    "outputs/ease_robust_training_v1/seed_2/policy.pt": "cf0d4d5d9fb80d5a20f5b117ea897a057e9c81ede715b785dad7523ec77520a0"
+  },
+  "commit": "cda5236f98383f6fbaa4820c6b18dba892cd087f",
+  "test_evaluated": false,
+  "intervention": "Yaw variant adds measured tool-X displacement statistics and same frozen Transformer third forward prediction; nearest world cardinal tool-X target at reset, aligned to initial cube faces. Baseline is exact E41 revision 3. No force, friction, scoring or model-weight change.",
+  "scope": "Matched observed nine Panda placements, same homes/probes/budgets; no policy filtering or final-test evaluation."
+}
