@@ -1,0 +1,22 @@
+{
+  "experiment": "E68",
+  "checkpoints": {
+    "outputs/ease_robust_training_v1/seed_0/policy.pt": "bb2eadf92edc2f698fd137f6d1a7c8ec0a7283cd34e1d5a0fc390645e66392f1",
+    "outputs/ease_robust_training_v1/seed_1/policy.pt": "141e03fdac6d03a8ef035db3b8d3218cbbe73193450e06821e10b310380fc42d",
+    "outputs/ease_robust_training_v1/seed_2/policy.pt": "cf0d4d5d9fb80d5a20f5b117ea897a057e9c81ede715b785dad7523ec77520a0",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_0/policy.pt": "7cc59ce83397a3856939a849f229e0a962bfe0e1df3add7680aac42b8c5d0fec",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_1/policy.pt": "67a01fc8cdbec4d7c5ee5e602e5d1a16d6cfa80a8520c28a89eb2a861437b2d6",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_2/policy.pt": "f87c12bd330baf384432c5d275eda41f189ddb557f6083f487082a76447b2b71"
+  },
+  "inputs": {
+    "outputs/ease_arm_pick_place_v2/cases.json": "9913082036080a0260394a0e9c8bfc9993ffb64bbf6e3019699bb88827d3f1cb",
+    "outputs/ease_arm_pick_place_v2/axis_catalog.json": "89fe5fcd4ded136798585ae58ad9339ad53b15a874c705f014bfc1646f86e406",
+    "outputs/ease_arm_pick_place_unseen_v1/cases.json": "944fbb927dac19a433547a0bd7f54790a6ba7e6dcb0aa7341c35488833de7753",
+    "outputs/ease_arm_pick_place_unseen_v1/axis_catalog.json": "56bd6c4afecb761916a879b2627cc7146793eda3731cc542b9560b422f9597bc"
+  },
+  "test_evaluated": false,
+  "design": "All 12 familiar and four IK-screened unseen procedural manipulation cases, seven frozen estimators, baseline/fixed/contact settling: 336 trials. Same 32-step calibration seed38000+local_case cloned across all conditions.",
+  "intervention": "Before lift and transport hold current measured XYZ reference, upright tool-Z, closed gripper; fixed waits20 steps; contact waits until8 consecutive end-of-control-step bilateral contacts or20 steps. No early rejection on unstable contact; continue original sequence and retain every outcome. At most40 extra steps (1.6 seconds). Controller statistics and bias keep updating.",
+  "limitations": "Simulator contact sensing is an extra privileged observation for the contact condition. Existing sequencer tolerates phase misses; no new safety or success gate. Fixed-duration control isolates some time effects but is not equal-duration per case. Previously observed development placements, only four screened unseen cases, no native extrapolation claim.",
+  "decision": "Advance contact condition to native retention only if it improves pooled learned success over baseline and fixed, without pooled six-joint success or collision regression. Otherwise retain baseline and record a negative result. No parameter sweep or checkpoint selection."
+}

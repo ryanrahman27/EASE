@@ -1,0 +1,39 @@
+# E68: frozen-estimator grasp settling
+
+Development comparison on 12 familiar and four previously IK-screened unseen procedural placements. Seven frozen estimators; shared calibration and simulator state. All 336 outcomes retained. Contact sensing is additional simulator-provided information. No training or reserved final-test evaluation.
+
+| Estimator | Mode | Success /16 | Six-joint /7 | Seven-joint /9 | Collisions | Total control steps |
+|---|---|---:|---:|---:|---:|---:|
+| analytical | baseline | 11 | 7 | 4 | 5 | 4927 |
+| analytical | fixed | 11 | 7 | 4 | 5 | 5519 |
+| analytical | contact | 11 | 7 | 4 | 5 | 5089 |
+| parent_0 | baseline | 10 | 4 | 6 | 5 | 5226 |
+| parent_0 | fixed | 10 | 4 | 6 | 5 | 5792 |
+| parent_0 | contact | 10 | 5 | 5 | 5 | 5329 |
+| parent_1 | baseline | 9 | 6 | 3 | 6 | 5610 |
+| parent_1 | fixed | 9 | 6 | 3 | 6 | 6132 |
+| parent_1 | contact | 9 | 5 | 4 | 5 | 5931 |
+| parent_2 | baseline | 12 | 6 | 6 | 4 | 4674 |
+| parent_2 | fixed | 11 | 7 | 4 | 5 | 5505 |
+| parent_2 | contact | 11 | 7 | 4 | 5 | 5102 |
+| candidate_0 | baseline | 11 | 6 | 5 | 5 | 4853 |
+| candidate_0 | fixed | 11 | 6 | 5 | 5 | 5511 |
+| candidate_0 | contact | 11 | 6 | 5 | 5 | 5167 |
+| candidate_1 | baseline | 11 | 6 | 5 | 5 | 5131 |
+| candidate_1 | fixed | 12 | 6 | 6 | 3 | 5487 |
+| candidate_1 | contact | 11 | 6 | 5 | 4 | 5385 |
+| candidate_2 | baseline | 12 | 6 | 6 | 4 | 4613 |
+| candidate_2 | fixed | 11 | 6 | 5 | 4 | 5407 |
+| candidate_2 | contact | 13 | 6 | 7 | 3 | 5002 |
+
+Pooled learned success: baseline 65/96, fixed-duration 64/96, contact-ended 65/96. Six-joint: 34, 35, 35 /42; collisions: 29, 28, 27.
+
+Contact-ended waiting has 4 paired recoveries and 4 paired regressions. Total learned control steps (including calibration) increase from 30107 to 31916 (6.0%). E35 parents lose one aggregate success, while E66 candidates gain one; neither subgroup is a new independently selected deployment model.
+
+Prespecified native advancement gate: FAIL. Retain the original sequencer; no native expansion of this intervention.
+
+The intervention holds the measured XYZ reference before lift and transport, while keeping upright tool-Z control, closed gripper, measured bias and online statistics updates. Fixed control waits 20 steps; contact control ends after 8 consecutive bilateral endpoint contacts or 20 steps. Neither rejects unstable grasps; original task outcomes remain the criterion. Maximum extra dwell is 40 control steps (1.6 seconds).
+
+These are dependent seed/case repeats on a small, observed development fixture. Pooled counts are descriptive. Fixed waiting is a duration control, not exact per-trial time matching. This tests bounded settling, not active regrasp recovery or all contact-aware controllers. Native robot performance cannot be inferred from this procedural experiment.
+
+Audits verify all checkpoint/input hashes, unique trial keys, trace lengths, dwell bounds, and exact trace reproduction of all 64 historical analytical/E35 baselines. All 95 regression tests pass. Per-case gains and losses are saved in paired.json; full traces remain in trials/.
