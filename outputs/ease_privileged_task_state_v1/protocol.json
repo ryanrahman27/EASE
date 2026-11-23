@@ -1,0 +1,182 @@
+{
+  "experiment": "E131",
+  "date": "2026-11-15",
+  "inputs": {
+    "outputs/ease_broad_task_value_gate_v1/gate_dataset.npz": "a14fdd52baf4a6e861a09934d785d1c88f37b7990f569c59480febb419a83138",
+    "outputs/ease_broad_task_value_gate_v1/gate_rows.json": "d44908b48191785740bf11d560c66fedd855ea8996f336c4b6c9cab4267163ad",
+    "outputs/ease_broad_task_value_gate_v1/cases.json": "231122397d1c787fafb138fa54197ad7f7064d823b0727cb36a839753d9a70d9",
+    "outputs/ease_broad_task_value_gate_v1/verification.json": "8ef8f21e1d11a91d467e9818fe0d321bd2fb1c3100bd34ece2d0b7f23e86cc7c",
+    "outputs/ease_broad_task_value_gate_v1/collection/records.json": "e5ee0ff13edf6fbb1d8f2f7c890f0b10da4f6ac7397ed2a936ae29e7cc70bdb7",
+    "outputs/ease_abstaining_task_value_gate_v1/protocol.json": "28898f5e4ad33db84a769f86adfb4597ee38da28423d134aa2c2841648cbb7b9",
+    "outputs/ease_abstaining_task_value_gate_v1/oof_predictions.npz": "1d7ac6874efd3c4c4a06f2fa4d1a5e53d4d33f976be81ed223f18d5c902e3ae4",
+    "outputs/ease_abstaining_task_value_gate_v1/validation_grid.json": "9e6597f2b64ee1c6424ec747651159e8d4a80880f512b154fa4b37ddb2fcc49b",
+    "outputs/ease_abstaining_task_value_gate_v1/frozen_selection.json": "ea22cea0e5b793300d540bb4b884941fccb878afbcb32e08e5bff45ce0794436",
+    "outputs/ease_bounded_history_v1/records.json": "660cfa30e45f5cea932f82883d7aaaaae0720708070ab34fc311e338024ca12d",
+    "outputs/ease_bounded_history_v1/summary.json": "a6ae93e4289bc31d87776d44ec0b83db1ed180ee0ebaeeb25131c791ecb926ed",
+    "outputs/ease_richer_task_state_v1/features.npz": "d531b6cb81a9613728a3cad88ee41abf188c739e709462c1e8243430299207aa",
+    "outputs/ease_richer_task_state_v1/richer_oof.npz": "b165e53cc32ac6e33259768ad4478712f01c3eda842adc73d821621669f0bb9f",
+    "outputs/ease_richer_task_state_v1/primary_outcomes.json": "0656cb0f57efd14fcce42cd425b806cc1cba73dc3ba23feaf37010a4c184c91b",
+    "outputs/ease_richer_task_state_v1/validation_grids.json": "8c009c29e9cfff4fcd004b8cc7d19a919837a611fb78fa1ea8d5d3bc56dac6ca",
+    "outputs/ease_richer_task_state_v1/verification.json": "f249243303b2f987e6788eb65be9a97dec5299f90ed7ec2cb2a8e264e995b847",
+    "outputs/ease_abstaining_task_value_gate_v1/models/final/126100.pt": "b1ed9fe72c200e132369f7cc9ed01a41ede8508328221828de89ab7d28fbf8a6",
+    "outputs/ease_abstaining_task_value_gate_v1/models/final/126101.pt": "b9ae6de37855ce6e5837b7538097e2322a78da6d1966524d9cdaf9c46a50c4ab",
+    "outputs/ease_abstaining_task_value_gate_v1/models/final/126102.pt": "940d585a9ad33d21ae7d021b55db67972bbd963a5dca9a5417d1877c866643b2",
+    "outputs/ease_abstaining_task_value_gate_v1/models/final/normalization.npz": "3a8a8e45616343733c97f372d44454ffab757c0c54502d4eeb46653213f421ba",
+    "outputs/ease_abstaining_task_value_gate_v1/models/final/training.json": "d3194ad8887708850563b12472ecdcca9fff24498ddbac814b27d8666b29f276",
+    "outputs/ease_abstaining_task_value_gate_v1/models/fold_0/126100.pt": "42a700c7122385fd1896c341bef47488cf729ae121cb0cb5a586a01a8afcf287",
+    "outputs/ease_abstaining_task_value_gate_v1/models/fold_0/126101.pt": "51ef8399225dfbadf3ff53075e790aeb32be774c208222d7befe6bb87d25ee01",
+    "outputs/ease_abstaining_task_value_gate_v1/models/fold_0/126102.pt": "e554b9633d0c66ecafc65b8562e1718bc19ed5873e3055a7e1e4351a8f7e6c0a",
+    "outputs/ease_abstaining_task_value_gate_v1/models/fold_0/normalization.npz": "808bd3eba58cb9342d8615772cdfa4b957eb8b0eeaf2806f9c106d73f06a4f29",
+    "outputs/ease_abstaining_task_value_gate_v1/models/fold_0/training.json": "d2d6e6ac9090a6477bb9c57f0073aac2da7262707117d1f077edf4b148772eb0",
+    "outputs/ease_abstaining_task_value_gate_v1/models/fold_1/126100.pt": "f0b3531eabb969c37649765dd6ba042c5250202c77d47cd337730ad999d5deab",
+    "outputs/ease_abstaining_task_value_gate_v1/models/fold_1/126101.pt": "9f67b90d1dda6fc5a58da3633f8fc5d36fe52d87123d35741319a52c95c67f8c",
+    "outputs/ease_abstaining_task_value_gate_v1/models/fold_1/126102.pt": "4712520ef304096c4a0028b3151a074238dff115c0306a46ac0861a3cea297a5",
+    "outputs/ease_abstaining_task_value_gate_v1/models/fold_1/normalization.npz": "95cbf4ea00feafe2b9375b5096d5ce6cbc0a813af1277bde1832bdfbd1e0f1be",
+    "outputs/ease_abstaining_task_value_gate_v1/models/fold_1/training.json": "050a7f281dd82166d250ecf2e5a43f05ebebeb0887d1bc1f1c7a177b98f51203",
+    "outputs/ease_abstaining_task_value_gate_v1/models/fold_2/126100.pt": "879bd9abadf76b9e8223536c8c9d61db2415ac0abd7361c4c2a7dd74a99dab46",
+    "outputs/ease_abstaining_task_value_gate_v1/models/fold_2/126101.pt": "fc06a0df0315c2ef6414e2f445db449e2c83419230b9fd05f92cfad5b5f1af69",
+    "outputs/ease_abstaining_task_value_gate_v1/models/fold_2/126102.pt": "d58f203d195e4901caaef15d9a8a534029b9f11767af95407956e8dba64e8b1d",
+    "outputs/ease_abstaining_task_value_gate_v1/models/fold_2/normalization.npz": "46bb5dc07ae4cdc09663ea363294253292263cd9f444e8d5903e474cae5dc208",
+    "outputs/ease_abstaining_task_value_gate_v1/models/fold_2/training.json": "7ec31ab06517a109974f942ff6204eee67257c3df6f6924e86c467d622a83c37",
+    "outputs/ease_abstaining_task_value_gate_v1/models/fold_3/126100.pt": "e4c69cf254fa3648ed21e4651bad29fb14b6504aacf6580e0f694ddd0487813c",
+    "outputs/ease_abstaining_task_value_gate_v1/models/fold_3/126101.pt": "2b3ce7a373633973563f6a3a334f7f3974aff2b96ac0a63fc1373efe3ab4a42c",
+    "outputs/ease_abstaining_task_value_gate_v1/models/fold_3/126102.pt": "48ff94981e63fa06c135d52fe855a2eb24e22f006e34c15d9767b1a47ca12841",
+    "outputs/ease_abstaining_task_value_gate_v1/models/fold_3/normalization.npz": "50dc798694335520647beb6646207cfe6149bdab0ee638b11cfbb780d2dc52f2",
+    "outputs/ease_abstaining_task_value_gate_v1/models/fold_3/training.json": "afb499402d8bcc5a0085b32dc9038a96e1b16b54f7825d473b16a107752e7562",
+    "outputs/ease_richer_task_state_v1/models/fold_0/126100.pt": "5f6600de2ac502245f8f423e85dd101c4fa788419d2ef2e0643a66d23b4244ba",
+    "outputs/ease_richer_task_state_v1/models/fold_0/126101.pt": "a26407124ef428ff6419852193781684b9471d9f023277456c5592c2bacc80ae",
+    "outputs/ease_richer_task_state_v1/models/fold_0/126102.pt": "454559f4aff49c80047e33508b80cee84ee1fd8ffc8fd61720356ca0db025695",
+    "outputs/ease_richer_task_state_v1/models/fold_0/normalization.npz": "ba6d39d8bd26b3d3f2941c687d3830a229b775b3870b881d8813c6f74d644ee6",
+    "outputs/ease_richer_task_state_v1/models/fold_0/training.json": "9f47ea1ae89727306021718c9098928eb1d2dfc1a963bc52970e9d8a7566576c",
+    "outputs/ease_richer_task_state_v1/models/fold_1/126100.pt": "f5c830eda0e629500cb36fd27870c2134fa2267cc95efe0f0860d038c68177f3",
+    "outputs/ease_richer_task_state_v1/models/fold_1/126101.pt": "ef3376b31ab0d898a40a022ca81b3014a98b62e1ff99881bbc153aae8e4d354d",
+    "outputs/ease_richer_task_state_v1/models/fold_1/126102.pt": "28f8882787246fd2f795545689fd4a78f731d8b3522b589d334375b09353d7ed",
+    "outputs/ease_richer_task_state_v1/models/fold_1/normalization.npz": "e117aafd436e4cdfa6c6d9ee3e591cc133f9340008d3379da9a302b265019600",
+    "outputs/ease_richer_task_state_v1/models/fold_1/training.json": "edd4bd129e5c900e07ddd13d4eff1f92e32ce4ff52464a78ee23edb969b4e722",
+    "outputs/ease_richer_task_state_v1/models/fold_2/126100.pt": "b0794c240d3db2c662228ea8136fe78dac9c55a10301add57ae742b40e23438e",
+    "outputs/ease_richer_task_state_v1/models/fold_2/126101.pt": "e9c87ab7a7cfca7860262faa21cc46c2ed2eaf3c84e46696ec73367e71ffaedb",
+    "outputs/ease_richer_task_state_v1/models/fold_2/126102.pt": "e1f7412e09177caed021323f91bbcb2a3e69caa4bc3d3c55719ce1873510a96f",
+    "outputs/ease_richer_task_state_v1/models/fold_2/normalization.npz": "d7ae0f3080f5c126bcf348ecb3749b3cf044d73068390cd4355867842fe4022e",
+    "outputs/ease_richer_task_state_v1/models/fold_2/training.json": "984712e79874504935e03ae9c39b3788a7a47c30e96f09b7fd07eaf2c5a30ee7",
+    "outputs/ease_richer_task_state_v1/models/fold_3/126100.pt": "a2f1303a5405d74240422dbbd8b50372a15809d768209bbdd4dffae28d38e50a",
+    "outputs/ease_richer_task_state_v1/models/fold_3/126101.pt": "e6e2e1f636639b88559dc59c0942147e4181dc78b7617deddc78baf7804b4b28",
+    "outputs/ease_richer_task_state_v1/models/fold_3/126102.pt": "31ec7abe8c17abf559a01ffbee1f65183d530eaef2f86b192880b37210f7509c",
+    "outputs/ease_richer_task_state_v1/models/fold_3/normalization.npz": "9951b58139b82fe554be720f99f985a105ed6e3559f2fc34d26420e59593d88e",
+    "outputs/ease_richer_task_state_v1/models/fold_3/training.json": "bb392b090d6f688e5fa4971e708b77b1945da05469de1a60f0fa061d2f6925be"
+  },
+  "label": "PRIVILEGED SIMULATOR-STATE INFORMATION UPPER BOUND. Not a measured-sensor or deployable policy result; extra information does not guarantee improved performance.",
+  "design": "Same two-head BCE,4 ancestral-family fitting folds,3 seeds126100..126102,1500 full-batch AdamW steps, lr.001 weight_decay.001, widths64/32. Input expands measured162 to182. No reweighting/resampling/early stopping or held-driven selection.",
+  "initialization": "Same-seed original139-column weights, biases, hidden and2-output weights copied exactly; all43 extra measured/privileged columns start at zero, matching E130 initial function. Input capacity grows with features.",
+  "features": "Measured162 unchanged. Append20 privileged inputs: object-to-tool position3, world object rotation matrix9, destination-minus-object position3 (task landing height0.215m), instantaneous object contacts with left pad/right pad/table3, pre-action cumulative grasp flag1, instantaneous bilateral finger contact1.",
+  "timing": "All added values use E120-on pre-action integration/history snapshot and same-time branch metadata. Grasp flag is from entry metadata, never final trial success/grasp/lift. No future state, final label, collision/bad flag, physical parameters, or true Jacobian in features.",
+  "normalization": "Measured162 normalization retained exactly per fold from E130. Added20 mean/std fitted only on training families, scale floor1e-6; clipping[-10,10].",
+  "primary": "Same min-advantage0.1/max-spread2 first-clean-phase intervention rule,144 fitting-placement/estimator episodes. Compare original139, measured162 and privileged182. Secondary same E126 zero-loss grid, tuning-validation only.",
+  "outcomes": "Reconstruct success from existing exact paired full-task continuations: one up-to8-step correction-off pulse then E120. Post-collision starts omitted because success irreversibly false. No fresh online-policy rollout or post-collision trajectory equivalence claim.",
+  "baseline": "E120 unchanged. No original held-placement benchmark, unseen bodies, sensing deployment, or promotion from this comparison.",
+  "grid": [
+    {
+      "min_advantage": 0.1,
+      "max_spread": 0.05
+    },
+    {
+      "min_advantage": 0.1,
+      "max_spread": 0.1
+    },
+    {
+      "min_advantage": 0.1,
+      "max_spread": 0.25
+    },
+    {
+      "min_advantage": 0.1,
+      "max_spread": 0.5
+    },
+    {
+      "min_advantage": 0.1,
+      "max_spread": 2.0
+    },
+    {
+      "min_advantage": 0.25,
+      "max_spread": 0.05
+    },
+    {
+      "min_advantage": 0.25,
+      "max_spread": 0.1
+    },
+    {
+      "min_advantage": 0.25,
+      "max_spread": 0.25
+    },
+    {
+      "min_advantage": 0.25,
+      "max_spread": 0.5
+    },
+    {
+      "min_advantage": 0.25,
+      "max_spread": 2.0
+    },
+    {
+      "min_advantage": 0.5,
+      "max_spread": 0.05
+    },
+    {
+      "min_advantage": 0.5,
+      "max_spread": 0.1
+    },
+    {
+      "min_advantage": 0.5,
+      "max_spread": 0.25
+    },
+    {
+      "min_advantage": 0.5,
+      "max_spread": 0.5
+    },
+    {
+      "min_advantage": 0.5,
+      "max_spread": 2.0
+    },
+    {
+      "min_advantage": 0.75,
+      "max_spread": 0.05
+    },
+    {
+      "min_advantage": 0.75,
+      "max_spread": 0.1
+    },
+    {
+      "min_advantage": 0.75,
+      "max_spread": 0.25
+    },
+    {
+      "min_advantage": 0.75,
+      "max_spread": 0.5
+    },
+    {
+      "min_advantage": 0.75,
+      "max_spread": 2.0
+    },
+    {
+      "min_advantage": 0.9,
+      "max_spread": 0.05
+    },
+    {
+      "min_advantage": 0.9,
+      "max_spread": 0.1
+    },
+    {
+      "min_advantage": 0.9,
+      "max_spread": 0.25
+    },
+    {
+      "min_advantage": 0.9,
+      "max_spread": 0.5
+    },
+    {
+      "min_advantage": 0.9,
+      "max_spread": 2.0
+    },
+    {
+      "min_advantage": 2.0,
+      "max_spread": 0.0
+    }
+  ]
+}
