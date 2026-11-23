@@ -64,13 +64,13 @@ def nearest_cube_axis(rotation):
     return axes[np.argmax(axes@rotation[:,0])]
 
 
-def run(assets,models,cases,output,variant='yaw'):
+def run(assets,models,cases,output,variant='supported'):
     torch.set_num_threads(4);root=Path(output);root.mkdir(parents=True,exist_ok=False)
     source=Path(cases);tasks=json.loads((source/'cases.json').read_text())
     manifest=verify_assets(assets);loaded,hashes=load_models(models)
     protocol=dict(experiment='E42',variant=variant,cases_sha256=fingerprint(source/'cases.json'),
         source=str(source),checkpoints=hashes,commit=manifest['commit'],test_evaluated=False,
-        intervention='Yaw variant adds measured tool-X displacement statistics and same frozen Transformer third forward prediction; nearest world cardinal tool-X target at reset, aligned to initial cube faces. Baseline is exact E41 revision 3. No force, friction, scoring or model-weight change.',
+        intervention='Yaw adds measured tool-X statistics and same frozen Transformer third prediction, targeting nearest world cardinal axis. Hold maintains native arm actuator position targets and pauses estimator updates during close/release/settle. Settle adds a 2 mm/.03 direction pre-grasp gate to hold. Supported switches lower to release when measured object center is .215-.230 m and XY error <.02 m, holding current tool position for release. Baseline is exact E41 revision 3. No force, friction, final-scoring or model-weight change.',
         scope='Matched observed nine Panda placements, same homes/probes/budgets; no policy filtering or final-test evaluation.')
     (root/'protocol.json').write_text(json.dumps(protocol,indent=2));(root/'source').mkdir()
     for name in ['panda_grasp.py','native_reliability.py','pick_place_control.py','real_arm_pick_place.py','real_arms.py','motion_transformer.py']:
@@ -85,7 +85,8 @@ def run(assets,models,cases,output,variant='yaw'):
             guard=nullcontext() if method=='privileged' else patch.object(mujoco,'mj_jacSite',side_effect=RuntimeError('Privileged Jacobian forbidden'))
             with guard:
                 probe=calibrate(env,task['home'],controller,41000+i)
-                result=rollout(env,None if method=='privileged' else controller,target_x=axis)
+                result=rollout(env,None if method=='privileged' else controller,target_x=axis,
+                    contact_hold=variant in ('hold','settle'),precise_grasp=variant=='settle',object_release=variant=='supported')
             if variant=='baseline':
                 previous=next(r for r in json.loads((source/'records.json').read_text()) if r['method']==method and r['case']==i)
                 for key in ['trace','phases','steps','success','final_object']:assert result[key]==previous[key],key
@@ -99,4 +100,4 @@ def run(assets,models,cases,output,variant='yaw'):
 if __name__=='__main__':
     p=argparse.ArgumentParser()
     for key in ['assets','models','cases','output']:p.add_argument('--'+key,required=True)
-    p.add_argument('--variant',choices=['baseline','yaw'],default='yaw');run(**vars(p.parse_args()))
+    p.add_argument('--variant',choices=['baseline','yaw','hold','settle','supported'],default='supported');run(**vars(p.parse_args()))

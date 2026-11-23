@@ -31,7 +31,7 @@ def bounded_error(goal,position,limit=.004):
     return error*min(1.,limit/max(float(np.linalg.norm(error)),1e-12))
 
 
-def rollout(env,controller=None,render=None,target_x=None):
+def rollout(env,controller=None,render=None,target_x=None,contact_hold=False,precise_grasp=False,object_release=False):
     obs=env.observe();trace=[];phases=[];failure=None
     renderer=None
     if render:
@@ -48,22 +48,30 @@ def rollout(env,controller=None,render=None,target_x=None):
             goal=np.r_[env.target+offset[:2], .32 if phase=='transport' else .222+offset[2]]
         if phase=='release':goal=release_goal.copy()
         held=0;reached=False;reference=obs['position'].copy()
+        hold_target=env.data.ctrl[env.aids].copy() if contact_hold and phase in ('close','release','settle') else None
         for t in range(budget):
             reference+=bounded_error(goal,reference,.002)
             error=np.r_[reference-obs['position'],ROT_SCALE*(np.array([0,0,1])-obs['rotation'][:,2])]
             if target_x is not None:error=np.r_[error,ROT_SCALE*(target_x-obs['rotation'][:,0])]
-            if controller is None:jac,bias=(env.jacobian() if target_x is None else env.full_jacobian()),env.privileged_bias()
-            else:jac,bias=controller.predict()
-            action=np.clip(jac.T@np.linalg.solve(jac@jac.T+.015**2*np.eye(len(error)),.35*error)+bias,-.04,.04)
+            if hold_target is not None:action=hold_target-obs['q']
+            else:
+                if controller is None:jac,bias=(env.jacobian() if target_x is None else env.full_jacobian()),env.privileged_bias()
+                else:jac,bias=controller.predict()
+                action=np.clip(jac.T@np.linalg.solve(jac@jac.T+.015**2*np.eye(len(error)),.35*error)+bias,-.04,.04)
             before=obs;obs,command,info=env.step(action,aperture)
-            if controller is not None:controller.update(before,obs,command)
+            if controller is not None and hold_target is None:controller.update(before,obs,command)
             pe=float(np.linalg.norm(goal-obs['position']));re=float(np.linalg.norm(np.array([0,0,1])-obs['rotation'][:,2]))
             if target_x is not None:re=max(re,float(np.linalg.norm(target_x-obs['rotation'][:,0])))
             pads,_=env.contacts()
             trace.append(dict(phase=phase,position=obs['position'].tolist(),object=env.data.xpos[env.obj].tolist(),
                 position_error=pe,rotation_error=re,pads=len(pads),bad=info['bad']))
-            held=held+1 if pe<.006 and re<.08 else 0
+            pos_tol,rot_tol=(.002,.03) if precise_grasp and phase=='descend' else (.006,.08)
+            held=held+1 if pe<pos_tol and re<rot_tol else 0
             if env.bad:failure='forbidden_contact';break
+            if object_release and phase=='lower':
+                obj=env.data.xpos[env.obj]
+                if .215<=obj[2]<=.230 and np.linalg.norm(obj[:2]-env.target)<.02:
+                    goal=obs['position'].copy();reached=True;break
             if held>=8 and phase not in ('close','release','settle'):reached=True;break
         if phase in ('close','release','settle'):reached=held>=8
         phases.append(dict(phase=phase,reached=reached,steps=t+1,goal=goal.tolist()))
