@@ -1,0 +1,129 @@
+{
+  "experiment": "E92",
+  "selection": [
+    {
+      "case": 0,
+      "method": "parent_2",
+      "group": "loss"
+    },
+    {
+      "case": 0,
+      "method": "candidate_0",
+      "group": "loss"
+    },
+    {
+      "case": 0,
+      "method": "candidate_2",
+      "group": "loss"
+    },
+    {
+      "case": 2,
+      "method": "candidate_0",
+      "group": "loss"
+    },
+    {
+      "case": 2,
+      "method": "candidate_1",
+      "group": "loss"
+    },
+    {
+      "case": 9,
+      "method": "parent_1",
+      "group": "loss"
+    },
+    {
+      "case": 12,
+      "method": "parent_1",
+      "group": "loss"
+    },
+    {
+      "case": 13,
+      "method": "parent_1",
+      "group": "loss"
+    },
+    {
+      "case": 15,
+      "method": "parent_1",
+      "group": "loss"
+    },
+    {
+      "case": 15,
+      "method": "candidate_1",
+      "group": "loss"
+    },
+    {
+      "case": 3,
+      "method": "candidate_0",
+      "group": "retained_success"
+    },
+    {
+      "case": 0,
+      "method": "candidate_1",
+      "group": "retained_success"
+    },
+    {
+      "case": 8,
+      "method": "candidate_1",
+      "group": "retained_success"
+    },
+    {
+      "case": 2,
+      "method": "candidate_2",
+      "group": "retained_success"
+    },
+    {
+      "case": 10,
+      "method": "parent_1",
+      "group": "retained_success"
+    },
+    {
+      "case": 2,
+      "method": "parent_2",
+      "group": "retained_success"
+    }
+  ],
+  "inputs": {
+    "outputs/ease_learned_path_transfer_v1/summary.json": "c8668c1b677861d3dfeb72857ba11002a854a47ffde2a99cd0a6d0e1ba31e5cb",
+    "outputs/ease_learned_path_transfer_v1/records.json": "4abce0c199db49a8a0e90023656d1ce607bb8ee42bc527df5eb3163e5571631d",
+    "outputs/ease_direction_novelaxis_v1/cases.json": "b92e989e1db069b5d195bfb07151f3cd0a03e59bb314cf94568cff6b3ee5d0a1",
+    "outputs/ease_direction_novelaxis_v1/axis_catalog.json": "bc812c707bbca7129148013b4d567e811a0b52fc5a0f693a2ee1b03612bfc07c",
+    "outputs/ease_learned_path_transfer_v1/trials/0_parent_2_route300.json": "f1dea551336d65c1a0ad9aa61e60afd2c732c23e44af420d5f8cb5f713bc5643",
+    "outputs/ease_learned_path_transfer_v1/trials/0_candidate_0_route300.json": "891173f24db0d42089c06214198075e878a55ff786e270cc8aac4dd8375575e5",
+    "outputs/ease_learned_path_transfer_v1/trials/0_candidate_2_route300.json": "48fc706123bd1992fa324e612e81d588ffaac01239ce270ac71e84380c86fd14",
+    "outputs/ease_learned_path_transfer_v1/trials/2_candidate_0_route300.json": "b434f5c932d7a8f027bf3f845803eb3b4ccd5bb8ffabb84879fcffd15f60a431",
+    "outputs/ease_learned_path_transfer_v1/trials/2_candidate_1_route300.json": "6d271b3b03f80f6903785103230dd9aa38d3b0cc8961576cff651b7378048c6a",
+    "outputs/ease_learned_path_transfer_v1/trials/9_parent_1_route300.json": "ed865e8a1764ab8fdc1f81910e605f7835b491c0990cc0c3a3eec868559f7894",
+    "outputs/ease_learned_path_transfer_v1/trials/12_parent_1_route300.json": "6c83886583e03e5e07ece921bcdd4be115d4394e9c3244c15f5d231c28fab918",
+    "outputs/ease_learned_path_transfer_v1/trials/13_parent_1_route300.json": "f15f0c8014220c24b8b65f4a49f0abf3c1739f65e9ec76b05df8cee39cab8cae",
+    "outputs/ease_learned_path_transfer_v1/trials/15_parent_1_route300.json": "061f5db930d0ddd9f38fa6dee68401e6f07995f1980823533b7da7725aff126b",
+    "outputs/ease_learned_path_transfer_v1/trials/15_candidate_1_route300.json": "04ba4d8daf0f765e8c46bf56b967bee3b896344b229c2e01d1a2b937c123dec6",
+    "outputs/ease_learned_path_transfer_v1/trials/3_candidate_0_route300.json": "18535712bf1584b2982143b9434ffd295d6f56c1b9e7892677c18ae9edb6c4b8",
+    "outputs/ease_learned_path_transfer_v1/trials/0_candidate_1_route300.json": "38faa71368c5a86e55654af20096c6071cf2ee6fbbc5a7a64260fed4406b8b30",
+    "outputs/ease_learned_path_transfer_v1/trials/8_candidate_1_route300.json": "e0310c6639e8ef67da8e7327e1701e13a6b2fa7dc8ede32ce7636c7c702343a8",
+    "outputs/ease_learned_path_transfer_v1/trials/2_candidate_2_route300.json": "1284bb41bc464544a45dfa14c93834eb57730169a6dfd574907ad07addb5dfbc",
+    "outputs/ease_learned_path_transfer_v1/trials/10_parent_1_route300.json": "c7547b0951b6636c66291234193f0966c51a8143925359c230a2488f367d6cd8",
+    "outputs/ease_learned_path_transfer_v1/trials/2_parent_2_route300.json": "aa657d9e1946d919512b78949af1b34656f93a1e93e46ac16582ac291cc42b5a",
+    "outputs/ease_novelaxis_paths_v1/cases/0.json": "3a50aac905b388af0323eab399d65fca6743be4acef77b2a393074dc168869b7",
+    "outputs/ease_novelaxis_paths_v1/cases/2.json": "c202fd0f6f2408677a2522fa00f8d0bf9e50d87e14aa98dc330f7d16f5a54b0d",
+    "outputs/ease_novelaxis_paths_v1/cases/9.json": "583c8ce2152c903ca07bc04e158a464905c47b483a11d75a80ef7c4a0f41c3f0",
+    "outputs/ease_novelaxis_paths_v1/cases/12.json": "a5ba3a78be5e77586a43eb5b09975f35a643ee64035c9d42fd5d02ee8613d890",
+    "outputs/ease_novelaxis_paths_v1/cases/13.json": "3b2b38e0a9d1b9a40c06da0453d73d32f4d09eec3f3c3ff0e5c989801334e312",
+    "outputs/ease_novelaxis_paths_v1/cases/15.json": "a961eed723713103b2aeee1409dcc35e35be5bac06967efce959f2dba731273d",
+    "outputs/ease_novelaxis_paths_v1/cases/3.json": "474fafc3c2f2d34bbda657f4ec6466026eba3b9f87ca1f916f84302150f4a403",
+    "outputs/ease_novelaxis_paths_v1/cases/8.json": "461e97fc61368791dfdde9367b45795472ecc20c4a3c09d147cc05b2ff67a8dc",
+    "outputs/ease_novelaxis_paths_v1/cases/10.json": "49f25ca479339236b78356d72b79276fb1e23a9484314418ebe5b6e6aa85ee56"
+  },
+  "checkpoints": {
+    "outputs/ease_robust_training_v1/seed_0/policy.pt": "bb2eadf92edc2f698fd137f6d1a7c8ec0a7283cd34e1d5a0fc390645e66392f1",
+    "outputs/ease_robust_training_v1/seed_1/policy.pt": "141e03fdac6d03a8ef035db3b8d3218cbbe73193450e06821e10b310380fc42d",
+    "outputs/ease_robust_training_v1/seed_2/policy.pt": "cf0d4d5d9fb80d5a20f5b117ea897a057e9c81ede715b785dad7523ec77520a0",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_0/policy.pt": "7cc59ce83397a3856939a849f229e0a962bfe0e1df3add7680aac42b8c5d0fec",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_1/policy.pt": "67a01fc8cdbec4d7c5ee5e602e5d1a16d6cfa80a8520c28a89eb2a861437b2d6",
+    "outputs/ease_estimator_distillation_v1/analytical/seed_2/policy.pt": "f87c12bd330baf384432c5d275eda41f189ddb557f6083f487082a76447b2b71"
+  },
+  "test_evaluated": false,
+  "design": "All ten E91 route300 losses relative to baseline plus earliest retained success per checkpoint/DOF stratum represented among losses, when available. Outcome-selected diagnostic, not generalization evaluation. Two complete rollouts each: learned E91 exact replay, and identical learned/planner prefix followed by exact-Jacobian substitution starting at close (immediately after descent). No state resets or reprobes; same adaptive measured bias and statistic updates. Original remaining budgets and success criteria. One read-only learned-vs-exact local Jacobian audit at handoff.",
+  "verification": "Prefix trace equality to E91, complete learned replay equality, identical handoff physical state and controller sufficient statistics across branches. Exact task Jacobians blocked before handoff except labeled read-only audit. No checkpoint modifications.",
+  "interpretation": "Exact continuation is privileged and changes subsequent trajectories; it tests the local kinematic estimator/controller contribution, not whether history corruption specifically caused failures. Relative Jacobian error is descriptive and may not align with task-relevant action directions. Selected failures and controls cannot estimate overall success rate.",
+  "videos": "Save candidate_0 case0 learned/exact pair and candidate_2 case0 learned/exact pair when selected; if no success or failure represented, append first missing category. Verify full video replays."
+}
