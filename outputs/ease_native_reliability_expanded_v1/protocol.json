@@ -1,0 +1,99 @@
+{
+  "experiment": "E41",
+  "revision": 2,
+  "expanded": true,
+  "candidates": {
+    "piper": [
+      [
+        0.205,
+        -0.03
+      ],
+      [
+        0.205,
+        0.03
+      ],
+      [
+        0.205,
+        0.06
+      ],
+      [
+        0.23,
+        -0.03
+      ],
+      [
+        0.23,
+        0.03
+      ],
+      [
+        0.23,
+        0.06
+      ],
+      [
+        0.255,
+        -0.03
+      ],
+      [
+        0.255,
+        0.03
+      ],
+      [
+        0.255,
+        0.06
+      ]
+    ],
+    "panda": [
+      [
+        0.31,
+        -0.03
+      ],
+      [
+        0.31,
+        0.03
+      ],
+      [
+        0.31,
+        0.06
+      ],
+      [
+        0.36,
+        -0.03
+      ],
+      [
+        0.36,
+        0.03
+      ],
+      [
+        0.36,
+        0.06
+      ],
+      [
+        0.41,
+        -0.03
+      ],
+      [
+        0.41,
+        0.03
+      ],
+      [
+        0.41,
+        0.06
+      ]
+    ]
+  },
+  "transfer_y": 0.04,
+  "base_height": 0.2,
+  "checkpoints": {
+    "outputs/ease_robust_training_v1/seed_0/policy.pt": "bb2eadf92edc2f698fd137f6d1a7c8ec0a7283cd34e1d5a0fc390645e66392f1",
+    "outputs/ease_robust_training_v1/seed_1/policy.pt": "141e03fdac6d03a8ef035db3b8d3218cbbe73193450e06821e10b310380fc42d",
+    "outputs/ease_robust_training_v1/seed_2/policy.pt": "cf0d4d5d9fb80d5a20f5b117ea897a057e9c81ede715b785dad7523ec77520a0"
+  },
+  "commit": "cda5236f98383f6fbaa4820c6b18dba892cd087f",
+  "methods": "privileged,analytical,neural_0,neural_1,neural_2",
+  "seed": 41000,
+  "control": "Frozen E35 weights; measured 32-step calibration; Cartesian reference ramps .002 m per step, tracking error uncapped; .35 gain/.015 damping/.04 joint clip. Native mechanics unchanged. Revision 1 bounded-error pilot preserved separately.",
+  "gates": "8 holds within .006 m and .08 tool direction. Stop on any forbidden contact, phase timeout, missing bilateral close grasp, or lost grasp after lift/transport.",
+  "geometry": "Both bases .2 m; approach .30/lift .32 m; grasp PiPER .24/Panda .222; lower grasp+.008. Shared 4 cm transfer.",
+  "screening": "All nine endpoint IK poses; no policy-success filtering. Every rejection and failure retained.",
+  "scope": "Development controller/fixture change, not weight learning or independent final-test validation.",
+  "test_evaluated": false
+}
