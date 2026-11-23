@@ -1,0 +1,28 @@
+{
+  "experiment": "E135",
+  "inputs": {
+    "outputs/ease_broad_task_value_gate_v1/gate_rows.json": "d44908b48191785740bf11d560c66fedd855ea8996f336c4b6c9cab4267163ad",
+    "outputs/ease_broad_task_value_gate_v1/gate_dataset.npz": "a14fdd52baf4a6e861a09934d785d1c88f37b7990f569c59480febb419a83138",
+    "outputs/ease_bounded_history_v1/records.json": "660cfa30e45f5cea932f82883d7aaaaae0720708070ab34fc311e338024ca12d",
+    "outputs/ease_privileged_task_state_v1/features.npz": "cc630707ceb901740a2a723fc31e1892a32d38e9e29adf7c0c7d52f459f1fd97"
+  },
+  "design": "Same1108 clean starts/four ancestral fitting-family splits. Linear ridge signed final-success advantage regression on compact measured pre-action features, with intercept. No privileged object/contact signals: reads only original139 and measured tool z/orientation at141:145. No case/body/seed IDs. No physics selector.",
+  "features": "Nine phase indicators; goal error3/norm, tool height, orientation-error norm, analytical J times paired command difference3, projected progress, effect norm, estimated common response norm, log10 history-Gram condition number, joint-count minus6; nine phase/progress interactions.32 features total. No learned E133 coefficients, preventing cross-fold feature leakage.",
+  "training": "Closed-form ridge, mean squared final paired advantage plus lambda times squared standardized weights, intercept unpenalized. Feature means/scales fitting-fold only. Four fixed penalties. No class weights or resampling. Primary lambda1 margin.05. Secondary same grid chooses zero E120 losses, most gains, fewer switches, stronger regularization, higher margin. Adaptive fitting-validation search, not independent testing.",
+  "penalties": [
+    0.01,
+    0.1,
+    1.0,
+    10.0
+  ],
+  "margins": [
+    0.01,
+    0.025,
+    0.05,
+    0.1,
+    0.2,
+    1000000000.0
+  ],
+  "intervention": "First accepted clean phase: up to8 off actions, then E120 resumes. Reconstruct from saved exact paired continuations.",
+  "held_evaluated": false
+}
