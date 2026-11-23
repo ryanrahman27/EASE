@@ -32,7 +32,7 @@ def bounded_error(goal,position,limit=.004):
     return error*min(1.,limit/max(float(np.linalg.norm(error)),1e-12))
 
 
-def rollout(env,controller=None,render=None,target_x=None,contact_hold=False,precise_grasp=False,object_release=False,pregrasp_hook=None,step_observer=None,orientation_target=None):
+def rollout(env,controller=None,render=None,target_x=None,contact_hold=False,precise_grasp=False,object_release=False,pregrasp_hook=None,step_observer=None,orientation_target=None,before_step_observer=None):
     assert orientation_target is None or target_x is None
     obs=env.observe();trace=[];phases=[];failure=None
     renderer=None
@@ -65,6 +65,8 @@ def rollout(env,controller=None,render=None,target_x=None,contact_hold=False,pre
                 else:jac,bias=controller.predict()
                 motion=jac.T@np.linalg.solve(jac@jac.T+.015**2*np.eye(len(error)),.35*error)
                 action=np.clip(motion+bias,-.04,.04)
+            if before_step_observer is not None:
+                before_step_observer(phase,t,obs,error,aperture)
             before=obs;obs,command,info=env.step(action,aperture)
             if controller is not None and hold_target is None:controller.update(before,obs,command)
             pe=float(np.linalg.norm(goal-obs['position']));re=float(np.linalg.norm(np.array([0,0,1])-obs['rotation'][:,2]))
