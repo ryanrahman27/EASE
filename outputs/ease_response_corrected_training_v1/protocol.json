@@ -1,0 +1,47 @@
+{
+  "experiment": "E61",
+  "steps": 2000,
+  "batch": 128,
+  "lr": 2e-05,
+  "control_weight": 0.01,
+  "parents": {
+    "outputs/ease_robust_training_v1/seed_0/policy.pt": "bb2eadf92edc2f698fd137f6d1a7c8ec0a7283cd34e1d5a0fc390645e66392f1",
+    "outputs/ease_robust_training_v1/seed_1/policy.pt": "141e03fdac6d03a8ef035db3b8d3218cbbe73193450e06821e10b310380fc42d",
+    "outputs/ease_robust_training_v1/seed_2/policy.pt": "cf0d4d5d9fb80d5a20f5b117ea897a057e9c81ede715b785dad7523ec77520a0"
+  },
+  "conditions": [
+    "prediction",
+    "control"
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "test_evaluated": false,
+  "coherent_data": "outputs/ease_coherent_pose_data_v1",
+  "coherent_sha256": "888e7e558752cb8184c6405d72cf031ca785097dfa413ed645b8466aa2846e05",
+  "response_data": "outputs/ease_joint_response_v1",
+  "response_hashes": {
+    "outputs/ease_joint_response_v1/fold_84000_command_velocity.npz": "d9a6120c1f36c0af314ab116d7bf791eeb1a49f47bbda2d005490a5a3976a9af",
+    "outputs/ease_joint_response_v1/fold_84000_history.npz": "fed75d8067429d23c5c66a05191be7c57f75648d137b7f86cf1ffd07c217b6c5",
+    "outputs/ease_joint_response_v1/fold_84001_command_velocity.npz": "f4720bedd38c25fd79fc719e8ddd6076b8b09139eecc3f03191b86bc52e95e4d",
+    "outputs/ease_joint_response_v1/fold_84001_history.npz": "c2cd8fe26bdab028c6098018243cbe7cef363c304f26a8e5283cc1b2dffa5381",
+    "outputs/ease_joint_response_v1/fold_84002_command_velocity.npz": "5226e7dc1d9e4f6451fd055fd598d96520526c08e5f7e8d15ae812012478092a",
+    "outputs/ease_joint_response_v1/fold_84002_history.npz": "f4bc0ae2ba7e6468463d771e8ae88b6cfa01fd17c9bcbf29e5f839a4116c4624",
+    "outputs/ease_joint_response_v1/fold_84003_command_velocity.npz": "b4534767895954a80ad4683673f0de65481feb93841fd8181e4a0d767c9d5a1b",
+    "outputs/ease_joint_response_v1/fold_84003_history.npz": "61a4a7a25290982ce4ce0a9cd0c2e8861e5d40cc8e30bd115d73d5050780e3be",
+    "outputs/ease_joint_response_v1/fold_84004_command_velocity.npz": "9b8dcd03a7e6944c000f948e3ffc45a63ec3a9c5d119dd87e999f1d48c0b0d24",
+    "outputs/ease_joint_response_v1/fold_84004_history.npz": "1cec7357efd16c3f78d657f37af4801988e89a331a80dde3b85ed0bda2659464",
+    "outputs/ease_joint_response_v1/fold_84005_command_velocity.npz": "10418f4baf398fbc1dd7ea8e592979d16c782e41c365b95f5b7bcf62a658a0b5",
+    "outputs/ease_joint_response_v1/fold_84005_history.npz": "9fa9e33ce0d1d3a87217c10194f243f88a0c4c804747f5e49f6193e1dd9adc5e",
+    "outputs/ease_joint_response_v1/fold_84006_command_velocity.npz": "9341e109c0fa3de75000ae6719d8d5aa4b967e4e9dca3e80231bc8cbf1c71a64",
+    "outputs/ease_joint_response_v1/fold_84006_history.npz": "9de9b097724a4a0c83853a9fd2d57a0a8c459c42529e27a7480db0047569867b",
+    "outputs/ease_joint_response_v1/fold_84007_command_velocity.npz": "3833a1264a486787c721ddfe08fa4b0b120f799ad58cb55b572fb1ac903d4d5d",
+    "outputs/ease_joint_response_v1/fold_84007_history.npz": "fe66a75f01fe8a48293319ca00d307bf035e928463bf4d9efe49d8e8d1f08d1b"
+  },
+  "data": "Every batch: 64 synthetic E56 contexts plus 64 coherent analytical/E35 procedural training contexts (3600 train, 1200 original_2 trajectory validation). Same paired rows. Trajectory holdout, not unseen bodies. Procedural labels are current geometric Jacobians; synthetic labels remain clean-ridge estimates. No native data or geometry.",
+  "loss": "Same E56 fixed fit/anchor loss and .01 normalized local-action term, lr 2e-5, 2000 updates, batch128. Both get fit+anchor+.01 local. Directory prediction means UNCORRECTED local objective; control means RESPONSE-CORRECTED local objective. Only measured half uses frozen leave-one-body-out response correction; synthetic half unchanged. Synthetic retention mixture is fixed at 50 percent before training. Context/label distribution changes together versus E56, so cross-experiment differences do not isolate coherence alone.",
+  "selection": "Fixed final checkpoints, no seed selection. Original 256 training tasks per seed first; all failures retained. Native development comparison requires six-joint retention before adoption. No final test.",
+  "evaluation": "Fixed independent synthetic batch; original training control; same twelve observed E46 manipulation tasks, original controller/tool-Z objective. No E51 angular intervention."
+}
