@@ -1,0 +1,32 @@
+{
+  "experiment": "E144",
+  "inputs": {
+    "outputs/ease_anchored_history_weights_v1/summary.json": "980101fdeaea7a96d4ec7bb60f6b3a39a799a61d6b0b086f39174af13725a349",
+    "outputs/ease_anchored_history_weights_v1/verification.json": "47ea5c6bbb3a4a9a3059f60aaeb3c3cdae176124371a716b3c9e8798ec2de254",
+    "outputs/ease_history_weight_ensemble_v1/summary.json": "0b0efba60d786a8edf4ac24f88f83a55d09be2207e60949c2661f82139613038",
+    "outputs/ease_history_weight_ensemble_v1/verification.json": "578960aa18182f5a7c148348f8a516f0b0895e1d3e60478d45c05546646ca9b5",
+    "outputs/ease_expanded_structured_pairs_v1/cases.json": "bb06c1302362e1e0232c548d822a24705ead6f0ca83e0ac6c283894efa0d7a25",
+    "outputs/ease_broad_task_value_gate_v1/collection/records.json": "e5ee0ff13edf6fbb1d8f2f7c890f0b10da4f6ac7397ed2a936ae29e7cc70bdb7",
+    "outputs/ease_expanded_structured_pairs_v1/collection/records.json": "e38f19a014570c2695aedc6b782615b1add942bbc288c8715ca2f1a59d507dc5"
+  },
+  "checkpoints": {
+    "outputs/ease_task_retention_training_v1/retained/seed_0/policy.pt": "3190e96c2d867237db6f5aedbc46f71ef61ca35f36e0dc3df663018141c50627",
+    "outputs/ease_task_retention_training_v1/retained/seed_1/policy.pt": "4a0495a5b7f719a1d3586554545e11ba39c58840ccdcc78e9fecf1aa2a5993ad",
+    "outputs/ease_task_retention_training_v1/retained/seed_2/policy.pt": "d351c6b49b8252a903ed98f2840207e8881f064b1902bc3b71ceb678273345a2",
+    "outputs/ease_estimator_repair_v1/seed_0/policy.pt": "26dd3d2785e3da7f7daeda03b588f19a5d1572e5db961d09d33c124ec8a733b1",
+    "outputs/ease_estimator_repair_v1/seed_1/policy.pt": "7b9727d0a1f583f158f454fcd1f3d1807636973e455d432f4927fcdc83cf7a7b",
+    "outputs/ease_estimator_repair_v1/seed_2/policy.pt": "62506dc0d29746b80fdeaa1fe549e3010dafe33eb6c6a97284beb9848a96ec37",
+    "outputs/ease_broad_history_v1/seed_0/policy.pt": "2d809ac80788ba548c19a2b577e3228eae32af4a59f591010dc6fa8972ec5a80",
+    "outputs/ease_broad_history_v1/seed_1/policy.pt": "69bec791582226b1fff68ac3432476f3d1881e40b7ffc39ea850fed2262027a0",
+    "outputs/ease_broad_history_v1/seed_2/policy.pt": "5d3303a645c6b540e606cd7dcbcbe1ee4b1574148e47d981a00b2184e83674b2",
+    "outputs/ease_candidate_history_v1/seed_0/policy.pt": "b2f775ea86ba60b82ff71b972c8fc36daf29caca051ea4cc8493ac3cbc26a6a9",
+    "outputs/ease_candidate_history_v1/seed_1/policy.pt": "918cccdf8aae26426069fb6f8c567906bcbe9722fafc2ac5813bebb5698e403b",
+    "outputs/ease_candidate_history_v1/seed_2/policy.pt": "4ef24d776eacaea79098f6f8c8134012b8c72c441d9b6228d0baacdca8a7f5b3"
+  },
+  "methods": "Five fixed controllers on all96 fitting placements: original analytical history (full statistics until close, then local32); uniform32 .98/ridge1e-6; fold-fitted constant kernel; E120 ensemble; learned three-model history-weight ensemble. One actual episode per method/placement,480 new episodes. Do not count deterministic references as three independent seeds. Existing E120 individual-seed results195/288 remain separately reported.",
+  "ensemble": "Learned uses mean of all three E142 Jacobians from the same history; no best-seed selection. E120 ensemble averages its three reference Jacobians and separately its three correction Jacobians, then uses unchanged DLS and E120 bounded residual. This controls for ensembling; it is a new reference, not the old individual-seed E120 score.",
+  "controller": "Same32-step initial calibration and close-phase probe, goals, DLS damping.015 and gain.35, +/- .04 action bounds, frozen measured bias, task success and collision definitions. Hybrid methods replace only the local Jacobian estimator; no correction-off gate or physics selector. All methods consume measured history only. Constant/learned float64 solve uses histories cast to float32 then float64, matching training. Local networks receive no phase, body ID, object/contact state or future data.",
+  "fitting": "Use four family-excluded kernel/neural models according to the original ancestry folds. No per-task fitting, online gradient update or controller hyperparameter search. Save all outcomes, complete states/actions and ordered pre-action histories, including failures. Prediction cache uses exact history/statistic bytes and returns live bias.",
+  "next_test": "Assess fixed learned ensemble overall, both joint counts, collisions, paired rescues/losses versus E120 ensemble and constant, and retention of E120 fitting gain placements1,13,18. A fresh placement test is justified only if overall success exceeds E120 ensemble, neither joint count declines, collisions do not rise, and performance is at least the constant-kernel reference. Report all lost successes; E120 is never overwritten or automatically promoted. If this screen fails, diagnose on fitting data and keep the reserved fresh set closed.",
+  "limitation": "Full estimator replacement can trade successes differently from an isolated gate. Zero-loss improvement remains preferred; any research gain with regressions must be labeled and does not replace E120. Known training bodies, not unseen morphology."
+}
