@@ -1,0 +1,26 @@
+{
+  "experiment": "E52",
+  "steps": 2000,
+  "batch": 128,
+  "lr": 2e-05,
+  "control_weight": 0.1,
+  "parents": {
+    "outputs/ease_robust_training_v1/seed_0/policy.pt": "bb2eadf92edc2f698fd137f6d1a7c8ec0a7283cd34e1d5a0fc390645e66392f1",
+    "outputs/ease_robust_training_v1/seed_1/policy.pt": "141e03fdac6d03a8ef035db3b8d3218cbbe73193450e06821e10b310380fc42d",
+    "outputs/ease_robust_training_v1/seed_2/policy.pt": "cf0d4d5d9fb80d5a20f5b117ea897a057e9c81ede715b785dad7523ec77520a0"
+  },
+  "conditions": [
+    "prediction",
+    "control"
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "test_evaluated": false,
+  "data": "Synthetic only. Shared XYZ/tool-Z statistics; 1\u2013256 transitions, full first 32 then rank 1\u20133, .98 decay, 1e-6 ridge, 6/7 joints, tangent-plane tool-Z responses, mostly clean measurement noise. Same batches per paired model.",
+  "loss": "Both: clean ridge prediction MSE plus frozen E35 anchor (six-joint weight 2, seven-joint .5). Control adds .1 times mean squared achieved task-response operator error using damping .015 and true synthetic Jacobian. No native data or geometry. Unclipped linear response surrogate; not a differentiable contact simulator.",
+  "selection": "Fixed final checkpoints, no seed selection. Original 256 training tasks per seed first; all failures retained. Native development comparison requires six-joint retention before adoption. No final test.",
+  "evaluation": "Fixed independent synthetic batch; original training control; same twelve observed E46 manipulation tasks, original controller/tool-Z objective. No E51 angular intervention."
+}
