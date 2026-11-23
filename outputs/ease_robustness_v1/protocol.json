@@ -1,0 +1,56 @@
+{
+  "experiment": "E34",
+  "conditions": [
+    {
+      "name": "clean"
+    },
+    {
+      "name": "noise_1mm",
+      "noise": 0.001
+    },
+    {
+      "name": "noise_5mm",
+      "noise": 0.005
+    },
+    {
+      "name": "delay_1",
+      "delay": 1
+    },
+    {
+      "name": "delay_3",
+      "delay": 3
+    },
+    {
+      "name": "history_4",
+      "window": 4
+    },
+    {
+      "name": "history_8",
+      "window": 8
+    }
+  ],
+  "checkpoints": [
+    {
+      "seed": 0,
+      "folder": "outputs/ease_motion_transformer_v1",
+      "policy_sha256": "b3be78ef5e97ed3a725e4f01b130565d85a68827a1d167e836de362ea3d2dd3a"
+    },
+    {
+      "seed": 1,
+      "folder": "outputs/ease_motion_replicate_v1/seed_1",
+      "policy_sha256": "e32cb506b9d402f63efd7530ee8d0ed12a08180fbb1e8ec2a976f1af1b232875"
+    },
+    {
+      "seed": 2,
+      "folder": "outputs/ease_motion_replicate_v1/seed_2",
+      "policy_sha256": "5b1e3b56136add2e9ff8459644d2f29cdde44881f4bba61745a4954633c36fee"
+    }
+  ],
+  "manifest_sha256": "603d7c309fe33bf5879c3b1200c9267d146f5193baa23ccd7be2319a110615f0",
+  "test_evaluated": false,
+  "design": "All 1024 E33 development tasks, 3 frozen neural seeds and fixed-probe analytical. No tuning. 150 task steps, zero separate calibration, same success/contact criteria.",
+  "noise": "Independent Gaussian joint-position radians and EE-position meters with equal numeric sigma. Goal exact. One deterministic noise realization per task, shared across methods at equal time; true simulator state determines success.",
+  "delay": "One or three 25Hz steps (40/120ms), joint and EE observations delayed together. Reuse initial observation during startup, no fictitious transition updates; commands aligned to delayed transition timestamps.",
+  "history": "Only last 4 or 8 observed transitions retained; reconstruct identical exponentially weighted statistics and bias from prior each time. This tests restricted memory, not independently controlled physical excitation.",
+  "analysis": "Report every condition and family, paired outcomes and interaction costs. Clean replay must reproduce E33 success/contact/step counts. No best-condition selection or final-test evaluation."
+}
