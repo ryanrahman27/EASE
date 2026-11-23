@@ -1,0 +1,16 @@
+{
+  "experiment": "E23",
+  "seed": 0,
+  "scope": "Single-seed feasibility pilot, not replication",
+  "teacher_steps": 10000,
+  "student_steps": 5000,
+  "batch": 32,
+  "lr": 0.0003,
+  "manifest_sha256": "234c8e0e90a31b22fbd065cbe6f55b5959fff65df1114d06ca18120a710a9ddf",
+  "test_evaluated": false,
+  "gate": "Teacher >=95% overall and >=90% every training body before student fitting",
+  "matching": "Same frozen teacher, fresh encoder seed, body/context sampling and normalization; only pose transformation differs",
+  "history": "Calibration prefixes 0..32 only, uniform body sampling; no task trajectories",
+  "evaluation": "Fresh paired calibration, frozen context, zero-spread task reset; correct/empty/twin",
+  "early_error": "Distance at step 10; null if episode already ended; do not silently pool nulls"
+}
