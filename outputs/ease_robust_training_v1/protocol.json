@@ -1,0 +1,60 @@
+{
+  "experiment": "E35",
+  "steps": 5000,
+  "lr": 0.0001,
+  "batch": 128,
+  "parents": [
+    {
+      "seed": 0,
+      "folder": "outputs/ease_motion_transformer_v1",
+      "policy_sha256": "b3be78ef5e97ed3a725e4f01b130565d85a68827a1d167e836de362ea3d2dd3a"
+    },
+    {
+      "seed": 1,
+      "folder": "outputs/ease_motion_replicate_v1/seed_1",
+      "policy_sha256": "e32cb506b9d402f63efd7530ee8d0ed12a08180fbb1e8ec2a976f1af1b232875"
+    },
+    {
+      "seed": 2,
+      "folder": "outputs/ease_motion_replicate_v1/seed_2",
+      "policy_sha256": "5b1e3b56136add2e9ff8459644d2f29cdde44881f4bba61745a4954633c36fee"
+    }
+  ],
+  "train": "outputs/ease_paired_factorial_v2",
+  "evaluation": "outputs/ease_broad_development_v2/data",
+  "train_sha256": "e28aa6cf6d4b402bb3847785d7ac125e8f015a16da7b70870d6582dbcea0d958",
+  "evaluation_sha256": "603d7c309fe33bf5879c3b1200c9267d146f5193baa23ccd7be2319a110615f0",
+  "test_evaluated": false,
+  "training": "Fine-tune all three existing seeds for 5000 updates each. Training-only excitation profiles mixed with Gaussian motions. Uniform history lengths 1..32; position noise sigma in {0,.0005,.001,.002,.005}, temporally correlated differences; clean weighted ridge target. Same network and controller parameters.",
+  "delay": "Shared delay-aware gain .5/(1+delay_steps), no state predictor. Evaluate old neural and analytical controls with this gain to separate controller gains from training.",
+  "evaluation_scope": "All seven E34 conditions, all 1024 tasks, fixed final checkpoints; observed development suite, not an independent confirmation. No selection or tuning after results.",
+  "conditions": [
+    {
+      "name": "clean"
+    },
+    {
+      "name": "noise_1mm",
+      "noise": 0.001
+    },
+    {
+      "name": "noise_5mm",
+      "noise": 0.005
+    },
+    {
+      "name": "delay_1",
+      "delay": 1
+    },
+    {
+      "name": "delay_3",
+      "delay": 3
+    },
+    {
+      "name": "history_4",
+      "window": 4
+    },
+    {
+      "name": "history_8",
+      "window": 8
+    }
+  ]
+}

@@ -64,7 +64,9 @@ def evaluate(manifest, model, condition, device):
                 index=max(0,step-delay);before=streams[i][index]
                 jac=(np.linalg.solve(gram[i,:n,:n],cross[i,:n]).T if model is None else predicted[i,:n].T)
                 error=before['task'][3:]-before['task'][:3]
-                action=np.clip(jac.T@np.linalg.solve(jac@jac.T+.015**2*np.eye(3),.5*error)+bias[i,:n],-.04,.04)
+                # Optional E35 delay-aware gain; shared by both estimators.
+                gain=.5/(1+delay) if condition.get('delay_aware') else .5
+                action=np.clip(jac.T@np.linalg.solve(jac@jac.T+.015**2*np.eye(3),gain*error)+bias[i,:n],-.04,.04)
                 if model is None and step==0:action=np.full(n,.01)
                 after,done,info=env.step(action);commands[i].append(info['executed_action'].copy())
                 streams[i].append(measure(after,rngs[i],condition.get('noise',0)))
